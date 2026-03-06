@@ -33,40 +33,40 @@ chung-swarm handoff validate
 ## Run with Claude Code (recommended)
 
 This repo includes Claude Code project subagents and skills:
-- Subagents: `.claude/agents/` (swarm-router / swarm-coder / swarm-reviewer / swarm-tester)
-- Workflow skill: `.claude/skills/swarm/` (invoke with `/swarm`)
+- Subagents: `.claude/agents/` (lcc-router / lcc-coder / lcc-reviewer / lcc-tester)
+- Workflow skill: `.claude/skills/lcc-swarm/` (invoke with `/lcc-swarm`)
 
 In Claude Code:
-1) Run `/swarm` and start with swarm-router to break down the task and produce a handoff JSON
+1) Run `/lcc-swarm` and start with lcc-router to break down the task and produce a handoff JSON
 2) Based on `next_role`, delegate to the matching subagent (or let Claude delegate automatically)
 3) Iterate Coder → Reviewer → Tester until Reviewer outputs final LGTM
 
 ### Available skills
 
-Run `/workflow-index` in Claude Code to see the full, up-to-date list. Common entry points:
-- `/swarm`: generic Router → Coder → Reviewer → Tester loop
-- `/feature`: requirements → design → implement → review → test
-- `/bugfix`: triage → reproduce → fix → review → verify
-- `/tdd`: red → green → refactor
-- `/simplify`: eliminate redundancy and simplify control flow (behavior-preserving)
-- `/review`: structured review (optional security pass)
-- `/security`: security-focused review + remediation loop
-- `/perf`: measure → optimize → re-measure
-- `/sql-optimize`: SQL optimization based on MySQL index principles (美团技术团队)
-- `/docs`: update documentation to match behavior
-- `/release`: release notes + checklist (no publishing)
-- `/triage`: incident triage playbook
+Run `/lcc-workflow-index` in Claude Code to see the full, up-to-date list. Common entry points:
+- `/lcc-swarm`: generic Router → Coder → Reviewer → Tester loop
+- `/lcc-feature`: requirements → design → implement → review → test
+- `/lcc-bugfix`: triage → reproduce → fix → review → verify
+- `/lcc-tdd`: red → green → refactor
+- `/lcc-simplify`: eliminate redundancy and simplify control flow (behavior-preserving)
+- `/lcc-review`: structured review (optional security pass)
+- `/lcc-security`: security-focused review + remediation loop
+- `/lcc-perf`: measure → optimize → re-measure
+- `/lcc-sql-optimize`: SQL optimization based on MySQL index principles (美团技术团队)
+- `/lcc-docs`: update documentation to match behavior
+- `/lcc-release`: release notes + checklist (no publishing)
+- `/lcc-triage`: incident triage playbook
 
 ### Available subagents
 
 Core roles:
-- swarm-router, swarm-coder, swarm-reviewer, swarm-tester
+- lcc-router, lcc-coder, lcc-reviewer, lcc-tester
 
 Specialists:
-- swarm-product, swarm-architect, swarm-debugger, swarm-refactorer
-- swarm-security-reviewer, swarm-performance-optimizer, swarm-sql-optimizer, swarm-docs-writer
-- swarm-release-manager, swarm-incident-triage, swarm-dependency-upgrader
-- swarm-git-worktree-manager
+- lcc-product, lcc-architect, lcc-debugger, lcc-refactorer
+- lcc-security-reviewer, lcc-performance-optimizer, lcc-sql-optimizer, lcc-docs-writer
+- lcc-release-manager, lcc-incident-triage, lcc-dependency-upgrader
+- lcc-git-worktree-manager
 
 ## Structure
 

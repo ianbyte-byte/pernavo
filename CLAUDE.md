@@ -59,7 +59,7 @@ When starting a development task, use:
 
 ### Session pre-flight (required)
 
-Before `swarm-coder` writes code, it must summarize requirements from the relevant specs regarding:
+Before `lcc-coder` writes code, it must summarize requirements from the relevant specs regarding:
 
 - JSON schema definition (structured outputs / tool input schemas)
 - Context window optimization (token budgets, long context, caching/compaction strategies)
