@@ -34,12 +34,18 @@ Each handoff must include a JSON object in the output:
 
 Agent teams allow parallel execution and decentralized coordination.
 
-- **Team lead**: The main agent session. Responsible for spawning the team and final synthesis.
+- **Team lead**: The main agent session. Responsible for spawning the team, defining tasks, and final synthesis.
 - **Teammates**: Independent agents with their own context windows.
-- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks.
+- **Shared task list**: Centralized coordination. Teammates can self-claim or be assigned tasks.
+- **Plan Approval**: For complex/risky tasks, use "Require plan approval" to review teammate plans before implementation.
+- **Display Modes**: Control via `teammateMode` in `settings.json` ("in-process" or "tmux").
+- **Management**:
+  - **Cleanup**: Use "Clean up the team" from the lead once all teammates are shut down.
+  - **Shutdown**: Request specific teammates to "shut down" gracefully.
 - **Parallel patterns**:
-  - **Scientific Debate**: Spawn multiple agents to investigate competing hypotheses and challenge each other.
-  - **Parallel Review**: Assign reviewers with different lenses (Security, Performance, Coverage).
+  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
+  - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
+  - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
 
 ## 6) Hooks and quality gates
 
