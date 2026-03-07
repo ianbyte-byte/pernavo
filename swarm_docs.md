@@ -19,9 +19,11 @@ Core capabilities:
   - Tester: verifies with tests and repro steps
 
 ### 2.2 Key artifacts
-- `CLAUDE.md`: global rules (role boundaries, handoff schema, document-first workflow)
+- `CLAUDE.md`: global rules (role boundaries, handoff schema, agent teams, hooks)
 - `.claude/agents/`: Claude Code subagents (Router/Coder/Reviewer/Tester + specialists)
 - `.claude/skills/`: Claude Code skills (including the `/swarm` workflow)
+- `.claude/settings.json`: project settings (enables agent teams and hooks)
+- `.claude/hooks/`: automated quality gate scripts
 - `.claude/session_config.json`: per-session pre-flight notes required by the document-first workflow
 
 ### 2.3 Key CLI helpers (optional)
@@ -53,14 +55,25 @@ Recommended constraints:
 - `summary` must include: done, todo, risks/blockers
 - `next_instructions` must be actionable (not just “continue”)
 
-## 4. Parallelization guidance
+## 4. Parallelization and Team Orchestration (V2)
 
-Phase 1 (logical parallelism):
-- Router dispatches read-only analysis tasks to multiple specialists (e.g., Reviewer + Tester + Architect) and synthesizes the results.
+V2 leverages native Claude Code **Agent Teams**:
 
-Phase 2 (code parallelism):
-- Use Git worktrees/branches to isolate code-changing work
-- Use an integrator role to merge and run a unified test suite
+### 4.1 Orchestration
+- **Router** acts as the team lead.
+- Use `Create an agent team...` prompts to parallelize work.
+
+### 4.2 Patterns
+- **Scientific Debate**: 5 teammates investigating competing hypotheses.
+- **Parallel Review**: Specialists for Security, Performance, and Coverage.
+
+### 4.3 Coordination
+- **Shared Task List**: decentralized task tracking.
+- **Mailbox**: inter-agent messaging via `message` and `broadcast`.
+
+### 4.4 Automated Quality Gates
+- `TaskCompleted` hook validates work before a task is closed.
+- `TeammateIdle` hook ensures teammates don't stop prematurely.
 
 ## 5. Testing guidance
 

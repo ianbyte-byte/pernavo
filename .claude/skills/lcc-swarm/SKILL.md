@@ -4,14 +4,15 @@ description: Run a comprehensive Swarm workflow using specialized agents: Router
 disable-model-invocation: true
 ---
 
-Run the comprehensive Swarm workflow for this repository. Break complex tasks into specialized stages with clear handoffs, leveraging Claude Code's subagent pattern for context isolation, tool constraint enforcement, and parallel exploration.
+Run the comprehensive Swarm workflow for this repository. Break complex tasks into specialized stages with clear handoffs or parallel agent teams, leveraging Claude Code's subagent and agent team patterns for context isolation, tool constraint enforcement, and parallel exploration.
 
-## Core Principles (From Claude Code Subagent Docs)
+## Core Principles
 
-- **Context Isolation**: Keep exploration/implementation out of main conversation
-- **Tool Constraints**: Use read-only agents for exploration, write-enabled for implementation
-- **Specialization**: Match tasks to focused system prompts
-- **Cost Efficiency**: Route appropriate tasks to faster models like Haiku
+- **Agent Teams**: Use for parallel work, shared task lists, and inter-agent coordination.
+- **Context Isolation**: Keep exploration/implementation out of main conversation.
+- **Tool Constraints**: Use read-only agents for exploration, write-enabled for implementation.
+- **Specialization**: Match tasks to focused system prompts (Router, Coder, etc.).
+- **Automated Quality Gates**: Use hooks (`TaskCompleted`, `TeammateIdle`) to enforce rules.
 
 ## Full Workflow
 
@@ -78,6 +79,14 @@ User Request
             │    - Document changes     │
             └───────────────────────────┘
 ```
+
+## Team Orchestration (New in V2)
+
+For complex tasks, the Router will propose an **Agent Team**:
+1. **Enable Teams**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
+2. **Shared Task List**: Lead manages tasks; teammates claim and complete.
+3. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
+4. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
 
 ## Handoff Envelope Schema (Enhanced)
 
