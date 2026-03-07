@@ -62,18 +62,22 @@ V2 leverages native Claude Code **Agent Teams**:
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
 - Use `Create an agent team...` prompts to parallelize work.
+- **Plan Approval**: Use "Require plan approval" to review approach before implementation.
+- **Display Modes**: Default is "auto". Override via `teammateMode` ("in-process" or "tmux").
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5 teammates investigating competing hypotheses.
-- **Parallel Review**: Specialists for Security, Performance, and Coverage.
+- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
+- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
+- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message` and `broadcast`.
+- **Shared Task List**: Centralized task management and tracking.
+- **Mailbox**: Direct messaging (`message`) or team-wide updates (`broadcast`).
+- **Shutdown/Cleanup**: Gracefully shut down teammates, then use the lead to "Clean up the team".
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates work before a task is closed.
-- `TeammateIdle` hook ensures teammates don't stop prematurely.
+- `TeammateIdle` hook ensures teammates don't stop prematurely or without reporting findings.
 
 ## 5. Testing guidance
 
