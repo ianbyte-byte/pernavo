@@ -21,6 +21,8 @@ def check_project_layout(root: Path) -> ProjectCheck:
         root / "CLAUDE.md",
         root / ".claude" / "docs" / "claud_platform_menu.md",
         root / ".claude" / "session_config.json",
+        root / ".claude" / "settings.json",
+        root / ".claude" / "hooks" / "lcc-quality-gate.sh",
         root / ".claude" / "agents",
         root / ".claude" / "skills",
     )
