@@ -30,11 +30,29 @@ Each handoff must include a JSON object in the output:
 - Must include: progress summary, next steps, and required context (files/commands/failure reasons)
 - Must not include: secrets, tokens, or sensitive information
 
-## 5) Failure handling
+## 5) Agent teams (Experimental)
+
+Agent teams allow parallel execution and decentralized coordination.
+
+- **Team lead**: The main agent session. Responsible for spawning the team and final synthesis.
+- **Teammates**: Independent agents with their own context windows.
+- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks.
+- **Parallel patterns**:
+  - **Scientific Debate**: Spawn multiple agents to investigate competing hypotheses and challenge each other.
+  - **Parallel Review**: Assign reviewers with different lenses (Security, Performance, Coverage).
+
+## 6) Hooks and quality gates
+
+Automated checks are enforced via `.claude/settings.json` and `.claude/hooks/`.
+
+- **TaskCompleted**: Fires when a task is closed. Used to verify completion criteria.
+- **TeammateIdle**: Fires before a teammate stops. Used to ensure no work is left in a pending state.
+
+## 7) Failure handling
 
 - If blocked, the summary must include: failure reason, repro steps, and a recommended fix path
 
-## 6) Document-first workflow (mandatory for platform/API/prompt/limits + Claude Code configuration)
+## 8) Document-first workflow (mandatory for platform/API/prompt/limits + Claude Code configuration)
 
 Before any code changes for tasks involving platform APIs, prompt optimization, model selection, token budgets, context windows, rate limits, structured outputs, or Claude Code configuration (subagents/skills/hooks/permissions):
 
