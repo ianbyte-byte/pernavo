@@ -29,5 +29,5 @@ Handoff envelope (must output if not using Agent Team):
 }
 
 Agent Team Notification (if applicable):
-- Use `message` to send specific findings to the Coder.
-- Use `broadcast` to share critical blockers with the entire team.
+- Use `message` to send findings or LGTM directly to the Coder teammate.
+- Use `broadcast` only for critical blockers that affect the entire team's goals.
