@@ -43,8 +43,9 @@ Agent teams allow parallel execution and decentralized coordination.
   - `broadcast <message>`: Send to all teammates (use sparingly).
 - **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
 - **Parallel patterns**:
-  - **Scientific Debate**: Spawn multiple agents to investigate competing hypotheses and challenge each other.
-  - **Parallel Review**: Assign reviewers with different lenses (Security, Performance, Coverage).
+  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
+  - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
+  - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
 
 ## 6) Hooks and quality gates
 
