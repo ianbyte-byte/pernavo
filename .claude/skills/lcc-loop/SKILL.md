@@ -20,8 +20,9 @@ Schedule a recurring prompt to run at a specified interval or cron schedule.
    - If no interval is provided, use `*/10 * * * *` (every 10 minutes).
 
 2. **Schedule the Task**:
-   - Use the native `CronCreate` tool to register the task.
-   - **CRITICAL**: `CronCreate` is a tool, not a shell command. DO NOT attempt to run `claude-cron` or any other shell command to create the task.
+   - Use the native `CronCreate` tool to register the task if available.
+   - If the `CronCreate` tool is not available, you may use the `claude-cron` shell command:
+     `claude-cron create --prompt "your prompt" --cron "cron expression"`
    - Set `recurring: true` for intervals/loops.
    - Provide the `prompt` and the calculated `cron` expression.
 
