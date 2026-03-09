@@ -34,14 +34,14 @@ Each handoff must include a JSON object in the output:
 
 Agent teams allow parallel execution and decentralized coordination.
 
-- **Team lead**: The main agent session. Responsible for spawning the team, defining tasks, and final synthesis.
+- **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
 - **Teammates**: Independent agents with their own context windows.
-- **Shared task list**: Centralized coordination. Teammates can self-claim or be assigned tasks.
-- **Plan Approval**: For complex/risky tasks, use "Require plan approval" to review teammate plans before implementation.
-- **Display Modes**: Control via `teammateMode` in `settings.json` ("in-process" or "tmux").
-- **Management**:
-  - **Cleanup**: Use "Clean up the team" from the lead once all teammates are shut down.
-  - **Shutdown**: Request specific teammates to "shut down" gracefully.
+- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
+- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
+- **Communication**:
+  - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
+  - `broadcast <message>`: Send to all teammates (use sparingly).
+- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
 - **Parallel patterns**:
   - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).

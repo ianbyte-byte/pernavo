@@ -28,4 +28,5 @@ Handoff envelope (must output if not using Agent Team):
 }
 
 Agent Team Notification (if applicable):
-- Message the Coder directly with failure logs and repro steps.
+- Message the Coder directly using `message` with failure logs and repro steps.
+- Broadcast to the lead and reviewer if critical regressions are found.
