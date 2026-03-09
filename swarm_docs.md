@@ -66,8 +66,9 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5 teammates investigating competing hypotheses.
-- **Parallel Review**: Specialists for Security, Performance, and Coverage.
+- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
+- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
+- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
 ### 4.3 Coordination
 - **Shared Task List**: decentralized task tracking.
