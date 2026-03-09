@@ -17,6 +17,7 @@ dev = ["pytest>=8"]
 
 [project.scripts]
 chung-swarm = "chung_agent_swarm.cli:main"
+lcc-claude-cron = "chung_agent_swarm.cron:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}

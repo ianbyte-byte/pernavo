@@ -21,8 +21,8 @@ Schedule a recurring prompt to run at a specified interval or cron schedule.
 
 2. **Schedule the Task**:
    - Use the native `CronCreate` tool to register the task if available.
-   - If the `CronCreate` tool is not available, you may use the `claude-cron` shell command:
-     `claude-cron create --prompt "your prompt" --cron "cron expression"`
+   - If the `CronCreate` tool is not available, you MUST use the `lcc-claude-cron` shell command:
+     `lcc-claude-cron create --prompt "your prompt" --cron "cron expression" --recurring`
    - Set `recurring: true` for intervals/loops.
    - Provide the `prompt` and the calculated `cron` expression.
 
@@ -40,3 +40,4 @@ Schedule a recurring prompt to run at a specified interval or cron schedule.
 - **CronCreate**: Create a new scheduled task.
 - **CronList**: List all scheduled tasks (useful if the user asks "what tasks are running?").
 - **CronDelete**: Delete a task by ID (useful if the user asks "cancel the loop").
+- **lcc-claude-cron**: Shell command fallback for scheduling tasks using system crontab.
