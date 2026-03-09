@@ -15,14 +15,17 @@ Schedule a recurring prompt to run at a specified interval or cron schedule.
 ## Instructions for Claude
 
 1. **Parse the Interval**:
-   - If a duration (e.g., `30s`, `5m`, `2h`) is provided, convert it to an appropriate cron expression. Note that cron has 1-minute granularity, so seconds are rounded up.
+   - If a duration (e.g., `30s`, `5m`, `2h`) is provided, convert it to an appropriate 5-field cron expression. Note that cron has 1-minute granularity, so seconds are rounded up.
    - If a 5-field cron expression is provided, use it directly.
    - If no interval is provided, use `*/10 * * * *` (every 10 minutes).
 
 2. **Schedule the Task**:
-   - Use the `CronCreate` tool to register the task.
-   - Set `recurring: true` for intervals/loops.
-   - Provide the `prompt` and the calculated `cron` expression.
+   - **DO NOT** attempt to run shell commands like `claude-cron`. Instead, use the built-in **`CronCreate` tool** (if available in your environment).
+   - Parameters for `CronCreate`:
+     - `cron`: The calculated cron expression (e.g., `*/5 * * * *`).
+     - `prompt`: The prompt to run.
+     - `recurring`: Set to `true` for loops.
+   - If `CronCreate` is not available as a tool, inform the user and ask for the specific scheduling environment details.
 
 3. **Confirm**:
    - Inform the user that the task has been scheduled, providing the task ID and the effective schedule.
@@ -36,5 +39,5 @@ Schedule a recurring prompt to run at a specified interval or cron schedule.
 ## Underlying Tools
 
 - **CronCreate**: Create a new scheduled task.
-- **CronList**: List all scheduled tasks (useful if the user asks "what tasks are running?").
-- **CronDelete**: Delete a task by ID (useful if the user asks "cancel the loop").
+- **CronList**: List all scheduled tasks.
+- **CronDelete**: Delete a task by ID.
