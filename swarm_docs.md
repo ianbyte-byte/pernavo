@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -57,23 +57,27 @@ Recommended constraints:
 
 ## 4. Parallelization and Team Orchestration (V2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
-- Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
-- **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- Use `Create an agent team...` prompts to parallelize work. Prefer **Sonnet** for all teammates.
+- **Plan Approval**: Use `Require plan approval` for complex or risky tasks. The lead reviews and approves/rejects plans autonomously before implementation begins.
+- **Task Management**:
+  - **Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+  - **Dependencies**: Use task dependencies to coordinate sequential work within the parallel team.
+- **Context Management**: Teammates **do not inherit** the lead's conversation history. Spawn prompts must be comprehensive and include all necessary context and constraints.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
-- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
+- **Scientific Debate**: 5+ teammates investigating competing hypotheses. Teammates actively challenge and try to disprove each other via the mailbox to converge on the root cause.
+- **Parallel Review**: Specialists with distinct domains (Security, Performance, Test Coverage). Reviewers coordinate via the mailbox to avoid redundant feedback.
+- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel on independent modules.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Shared Task List**: decentralized task tracking with support for self-claiming and automatic unblocking of dependent tasks.
+- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide). Teammates notify the lead and peers upon task completion.
+- **Wait for Teammates**: If the lead starts doing work prematurely, use the `Wait for your teammates...` instruction to force delegation.
+- **Cleanup**: The lead must shut down all teammates first, then run `Clean up the team`. Teammates should never run cleanup.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.

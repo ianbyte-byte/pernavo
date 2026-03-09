@@ -36,16 +36,19 @@ Agent teams allow parallel execution and decentralized coordination.
 
 - **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
 - **Teammates**: Independent agents with their own context windows.
-- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
+- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks.
+  - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+  - **Dependencies**: Tasks can depend on others; blocked tasks unblock automatically upon completion of dependencies.
 - **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
+- **Context & Spawning**: Teammates load `CLAUDE.md`, MCP servers, and skills, but **do not inherit conversation history**. Spawn prompts must be comprehensive and include all necessary context/constraints.
 - **Communication**:
   - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
   - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team`. **Do not run cleanup from a teammate.**
 - **Parallel patterns**:
-  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
-  - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
-  - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
+  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses. Teammates must actively challenge and try to disprove each other's theories via messaging to find the root cause.
+  - **Parallel Review**: Assign reviewers with distinct domains (Security, Performance, Test Coverage). Reviewers should coordinate to avoid redundant feedback.
+  - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing to work on independent modules.
 
 ## 6) Hooks and quality gates
 
