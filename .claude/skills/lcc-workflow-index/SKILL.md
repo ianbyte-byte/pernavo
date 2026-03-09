@@ -42,6 +42,7 @@ List the available project subagents and skills in this repository, and recommen
 - /simplify: eliminate redundancy and simplify control flow (behavior-preserving)
 - /deps: safe dependency upgrades
 - /design: requirements → architecture → execution plan
+- /loop: (lcc-loop) schedule recurring tasks or prompts
 
 ## Usage
 Pick a skill that matches your intent, or explicitly ask Claude Code to use a specific subagent (e.g., “Use lcc-debugger to fix failing tests”). If you are unsure, start with lcc-router.

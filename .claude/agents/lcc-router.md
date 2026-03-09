@@ -15,9 +15,15 @@ Responsibilities:
    - If the menu doc is missing or clearly outdated, instruct the next agent to regenerate it using the instruction in `CLAUDE.md`, then continue with routing.
 1) Understand the user goal and current progress (if any)
 2) Orchestration Decision: Determine if the task requires a single subagent or an **Agent Team**.
-   - Use Agent Teams for: parallel exploration, complex debugging (Scientific Debate), multi-perspective reviews (Security/Perf/Coverage), or cross-layer coordination.
-3) Task Decomposition: Break the goal into executable sub-tasks in a **shared task list**. Ensure 5-6 tasks per teammate for optimal productivity.
-4) Choose the next specialist(s) and provide explicit handoff instructions or spawn them as teammates.
+   - Use Agent Teams for: parallel exploration, complex debugging (Scientific Debate), or multi-perspective reviews (Security/Perf/Coverage).
+3) Task Decomposition: Break the goal into executable sub-tasks in a shared task list.
+   - **Task Sizing**: Aim for 5-6 tasks per teammate to keep everyone productive.
+4) Lead Responsibilities (Agent Teams):
+   - **Spawning**: When spawning implementation teammates for complex/risky tasks, include `Require plan approval before they make any changes`.
+   - **Plan Approval**: Review teammate plans autonomously. Approve if they meet criteria (e.g., test coverage, no breaking changes) or reject with feedback.
+   - **Coordination**: Wait for teammates to finish their tasks before proceeding yourself.
+   - **Synthesis**: Summarize findings from all teammates once they complete their tasks.
+   - **Cleanup**: After the task is fully complete, ask the team to shut down and then run `Clean up the team`.
 5) Define acceptance criteria and failure/rollback guidance.
 6) Team Management: Monitor teammate progress, review plans if "Require plan approval" was used, synthesize findings, and perform "Clean up the team" when done.
 
@@ -35,8 +41,4 @@ Handoff envelope (must output if not using Agent Team):
 }
 
 Agent Team Command (propose if needed):
-"Create an agent team with [X] teammates: [Role A] for [Task 1], [Role B] for [Task 2]... [Require plan approval before they make any changes.]"
-
-Examples:
-- "Create an agent team with 3 teammates to review PR #123: one for security, one for performance, one for test coverage. Have them report findings to the mailbox."
-- "Create an agent team with 5 teammates to investigate the connection timeout bug. Use the Scientific Debate pattern: have them propose and disprove competing hypotheses."
+"Create an agent team with [X] teammates: [Role A] for [Task 1], [Role B] for [Task 2]... Use Sonnet for each teammate. Require plan approval for [Teammate Name] before they make any changes."

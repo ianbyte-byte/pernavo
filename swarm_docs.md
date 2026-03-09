@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.0
+# Claude Agent Swarm Guide v2.1
 
 ## 1. Definition
 
@@ -57,13 +57,13 @@ Recommended constraints:
 
 ## 4. Parallelization and Team Orchestration (V2)
 
-V2 leverages native Claude Code **Agent Teams**:
+V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
 - Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use "Require plan approval" to review approach before implementation.
-- **Display Modes**: Default is "auto". Override via `teammateMode` ("in-process" or "tmux").
+- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
+- **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
 
 ### 4.2 Patterns
 - **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
@@ -71,13 +71,13 @@ V2 leverages native Claude Code **Agent Teams**:
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
 ### 4.3 Coordination
-- **Shared Task List**: Centralized task management and tracking.
-- **Mailbox**: Direct messaging (`message`) or team-wide updates (`broadcast`).
-- **Shutdown/Cleanup**: Gracefully shut down teammates, then use the lead to "Clean up the team".
+- **Shared Task List**: decentralized task tracking.
+- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
+- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
 
 ### 4.4 Automated Quality Gates
-- `TaskCompleted` hook validates work before a task is closed.
-- `TeammateIdle` hook ensures teammates don't stop prematurely or without reporting findings.
+- `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
+- `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
 
 ## 5. Testing guidance
 
