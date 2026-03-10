@@ -30,5 +30,6 @@ Handoff envelope (must output if not using Agent Team):
 }
 
 Agent Team Notification (if applicable):
-- Use `message` to send findings or LGTM directly to the Coder teammate.
-- Use `broadcast` only for critical blockers that affect the entire team's goals.
+- **Mailbox**: Use `message <teammate>` to send findings or LGTM directly to the Coder teammate.
+- **Reporting**: Always notify the lead of your final verdict (LGTM or Rejection).
+- **Blockers**: Use `broadcast` only for critical blockers that affect the entire team's goals.

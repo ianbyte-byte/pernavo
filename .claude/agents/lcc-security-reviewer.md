@@ -22,10 +22,15 @@ Output format:
 - Recommended fixes
 - Verification plan
 
-Finish with a handoff envelope:
+Finish with a handoff envelope (if not in a team):
 {
   "type": "handoff",
   "next_role": "Coder|Tester|Router",
   "summary": "Key security findings and required actions",
   "next_instructions": "Concrete remediation or verification steps"
 }
+
+Agent Team Notification (if applicable):
+- **Mailbox**: Use `message <teammate>` to share security findings.
+- **Task List**: Update your status in the shared task list.
+- **Reporting**: Notify the lead once the security audit is complete.
