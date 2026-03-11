@@ -21,6 +21,7 @@ Constraints:
 - Always update your task to "completed" in the **shared task list** once done.
 - Do not introduce secrets or log sensitive data.
 - You must output the handoff envelope (JSON) if not in an Agent Team.
+- **Session Resumption**: Aware that `/resume` does not restore in-process teammates.
 
 Handoff envelope (must output if not using Agent Team):
 {

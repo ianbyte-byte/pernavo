@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -62,6 +62,13 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
 - Use `Create an agent team...` prompts to parallelize work.
+- **Display Modes**:
+  - **In-process**: Default. Runs inside your terminal. Use `Shift+Down` to cycle teammates.
+  - **Split panes**: Requires `tmux` or `iTerm2`. Each teammate gets a separate pane.
+- **Interaction Shortcuts**:
+  - `Shift+Down`: Cycle through teammates.
+  - `Ctrl+T`: Toggle shared task list.
+  - `Escape`: Interrupt a teammate's current turn.
 - **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
 
@@ -73,9 +80,20 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 ### 4.3 Coordination
 - **Shared Task List**: decentralized task tracking.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Cleanup**: The lead must shut down teammates individually (e.g., `Ask the coder teammate to shut down`) before running `Clean up the team`.
 
-### 4.4 Automated Quality Gates
+### 4.4 Best Practices
+- **Monitor and steer**: Check in on teammates' progress frequently to avoid wasted effort.
+- **Avoid file conflicts**: Break work so each teammate owns a different set of files.
+- **Give context**: Include task-specific details in the spawn prompt as teammates don't inherit history.
+
+### 4.5 Limitations
+- **Session Resumption**: `/resume` and `/rewind` do not restore in-process teammates.
+- **Task Status Lag**: Teammates may fail to mark tasks as complete; update manually or nudge them if stuck.
+- **One Team per Session**: A lead can only manage one team at a time.
+- **No Nested Teams**: Teammates cannot spawn their own teams.
+
+### 4.6 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
 - `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
 
