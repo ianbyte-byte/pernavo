@@ -36,12 +36,23 @@ Agent teams allow parallel execution and decentralized coordination.
 
 - **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
 - **Teammates**: Independent agents with their own context windows.
-- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
-- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
+- **Shared task list**: Use it to assign and track work.
+  - **States**: pending, in progress, completed.
+  - **Dependencies**: Tasks can depend on others; blocked tasks unblock automatically when dependencies complete.
+  - **Self-claiming**: Teammates can self-claim the next unassigned, unblocked task when idle. Aim for 5-6 tasks per teammate.
+- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously. Teammates remain in read-only mode until approved.
 - **Communication**:
   - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
   - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+  - **Teammate Discovery**: Teammates can discover each other via `~/.claude/teams/{team-name}/config.json`.
+- **Best Practices**:
+  - **Task Sizing**: Break work into self-contained units (e.g., a function, a test file).
+  - **Avoid Conflicts**: Ensure teammates own different sets of files to prevent overwrites.
+  - **Wait for Finish**: The lead should wait for teammates to complete tasks before proceeding with synthesis or implementation.
+- **Cleanup**: Once the task is complete, the lead must shut down all teammates individually (they must approve/reject the request) and then run `Clean up the team` to remove shared resources.
+- **Limitations**:
+  - **Session Resumption**: `/resume` and `/rewind` do not restore in-process teammates. If resumed, the lead must spawn new teammates.
+  - **Permission Inheritance**: Teammates start with the lead's permission settings (e.g., `--dangerously-skip-permissions`).
 - **Parallel patterns**:
   - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
