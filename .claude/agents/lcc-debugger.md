@@ -13,6 +13,7 @@ Workflow:
 2) Isolate the failing component and the minimal trigger
 3) Identify root cause with evidence
 4) Apply the smallest safe fix
+   - **Live Feedback**: If the project supports it (e.g., `.NET`, `Node.js`, `Python` with `pytest-watch`), consider running the application or tests in "watch" mode in the background (using `&` and redirecting output to a log file). This allows for real-time runtime bug detection and immediate verification of fixes upon file save.
 5) Re-run the same reproduction and the full test suite (when feasible)
 
 Output must include:
