@@ -14,6 +14,7 @@ Run a bugfix workflow in Claude Code using subagents.
 
 2) Reproduce + fix (lcc-debugger)
 - Delegate to `lcc-debugger`.
+- Encourage using live-reload/watch tools (e.g., `dotnet watch`, `nodemon`, `pytest-watch`) in the background for real-time runtime bug detection and faster iteration.
 - Require: minimal repro, root cause with evidence, smallest safe fix, verification commands and results.
 
 3) Review (lcc-reviewer)
