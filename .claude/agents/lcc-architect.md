@@ -22,10 +22,15 @@ Output format:
 - Migration plan
 - Test plan
 
-If you want implementation to start, finish with a handoff envelope:
+If you want implementation to start, finish with a handoff envelope (if not in a team):
 {
   "type": "handoff",
   "next_role": "Router",
   "summary": "Chosen design and key decisions",
   "next_instructions": "Delegate implementation and verification tasks to the right specialist"
 }
+
+Agent Team Notification (if applicable):
+- **Mailbox**: Use `message <teammate>` to share design decisions.
+- **Task List**: Update your status in the shared task list.
+- **Reporting**: Notify the lead once the architecture proposal is ready for review.
