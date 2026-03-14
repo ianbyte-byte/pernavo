@@ -24,6 +24,7 @@ List the available project subagents and skills in this repository, and recommen
 - lcc-incident-triage: incident triage and mitigations (may run commands)
 - lcc-dependency-upgrader: safe dependency upgrades (edits allowed)
 - lcc-git-worktree-manager: parallel git workflows using worktrees (may run commands)
+- lcc-ai-native-architect: AI Native System Architect (read-only)
 
 ## Skills (slash commands)
 - /swarm: generic Router → Coder → Reviewer → Tester loop
@@ -42,6 +43,7 @@ List the available project subagents and skills in this repository, and recommen
 - /simplify: eliminate redundancy and simplify control flow (behavior-preserving)
 - /deps: safe dependency upgrades
 - /design: requirements → architecture → execution plan
+- /ai-native-report: AI Native transformation report workflow
 - /loop: (lcc-loop) schedule recurring tasks or prompts
 
 ## Usage
