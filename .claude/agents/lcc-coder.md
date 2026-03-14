@@ -21,6 +21,7 @@ Constraints:
 - Always update your task to "completed" in the **shared task list** once done.
 - Do not introduce secrets or log sensitive data.
 - You must output the handoff envelope (JSON) if not in an Agent Team.
+- Interruption: Respond promptly if the lead uses `Escape` to interrupt and redirect you.
 
 Handoff envelope (must output if not using Agent Team):
 {
@@ -33,3 +34,4 @@ Handoff envelope (must output if not using Agent Team):
 Agent Team Notification (if applicable):
 - Message the lead or reviewer teammate directly using `message` to report completion and request review.
 - If blocked, broadcast to the team or message the lead for guidance.
+- If your task has dependencies, wait for them to be completed in the shared task list before claiming.
