@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -59,23 +59,35 @@ Recommended constraints:
 
 V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
-### 4.1 Orchestration
-- **Router** acts as the team lead.
-- Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
-- **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+### 4.1 Comparison: Subagents vs Agent Teams
+| Feature | Subagents | Agent Teams |
+| :--- | :--- | :--- |
+| **Context** | Shared caller window | Independent context windows |
+| **Communication** | Report to caller only | Direct inter-agent messaging |
+| **Coordination** | Lead manages all work | Shared task list / self-coordination |
+| **Best For** | Focused, sequential tasks | Parallel exploration, collaboration |
+| **Token Cost** | Lower (summarized results) | Higher (separate instances) |
 
-### 4.2 Patterns
+### 4.2 Orchestration
+- **Router** acts as the team lead.
+- **Spawning**: Teammates inherit lead's permission mode.
+- **Plan Approval**: Use `Require plan approval` for complex tasks. Teammates remain in read-only mode until the lead approves.
+- **Task Management**: Leverage **Task Dependencies** (blocked tasks unblock automatically). Teammates can **self-claim** unassigned work when idle.
+
+### 4.3 Patterns
 - **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
 - **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
-### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+### 4.4 Coordination
+- **Mailbox**: Direct messaging via `message <teammate>` and `broadcast`.
+- **Display Modes**:
+  - `in-process`: Default, cycle with Shift+Down.
+  - `split-panes`: Requires `tmux` or iTerm2; set `teammateMode: "tmux"` in `settings.json`.
+- **Cleanup**: Lead must shut down teammates individually (must be approved/rejected) before running `Clean up the team`.
+- **Limitations**: `/resume` and `/rewind` do not restore in-process teammates.
 
-### 4.4 Automated Quality Gates
+### 4.5 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
 - `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
 
