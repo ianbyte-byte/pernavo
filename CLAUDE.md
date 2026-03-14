@@ -34,14 +34,22 @@ Each handoff must include a JSON object in the output:
 
 Agent teams allow parallel execution and decentralized coordination.
 
-- **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
-- **Teammates**: Independent agents with their own context windows.
-- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
-- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
+- **Team lead**: The main agent session. Coordinates work, assigns tasks, approves plans, and performs final synthesis.
+- **Teammates**: Independent agents with their own context windows. They can be discovered via `~/.claude/teams/{team-name}/config.json`.
+- **Display Modes**:
+  - **In-process**: (Default) Use `Shift+Down` to cycle teammates. Press `Enter` to view a teammate's session, `Escape` to interrupt.
+  - **Split panes**: Requires `tmux` or `iTerm2`. Each teammate gets a pane.
+- **Shared task list**: Use `Ctrl+T` to toggle. Teammates can self-claim tasks. Task dependencies are managed automatically. Aim for 5-6 tasks per teammate.
+- **Plan Approval**: For complex or risky tasks, use `Require plan approval before they make any changes`. The lead approves/rejects plans autonomously.
 - **Communication**:
-  - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
-  - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+  - `message <teammate>`: Send a direct message (e.g., Coder to Reviewer).
+  - `broadcast <message>`: Send to all teammates (high token cost, use sparingly).
+- **Shutdown & Cleanup**:
+  - **Shutdown**: Individual teammates should be asked to shut down first (e.g., `Ask the researcher to shut down`).
+  - **Cleanup**: The lead runs `Clean up the team` only after all teammates have exited.
+- **Limitations**:
+  - `/resume` and `/rewind` do NOT restore in-process teammates. If resuming, tell the lead to spawn new teammates.
+  - Task status can lag; nudging the teammate or manual updates may be required.
 - **Parallel patterns**:
   - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).

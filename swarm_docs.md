@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -28,9 +28,9 @@ Core capabilities:
 
 ### 2.3 Key CLI helpers (optional)
 The Python package provides a small CLI to validate workflow artifacts:
-- `chung-swarm check`: verify required files exist
-- `chung-swarm session-config validate`: validate `.claude/session_config.json`
-- `chung-swarm handoff validate`: validate a handoff envelope pasted from output
+- `python -m chung_agent_swarm.cli check`: verify required files exist
+- `python -m chung_agent_swarm.cli session-config validate`: validate `.claude/session_config.json`
+- `python -m chung_agent_swarm.cli handoff validate`: validate a handoff envelope pasted from output
 
 ### 2.3 Running with Claude Code (project configuration)
 
@@ -57,11 +57,12 @@ Recommended constraints:
 
 ## 4. Parallelization and Team Orchestration (V2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
-- Use `Create an agent team...` prompts to parallelize work.
+- **Teammates**: Independent agents discovered via `~/.claude/teams/{team-name}/config.json`.
+- **Shortcuts**: `Shift+Down` (cycle teammates), `Ctrl+T` (toggle task list).
 - **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
 
@@ -71,13 +72,17 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
+- **Shared Task List**: decentralized task tracking with automatic dependency management.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Wait for Completion**: The lead must wait for teammates to finish before synthesis.
+- **Shutdown & Cleanup**: Individual teammates must be shut down (e.g., `Ask the researcher to shut down`) before the lead runs `Clean up the team`.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
 - `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
+
+### 4.5 Limitations
+- `/resume` and `/rewind` do NOT restore in-process teammates.
 
 ## 5. Testing guidance
 
