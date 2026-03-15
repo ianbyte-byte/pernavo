@@ -13,14 +13,14 @@ if [[ "$EVENT" == "TaskCompleted" ]]; then
   # If it's a coder task, ensure it doesn't say "TODO"
   if [[ "$TASK_SUBJECT" == *"TODO"* ]]; then
      echo "Task subject contains TODO. Please provide a concrete subject before completing." >&2
-     exit 2
+     exit 2 # Exit code 2 sends feedback and prevents completion
   fi
 
   # Basic verification: Ensure there is a handoff or a report in the transcript
   if [[ -f "$TRANSCRIPT_PATH" ]]; then
     if ! grep -qiE "handoff|summary|report|LGTM|verified" "$TRANSCRIPT_PATH"; then
        echo "Task completion requires a summary or handoff report in the transcript." >&2
-       exit 2
+       exit 2 # Exit code 2 sends feedback and prevents completion
     fi
   fi
 fi
@@ -32,7 +32,7 @@ if [[ "$EVENT" == "TeammateIdle" ]]; then
   if [[ -f "$TRANSCRIPT_PATH" ]]; then
     if grep -qi "error" "$TRANSCRIPT_PATH" && ! grep -qiE "fixed|resolved|workaround" "$TRANSCRIPT_PATH"; then
        echo "Teammate $TEAMMATE is going idle with potential unaddressed errors in the transcript." >&2
-       exit 2
+       exit 2 # Exit code 2 sends feedback and keeps the teammate working
     fi
   fi
 fi
