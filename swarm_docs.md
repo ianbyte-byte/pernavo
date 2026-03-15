@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -57,11 +57,14 @@ Recommended constraints:
 
 ## 4. Parallelization and Team Orchestration (V2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
 - Use `Create an agent team...` prompts to parallelize work.
+- **Display Modes**:
+  - `in-process` (default): all in one terminal. Cycle with `Shift+Down`.
+  - `split panes`: each in its own pane (requires tmux or iTerm2). Configure via `teammateMode` in `settings.json`.
 - **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
 
@@ -71,13 +74,21 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
+- **Shared Task List**: decentralized task tracking. Use `Ctrl+T` to toggle.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Discovery**: Teammates can discover others via `~/.claude/teams/{team-name}/config.json`.
+- **Cleanup Sequence**:
+  1. Shut down teammates first (`Ask the <teammate> to shut down`).
+  2. Run `Clean up the team` via the lead.
 
 ### 4.4 Automated Quality Gates
-- `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
+- `TaskCompleted` hook validates that a handoff report or summary exists in the transcript. Exit with code 2 to keep working.
 - `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
+
+### 4.5 Limitations
+- **No Session Resumption**: `/resume` and `/rewind` do not restore in-process teammates.
+- **Task Lag**: Status may lag; nudge teammates or update manually.
+- **Fixed Lead**: The creating session remains the lead.
 
 ## 5. Testing guidance
 

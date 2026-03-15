@@ -35,13 +35,18 @@ Each handoff must include a JSON object in the output:
 Agent teams allow parallel execution and decentralized coordination.
 
 - **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
-- **Teammates**: Independent agents with their own context windows.
+- **Teammates**: Independent agents with their own context windows. Discover other members via `~/.claude/teams/{team-name}/config.json`.
+- **Display Modes**:
+  - `in-process`: Cycle with `Shift+Down`, toggle task list with `Ctrl+T`.
+  - `split-pane`: Requires tmux/iTerm2. Configure via `teammateMode` in `settings.json`.
 - **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
 - **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
 - **Communication**:
   - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
   - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+- **Cleanup Sequence (Mandatory)**:
+  1. **Shutdown**: The lead must shut down each teammate individually (`Ask the <teammate> to shut down`).
+  2. **Cleanup**: Run `Clean up the team` via the lead only after all teammates have exited.
 - **Parallel patterns**:
   - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
