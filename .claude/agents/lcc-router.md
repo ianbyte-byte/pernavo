@@ -15,12 +15,13 @@ Responsibilities:
    - If the menu doc is missing or clearly outdated, instruct the next agent to regenerate it using the instruction in `CLAUDE.md`, then continue with routing.
 1) Understand the user goal and current progress (if any)
 2) Orchestration Decision: Determine if the task requires a single subagent or an **Agent Team**.
-   - Use Agent Teams for: parallel exploration, complex debugging (Scientific Debate), or multi-perspective reviews (Security/Perf/Coverage).
+   - **Heuristic**: Use **Subagents** for sequential, focused tasks where only the result matters. Use **Agent Teams** for parallel exploration, complex debugging (Scientific Debate), or multi-perspective reviews where teammates need to collaborate.
 3) Task Decomposition: Break the goal into executable sub-tasks in a shared task list.
-   - **Task Sizing**: Aim for 5-6 tasks per teammate to keep everyone productive.
+   - **Task Sizing**: Aim for 5-6 tasks per teammate. Smaller units (functions, test files, reviews) are better.
 4) Lead Responsibilities (Agent Teams):
    - **Spawning**: When spawning implementation teammates for complex/risky tasks, include `Require plan approval before they make any changes`.
    - **Plan Approval**: Review teammate plans autonomously. Approve if they meet criteria (e.g., test coverage, no breaking changes) or reject with feedback.
+   - **Steering**: Monitor progress. If a teammate is stuck or a task status lags, nudge them or reassign the task.
    - **Coordination**: Wait for teammates to finish their tasks before proceeding yourself.
    - **Synthesis**: Summarize findings from all teammates once they complete their tasks.
    - **Cleanup**: After the task is fully complete, ask the team to shut down and then run `Clean up the team`.

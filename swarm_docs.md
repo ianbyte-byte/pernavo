@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -66,14 +66,26 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
-- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
+- **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses. Example: "Spawn 5 agent teammates to investigate different hypotheses. Have them talk to each other to try to disprove each other's theories, like a scientific debate."
+- **Parallel Review**: Assign distinct lenses to reviewers. Example: "Spawn three reviewers: one for security, one for performance, one for test coverage. Have them each report findings."
+- **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
 
-### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
+### 4.3 Comparison: Subagents vs Agent Teams
+| Feature | Subagents | Agent Teams |
+| :--- | :--- | :--- |
+| **Context** | Own context window; results return to caller | Own context window; fully independent |
+| **Communication** | Report results back to caller only | Teammates message each other directly |
+| **Coordination** | Main agent manages all work | Shared task list with self-coordination |
+| **Best for** | Focused tasks where only result matters | Complex work requiring discussion |
+| **Token cost** | Lower (summarized results) | Higher (separate Claude instances) |
+
+### 4.4 Coordination & Controls
+- **Shared Task List**: decentralized task tracking. Use `Ctrl+T` to toggle.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Cleanup**: The lead must shut down teammates first, then run `Clean up the team`.
+- **Troubleshooting**:
+  - **Orphaned tmux**: If a session persists, use `tmux ls` and `tmux kill-session -t <name>`.
+  - **Lagging Tasks**: If a task is stuck, check work manually and nudge the teammate.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.

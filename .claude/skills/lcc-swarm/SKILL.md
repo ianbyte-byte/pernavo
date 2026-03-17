@@ -29,14 +29,14 @@ User Request
 │    - Specialist Selection: Choose next role(s)               │
 └─────────────────────────────────────────────────────────────┘
     │
-    ├───────────────────────┬───────────────────────┐
-    │                       │                       │
-    ▼                       ▼                       ▼
-┌───────────────┐   ┌───────────────┐   ┌───────────────┐
-│ 2a. lcc-     │   │ 2b. lcc-     │   │ 2c. Parallel  │
-│ architect     │   │ product       │   │ Exploration   │
-│ (Optional)    │   │ (Optional)    │   │ (Explore)     │
-└───────────────┘   └───────────────┘   └───────────────┘
+    ├───────────────────────┬──────────────────────────────┐
+    │                       │                              │
+    ▼                       ▼                              ▼
+┌───────────────┐   ┌───────────────┐   ┌──────────────────────────────┐
+│ 2a. lcc-     │   │ 2b. lcc-     │   │ 2c. Agent Team (Parallel)    │
+│ architect     │   │ product       │   │ - Shared Task List           │
+│ (Optional)    │   │ (Optional)    │   │ - Scientific Debate          │
+└───────────────┘   └───────────────┘   └──────────────────────────────┘
     │                       │                       │
     └───────────────────────┴───────────────────────┘
                             │
@@ -87,6 +87,14 @@ For complex tasks, the Router will propose an **Agent Team**:
 2. **Shared Task List**: Lead manages tasks; teammates claim and complete.
 3. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
 4. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
+
+### User Controls (In-process mode)
+- `Shift+Down`: Cycle through teammates
+- `Ctrl+T`: Toggle shared task list
+- `Enter`: View teammate session
+- `Escape`: Interrupt teammate
+- `message <name>`: Direct message
+- `broadcast <msg>`: Team message
 
 ## Handoff Envelope Schema (Enhanced)
 
