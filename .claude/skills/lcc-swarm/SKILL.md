@@ -8,11 +8,11 @@ Run the comprehensive Swarm workflow for this repository. Break complex tasks in
 
 ## Core Principles
 
-- **Agent Teams**: Use for parallel work, shared task lists, and inter-agent coordination.
-- **Context Isolation**: Keep exploration/implementation out of main conversation.
-- **Tool Constraints**: Use read-only agents for exploration, write-enabled for implementation.
+- **Agent Teams**: Use for parallel work (Scientific Debate, Parallel Review), shared task lists, and inter-agent coordination via `message` and `broadcast`.
+- **Context Isolation**: Each agent team member has its own context window.
+- **Tool Constraints**: Use read-only agents for exploration, write-enabled for implementation. Use `Require plan approval` for risk management.
 - **Specialization**: Match tasks to focused system prompts (Router, Coder, etc.).
-- **Automated Quality Gates**: Use hooks (`TaskCompleted`, `TeammateIdle`) to enforce rules.
+- **Automated Quality Gates**: Use hooks (`TaskCompleted`, `TeammateIdle`) to enforce handoffs and error handling.
 
 ## Full Workflow
 
@@ -84,9 +84,12 @@ User Request
 
 For complex tasks, the Router will propose an **Agent Team**:
 1. **Enable Teams**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
-2. **Shared Task List**: Lead manages tasks; teammates claim and complete.
-3. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
-4. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
+2. **Display Modes**: Choose `in-process` or `split-pane` (via `teammateMode` in `settings.json`).
+3. **Plan Approval**: Use `Require plan approval` to ensure the lead reviews implementation plans before they start.
+4. **Shared Task List**: Lead manages tasks; teammates claim and complete with file locking.
+5. **Mailbox**: Teammates use `message` and `broadcast` to coordinate. They can discover each other via team config.
+6. **Wait & Cleanup**: The lead waits for teammates and performs `Clean up the team` after shutting them down.
+7. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
 
 ## Handoff Envelope Schema (Enhanced)
 

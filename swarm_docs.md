@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -57,27 +57,46 @@ Recommended constraints:
 
 ## 4. Parallelization and Team Orchestration (V2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
-### 4.1 Orchestration
+### 4.1 Comparison: Subagents vs Agent Teams
+
+| Feature | Subagents | Agent Teams |
+| :--- | :--- | :--- |
+| **Context** | Own context window; results return to caller | Own context window; fully independent |
+| **Communication** | Report results back to main agent only | Teammates message each other directly |
+| **Coordination** | Main agent manages all work | Shared task list with self-coordination |
+| **Best for** | Focused tasks where only result matters | Complex work requiring collaboration |
+| **Token cost** | Lower (summarized back to main) | Higher (each is a separate instance) |
+
+### 4.2 Orchestration
 - **Router** acts as the team lead.
-- Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
+- **Enablement**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
+- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans autonomously while the teammate stays in read-only mode.
+- **Display Mode**: Choose between `in-process` (Shift+Down to cycle) and `split-pane` (requires tmux/iTerm2).
+
+### 4.3 Patterns
+- **Scientific Debate**: 5+ teammates investigate competing hypotheses and actively disprove each other. Use for root cause analysis or architectural trade-offs.
+- **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
+- **Cross-layer coordination**: Separate teammates for frontend, backend, and testing working on a single feature.
+
+### 4.4 Coordination & Best Practices
+- **Shared Task List**: All agents see task status and claim work. Task claiming uses file locking.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
-
-### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
-- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
-
-### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
+- **Context**: Teammates load `CLAUDE.md`, MCP servers, and skills, but NOT conversation history. Include task-specific details in the spawn prompt.
+- **Direct Messaging**: Use `message <teammate>` (direct) and `broadcast` (team-wide). Teammates can discover each other via `~/.claude/teams/{team-name}/config.json`.
+- **Wait for Completion**: The lead should wait for teammates to finish tasks before proceeding to avoid implementation race conditions.
 - **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
 
-### 4.4 Automated Quality Gates
+### 4.5 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
-- `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
+- `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors (exit code 2 sends feedback).
+
+### 4.6 Troubleshooting
+- **Teammates not appearing**: Check `Shift+Down` in in-process mode or verify `tmux`/`it2` for split-pane.
+- **Orphaned tmux sessions**: Use `tmux ls` and `tmux kill-session -t <name>`.
+- **Lagging task status**: If a task appears stuck, nudged the teammate or update status manually.
+- **Lead shuts down early**: Tell the lead to wait for teammates.
 
 ## 5. Testing guidance
 
