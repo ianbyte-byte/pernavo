@@ -32,20 +32,26 @@ Each handoff must include a JSON object in the output:
 
 ## 5) Agent teams (Experimental)
 
-Agent teams allow parallel execution and decentralized coordination.
+Agent teams allow parallel execution and decentralized coordination. Enable via `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
 
-- **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
-- **Teammates**: Independent agents with their own context windows.
-- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
-- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
-- **Communication**:
-  - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
-  - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+- **Team lead**: The main session. Responsible for spawning, task decomposition, plan approval, and final synthesis. One team per session.
+- **Teammates**: Independent sessions with separate context windows. Teammates load `CLAUDE.md`, MCP servers, and skills, but **do not inherit lead conversation history**. Include full context in spawn prompts.
+- **Display Modes**:
+  - `in-process` (default): Use `Shift+Down` to cycle, `Enter` to view, `Escape` to interrupt, `Ctrl+T` for tasks.
+  - `split panes`: Requires `tmux` or iTerm2 (`teammateMode: "tmux"` in `settings.json`).
+- **Shared task list**: decentralized tracking. Teammates self-claim or lead assigns. Aim for 5-6 tasks/teammate.
+- **Plan Approval**: Use `Require plan approval` for implementation. The lead reviews/approves plans before any changes.
+- **Communication**: Use `message <teammate>` (direct) or `broadcast <message>` (all).
+- **Cleanup**: Lead must shut down teammates first, then run `Clean up the team`.
 - **Parallel patterns**:
-  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
-  - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
+  - **Scientific Debate**: 5+ teammates investigate competing hypotheses and challenge each other.
+  - **Parallel Review**: Assign distinct lenses (Security, Performance, Coverage).
   - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
+- **Troubleshooting**:
+  - Teammates stop on errors: Check output via `Shift+Down` and message them directly.
+  - Orphaned tmux: Run `tmux kill-session -t <name>`.
+  - Task lag: Update status manually or nudge the teammate via lead.
+- **Limitations**: No session resumption (`/resume`) for in-process teammates; no nested teams.
 
 ## 6) Hooks and quality gates
 
