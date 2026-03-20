@@ -57,23 +57,29 @@ Recommended constraints:
 
 ## 4. Parallelization and Team Orchestration (V2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
 - Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
-- **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans autonomously before implementation begins.
+- **Task Sizing**: Aim for 5-6 tasks per teammate to keep everyone productive without excessive context switching.
+- **Wait for Teammates**: The lead should wait for all teammate tasks to be completed before proceeding with synthesis.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
-- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
+- **Scientific Debate**: 5+ teammates investigating competing hypotheses and actively trying to disprove each other.
+- **Parallel Review**: Assign specialists (Security, Performance, Test Coverage) to review the same PR/codebase.
+- **Cross-layer coordination**: Teammates specializing in Frontend, Backend, and Testing working in parallel.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Shared Task List**: Centralized task tracking where the lead assigns or teammates self-claim work.
+- **Mailbox**: Inter-agent messaging system via `message <teammate>` (direct) and `broadcast` (team-wide).
+- **Shutdown & Cleanup**: Gracefully shut down teammates individually before the lead runs `Clean up the team`.
+
+### 4.4 Known Limitations
+- **Session Resumption**: `/resume` and `/rewind` do not restore in-process teammates. The lead must spawn new ones if the session is resumed.
+- **Task Lag**: Status can sometimes lag. The lead or user can manually update or nudge teammates.
+- **One Team Per Session**: A lead can only manage one team at a time.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.

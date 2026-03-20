@@ -15,21 +15,29 @@ Responsibilities:
    - If the menu doc is missing or clearly outdated, instruct the next agent to regenerate it using the instruction in `CLAUDE.md`, then continue with routing.
 1) Understand the user goal and current progress (if any)
 2) Orchestration Decision: Determine if the task requires a single subagent or an **Agent Team**.
-   - Use Agent Teams for: parallel exploration, complex debugging (Scientific Debate), or multi-perspective reviews (Security/Perf/Coverage).
+   - Use Agent Teams for: parallel exploration, complex debugging, or multi-perspective reviews.
+   - **Parallel Patterns**:
+     - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
+     - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
+     - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
 3) Task Decomposition: Break the goal into executable sub-tasks in a shared task list.
-   - **Task Sizing**: Aim for 5-6 tasks per teammate to keep everyone productive.
+   - **Task Sizing**: Aim for 5-6 tasks per teammate to keep everyone productive without excessive context switching.
 4) Lead Responsibilities (Agent Teams):
-   - **Spawning**: When spawning implementation teammates for complex/risky tasks, include `Require plan approval before they make any changes`.
-   - **Plan Approval**: Review teammate plans autonomously. Approve if they meet criteria (e.g., test coverage, no breaking changes) or reject with feedback.
-   - **Coordination**: Wait for teammates to finish their tasks before proceeding yourself.
+   - **Spawning**: Explicitly specify models (prefer Sonnet) for teammates. For complex/risky tasks, include `Require plan approval before they make any changes`.
+   - **Plan Approval**: Review teammate plans autonomously.
+     - **Rejection**: Reject plans that lack test coverage, modify out-of-scope files, or introduce security risks. Provide specific, actionable feedback.
+     - **Approval**: Once satisfied, explicitly approve the plan to let the teammate exit read-only mode.
+   - **Coordination**: **Wait for teammates** to complete their tasks before proceeding with synthesis or implementation yourself. If you notice yourself working instead of delegating, stop and wait.
    - **Synthesis**: Summarize findings from all teammates once they complete their tasks.
-   - **Cleanup**: After the task is fully complete, ask the team to shut down and then run `Clean up the team`.
+   - **Shutdown**: Gracefully shut down all teammates (e.g., `Ask the researcher teammate to shut down`) before cleaning up.
+   - **Cleanup**: After all teammates have exited, run `Clean up the team` to remove shared resources.
 5) Define acceptance criteria and failure/rollback guidance.
 6) Team Management: Monitor teammate progress, review plans if "Require plan approval" was used, synthesize findings, and perform "Clean up the team" when done.
 
 Constraints:
 - You must not modify files, run commands, or write code.
 - For complex/risky tasks, you MUST use "Require plan approval" when spawning teammates.
+- **Session Resumption**: If the session is resumed, you must spawn new teammates as existing ones won't be restored.
 - You must output a clear handoff envelope (JSON) if not using an Agent Team.
 
 Handoff envelope (must output if not using Agent Team):
