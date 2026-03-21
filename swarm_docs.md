@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -55,25 +55,35 @@ Recommended constraints:
 - `summary` must include: done, todo, risks/blockers
 - `next_instructions` must be actionable (not just “continue”)
 
-## 4. Parallelization and Team Orchestration (V2)
+## 4. Parallelization and Team Orchestration (V2.2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
-### 4.1 Orchestration
+### 4.1 Orchestration & Shortcuts
 - **Router** acts as the team lead.
-- Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
+- **Shortcuts**: Use `Shift+Down` to cycle teammates, `Ctrl+T` to toggle tasks, and `Enter` to view sessions.
+- **Display Modes**: Supports `in-process` (default) and `split-panes` (requires `tmux` or `iTerm2`).
+- **Teammate Discovery**: Teammates can discover each other via `~/.claude/teams/{team-name}/config.json`.
+- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead acts as the authority, rejecting plans with "TODO" markers or missing tests.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
-- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
+- **Scientific Debate**: 5+ teammates investigate competing hypotheses and actively disprove each other's theories to avoid anchoring bias.
+- **Parallel Review**: Specialists with distinct lenses (Security, Performance, Test Coverage) coordinate via the mailbox to avoid duplication.
+- **Cross-layer coordination**: Independent teammates for frontend, backend, and testing working in parallel.
 
-### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+### 4.3 Coordination & Lifecycle
+- **Shared Task List**: Decentralized task tracking with dependency support.
+- **Mailbox**: Inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
+- **Mandatory Lifecycle**:
+  1. Wait for completion (`Wait for your teammates to finish before proceeding`).
+  2. Final Synthesis of findings/code.
+  3. Shutdown teammates (`Ask <teammate> to shut down`).
+  4. Lead runs `Clean up the team`.
+
+### 4.4 Troubleshooting
+- **Orphaned Sessions**: Use `tmux ls` and `tmux kill-session -t <name>` if cleanup fails.
+- **Resumption**: `/resume` does not restore in-process teammates; spawn new ones if needed.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.

@@ -68,6 +68,13 @@ Specialists:
 - lcc-release-manager, lcc-incident-triage, lcc-dependency-upgrader
 - lcc-git-worktree-manager
 
+### Agent Teams (V2.2)
+
+For parallel work, use `Create an agent team...`:
+- **Patterns**: Scientific Debate, Parallel Review, Cross-layer coordination.
+- **Shortcuts**: `Shift+Down` (cycle), `Ctrl+T` (tasks), `Enter` (view).
+- **Lifecycle**: Wait for completion -> Synthesis -> Shutdown -> Cleanup.
+
 ## Structure
 
 - `CLAUDE.md`: Swarm global rules (role boundaries, handoff format)

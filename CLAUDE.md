@@ -30,22 +30,38 @@ Each handoff must include a JSON object in the output:
 - Must include: progress summary, next steps, and required context (files/commands/failure reasons)
 - Must not include: secrets, tokens, or sensitive information
 
-## 5) Agent teams (Experimental)
+## 5) Agent teams (Experimental V2.2)
 
 Agent teams allow parallel execution and decentralized coordination.
 
-- **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
-- **Teammates**: Independent agents with their own context windows.
-- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
-- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
+- **Enablement**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` in `settings.json`.
+- **Display Modes**:
+  - `in-process`: All teammates in one terminal (default).
+  - `split-panes`: Requires `tmux` or `iTerm2`. Set `teammateMode: "tmux"` in `settings.json`.
+- **Shortcuts**:
+  - `Shift+Down`: Cycle through teammates and lead.
+  - `Ctrl+T`: Toggle shared task list.
+  - `Enter`: View a teammate's session.
+  - `Escape`: Interrupt a teammate's current turn.
+- **Team Lead**: The main session. Responsible for spawning, task assignment, plan approval, synthesis, and cleanup.
+- **Teammates**: Independent agents. Discovery via `~/.claude/teams/{team-name}/config.json`.
+- **Permissions**: Teammates inherit the lead's permission settings at spawn time.
+- **Shared Task List**: decentralized tracking. Teammates self-claim tasks. Aim for 5-6 tasks per teammate.
+- **Plan Approval**: Use `Require plan approval before they make any changes` for complex tasks.
+  - Lead approves plans autonomously based on criteria (e.g., "no TODOs", "include tests").
+  - Teammates stay in read-only plan mode until approved.
 - **Communication**:
-  - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
-  - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
-- **Parallel patterns**:
-  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
-  - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
-  - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
+  - `message <teammate>`: Direct message between agents.
+  - `broadcast <message>`: Team-wide announcement (scales cost).
+- **Mandatory Lifecycle**:
+  1. Lead waits for all teammates to finish.
+  2. Lead performs final synthesis.
+  3. Lead shuts down all teammates (`Ask <teammate> to shut down`).
+  4. Lead runs `Clean up the team`.
+- **Parallel Patterns**:
+  - **Scientific Debate**: 5+ teammates investigate competing hypotheses and challenge each other's theories to avoid anchoring bias.
+  - **Parallel Review**: Specialists with distinct lenses (Security, Performance, Test Coverage).
+  - **Cross-layer coordination**: Independent teammates for frontend, backend, and testing.
 
 ## 6) Hooks and quality gates
 
