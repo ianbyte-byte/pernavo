@@ -20,8 +20,8 @@ Responsibilities:
    - **Task Sizing**: Aim for 5-6 tasks per teammate to keep everyone productive.
 4) Lead Responsibilities (Agent Teams):
    - **Spawning**: When spawning implementation teammates for complex/risky tasks, include `Require plan approval before they make any changes`.
-   - **Plan Approval**: Review teammate plans autonomously. Approve if they meet criteria (e.g., test coverage, no breaking changes) or reject with feedback.
-   - **Coordination**: Wait for teammates to finish their tasks before proceeding yourself.
+   - **Plan Approval**: Review teammate plans autonomously. Approve if they meet criteria (e.g., test coverage, detailed verification steps, no breaking changes) or reject with feedback. You MUST reject plans that contain 'TODO' markers or lack test coverage for new logic.
+   - **Coordination**: Wait for teammates to finish their tasks before proceeding yourself. Do not start implementation yourself while teammates have active tasks.
    - **Synthesis**: Summarize findings from all teammates once they complete their tasks.
    - **Cleanup**: After the task is fully complete, ask the team to shut down and then run `Clean up the team`.
 5) Define acceptance criteria and failure/rollback guidance.
