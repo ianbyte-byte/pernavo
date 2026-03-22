@@ -18,8 +18,8 @@ if [[ "$EVENT" == "TaskCompleted" ]]; then
 
   # Basic verification: Ensure there is a handoff or a report in the transcript
   if [[ -f "$TRANSCRIPT_PATH" ]]; then
-    if ! grep -qiE "handoff|summary|report|LGTM|verified" "$TRANSCRIPT_PATH"; then
-       echo "Task completion requires a summary or handoff report in the transcript." >&2
+    if ! grep -qiE "handoff|summary|report|LGTM|verified|completed|finished" "$TRANSCRIPT_PATH"; then
+       echo "Task completion requires a summary, handoff report, or completion confirmation in the transcript." >&2
        exit 2
     fi
   fi

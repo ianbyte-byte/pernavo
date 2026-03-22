@@ -24,6 +24,11 @@ After enabling, tell Claude to create an agent team and describe the task and te
 Example:
 > I'm designing a CLI tool that helps developers track TODO comments across their codebase. Create an agent team with 3 specialists to work on this.
 
+## Advanced Patterns
+
+- **Scientific Debate**: Spawn 5+ agent teammates to investigate different hypotheses. Have them talk to each other to try to disprove each other's theories.
+- **Parallel Review**: Spawn reviewers with distinct lenses (Security, Performance, Test Coverage).
+
 ## Architecture
 
 Component roles:
@@ -42,7 +47,7 @@ Agent team hooks:
 
 ### In-process mode (default)
 - Works in any terminal, including VS Code integrated terminal
-- Use `Shift+Up/Down` to select a teammate
+- Use `Shift+Down` to cycle through teammates (wraps to lead)
 - Press `Enter` to view a teammate's session, `Escape` to interrupt
 - Press `Ctrl+T` to toggle the task list
 

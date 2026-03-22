@@ -36,16 +36,23 @@ Agent teams allow parallel execution and decentralized coordination.
 
 - **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
 - **Teammates**: Independent agents with their own context windows.
-- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
-- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
+- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 3-5 teammates for most workflows, with 5-6 tasks per teammate to maximize productivity.
+- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously (e.g., rejecting plans that lack test coverage or contain 'TODO' markers).
+- **Teammate Mode**: Configure `teammateMode: "auto"` in `.claude/settings.json`.
+- **Shortcuts (In-process mode)**:
+  - `Shift+Down`: Cycle through teammates (wraps to lead).
+  - `Ctrl+T`: Toggle the shared task list.
+  - `Enter`: View a teammate's session.
+  - `Escape`: Interrupt a teammate's turn.
 - **Communication**:
   - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
-  - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+  - `broadcast <message>`: Send to all teammates (use sparingly as costs scale with team size).
+- **Shutdown and Cleanup**: The lead must wait for teammates to finish, request them to shut down, and then run `Clean up the team` to remove shared resources.
 - **Parallel patterns**:
   - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
   - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
+- **Avoid File Conflicts**: Break the work so each teammate owns a different set of files.
 
 ## 6) Hooks and quality gates
 
