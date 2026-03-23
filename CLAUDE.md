@@ -34,17 +34,27 @@ Each handoff must include a JSON object in the output:
 
 Agent teams allow parallel execution and decentralized coordination.
 
+- **Enablement**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`. Use `teammateMode: "in-process" | "tmux" | "auto"` in `.claude/settings.json`.
 - **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
 - **Teammates**: Independent agents with their own context windows.
 - **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
-- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
+- **Task Dependencies**: Tasks can depend on others; blocked tasks unblock automatically when dependencies complete.
+- **Plan Approval**: For complex or risky tasks, the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
+- **Shortcuts & Controls**:
+  - `Shift+Down`: Cycle through teammates.
+  - `Ctrl+T`: Toggle the shared task list.
+  - `Enter`: View a teammate's session (in-process mode).
+  - `Escape`: Interrupt a teammate's current turn.
 - **Communication**:
-  - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
-  - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+  - `message <teammate>`: Direct message.
+  - `broadcast <message>`: Team-wide message (use sparingly).
+- **Cleanup**: Once complete, the lead must shut down all teammates then run `Clean up the team`.
+- **Limitations**:
+  - No session resumption for in-process teammates (`/resume` or `/rewind`).
+  - Task status may lag; nudge teammates or update manually if stuck.
 - **Parallel patterns**:
-  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
-  - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
+  - **Scientific Debate**: 5+ teammates investigate competing hypotheses and actively disprove each other.
+  - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Coverage).
   - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
 
 ## 6) Hooks and quality gates

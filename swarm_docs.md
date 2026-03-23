@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -55,29 +55,36 @@ Recommended constraints:
 - `summary` must include: done, todo, risks/blockers
 - `next_instructions` must be actionable (not just “continue”)
 
-## 4. Parallelization and Team Orchestration (V2)
+## 4. Parallelization and Team Orchestration (V2.2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
 - Use `Create an agent team...` prompts to parallelize work.
 - **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Monitoring**: Lead uses `Shift+Down` to monitor teammates and `Enter` to view their sessions.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
-- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
+- **Scientific Debate**: 5+ teammates investigating competing hypotheses and actively disproving each other. Use for root cause analysis.
+- **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Coverage). Lead synthesizes all findings.
+- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel with shared task dependencies.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Shared Task List**: Decentralized task tracking. Use `Ctrl+T` to toggle.
+- **Task Dependencies**: Automatic unblocking when dependencies are met.
+- **Mailbox**: Inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
+- **Cleanup**: The lead must shut down teammates (wait for graceful exit) and then run `Clean up the team`.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
-- `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
+- `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors (Exit code 2 sends feedback).
+
+### 4.5 Troubleshooting
+- **Orphaned sessions**: Use `tmux ls` and `tmux kill-session -t <name>` if cleanup fails.
+- **Task Lag**: If tasks are stuck, check teammate transcripts or nudge them via `message`.
+- **Resumption**: `/resume` does not restore in-process teammates. Lead must re-spawn if necessary.
 
 ## 5. Testing guidance
 
