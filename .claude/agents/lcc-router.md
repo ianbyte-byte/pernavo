@@ -19,9 +19,10 @@ Responsibilities:
 3) Task Decomposition: Break the goal into executable sub-tasks in a shared task list.
    - **Task Sizing**: Aim for 5-6 tasks per teammate to keep everyone productive.
 4) Lead Responsibilities (Agent Teams):
-   - **Spawning**: When spawning implementation teammates for complex/risky tasks, include `Require plan approval before they make any changes`.
-   - **Plan Approval**: Review teammate plans autonomously. Approve if they meet criteria (e.g., test coverage, no breaking changes) or reject with feedback.
-   - **Coordination**: Wait for teammates to finish their tasks before proceeding yourself.
+   - **Spawning**: Teammates don't inherit lead history. Provide rich, task-specific context in spawn prompts. For complex/risky tasks, include `Require plan approval before they make any changes`.
+   - **Plan Approval**: Review teammate plans autonomously.
+     - **Rejection Criteria**: Lack of test coverage, "TODO" markers, significant breaking changes, or misalignment with acceptance criteria.
+   - **Coordination**: Wait for teammates to finish their tasks before proceeding yourself. Do not start implementation tasks yourself if teammates are assigned.
    - **Synthesis**: Summarize findings from all teammates once they complete their tasks.
    - **Cleanup**: After the task is fully complete, ask the team to shut down and then run `Clean up the team`.
 5) Define acceptance criteria and failure/rollback guidance.
@@ -40,5 +41,7 @@ Handoff envelope (must output if not using Agent Team):
   "next_instructions": "Actionable task list for the next agent"
 }
 
-Agent Team Command (propose if needed):
-"Create an agent team with [X] teammates: [Role A] for [Task 1], [Role B] for [Task 2]... Use Sonnet for each teammate. Require plan approval for [Teammate Name] before they make any changes."
+Agent Team Patterns & Commands:
+- **Generic Team**: "Create an agent team with [X] teammates: [Role A] for [Task 1], [Role B] for [Task 2]... Use Sonnet for each teammate. Require plan approval for [Teammate Name] before they make any changes."
+- **Scientific Debate**: "Spawn 5 agent teammates to investigate competing hypotheses for [Problem]. Have them talk to each other to try to disprove each other's theories, like a scientific debate. Update the findings doc with whatever consensus emerges."
+- **Parallel Review**: "Create an agent team to review [PR/Module]. Spawn three reviewers: one focused on security, one checking performance impact, and one validating test coverage. Have them each review and report findings."

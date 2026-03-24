@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -57,12 +57,14 @@ Recommended constraints:
 
 ## 4. Parallelization and Team Orchestration (V2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
 - Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
+- **Display Modes**: Configure via `teammateMode` in `.claude/settings.json`. Supports `auto`, `in-process`, and `tmux`.
+- **Shortcuts**: `Shift+Down` (cycle), `Ctrl+T` (toggle tasks), `Enter` (view), `Escape` (interrupt).
+- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans autonomously based on criteria (e.g., test coverage, no TODOs).
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
 
 ### 4.2 Patterns
@@ -78,6 +80,12 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
 - `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
+
+### 4.5 Troubleshooting & Limitations
+- **Orphaned Sessions**: Use `tmux ls` and `tmux kill-session -t <session-name>` for cleanup.
+- **No Resumption**: `/resume` does not restore in-process teammates.
+- **One Team/Fixed Lead**: One team per session; lead is permanent for that session.
+- **Discovery**: Teammates can discover each other via `~/.claude/teams/{team-name}/config.json`.
 
 ## 5. Testing guidance
 
