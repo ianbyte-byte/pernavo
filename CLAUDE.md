@@ -35,13 +35,19 @@ Each handoff must include a JSON object in the output:
 Agent teams allow parallel execution and decentralized coordination.
 
 - **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
-- **Teammates**: Independent agents with their own context windows.
+- **Teammates**: Independent agents with their own context windows. They do not inherit the lead's conversation history but load project context (`CLAUDE.md`, skills, MCP).
+- **Display Mode**: Configurable via `teammateMode` in `settings.json` ("auto", "in-process", or "tmux").
 - **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
-- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
+- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously based on provided criteria (e.g., "only approve plans with test coverage").
 - **Communication**:
   - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
   - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+- **Cleanup**: Once the task is complete, the lead must manually ask teammates to shut down, wait for them to finish, and then run `Clean up the team` to remove shared resources.
+- **Limitations**:
+  - No session resumption for in-process teammates (/resume or /rewind).
+  - Task status can lag; check output and nudge teammates if stuck.
+  - Shutdown is not immediate; teammates finish current tool calls first.
+  - Only one team per lead session; no nested teams.
 - **Parallel patterns**:
   - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
