@@ -6,11 +6,19 @@ INPUT=$(cat)
 EVENT=$(echo "$INPUT" | jq -r '.hook_event_name')
 TRANSCRIPT_PATH=$(echo "$INPUT" | jq -r '.transcript_path')
 
+if [[ "$EVENT" == "TaskCreated" ]]; then
+  TASK_SUBJECT=$(echo "$INPUT" | jq -r '.task_subject')
+  if [[ "$TASK_SUBJECT" == *"TODO"* ]]; then
+     echo "Cannot create task with 'TODO' in the subject. Please provide a descriptive title." >&2
+     exit 2
+  fi
+fi
+
 if [[ "$EVENT" == "TaskCompleted" ]]; then
   TASK_ID=$(echo "$INPUT" | jq -r '.task_id')
   TASK_SUBJECT=$(echo "$INPUT" | jq -r '.task_subject')
 
-  # If it's a coder task, ensure it doesn't say "TODO"
+  # Ensure task subject doesn't contain TODO
   if [[ "$TASK_SUBJECT" == *"TODO"* ]]; then
      echo "Task subject contains TODO. Please provide a concrete subject before completing." >&2
      exit 2
