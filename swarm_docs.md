@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -57,27 +57,40 @@ Recommended constraints:
 
 ## 4. Parallelization and Team Orchestration (V2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
 - Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
+- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans autonomously in read-only plan mode. Rejections must include feedback.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Context**: Teammates do not inherit lead context; provide rich spawn prompts.
+- **Display Modes**: Use `teammateMode: "auto"` (default), `"in-process"`, or `"tmux"`.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
+- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other to disprove theories.
 - **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Shared Task List**: Decentralized task tracking with dependency support.
+- **Inter-agent Messaging**: Mailbox system via `message <teammate>` and `broadcast`.
+- **Shortcuts (In-process)**:
+  - `Shift+Down`: Cycle teammates.
+  - `Ctrl+T`: Toggle task list.
+  - `Enter`: View session.
+  - `Escape`: Interrupt turn.
+- **Discovery**: Teammates can find others via `~/.claude/teams/{team-name}/config.json`.
+- **Cleanup**: Mandatory sequence: Shut down all teammates -> Lead runs `Clean up the team`.
 
 ### 4.4 Automated Quality Gates
-- `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
-- `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
+- `TaskCreated`: Prevents creating tasks with "TODO" in the subject.
+- `TaskCompleted`: Validates that a handoff report or summary exists in the transcript.
+- `TeammateIdle`: Ensures teammates don't go idle with unaddressed errors.
+
+### 4.5 Limitations
+- **Session Resumption**: `/resume` and `/rewind` do not restore in-process teammates.
+- **Task Status Lag**: Teammates may fail to mark tasks completed; lead must monitor and nudge.
 
 ## 5. Testing guidance
 
