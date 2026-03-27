@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -55,15 +55,16 @@ Recommended constraints:
 - `summary` must include: done, todo, risks/blockers
 - `next_instructions` must be actionable (not just “continue”)
 
-## 4. Parallelization and Team Orchestration (V2)
+## 4. Parallelization and Team Orchestration (V2.2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
-- Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
+- Use `Create an agent team...` prompts to parallelize work. **Critical**: Provide detailed context in the spawn prompt as teammates do not inherit history.
+- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans autonomously based on quality criteria (test coverage, no TODOs, etc.).
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Lifecycle**: Wait for task completion -> Shut down teammates -> Final synthesis -> Cleanup.
 
 ### 4.2 Patterns
 - **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
