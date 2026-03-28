@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -28,9 +28,9 @@ Core capabilities:
 
 ### 2.3 Key CLI helpers (optional)
 The Python package provides a small CLI to validate workflow artifacts:
-- `chung-swarm check`: verify required files exist
-- `chung-swarm session-config validate`: validate `.claude/session_config.json`
-- `chung-swarm handoff validate`: validate a handoff envelope pasted from output
+- `python -m chung_agent_swarm.cli check`: verify required files exist
+- `python -m chung_agent_swarm.cli session-config validate`: validate `.claude/session_config.json`
+- `python -m chung_agent_swarm.cli handoff validate`: validate a handoff envelope pasted from output
 
 ### 2.3 Running with Claude Code (project configuration)
 
@@ -57,29 +57,38 @@ Recommended constraints:
 
 ## 4. Parallelization and Team Orchestration (V2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
 - Use `Create an agent team...` prompts to parallelize work.
 - **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Task Dependencies**: Leverage task dependencies to ensure correct execution order.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
-- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
+- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other to disprove theories.
+- **Parallel Review**: Specialists for Security, Performance, and Test Coverage reviewing the same PR/module from different angles.
+- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel with shared context.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
+- **Shared Task List**: decentralized task tracking and self-claiming.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Cleanup**: The lead MUST shut down teammates before running `Clean up the team`.
 
 ### 4.4 Automated Quality Gates
-- `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
+- `TaskCompleted` hook validates handoff reports and prevents "TODO" in task subjects.
 - `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
+- `TaskCreated` hook (new) prevents vague tasks without sufficient detail.
 
-## 5. Testing guidance
+## 5. Troubleshooting Agent Teams
+
+- **Teammates not appearing**: In in-process mode, use `Shift+Down` to cycle. Ensure `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` is set.
+- **Orphaned tmux sessions**: Use `tmux ls` and `tmux kill-session -t <session-name>` to clean up if the lead fails to do so.
+- **Lead shuts down early**: Tell the lead to "Wait for teammates to finish tasks before proceeding".
+- **Permission prompts**: Pre-approve common operations in your permission settings to reduce teammate interruptions.
+
+## 6. Testing guidance
 
 Suggested scenario:
 - From an empty directory, scaffold a FastAPI project with unit tests
