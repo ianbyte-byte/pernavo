@@ -88,6 +88,13 @@ For complex tasks, the Router will propose an **Agent Team**:
 3. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
 4. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
 
+### Operational Commands
+- **View Tasks**: `Ctrl+T` to toggle the task list in the lead session.
+- **Cycle Teammates**: `Shift+Down` to cycle through active teammates in `in-process` mode.
+- **Interact**: `Enter` to view a teammate's session, `Escape` to interrupt.
+- **Shutdown**: Tell the lead to `Ask the [Name] teammate to shut down`.
+- **Cleanup**: Ask the lead to `Clean up the team` after all teammates are stopped.
+
 ## Handoff Envelope Schema (Enhanced)
 
 ```json
