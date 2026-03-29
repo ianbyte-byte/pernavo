@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -61,18 +61,19 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
-- Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
+- Use `Create an agent team...` prompts to parallelize work. Provide rich task-specific context as teammates don't inherit conversation history.
+- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans (rejecting 'TODO' or lack of tests) before implementation.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
-- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
+- **Scientific Debate**: 5+ teammates investigate different hypotheses, communicate to disprove each other, and converge on consensus.
+- **Parallel Review**: Assign distinct filters (Security, Performance, Test Coverage) to separate reviewers to ensure thorough attention.
+- **Cross-layer coordination**: Independent teammates for frontend, backend, and testing coordinate through a shared task list.
 
-### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
+### 4.3 Coordination & Display
+- **Shared Task List**: Decentralized task tracking with `pending`, `in progress`, and `completed` states.
+- **Mailbox**: Inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
+- **Display Modes**: `in-process` (default) or `split panes` (requires tmux or iTerm2). Use `Shift+Down` to cycle teammates.
 - **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
 
 ### 4.4 Automated Quality Gates
