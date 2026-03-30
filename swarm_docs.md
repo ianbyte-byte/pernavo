@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -62,7 +62,9 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
 - Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
+- **Rich Context Spawning**: Teammates **do not inherit** conversation history. Provide all file paths, specs, and requirements in the spawn prompt.
+- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans autonomously in "read-only plan mode" before implementation begins.
+- **Task Management**: Define **Task Dependencies** (e.g., Task B depends on Task A) to automate blocking/unblocking in the shared list.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
 
 ### 4.2 Patterns
@@ -71,11 +73,14 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Shared Task List**: decentralized task tracking with file locking to prevent race conditions.
+- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide). Workers should coordinate to avoid file conflicts.
+- **Display Modes**: `in-process` (default) or `split-pane` (requires `tmux`/`iTerm2`).
+- **Cleanup**: The lead must explicitly `Ask <teammate> to shut down` before running `Clean up the team`.
+- **Limitations**: `/resume` and `/rewind` do not restore in-process teammates.
 
 ### 4.4 Automated Quality Gates
+- `TaskCreated` hook enforces descriptive subjects (>= 10 chars) and prohibits "TODO".
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
 - `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
 
