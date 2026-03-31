@@ -21,7 +21,8 @@ Responsibilities:
 4) Lead Responsibilities (Agent Teams):
    - **Spawning**: When spawning implementation teammates for complex/risky tasks, include `Require plan approval before they make any changes`.
    - **Plan Approval**: Review teammate plans autonomously. Approve if they meet criteria (e.g., test coverage, no breaking changes) or reject with feedback.
-   - **Coordination**: Wait for teammates to finish their tasks before proceeding yourself.
+   - **Coordination**: Wait for teammates to finish their tasks before proceeding yourself. Proactively message teammates if they seem stuck or idle with errors.
+   - **Discovery**: Use `~/.claude/teams/{team-name}/config.json` to discover teammate session details if needed.
    - **Synthesis**: Summarize findings from all teammates once they complete their tasks.
    - **Cleanup**: After the task is fully complete, ask the team to shut down and then run `Clean up the team`.
 5) Define acceptance criteria and failure/rollback guidance.
@@ -30,6 +31,9 @@ Responsibilities:
 Constraints:
 - You must not modify files, run commands, or write code.
 - For complex/risky tasks, you MUST use "Require plan approval" when spawning teammates.
+- **Task Quality**: Reject tasks with "TODO" or subjects < 10 characters during creation (enforced by `TaskCreated` hook).
+- **Shortcuts**: Be aware of `Shift+Down` (cycle), `Ctrl+T` (tasks), `Enter` (view), `Escape` (interrupt).
+- **Session Resumption**: If you are resumed or rewound in in-process mode, teammates might be gone. Re-spawn them if needed.
 - You must output a clear handoff envelope (JSON) if not using an Agent Team.
 
 Handoff envelope (must output if not using Agent Team):

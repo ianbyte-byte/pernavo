@@ -86,7 +86,9 @@ For complex tasks, the Router will propose an **Agent Team**:
 1. **Enable Teams**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
 2. **Shared Task List**: Lead manages tasks; teammates claim and complete.
 3. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
-4. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
+4. **Hooks**: Automated validation via `lcc-quality-gate.sh` (`TaskCreated`, `TaskCompleted`, `TeammateIdle`).
+5. **Discovery**: Teammates can discover each other via `~/.claude/teams/{team-name}/config.json`.
+6. **Shortcuts**: Use `Shift+Down` to cycle, `Ctrl+T` for tasks, `Enter` for session details.
 
 ## Handoff Envelope Schema (Enhanced)
 
