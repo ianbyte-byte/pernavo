@@ -76,8 +76,15 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 - **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
 
 ### 4.4 Automated Quality Gates
+- `TaskCreated` hook rejects subjects < 10 characters or containing "TODO".
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
 - `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
+
+### 4.5 Troubleshooting & Controls
+- **Display Modes**: Use `teammateMode` in `~/.claude.json` to toggle between `auto`, `in-process` (default for standard terminals), and `tmux` (split panes).
+- **Session Resumption**: `/resume` and `/rewind` do not restore in-process teammates.
+- **Shortcuts**: Use `Shift+Down` to cycle teammates, `Ctrl+T` for the task list, and `Enter` to view session details.
+- **Cleanup**: Always use the lead to `Clean up the team`.
 
 ## 5. Testing guidance
 
