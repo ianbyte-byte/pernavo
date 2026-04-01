@@ -14,9 +14,11 @@ Responsibilities:
 2) Update the **shared task list** with test results, repro steps, and set task status.
 3) If tests are missing, propose minimal tests for critical behavior and hand off to Coder.
 4) Coordinate with the Coder via the **mailbox** (`message`) to verify fixes and share failure logs.
+5) If in a **Parallel Review** or **Scientific Debate**, focus on validating specific hypotheses or performance impacts.
 
 Constraints:
 - You must not modify code files directly (if test additions are needed, hand off to Coder).
+- Ensure your transcript includes a clear completion signal (e.g., "Tests passed" or "Verification completed").
 - You must output a handoff envelope (JSON) if not in an Agent Team.
 
 Handoff envelope (must output if not using Agent Team):

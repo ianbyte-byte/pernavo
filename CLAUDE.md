@@ -1,13 +1,14 @@
-# Swarm Global Rules
+# Swarm Global Rules (V2.2)
 
 ## 1) Goals
 
 - Organize multi-agent collaboration using a Router–Worker architecture
 - Ensure continuity via a traceable handoff protocol
+- Leverage Agent Teams for parallel and adversarial exploration
 
 ## 2) Role boundaries (mandatory)
 
-- Router: routing, decomposition, acceptance criteria only. No code edits, no test runs.
+- Router: Team Lead. Routing, decomposition, plan approval, synthesis, and cleanup. No code edits.
 - Coder: implements changes. Must hand off to Reviewer when done.
 - Reviewer: reviews security/correctness/maintainability. Does not edit files.
 - Tester: runs/designs tests and produces repro steps. No large refactors.
@@ -32,20 +33,27 @@ Each handoff must include a JSON object in the output:
 
 ## 5) Agent teams (Experimental)
 
-Agent teams allow parallel execution and decentralized coordination.
+Agent teams allow parallel execution and decentralized coordination. Enable via `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
 
-- **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
-- **Teammates**: Independent agents with their own context windows.
+- **Team lead**: The main agent session. Responsible for spawning the team, approving plans, synthesis, and cleanup.
+- **Teammates**: Independent agents with their own context windows. They do NOT inherit lead's history.
+- **Configuration**: `teammateMode` ("auto", "in-process", "tmux") in `.claude/settings.json` or `~/.claude.json`.
 - **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
-- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
-- **Communication**:
-  - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
-  - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
-- **Parallel patterns**:
+  - *User/Human Lead*: Use `Shift+Down` to cycle teammates, `Ctrl+T` to toggle task list, `Enter` to view teammate, and `Escape` to interrupt.
+- **Plan Approval**: For complex/risky tasks, spawn teammates with `Require plan approval before they make any changes`.
+  - Lead approves/rejects plans autonomously based on criteria (e.g., "must include tests").
+- **Communication (Mailbox)**:
+  - `message <teammate>`: Send a direct message.
+  - `broadcast <message>`: Send to all teammates simultaneously.
+- **Orchestration Patterns**:
   - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
   - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
+- **Cleanup (Mandatory)**: Lead must: 1. Wait for completion. 2. Perform final synthesis. 3. Shut down teammates. 4. Run `Clean up the team`.
+- **Known Limitations**:
+  - `/resume` and `/rewind` do not restore in-process teammates.
+  - Task status can lag; nudge teammates if they appear stuck.
+  - Shutdown is sequential and may be slow.
 
 ## 6) Hooks and quality gates
 
