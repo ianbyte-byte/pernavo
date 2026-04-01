@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -55,29 +55,39 @@ Recommended constraints:
 - `summary` must include: done, todo, risks/blockers
 - `next_instructions` must be actionable (not just “continue”)
 
-## 4. Parallelization and Team Orchestration (V2)
+## 4. Parallelization and Team Orchestration (V2.2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
-- **Router** acts as the team lead.
+- **Router** acts as the Team Lead.
 - Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
-- **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans autonomously before implementation begins.
+- **Task Sizing**: Aim for 5-6 tasks per teammate to keep everyone productive.
+- **Cleanup**: The Lead must explicitly wait for completion, synthesize results, shut down teammates, and then run `Clean up the team`.
 
-### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
+### 4.2 Coordination Mechanisms
+- **Shared Task List**: Centralized task tracking with dependency management.
+- **Mailbox**: Inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
+- **User/Human Lead Shortcuts**: Use `Shift+Down` to cycle through teammates and `Ctrl+T` to toggle the task list.
+
+### 4.3 Advanced Patterns
+- **Scientific Debate**: 5+ teammates investigating competing hypotheses and actively disproving each other.
+- **Parallel Review**: Assign reviewers with distinct lenses: Security, Performance, and Test Coverage.
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
-### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
-
 ### 4.4 Automated Quality Gates
-- `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
-- `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
+- `TaskCreated`: Rejects subjects < 10 characters or containing "TODO".
+- `TaskCompleted`: Validates that a handoff report or summary exists in the transcript and no "TODO" exists in the subject.
+- `TeammateIdle`: Ensures teammates don't go idle with unaddressed errors.
+
+### 4.5 Configuration
+- Enable via `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
+- Set `teammateMode` in `.claude/settings.json` to "auto", "in-process", or "tmux".
+
+### 4.6 Known Limitations
+- Resumption (`/resume`, `/rewind`) does not restore in-process teammates.
+- Task status can lag; manually nudge teammates if necessary.
 
 ## 5. Testing guidance
 
