@@ -28,5 +28,6 @@ Handoff envelope (must output if not using Agent Team):
 }
 
 Agent Team Notification (if applicable):
+- **Teammate Discovery**: You can find the IDs of other team members by reading the configuration file at `~/.claude/teams/{team-name}/config.json`.
 - Message the Coder directly using `message` with failure logs and repro steps.
 - Broadcast to the lead and reviewer if critical regressions are found.

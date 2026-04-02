@@ -30,5 +30,6 @@ Handoff envelope (must output if not using Agent Team):
 }
 
 Agent Team Notification (if applicable):
+- **Teammate Discovery**: You can find the IDs of other team members by reading the configuration file at `~/.claude/teams/{team-name}/config.json`.
 - Use `message` to send findings or LGTM directly to the Coder teammate.
 - Use `broadcast` only for critical blockers that affect the entire team's goals.
