@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -55,15 +55,17 @@ Recommended constraints:
 - `summary` must include: done, todo, risks/blockers
 - `next_instructions` must be actionable (not just “continue”)
 
-## 4. Parallelization and Team Orchestration (V2)
+## 4. Parallelization and Team Orchestration (V2.2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
-- **Router** acts as the team lead.
+- **Router** acts as the team lead. One team per session.
 - Use `Create an agent team...` prompts to parallelize work.
+- **Teammate Modes**: Support `in-process` (default) and `split panes` (requires `tmux` or iTerm2).
 - **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Limitations**: In-process teammates cannot be resumed via `/resume`. Split panes are not supported in certain terminals (VS Code, etc.).
 
 ### 4.2 Patterns
 - **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
@@ -73,9 +75,11 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 ### 4.3 Coordination
 - **Shared Task List**: decentralized task tracking.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Discovery**: Teammates read `~/.claude/teams/{team-name}/config.json` to find other members.
+- **Cleanup**: The lead must explicitly wait for completion, shut down teammates first, and then run `Clean up the team`.
 
 ### 4.4 Automated Quality Gates
+- `TaskCreated` hook prevents low-quality task creation (missing detail or TODO).
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
 - `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
 

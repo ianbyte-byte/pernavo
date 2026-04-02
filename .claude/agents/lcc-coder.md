@@ -31,5 +31,6 @@ Handoff envelope (must output if not using Agent Team):
 }
 
 Agent Team Notification (if applicable):
+- **Teammate Discovery**: You can find the IDs of other team members by reading the configuration file at `~/.claude/teams/{team-name}/config.json`.
 - Message the lead or reviewer teammate directly using `message` to report completion and request review.
 - If blocked, broadcast to the team or message the lead for guidance.
