@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1773137563396,
-  "projectRoot": "C:\\Users\\voloz\\Documents\\GitHub\\loongclaude",
+  "lastScanned": 1773806186658,
+  "projectRoot": "c:\\Users\\voloz\\Documents\\GitHub\\loongclaude",
   "techStack": {
     "languages": [
       {
@@ -40,6 +40,7 @@
     "isMonorepo": false,
     "workspaces": [],
     "mainDirectories": [
+      "docs",
       "src",
       "tests"
     ],
@@ -50,18 +51,27 @@
   },
   "customNotes": [],
   "directoryMap": {
+    "docs": {
+      "path": "docs",
+      "purpose": "Documentation",
+      "fileCount": 1,
+      "lastAccessed": 1773806186597,
+      "keyFiles": [
+        "ai_native_analysis_report.md"
+      ]
+    },
     "src": {
       "path": "src",
       "purpose": "Source code",
       "fileCount": 0,
-      "lastAccessed": 1773137563367,
+      "lastAccessed": 1773806186615,
       "keyFiles": []
     },
     "tests": {
       "path": "tests",
       "purpose": "Test files",
       "fileCount": 3,
-      "lastAccessed": 1773137563367,
+      "lastAccessed": 1773806186615,
       "keyFiles": [
         "test_handoff.py",
         "test_project.py",
