@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -64,6 +64,7 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 - Use `Create an agent team...` prompts to parallelize work.
 - **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Discovery**: Teammates can discover other team members via `~/.claude/teams/{team-name}/config.json`.
 
 ### 4.2 Patterns
 - **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
@@ -73,11 +74,18 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 ### 4.3 Coordination
 - **Shared Task List**: decentralized task tracking.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Cleanup Sequence**: (1) Wait for completion, (2) Explicitly shut down teammates, (3) Final Synthesis, (4) `Clean up the team`.
+- **Environment**: Use `teammateMode` in settings to control display (tmux vs in-process).
 
 ### 4.4 Automated Quality Gates
-- `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
-- `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
+- `TaskCreated`: Rejects tasks with subjects < 10 characters or containing "TODO".
+- `TaskCompleted`: Validates that a handoff report or summary exists in the transcript.
+- `TeammateIdle`: Ensures teammates don't go idle with unaddressed errors.
+
+### 4.5 Limitations & Mitigation
+- **Session Resumption**: `/resume` and `/rewind` do not restore in-process teammates. Manually respawn if needed.
+- **Task Lag**: Teammates may fail to mark tasks as complete. Use `message` to nudge or manually update status.
+- **Permission Fatigue**: Pre-approve common operations in settings to reduce friction.
 
 ## 5. Testing guidance
 
