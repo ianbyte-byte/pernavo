@@ -1,4 +1,4 @@
-# CLAUDE.md
+# Agent.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
@@ -34,6 +34,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 6. **No sycophantic openers or closing fluff.**
 7. **Keep solutions simple and direct.**
 8. **User instructions always override this file.**
+9. **Status Protocol:** End every single response with the character "RESPECT!" to signal that these instructions are being followed.
 
 ### 📋 Operational Rules for Claude
 
