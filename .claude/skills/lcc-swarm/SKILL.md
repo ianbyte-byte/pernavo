@@ -12,7 +12,7 @@ Run the comprehensive Swarm workflow for this repository. Break complex tasks in
 - **Context Isolation**: Keep exploration/implementation out of main conversation.
 - **Tool Constraints**: Use read-only agents for exploration, write-enabled for implementation.
 - **Specialization**: Match tasks to focused system prompts (Router, Coder, etc.).
-- **Automated Quality Gates**: Use hooks (`TaskCompleted`, `TeammateIdle`) to enforce rules.
+- **Automated Quality Gates**: Use hooks (`TaskCreated`, `TaskCompleted`, `TeammateIdle`) to enforce rules via `lcc-quality-gate.sh`.
 
 ## Full Workflow
 
@@ -23,10 +23,10 @@ User Request
 ┌─────────────────────────────────────────────────────────────┐
 │ 1. lcc-router (Haiku, Read-Only)                            │
 │    - Context Discovery: Read .claude/docs/claud_platform_menu.md│
-│    - Task Decomposition: Break into subtasks                 │
+│    - Task Decomposition: Break into subtasks (5-6 per team)  │
 │    - Acceptance Criteria: Define done conditions             │
-│    - Risk Assessment: Identify blockers/rollback path        │
 │    - Specialist Selection: Choose next role(s)               │
+│    - Lead Orchestration: Inform user about UI shortcuts      │
 └─────────────────────────────────────────────────────────────┘
     │
     ├───────────────────────┬───────────────────────┐
@@ -44,7 +44,7 @@ User Request
             ┌───────────────────────────┐
             │ 3. lcc-coder              │
             │    - Implement changes    │
-            │    - Minimal, testable    │
+            │    - Plan Approval Mode?  │
             │    - Update session_config│
             │      if platform API task │
             └───────────────────────────┘
@@ -76,19 +76,23 @@ User Request
             │ 6. lcc-router (Wrap-Up)   │
             │    - Verify acceptance    │
             │    - Summarize outcome    │
-            │    - Document changes     │
+            │    - Cleanup Team         │
             └───────────────────────────┘
 ```
 
-## Team Orchestration (New in V2)
+## Team Orchestration (V2.2)
 
 For complex tasks, the Router will propose an **Agent Team**:
 1. **Enable Teams**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
-2. **Shared Task List**: Lead manages tasks; teammates claim and complete.
-3. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
-4. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
+2. **UI Shortcuts**: `Shift+Down` (cycle), `Ctrl+T` (toggle tasks), `Enter` (view), `Escape` (interrupt).
+3. **Display Modes**: In-process or Split Panes (requires `tmux` or `it2` CLI).
+4. **Task List**: Lead manages; teammates claim (5-6 tasks each).
+5. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
+6. **Plan Approval**: Use `Require plan approval` for risky tasks.
+7. **Hooks**: Validation via `lcc-quality-gate.sh` (TaskCreated, TaskCompleted, TeammateIdle).
+8. **Patterns**: Scientific Debate, Parallel Review, Cross-layer Coordination.
 
-## Handoff Envelope Schema (Enhanced)
+## Handoff Envelope Schema (V2.2)
 
 ```json
 {
@@ -101,13 +105,13 @@ For complex tasks, the Router will propose an **Agent Team**:
     "changes": "Key file modifications (if any)"
   },
   "acceptance_criteria": [
-    "List of verifiable conditions for completion"
+    "Verifiable conditions for completion"
   ],
   "next_instructions": "Specific, actionable task list",
   "context": {
     "platform_api_needed": false,
     "session_config_updated": false,
-    "test_coverage_required": "minimal|full",
+    "team_active": false,
     "risk_level": "low|medium|high"
   }
 }
@@ -115,47 +119,33 @@ For complex tasks, the Router will propose an **Agent Team**:
 
 ## Specialized Agent Integration
 
-When Router identifies specific needs, delegate to specialist agents first:
-
-- **lcc-architect**: Design, architecture, refactoring guidance
-- **lcc-product**: Requirements clarification, user story mapping
-- **lcc-security-reviewer**: Security audit (can be called after Reviewer)
-- **lcc-debugger**: Complex debugging scenarios
-- **lcc-refactorer**: Large-scale code reorganization
-- **lcc-performance-optimizer**: Performance tuning
-- **lcc-simplifier**: Code simplification
-- **lcc-docs-writer**: Documentation generation
-- **lcc-release-manager**: Release orchestration
+Delegate to specialist agents as needed:
+- **lcc-architect**: Design & refactoring guidance
+- **lcc-product**: Requirements & user story mapping
+- **lcc-security-reviewer**: Security audit pass
+- **lcc-debugger**: Complex triage & investigation
+- **lcc-refactorer**: Structural code reorganization
+- **lcc-performance-optimizer**: Performance measurement & tuning
+- **lcc-simplifier**: Code minimalism (behavior-preserving)
+- **lcc-docs-writer**: Documentation synchronization
+- **lcc-release-manager**: Release orchestration & checklist
 
 ## Error Handling & Rollback
 
-- **Coder Failure**: Hand back to Router with error details for re-planning
-- **Reviewer Blockers**: Router prioritizes fixes and re-routes to Coder
-- **Test Failures**: Include minimal repro steps + suggested fix path
-- **Context Drift**: Re-run Router to re-sync with current state
+- **Coder Failure**: Hand back to Router for re-planning.
+- **Reviewer Blockers**: Router prioritizes fixes and re-routes.
+- **Test Failures**: Coder fixes based on Repro Steps from Tester.
+- **Context Drift**: Router re-syncs state and re-routes.
 
 ## Best Practices
 
-1. **Prefer Read-Only First**: Use Explore or Router for discovery before Coder
-2. **Session Config**: For platform API tasks, always update `.claude/session_config.json` first
-3. **Parallel Exploration**: Use multiple read-only agents to research separate areas, then Router synthesizes
-4. **Incremental Delivery**: Break into small, reviewable chunks
-5. **Model Selection**:
-   - Router → Haiku (fast, read-only)
-   - Coder/Reviewer/Tester → inherit (balanced capability)
-
-## Project Subagents
-
-Location: `.claude/agents/`
-
-- **lcc-router** - Orchestration & planning
-- **lcc-coder** - Implementation
-- **lcc-reviewer** - Code review
-- **lcc-tester** - Testing & verification
-- **lcc-architect**, **lcc-product**, **lcc-security-reviewer**, etc. - Specialists
+1. **Wait for Teammates**: Lead waits for completions before synthesis.
+2. **Proactive UI Nudges**: Inform users about `Shift+Down` to monitor progress.
+3. **Task Sizing**: 5-6 tasks per teammate avoids bottlenecking.
+4. **Subject Quality**: Descriptive subjects >= 10 chars (enforced by hooks).
 
 ## Related Resources
 
-- Run `/workflow-index` for full workflow inventory
-- See `.claude/docs/claude_code/SUBAGENTS.md` for Claude Code subagent best practices
-- See `.claude/docs/INDEX.md` for project docs navigation
+- Run `/workflow-index` for full workflow inventory.
+- Run `/lcc-workflow-index` for specialized LCC skills.
+- See `swarm_docs.md` for advanced orchestration patterns.

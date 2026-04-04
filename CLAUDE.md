@@ -43,6 +43,46 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 4.  **Knuth’s Optimization Warning:** Focus on architectural correctness and clean structure first; avoid premature optimization until bottlenecks are proven.
 5.  **Perlis’s Rule of Thought:** Provide solutions that improve the mental model of the codebase rather than just patching symptoms.
 
+## Swarm Global Rules (V2.2)
+
+### 1) Goals
+- Organize multi-agent collaboration using a Router–Worker architecture.
+- Ensure continuity via a traceable handoff protocol.
+
+### 2) Role boundaries (mandatory)
+- **Router**: routing, decomposition, acceptance criteria only. No code edits, no test runs.
+- **Coder**: implements changes. Must hand off to Reviewer when done.
+- **Reviewer**: reviews security/correctness/maintainability. Does not edit files.
+- **Tester**: runs/designs tests and produces repro steps. No large refactors.
+
+### 3) Handoff protocol (mandatory)
+Each handoff must include a JSON object in the output:
+```json
+{
+  "type": "handoff",
+  "next_role": "Router|Coder|Reviewer|Tester",
+  "summary": "Progress summary (done/todo/risks)",
+  "next_instructions": "Actionable task list for the next agent"
+}
+```
+
+### 4) Agent teams (Experimental)
+Agent teams allow parallel execution and decentralized coordination.
+
+- **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
+- **UI Shortcuts**: `Shift+Down` (cycle), `Ctrl+T` (toggle tasks), `Enter` (view), `Escape` (interrupt).
+- **Display Modes**: `in-process` (default) or `split panes` (requires `tmux` or `it2` CLI).
+- **Plan Approval**: Use `Require plan approval` for complex tasks.
+- **Communication**: `message <teammate>` (direct) and `broadcast` (team-wide).
+- **Cleanup**: Lead shuts down teammates and then runs `Clean up the team`.
+- **Limitations**: `/resume` does not restore in-process teammates.
+
+### 5) Hooks and quality gates
+Automated checks via `.claude/hooks/lcc-quality-gate.sh`.
+- **TaskCreated**: Validates subjects (>= 10 chars, no "TODO").
+- **TaskCompleted**: Verifies completion criteria.
+- **TeammateIdle**: Ensures no unaddressed errors.
+
 ## Project Overview
 
 ZKSoft 2025 is a large-scale enterprise management solution built on .NET 8.0 with a modular architecture. It consists of multiple business modules (ZKSoft.*) and industry-specific applications (CZL, BK2024, TX, Hjg, etc.).
