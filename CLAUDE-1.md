@@ -42,12 +42,26 @@ Agent teams allow parallel execution and decentralized coordination.
 
 - **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
 - **Teammates**: Independent agents with their own context windows.
+  - **Naming**: Assign specific names during spawn (e.g., "Spawn a researcher named Alice").
+  - **Types**: Reuse subagent definitions (e.g., "Spawn a teammate using the security-reviewer agent type").
+- **Display Modes**:
+  - `in-process`: Default, runs inside the main terminal. Use `Shift+Down` to cycle.
+  - `split panes`: Each teammate gets a pane (requires tmux/iTerm2).
+  - Control via `--teammate-mode [mode]` flag or `teammateMode` in `~/.claude.json`.
+- **Interaction**:
+  - `Shift+Down`: Cycle through teammates and lead.
+  - `Enter`: View teammate session (in-process).
+  - `Escape`: Interrupt teammate's current turn (in-process).
+  - `Ctrl+T`: Toggle shared task list display.
 - **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
 - **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
 - **Communication**:
   - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
   - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+- **Cleanup**: Once the task is complete, the lead must **shut down all teammates first**, then run `Clean up the team` to remove shared resources.
+- **Limitations**:
+  - **No session resumption**: `/resume` does not restore in-process teammates.
+  - **Task lag**: Teammates may fail to mark tasks complete; nudge them or update manually.
 - **Parallel patterns**:
   - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
