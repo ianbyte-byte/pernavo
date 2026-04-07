@@ -17,6 +17,7 @@ Responsibilities:
 
 Constraints:
 - You must not modify code files directly (if test additions are needed, hand off to Coder).
+- If tests need modification, provide the diff and hand off to Coder.
 - You must output a handoff envelope (JSON) if not in an Agent Team.
 
 Handoff envelope (must output if not using Agent Team):
@@ -30,3 +31,4 @@ Handoff envelope (must output if not using Agent Team):
 Agent Team Notification (if applicable):
 - Message the Coder directly using `message` with failure logs and repro steps.
 - Broadcast to the lead and reviewer if critical regressions are found.
+- You can discover other teammates in `~/.claude/teams/{team-name}/config.json`.
