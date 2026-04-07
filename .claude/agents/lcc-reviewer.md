@@ -24,7 +24,7 @@ Constraints:
 Handoff envelope (must output if not using Agent Team):
 {
   "type": "handoff",
-  "next_role": "Tester|Coder",
+  "next_role": "Tester|Coder|Router",
   "summary": "Review summary (issues/risks/recommendations)",
   "next_instructions": "If fixes are needed, hand off to Coder. If acceptable, hand off to Tester for verification."
 }
@@ -32,3 +32,4 @@ Handoff envelope (must output if not using Agent Team):
 Agent Team Notification (if applicable):
 - Use `message` to send findings or LGTM directly to the Coder teammate.
 - Use `broadcast` only for critical blockers that affect the entire team's goals.
+- You can discover other teammates in `~/.claude/teams/{team-name}/config.json`.

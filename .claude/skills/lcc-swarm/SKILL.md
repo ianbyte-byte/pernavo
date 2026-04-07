@@ -4,7 +4,7 @@ description: Run a comprehensive Swarm workflow using specialized agents: Router
 disable-model-invocation: true
 ---
 
-Run the comprehensive Swarm workflow for this repository. Break complex tasks into specialized stages with clear handoffs or parallel agent teams, leveraging Claude Code's subagent and agent team patterns for context isolation, tool constraint enforcement, and parallel exploration.
+Run the comprehensive Swarm workflow for this repository (V2.2). Break complex tasks into specialized stages with clear handoffs or parallel agent teams, leveraging Claude Code's subagent and agent team patterns for context isolation, tool constraint enforcement, and parallel exploration.
 
 ## Core Principles
 
@@ -12,7 +12,8 @@ Run the comprehensive Swarm workflow for this repository. Break complex tasks in
 - **Context Isolation**: Keep exploration/implementation out of main conversation.
 - **Tool Constraints**: Use read-only agents for exploration, write-enabled for implementation.
 - **Specialization**: Match tasks to focused system prompts (Router, Coder, etc.).
-- **Automated Quality Gates**: Use hooks (`TaskCompleted`, `TeammateIdle`) to enforce rules.
+- **Automated Quality Gates**: Use hooks (`TaskCreated`, `TaskCompleted`, `TeammateIdle`) to enforce rules.
+- **Plan Approval**: Use `Require plan approval` for implementation teammates.
 
 ## Full Workflow
 
@@ -80,20 +81,31 @@ User Request
             └───────────────────────────┘
 ```
 
-## Team Orchestration (New in V2)
+## Team Orchestration (V2.2)
 
 For complex tasks, the Router will propose an **Agent Team**:
 1. **Enable Teams**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
 2. **Shared Task List**: Lead manages tasks; teammates claim and complete.
 3. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
 4. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
+5. **UI Shortcuts**:
+   - `Shift+Down`: Cycle through teammates
+   - `Ctrl+T`: Toggle task list
+   - `Enter`: View teammate session
+   - `Escape`: Interrupt teammate
+6. **Task Sizing**: 5-6 tasks per teammate is optimal.
 
-## Handoff Envelope Schema (Enhanced)
+## Advanced Orchestration Patterns
+
+- **Parallel Code Review**: Different reviewers for Security, Performance, and Coverage.
+- **Scientific Debate**: Adversarial exploration of debugging hypotheses.
+
+## Handoff Envelope Schema
 
 ```json
 {
   "type": "handoff",
-  "next_role": "Router|Coder|Reviewer|Tester|Architect|Product|SecurityReviewer|Debugger|Refactorer",
+  "next_role": "Router|Coder|Reviewer|Tester|Architect|Product|SecurityReviewer|Debugger|Refactorer|...",
   "summary": {
     "progress": "What was accomplished",
     "remaining": "Outstanding tasks",
@@ -115,47 +127,38 @@ For complex tasks, the Router will propose an **Agent Team**:
 
 ## Specialized Agent Integration
 
-When Router identifies specific needs, delegate to specialist agents first:
-
+- **lcc-router**: Orchestration & planning
+- **lcc-coder**: Implementation
+- **lcc-reviewer**: Code review
+- **lcc-tester**: Testing & verification
 - **lcc-architect**: Design, architecture, refactoring guidance
-- **lcc-product**: Requirements clarification, user story mapping
-- **lcc-security-reviewer**: Security audit (can be called after Reviewer)
+- **lcc-ai-native-architect**: Model-Centric architectural patterns
+- **lcc-product**: Requirements clarification
+- **lcc-security-reviewer**: Security audit
 - **lcc-debugger**: Complex debugging scenarios
 - **lcc-refactorer**: Large-scale code reorganization
 - **lcc-performance-optimizer**: Performance tuning
-- **lcc-simplifier**: Code simplification
+- **lcc-sql-optimizer**: SQL/Database optimization
 - **lcc-docs-writer**: Documentation generation
 - **lcc-release-manager**: Release orchestration
+- **lcc-incident-triage**: Incident analysis
+- **lcc-dependency-upgrader**: Dependency management
+- **lcc-git-worktree-manager**: Parallel session management via worktrees
+- **lcc-simplifier**: Code simplification
 
 ## Error Handling & Rollback
 
-- **Coder Failure**: Hand back to Router with error details for re-planning
-- **Reviewer Blockers**: Router prioritizes fixes and re-routes to Coder
-- **Test Failures**: Include minimal repro steps + suggested fix path
-- **Context Drift**: Re-run Router to re-sync with current state
+- **Coder Failure**: Hand back to Router with error details for re-planning.
+- **Reviewer Blockers**: Router prioritizes fixes and re-routes to Coder.
+- **Test Failures**: Include minimal repro steps + suggested fix path.
+- **Context Drift**: Re-run Router to re-sync with current state.
+- **Teammate Stalled**: Lead can nudge or spawn replacement.
 
 ## Best Practices
 
-1. **Prefer Read-Only First**: Use Explore or Router for discovery before Coder
-2. **Session Config**: For platform API tasks, always update `.claude/session_config.json` first
-3. **Parallel Exploration**: Use multiple read-only agents to research separate areas, then Router synthesizes
-4. **Incremental Delivery**: Break into small, reviewable chunks
-5. **Model Selection**:
-   - Router → Haiku (fast, read-only)
-   - Coder/Reviewer/Tester → inherit (balanced capability)
-
-## Project Subagents
-
-Location: `.claude/agents/`
-
-- **lcc-router** - Orchestration & planning
-- **lcc-coder** - Implementation
-- **lcc-reviewer** - Code review
-- **lcc-tester** - Testing & verification
-- **lcc-architect**, **lcc-product**, **lcc-security-reviewer**, etc. - Specialists
-
-## Related Resources
-
-- Run `/workflow-index` for full workflow inventory
-- See `.claude/docs/claude_code/SUBAGENTS.md` for Claude Code subagent best practices
-- See `.claude/docs/INDEX.md` for project docs navigation
+1. **Prefer Read-Only First**: Use Explore or Router for discovery before Coder.
+2. **Session Config**: For platform API tasks, always update `.claude/session_config.json` first.
+3. **Parallel Exploration**: Use multiple read-only agents to research separate areas.
+4. **Incremental Delivery**: Break into small, reviewable chunks.
+5. **Cleanup**: Shut down teammates before final team cleanup.
+6. **Plan Approval**: Lead reviews plans for test coverage and absence of TODOs.
