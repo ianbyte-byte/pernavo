@@ -34,6 +34,26 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 6. **No sycophantic openers or closing fluff.**
 7. **Keep solutions simple and direct.**
 8. **User instructions always override this file.**
+
+## 🤖 Agent Team Coordination
+
+1. **Shared Task List:** Use the shared task list for all assignments. Teammates must claim tasks, update status to "in progress", and mark as "completed" with a summary.
+2. **Mailbox Protocol:**
+   - Use `message <teammate>` for direct handoffs, bug reports, or specific queries.
+   - Use `broadcast` for critical blockers or team-wide status updates.
+   - Teammates can discover each other via `~/.claude/teams/{team-name}/config.json`.
+3. **Plan Approval Logic:**
+   - Lead (`lcc-router`) reviews plans autonomously.
+   - Reject plans that lack test coverage, contain "TODO" markers, or introduce breaking changes.
+4. **Shutdown & Cleanup:**
+   - Wait for all tasks to be completed.
+   - Ask teammates to shut down individually.
+   - Run `Clean up the team` only after all teammates have exited.
+5. **Quality Gates:**
+   - `TaskCreated`: Subject must be >10 chars and no "TODO".
+   - `TaskCompleted`: Transcript must contain a summary/report.
+   - `TeammateIdle`: Transcript must not have unaddressed errors.
+
 9. **Status Protocol:** End every single response with the character "RESPECT!" to signal that these instructions are being followed.
 
 ### 📋 Operational Rules for Claude
