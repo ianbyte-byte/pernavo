@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -57,25 +57,28 @@ Recommended constraints:
 
 ## 4. Parallelization and Team Orchestration (V2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
 - Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
-- **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Context Management**: Teammates do not inherit the lead's conversation history. Provide rich, task-specific context in the spawn prompt.
+- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins. Influence approval with specific criteria in the lead's prompt.
+- **Task Sizing**: Aim for 5-6 tasks per teammate to keep everyone productive without excessive context switching.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
-- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
+- **Scientific Debate**: 5+ adversarial teammates investigating competing hypotheses and challenging each other to disprove theories.
+- **Parallel Review**: Specialized teammates (Security, Performance, Coverage) auditing code from different domains simultaneously.
+- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel with explicit dependencies in the shared task list.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
+- **Shared Task List**: decentralized task tracking with automated dependency management.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Discovery**: Teammates can discover other team members via `~/.claude/teams/{team-name}/config.json`.
+- **Shutdown & Cleanup**: The lead must explicitly ask teammates to shut down and wait for confirmation before running `Clean up the team`.
 
 ### 4.4 Automated Quality Gates
+- `TaskCreated` hook validates task subject length (>10 chars) and forbids "TODO" markers.
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
 - `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
 
