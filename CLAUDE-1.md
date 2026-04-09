@@ -42,8 +42,9 @@ Agent teams allow parallel execution and decentralized coordination.
 
 - **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
 - **Teammates**: Independent agents with their own context windows.
-- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
+- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity. Use task dependencies to ensure correct execution order.
 - **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
+- **Teammate Discovery**: Teammates can discover other team members in an active session by reading the configuration file located at `~/.claude/teams/{team-name}/config.json`.
 - **Communication**:
   - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
   - `broadcast <message>`: Send to all teammates (use sparingly).
@@ -57,6 +58,7 @@ Agent teams allow parallel execution and decentralized coordination.
 
 Automated checks are enforced via `.claude/settings.json` and `.claude/hooks/`.
 
+- **TaskCreated**: Fires when a task is being created. Rejects subjects < 10 characters or with "TODO".
 - **TaskCompleted**: Fires when a task is closed. Used to verify completion criteria.
 - **TeammateIdle**: Fires before a teammate stops. Used to ensure no work is left in a pending state.
 
