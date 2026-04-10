@@ -137,6 +137,27 @@ dotnet add reference ../../ZKSoft.AA/ZKSoft.AA.csproj \
                      ../../ZKSoft.Report/ZKSoft.Report.csproj
 ```
 
+## Swarm V2.2 Rules
+
+### Orchestration & Agent Teams
+- **Router** (Team Lead) orchestrates via a shared task list and 'Require plan approval', selecting Subagents or Agent Teams.
+- **Agent Team coordination** uses a shared task list (pending, in progress, completed) with explicit dependencies, 'message' and 'broadcast' tools.
+- **Sequence**: Leads wait for completion, perform a synthesis, and shut down teammates first.
+- **UI Shortcuts** (User Lead only): 'Shift+Down' (cycle), 'Ctrl+T' (toggle tasks), 'Enter' (view), 'Escape' (interrupt).
+- **Limitation**: '/resume' does not restore in-process teammates.
+- **Teammates** inherit the lead's permission mode at spawn.
+- **Handoffs**: Must include a JSON envelope with `next_role`, `summary`, and `next_instructions`.
+- **Specialized Roles**: Supported roles include Router, Coder, Reviewer, Tester, Architect, AiNativeArchitect, Product, SecurityReviewer, Debugger, Refactorer, PerformanceOptimizer, SqlOptimizer, DocsWriter, ReleaseManager, IncidentTriage, DependencyUpgrader, GitWorktreeManager, and Simplifier.
+
+### Quality Gates & Hooks
+- **Automated quality gates** (e.g., 'lcc-quality-gate.sh') use exit code 2 to reject tasks.
+- **TaskCreated**: Rejects subjects < 10 characters or with 'TODO'.
+- **TaskCompleted**: Rejects 'TODO' in subjects or if transcripts lack evidence/keywords like 'LGTM', 'verified', 'completed', or 'finished'.
+- **TeammateIdle**: Checks for unaddressed errors.
+
+### Document-First Workflow
+- Tasks involving platform APIs or complex Claude configurations require reading `.claude/docs/claud_platform_menu.md` and updating `.claude/session_config.json`.
+
 ## Architecture
 
 ### Project Structure
