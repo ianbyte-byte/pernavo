@@ -47,6 +47,7 @@ Agent teams allow parallel execution and decentralized coordination.
 - **Communication**:
   - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
   - `broadcast <message>`: Send to all teammates (use sparingly).
+  - **Discovery**: Teammates can discover each other via `~/.claude/teams/{team-name}/config.json`.
 - **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
 - **Parallel patterns**:
   - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
@@ -57,8 +58,9 @@ Agent teams allow parallel execution and decentralized coordination.
 
 Automated checks are enforced via `.claude/settings.json` and `.claude/hooks/`.
 
-- **TaskCompleted**: Fires when a task is closed. Used to verify completion criteria.
-- **TeammateIdle**: Fires before a teammate stops. Used to ensure no work is left in a pending state.
+- **TaskCreated**: Fires when a task is created. Validates subject length (>=10) and prevents "TODO".
+- **TaskCompleted**: Fires when a task is closed. Used to verify completion criteria and prevents "TODO".
+- **TeammateIdle**: Fires before a teammate stops. Used to ensure no work is left in a pending state with errors.
 
 ## 7) Failure handling
 

@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -64,6 +64,8 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 - Use `Create an agent team...` prompts to parallelize work.
 - **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Discovery**: Teammates can discover each other via `~/.claude/teams/{team-name}/config.json`.
+- **Messaging**: `message <teammate>` (direct) and `broadcast` (team-wide).
 
 ### 4.2 Patterns
 - **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
@@ -76,8 +78,15 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 - **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
 
 ### 4.4 Automated Quality Gates
-- `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
-- `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
+- `TaskCreated`: Validates subject length (>=10) and prevents "TODO" in subjects.
+- `TaskCompleted`: Validates that a handoff report or summary exists in the transcript and prevents "TODO" in subjects.
+- `TeammateIdle`: Ensures teammates don't go idle with unaddressed errors.
+
+### 4.5 Known Limitations (Experimental)
+- **No Session Resumption**: `/resume` and `/rewind` do not restore in-process teammates.
+- **Task Status Lag**: Teammates sometimes fail to mark tasks as completed.
+- **One Team Per Session**: Only one active team allowed per lead session.
+- **Fixed Lead**: Leadership cannot be transferred.
 
 ## 5. Testing guidance
 
