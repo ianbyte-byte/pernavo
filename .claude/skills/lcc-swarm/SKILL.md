@@ -12,7 +12,7 @@ Run the comprehensive Swarm workflow for this repository. Break complex tasks in
 - **Context Isolation**: Keep exploration/implementation out of main conversation.
 - **Tool Constraints**: Use read-only agents for exploration, write-enabled for implementation.
 - **Specialization**: Match tasks to focused system prompts (Router, Coder, etc.).
-- **Automated Quality Gates**: Use hooks (`TaskCompleted`, `TeammateIdle`) to enforce rules.
+- **Automated Quality Gates**: Use hooks (`TaskCreated`, `TaskCompleted`, `TeammateIdle`) to enforce rules.
 
 ## Full Workflow
 
@@ -80,13 +80,16 @@ User Request
             └───────────────────────────┘
 ```
 
-## Team Orchestration (New in V2)
+## Team Orchestration (V2.2)
 
 For complex tasks, the Router will propose an **Agent Team**:
 1. **Enable Teams**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
-2. **Shared Task List**: Lead manages tasks; teammates claim and complete.
-3. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
-4. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
+2. **Display Modes**: Supports `in-process` (default) and `split panes` (tmux/iTerm2).
+3. **Shared Task List**: Lead manages tasks; teammates claim and complete.
+4. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
+5. **Context**: Provide rich spawn prompts as context does not carry over from lead.
+6. **Cleanup**: Shut down teammates first, then clean up the team.
+7. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
 
 ## Handoff Envelope Schema (Enhanced)
 
@@ -140,7 +143,8 @@ When Router identifies specific needs, delegate to specialist agents first:
 2. **Session Config**: For platform API tasks, always update `.claude/session_config.json` first
 3. **Parallel Exploration**: Use multiple read-only agents to research separate areas, then Router synthesizes
 4. **Incremental Delivery**: Break into small, reviewable chunks
-5. **Model Selection**:
+5. **Team Size**: 3-5 teammates is ideal; 5-6 tasks per teammate.
+6. **Model Selection**:
    - Router → Haiku (fast, read-only)
    - Coder/Reviewer/Tester → inherit (balanced capability)
 
