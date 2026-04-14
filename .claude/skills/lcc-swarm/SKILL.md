@@ -12,7 +12,7 @@ Run the comprehensive Swarm workflow for this repository. Break complex tasks in
 - **Context Isolation**: Keep exploration/implementation out of main conversation.
 - **Tool Constraints**: Use read-only agents for exploration, write-enabled for implementation.
 - **Specialization**: Match tasks to focused system prompts (Router, Coder, etc.).
-- **Automated Quality Gates**: Use hooks (`TaskCompleted`, `TeammateIdle`) to enforce rules.
+- **Automated Quality Gates**: Use hooks (`TaskCreated`, `TaskCompleted`, `TeammateIdle`) to enforce rules.
 
 ## Full Workflow
 
@@ -80,13 +80,17 @@ User Request
             └───────────────────────────┘
 ```
 
-## Team Orchestration (New in V2)
+## Team Orchestration (V2.2)
 
 For complex tasks, the Router will propose an **Agent Team**:
 1. **Enable Teams**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
 2. **Shared Task List**: Lead manages tasks; teammates claim and complete.
-3. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
-4. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
+3. **Task Quality**: Automated gate rejects subjects < 10 chars or containing "TODO".
+4. **Patterns**:
+   - **Scientific Debate**: Competing hypotheses and peer challenge.
+   - **Parallel Review**: Security, Performance, and Test Coverage specialists.
+5. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
+6. **Hooks**: Automated validation via `lcc-quality-gate.sh` (`TaskCreated`, `TaskCompleted`, `TeammateIdle`).
 
 ## Handoff Envelope Schema (Enhanced)
 
