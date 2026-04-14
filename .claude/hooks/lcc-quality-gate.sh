@@ -6,11 +6,27 @@ INPUT=$(cat)
 EVENT=$(echo "$INPUT" | jq -r '.hook_event_name')
 TRANSCRIPT_PATH=$(echo "$INPUT" | jq -r '.transcript_path')
 
+if [[ "$EVENT" == "TaskCreated" ]]; then
+  TASK_SUBJECT=$(echo "$INPUT" | jq -r '.task_subject')
+
+  # Ensure task subjects are descriptive
+  if [[ ${#TASK_SUBJECT} -lt 10 ]]; then
+     echo "Task subject is too short (min 10 characters). Please be more descriptive." >&2
+     exit 2
+  fi
+
+  # Ensure it doesn't say "TODO"
+  if [[ "$TASK_SUBJECT" == *"TODO"* ]]; then
+     echo "Task subject contains TODO. Please provide a concrete subject." >&2
+     exit 2
+  fi
+fi
+
 if [[ "$EVENT" == "TaskCompleted" ]]; then
   TASK_ID=$(echo "$INPUT" | jq -r '.task_id')
   TASK_SUBJECT=$(echo "$INPUT" | jq -r '.task_subject')
 
-  # If it's a coder task, ensure it doesn't say "TODO"
+  # Ensure it doesn't say "TODO"
   if [[ "$TASK_SUBJECT" == *"TODO"* ]]; then
      echo "Task subject contains TODO. Please provide a concrete subject before completing." >&2
      exit 2
@@ -18,8 +34,8 @@ if [[ "$EVENT" == "TaskCompleted" ]]; then
 
   # Basic verification: Ensure there is a handoff or a report in the transcript
   if [[ -f "$TRANSCRIPT_PATH" ]]; then
-    if ! grep -qiE "handoff|summary|report|LGTM|verified" "$TRANSCRIPT_PATH"; then
-       echo "Task completion requires a summary or handoff report in the transcript." >&2
+    if ! grep -qiE "handoff|summary|report|LGTM|verified|completed|finished" "$TRANSCRIPT_PATH"; then
+       echo "Task completion requires a summary, handoff report, or completion keyword (LGTM, verified, completed, finished) in the transcript." >&2
        exit 2
     fi
   fi
