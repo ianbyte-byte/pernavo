@@ -62,18 +62,22 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
 - Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
-- **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins. Teammates provide detailed plans in Markdown before proceeding.
+- **Task Sizing**: Aim for 5-6 tasks per teammate. Smaller tasks reduce risk and allow the lead to reassign work if someone gets stuck.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
-- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
+- **Scientific Debate**: 5+ teammates investigating competing hypotheses. Teammates must talk to each other to try to disprove each other's theories to avoid anchoring bias.
+- **Parallel Review**: Specialists for Security, Performance, and Test Coverage auditing simultaneously from different domains.
+- **Cross-layer Coordination**: Separate teammates for frontend, backend, and tests, each owning a distinct layer.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Shared Task List**: Decentralized tracking where teammates self-claim work. Blocked tasks unblock automatically when dependencies finish.
+- **Mailbox**: Inter-agent messaging via `message <name>` (direct) and `broadcast` (team-wide). Teammates can read `~/.claude/teams/{team-name}/config.json` to discover other members.
+- **Shutdown & Cleanup**:
+  1. Lead waits for completion.
+  2. Lead synthesizes results.
+  3. Lead asks teammates to shut down.
+  4. Lead runs `Clean up the team`.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.

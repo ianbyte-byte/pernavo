@@ -42,16 +42,20 @@ Agent teams allow parallel execution and decentralized coordination.
 
 - **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
 - **Teammates**: Independent agents with their own context windows.
-- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
-- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
+- **Shared task list**: Decentralized task tracking. Teammates self-claim the next unassigned, unblocked task. Aim for 5-6 tasks per teammate to keep everyone productive without excessive context switching.
+- **Plan Approval**: For complex/risky tasks, the lead should spawn teammates with `Require plan approval before they make any changes`. Teammates work in "read-only plan mode" until approved. The lead reviews plans autonomously based on criteria (e.g., test coverage, no breaking changes).
 - **Communication**:
-  - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
-  - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
-- **Parallel patterns**:
-  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
-  - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
-  - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
+  - `message <teammate>`: Direct messaging between any team members.
+  - `broadcast <message>`: Team-wide announcements (use sparingly to control token costs).
+- **Shutdown & Cleanup**: The lead MUST follow a strict sequence:
+  1. Wait for all teammates to complete their tasks.
+  2. Perform a final synthesis of findings.
+  3. Ask all teammates to shut down (they must approve/exit gracefully).
+  4. Run `Clean up the team` only after all teammates have exited.
+- **Parallel Patterns**:
+  - **Scientific Debate**: 5+ teammates investigating competing hypotheses. Each teammate's job is to investigate their own theory AND actively try to disprove others' theories to reach a robust consensus.
+  - **Parallel Review**: Assign reviewers with distinct domains (e.g., Security, Performance, Test Coverage) to ensure thorough multi-lens auditing simultaneously.
+  - **Cross-layer Coordination**: Separate teammates for frontend, backend, and testing, each owning their respective layer independently.
 
 ## 6) Hooks and quality gates
 
