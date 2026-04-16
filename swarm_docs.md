@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -78,6 +78,12 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
 - `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
+- `TaskCreated` hook (optional) can enforce naming conventions or description requirements.
+
+### 4.5 Shortcuts and Troubleshooting
+- **Shortcuts**: `Shift+Down` (cycle), `Ctrl+T` (task list), `Enter` (view teammate), `Escape` (interrupt).
+- **Session Resumption**: `/resume` does not restore in-process teammates. Re-spawn if needed.
+- **Orphaned Sessions**: If tmux persists, use `tmux ls` and `tmux kill-session -t <name>`.
 
 ## 5. Testing guidance
 
