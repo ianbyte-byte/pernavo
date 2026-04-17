@@ -6,6 +6,21 @@ INPUT=$(cat)
 EVENT=$(echo "$INPUT" | jq -r '.hook_event_name')
 TRANSCRIPT_PATH=$(echo "$INPUT" | jq -r '.transcript_path')
 
+if [[ "$EVENT" == "TaskCreated" ]]; then
+  TASK_SUBJECT=$(echo "$INPUT" | jq -r '.task_subject')
+
+  # Reject vague or TODO task subjects
+  if [[ ${#TASK_SUBJECT} -lt 10 ]]; then
+     echo "Task subject is too short (min 10 characters). Please provide a more descriptive subject." >&2
+     exit 2
+  fi
+
+  if [[ "$TASK_SUBJECT" == *"TODO"* ]]; then
+     echo "Task subject contains TODO. Please provide a concrete subject." >&2
+     exit 2
+  fi
+fi
+
 if [[ "$EVENT" == "TaskCompleted" ]]; then
   TASK_ID=$(echo "$INPUT" | jq -r '.task_id')
   TASK_SUBJECT=$(echo "$INPUT" | jq -r '.task_subject')

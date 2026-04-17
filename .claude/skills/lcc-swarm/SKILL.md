@@ -80,15 +80,17 @@ User Request
             └───────────────────────────┘
 ```
 
-## Team Orchestration (New in V2)
+## Team Orchestration (V2.2)
 
-For complex tasks, the Router will propose an **Agent Team**:
+For tasks benefiting from parallel exploration, the Router (Lead) proposes an **Agent Team**:
 1. **Enable Teams**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
-2. **Shared Task List**: Lead manages tasks; teammates claim and complete.
-3. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
-4. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
+2. **Autonomous Plan Approval**: Lead reviews teammate plans before implementation.
+3. **Shared Task List**: Teammates self-claim tasks (5-6 per teammate).
+4. **Mailbox**: Direct `message` for peer coordination and handoffs.
+5. **Advanced Patterns**: "Scientific Debate" for debugging, "Parallel Review" for audits.
+6. **Hooks**: Automated validation via `lcc-quality-gate.sh` (TaskCreated, TaskCompleted, TeammateIdle).
 
-## Handoff Envelope Schema (Enhanced)
+Handoff Envelope Schema (V2.2)
 
 ```json
 {
