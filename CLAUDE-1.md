@@ -38,20 +38,26 @@ Each handoff must include a JSON object in the output:
 
 ## 5) Agent teams (Experimental)
 
-Agent teams allow parallel execution and decentralized coordination.
+Agent teams allow parallel execution and decentralized coordination for tasks where parallel exploration adds value.
 
-- **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
-- **Teammates**: Independent agents with their own context windows.
-- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
-- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
-- **Communication**:
-  - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
-  - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
-- **Parallel patterns**:
-  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
-  - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
-  - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
+- **Enablement**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` in `settings.json`.
+- **Team Lead**: The session that creates the team. Responsible for:
+  - Spawning teammates with clear roles and model selection (Sonnet preferred).
+  - Task decomposition: Breaking work into 5-6 self-contained tasks per teammate.
+  - **Autonomous Plan Approval**: For complex/risky tasks, spawn with `Require plan approval before they make any changes`. The lead approves plans based on criteria (e.g., "include test coverage", "no breaking changes").
+  - **Coordination & Synthesis**: Monitoring progress, nudging stuck teammates, and synthesizing final results.
+  - **Shutdown & Cleanup**: Shutting down teammates gracefully (`Ask the [Name] teammate to shut down`) before running `Clean up the team`.
+- **Teammates**: Independent Claude Code sessions.
+  - **Context**: They load `CLAUDE.md`, skills, and MCP servers but NOT the lead's history. Provide task-specific context in the spawn prompt.
+  - **Task Claiming**: Teammates can self-claim unassigned, unblocked tasks from the **shared task list**. Use file locking to prevent race conditions.
+  - **Messaging**:
+    - `message <name>`: Send direct messages for peer coordination (e.g., Coder to Reviewer).
+    - `broadcast <message>`: Send to all teammates (use sparingly; costs scale with team size).
+- **Advanced Patterns**:
+  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses. Teammates must talk to each other to try to disprove theories.
+  - **Parallel Review**: Assign reviewers distinct domains (Security, Performance, Coverage) for thorough attention.
+  - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
+- **Limitations**: No session resumption (`/resume`) for in-process teammates; task status can sometimes lag.
 
 ## 6) Hooks and quality gates
 
