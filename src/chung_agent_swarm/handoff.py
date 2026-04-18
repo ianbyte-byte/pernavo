@@ -13,6 +13,20 @@ class AgentRole(str, Enum):
     CODER = "Coder"
     REVIEWER = "Reviewer"
     TESTER = "Tester"
+    ARCHITECT = "Architect"
+    AI_NATIVE_ARCHITECT = "AiNativeArchitect"
+    PRODUCT = "Product"
+    SECURITY_REVIEWER = "SecurityReviewer"
+    DEBUGGER = "Debugger"
+    REFACTORER = "Refactorer"
+    PERFORMANCE_OPTIMIZER = "PerformanceOptimizer"
+    SQL_OPTIMIZER = "SqlOptimizer"
+    DOCS_WRITER = "DocsWriter"
+    RELEASE_MANAGER = "ReleaseManager"
+    INCIDENT_TRIAGE = "IncidentTriage"
+    DEPENDENCY_UPGRADER = "DependencyUpgrader"
+    GIT_WORKTREE_MANAGER = "GitWorktreeManager"
+    SIMPLIFIER = "Simplifier"
 
     @classmethod
     def parse(cls, value: str) -> "AgentRole":
@@ -26,16 +40,23 @@ class AgentRole(str, Enum):
 @dataclass(frozen=True)
 class HandoffEnvelope:
     next_role: AgentRole
-    summary: str
+    summary: str | Mapping[str, Any]
     next_instructions: str
+    acceptance_criteria: list[str] | None = None
+    context: Mapping[str, Any] | None = None
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        result = {
             "type": "handoff",
             "next_role": self.next_role.value,
             "summary": self.summary,
             "next_instructions": self.next_instructions,
         }
+        if self.acceptance_criteria is not None:
+            result["acceptance_criteria"] = self.acceptance_criteria
+        if self.context is not None:
+            result["context"] = self.context
+        return result
 
 
 class HandoffError(ValueError):
@@ -76,8 +97,15 @@ def parse_handoff_dict(obj: Mapping[str, Any]) -> HandoffEnvelope:
     next_role = AgentRole.parse(next_role_raw)
 
     summary = obj.get("summary")
-    if not isinstance(summary, str) or not summary.strip():
-        raise HandoffValidationError('Missing or invalid "summary" (must be a non-empty string).')
+    if isinstance(summary, str):
+        if not summary.strip():
+            raise HandoffValidationError('Missing or invalid "summary" (must be a non-empty string).')
+        summary = summary.strip()
+    elif isinstance(summary, Mapping):
+        # Could add validation for specific summary fields here
+        pass
+    else:
+        raise HandoffValidationError('Missing or invalid "summary" (must be a string or object).')
 
     next_instructions = obj.get("next_instructions")
     if not isinstance(next_instructions, str) or not next_instructions.strip():
@@ -85,8 +113,24 @@ def parse_handoff_dict(obj: Mapping[str, Any]) -> HandoffEnvelope:
             'Missing or invalid "next_instructions" (must be a non-empty string).'
         )
 
+    acceptance_criteria = obj.get("acceptance_criteria")
+    if acceptance_criteria is not None:
+        if not isinstance(acceptance_criteria, list) or not all(
+            isinstance(i, str) for i in acceptance_criteria
+        ):
+            raise HandoffValidationError(
+                'Invalid "acceptance_criteria" (must be a list of strings).'
+            )
+
+    context = obj.get("context")
+    if context is not None:
+        if not isinstance(context, Mapping):
+            raise HandoffValidationError('Invalid "context" (must be an object).')
+
     return HandoffEnvelope(
         next_role=next_role,
-        summary=summary.strip(),
+        summary=summary,
         next_instructions=next_instructions.strip(),
+        acceptance_criteria=acceptance_criteria,
+        context=context,
     )
