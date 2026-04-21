@@ -13,6 +13,20 @@ class AgentRole(str, Enum):
     CODER = "Coder"
     REVIEWER = "Reviewer"
     TESTER = "Tester"
+    ARCHITECT = "Architect"
+    AI_NATIVE_ARCHITECT = "AiNativeArchitect"
+    PRODUCT = "Product"
+    SECURITY_REVIEWER = "SecurityReviewer"
+    DEBUGGER = "Debugger"
+    REFACTORER = "Refactorer"
+    PERFORMANCE_OPTIMIZER = "PerformanceOptimizer"
+    SQL_OPTIMIZER = "SqlOptimizer"
+    DOCS_WRITER = "DocsWriter"
+    RELEASE_MANAGER = "ReleaseManager"
+    INCIDENT_TRIAGE = "IncidentTriage"
+    DEPENDENCY_UPGRADER = "DependencyUpgrader"
+    GIT_WORKTREE_MANAGER = "GitWorktreeManager"
+    SIMPLIFIER = "Simplifier"
 
     @classmethod
     def parse(cls, value: str) -> "AgentRole":
