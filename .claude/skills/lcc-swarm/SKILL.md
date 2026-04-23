@@ -84,16 +84,19 @@ User Request
 
 For complex tasks, the Router will propose an **Agent Team**:
 1. **Enable Teams**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
-2. **Shared Task List**: Lead manages tasks; teammates claim and complete.
-3. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
-4. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
+2. **Team Sizing**: Start with 3-5 teammates for most workflows.
+3. **Shared Task List**: Lead manages tasks; teammates claim and complete. Aim for 5-6 tasks per teammate to keep everyone productive.
+4. **Coordination**: Lead should wait for teammates to complete tasks before proceeding and monitor/steer the team.
+5. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
+6. **Cleanup**: Lead must ask teammates to shut down before running `Clean up the team`.
+7. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
 
 ## Handoff Envelope Schema (Enhanced)
 
 ```json
 {
   "type": "handoff",
-  "next_role": "Router|Coder|Reviewer|Tester|Architect|Product|SecurityReviewer|Debugger|Refactorer",
+  "next_role": "Router|Coder|Reviewer|Tester|Architect|AiNativeArchitect|Product|SecurityReviewer|Debugger|Refactorer|PerformanceOptimizer|SqlOptimizer|DocsWriter|ReleaseManager|IncidentTriage|DependencyUpgrader|GitWorktreeManager|Simplifier",
   "summary": {
     "progress": "What was accomplished",
     "remaining": "Outstanding tasks",
