@@ -1,4 +1,4 @@
-# Swarm Global Rules
+# Swarm Global Rules (V2.2)
 
 ## First Principle: Intent-Driven Minimalism
 - **Code is Liability:** Never write a line of code that doesn't need to exist. Prefer reusing existing patterns over creating new abstractions.
@@ -40,31 +40,45 @@ Each handoff must include a JSON object in the output:
 
 Agent teams allow parallel execution and decentralized coordination.
 
-- **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
-- **Teammates**: Independent agents with their own context windows.
-- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
-- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
+- **Team lead**: The main agent session. Responsible for spawning the team, assigning predictable names (e.g., `coder-1`), approving plans, and final synthesis.
+- **Teammates**: Independent agents with their own context windows. Inherit lead's permissions at spawn. conversation history does not carry over.
+- **Subagent Roles**: Reference subagent types (e.g., `lcc-coder`) when spawning to reuse specialized system prompts.
+- **Shared task list**: Decentralized coordination. Teammates self-claim unblocked tasks. Aim for 5-6 tasks per teammate.
+- **Plan Approval**: Lead reviews teammate plans before implementation. Approve if they meet criteria (tests, no breaks) or reject with feedback.
 - **Communication**:
-  - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
-  - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+  - `message <teammate>`: Direct inter-agent communication.
+  - `broadcast <message>`: Team-wide updates (use sparingly).
+- **Shortcuts (UI)**:
+  - `Shift+Down`: Cycle through teammates.
+  - `Ctrl+T`: Toggle shared task list.
+  - `Enter`: View teammate session.
+  - `Escape`: Interrupt teammate.
+- **Orchestration Sequence**: Wait for task completion -> shutdown teammates -> perform final synthesis -> `Clean up the team`.
 - **Parallel patterns**:
-  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
-  - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
-  - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
+  - **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
+  - **Parallel Review**: Specialists (Security, Perf, Coverage) with distinct lenses.
+  - **Parallel Implementation**: Teammates owning separate modules or layers.
 
-## 6) Hooks and quality gates
+## 6) Limitations & Troubleshooting
 
-Automated checks are enforced via `.claude/settings.json` and `.claude/hooks/`.
+- **Session Resumption**: `/resume` and `/rewind` do not restore in-process teammates. If lead loses track, tell it to spawn new ones.
+- **Task Status Lag**: Teammates may fail to mark tasks complete. Lead should nudge them or update manually.
+- **Shutdown**: Graceful but can be slow as agents finish tool calls.
+- **Cleanup**: Always run from Lead. Orphaned tmux sessions: `tmux kill-session -t <name>`.
 
-- **TaskCompleted**: Fires when a task is closed. Used to verify completion criteria.
-- **TeammateIdle**: Fires before a teammate stops. Used to ensure no work is left in a pending state.
+## 7) Hooks and quality gates
 
-## 7) Failure handling
+Automated checks via `.claude/settings.json` and `.claude/hooks/`.
+
+- **TaskCreated**: Reject subjects < 10 chars or containing "TODO".
+- **TaskCompleted**: Verify handoff/summary/LGTM exists in transcript.
+- **TeammateIdle**: Prevent idling with unaddressed errors.
+
+## 8) Failure handling
 
 - If blocked, the summary must include: failure reason, repro steps, and a recommended fix path
 
-## 8) Document-first workflow (mandatory for platform/API/prompt/limits + Claude Code configuration)
+## 9) Document-first workflow (mandatory for platform/API/prompt/limits + Claude Code configuration)
 
 Before any code changes for tasks involving platform APIs, prompt optimization, model selection, token budgets, context windows, rate limits, structured outputs, or Claude Code configuration (subagents/skills/hooks/permissions):
 
