@@ -84,9 +84,23 @@ User Request
 
 For complex tasks, the Router will propose an **Agent Team**:
 1. **Enable Teams**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
-2. **Shared Task List**: Lead manages tasks; teammates claim and complete.
-3. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
-4. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
+2. **Display Modes**:
+   - `in-process` (default): Cycle with `Shift+Down`.
+   - `split-panes`: Requires tmux or iTerm2.
+3. **Shared Task List**: Lead manages tasks; teammates claim and complete.
+   - **Task Sizing**: Aim for 5-6 tasks per teammate for maximum productivity.
+4. **UI Shortcuts**:
+   - `Shift+Down`: Cycle through teammates.
+   - `Ctrl+T`: Toggle shared task list.
+   - `Enter`: View teammate session.
+   - `Escape`: Interrupt teammate turn.
+5. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
+6. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
+7. **Cleanup Sequence**:
+   - Wait for teammates to complete tasks.
+   - Lead performs final synthesis.
+   - Shut down all teammates (`Ask the [name] teammate to shut down`).
+   - Run `Clean up the team` from the lead session.
 
 ## Handoff Envelope Schema (Enhanced)
 

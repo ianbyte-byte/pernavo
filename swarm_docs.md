@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -62,20 +62,39 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
 - Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
+- **Display Modes**:
+  - `in-process` (default): Cycle with `Shift+Down`.
+  - `split-panes`: Requires tmux or iTerm2. Click panes to interact.
+- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead MUST review and approve/reject plans before implementation begins.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
 
-### 4.2 Patterns
+### 4.2 UI Shortcuts (In-Process)
+- `Shift+Down`: Cycle through teammates.
+- `Ctrl+T`: Toggle shared task list.
+- `Enter`: View teammate session.
+- `Escape`: Interrupt teammate turn.
+
+### 4.3 Patterns
 - **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
 - **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
-### 4.3 Coordination
+### 4.4 Coordination
 - **Shared Task List**: decentralized task tracking.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Discovery**: Teammates can read `~/.claude/teams/{team-name}/config.json` to discover other members.
+- **Cleanup Sequence**:
+  1. Wait for teammates to finish tasks.
+  2. Perform final synthesis.
+  3. Shut down teammates individually (`Ask [name] to shut down`).
+  4. Run `Clean up the team` from the lead session.
 
-### 4.4 Automated Quality Gates
+### 4.5 Limitations
+- `/resume` does not restore in-process teammates.
+- Task status may lag; nudge teammates if stuck.
+- One team per session; no nested teams.
+
+### 4.6 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
 - `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
 
