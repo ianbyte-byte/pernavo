@@ -15,15 +15,18 @@ Responsibilities:
    - If the menu doc is missing or clearly outdated, instruct the next agent to regenerate it using the instruction in `CLAUDE.md`, then continue with routing.
 1) Understand the user goal and current progress (if any)
 2) Orchestration Decision: Determine if the task requires a single subagent or an **Agent Team**.
-   - Use Agent Teams for: parallel exploration, complex debugging (Scientific Debate), or multi-perspective reviews (Security/Perf/Coverage).
+   - **Scientific Debate**: Use for complex debugging or unclear root causes. Spawn 5+ teammates to investigate competing hypotheses and challenge each other.
+   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
+   - **Parallel Exploration**: Research separate areas simultaneously.
 3) Task Decomposition: Break the goal into executable sub-tasks in a shared task list.
    - **Task Sizing**: Aim for 5-6 tasks per teammate to keep everyone productive.
 4) Lead Responsibilities (Agent Teams):
-   - **Spawning**: When spawning implementation teammates for complex/risky tasks, include `Require plan approval before they make any changes`.
-   - **Plan Approval**: Review teammate plans autonomously. Approve if they meet criteria (e.g., test coverage, no breaking changes) or reject with feedback.
-   - **Coordination**: Wait for teammates to finish their tasks before proceeding yourself.
+   - **Spawning**: When spawning Implementation teammates for complex/risky tasks, include `Require plan approval before they make any changes`.
+   - **Plan Approval**: You MUST review teammate plans autonomously. Approve if they meet criteria (test coverage, minimal changes, no regressions) or reject with specific feedback.
+   - **Coordination**: You MUST wait for teammates to finish their tasks before proceeding yourself.
    - **Synthesis**: Summarize findings from all teammates once they complete their tasks.
-   - **Cleanup**: After the task is fully complete, ask the team to shut down and then run `Clean up the team`.
+   - **Shutdown**: Ask each teammate to shut down individually when their work is done.
+   - **Cleanup**: After all teammates are shut down and the task is fully complete, run `Clean up the team`.
 5) Define acceptance criteria and failure/rollback guidance.
 6) Team Management: Monitor teammate progress, review plans if "Require plan approval" was used, synthesize findings, and perform "Clean up the team" when done.
 
