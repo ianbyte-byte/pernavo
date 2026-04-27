@@ -13,6 +13,20 @@ class AgentRole(str, Enum):
     CODER = "Coder"
     REVIEWER = "Reviewer"
     TESTER = "Tester"
+    ARCHITECT = "Architect"
+    AI_NATIVE_ARCHITECT = "AiNativeArchitect"
+    PRODUCT = "Product"
+    SECURITY_REVIEWER = "SecurityReviewer"
+    DEBUGGER = "Debugger"
+    REFACTORER = "Refactorer"
+    PERFORMANCE_OPTIMIZER = "PerformanceOptimizer"
+    SQL_OPTIMIZER = "SqlOptimizer"
+    DOCS_WRITER = "DocsWriter"
+    RELEASE_MANAGER = "ReleaseManager"
+    INCIDENT_TRIAGE = "IncidentTriage"
+    DEPENDENCY_UPGRADER = "DependencyUpgrader"
+    GIT_WORKTREE_MANAGER = "GitWorktreeManager"
+    SIMPLIFIER = "Simplifier"
 
     @classmethod
     def parse(cls, value: str) -> "AgentRole":
@@ -26,15 +40,19 @@ class AgentRole(str, Enum):
 @dataclass(frozen=True)
 class HandoffEnvelope:
     next_role: AgentRole
-    summary: str
+    summary: Mapping[str, str]
+    acceptance_criteria: list[str]
     next_instructions: str
+    context: Mapping[str, Any]
 
     def to_dict(self) -> dict[str, Any]:
         return {
             "type": "handoff",
             "next_role": self.next_role.value,
             "summary": self.summary,
+            "acceptance_criteria": self.acceptance_criteria,
             "next_instructions": self.next_instructions,
+            "context": self.context,
         }
 
 
@@ -76,8 +94,12 @@ def parse_handoff_dict(obj: Mapping[str, Any]) -> HandoffEnvelope:
     next_role = AgentRole.parse(next_role_raw)
 
     summary = obj.get("summary")
-    if not isinstance(summary, str) or not summary.strip():
-        raise HandoffValidationError('Missing or invalid "summary" (must be a non-empty string).')
+    if not isinstance(summary, Mapping):
+        raise HandoffValidationError('Missing or invalid "summary" (must be an object).')
+
+    acceptance_criteria = obj.get("acceptance_criteria")
+    if not isinstance(acceptance_criteria, list):
+        raise HandoffValidationError('Missing or invalid "acceptance_criteria" (must be a list).')
 
     next_instructions = obj.get("next_instructions")
     if not isinstance(next_instructions, str) or not next_instructions.strip():
@@ -85,8 +107,14 @@ def parse_handoff_dict(obj: Mapping[str, Any]) -> HandoffEnvelope:
             'Missing or invalid "next_instructions" (must be a non-empty string).'
         )
 
+    context = obj.get("context")
+    if not isinstance(context, Mapping):
+        raise HandoffValidationError('Missing or invalid "context" (must be an object).')
+
     return HandoffEnvelope(
         next_role=next_role,
-        summary=summary.strip(),
+        summary=summary,
+        acceptance_criteria=acceptance_criteria,
         next_instructions=next_instructions.strip(),
+        context=context,
     )

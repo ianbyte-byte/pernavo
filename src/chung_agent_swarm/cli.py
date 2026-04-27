@@ -85,8 +85,10 @@ def _dispatch(args: argparse.Namespace) -> int:
                     {
                         "type": "handoff",
                         "next_role": args.next_role,
-                        "summary": args.summary,
+                        "summary": {"progress": args.summary},
+                        "acceptance_criteria": [],
                         "next_instructions": args.next_instructions,
+                        "context": {},
                     }
                 )
             )

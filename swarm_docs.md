@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -28,11 +28,11 @@ Core capabilities:
 
 ### 2.3 Key CLI helpers (optional)
 The Python package provides a small CLI to validate workflow artifacts:
-- `chung-swarm check`: verify required files exist
-- `chung-swarm session-config validate`: validate `.claude/session_config.json`
-- `chung-swarm handoff validate`: validate a handoff envelope pasted from output
+- `PYTHONPATH=src python -m chung_agent_swarm.cli check`: verify required files exist
+- `PYTHONPATH=src python -m chung_agent_swarm.cli session-config validate`: validate `.claude/session_config.json`
+- `PYTHONPATH=src python -m chung_agent_swarm.cli handoff validate`: validate a handoff envelope pasted from output
 
-### 2.3 Running with Claude Code (project configuration)
+### 2.4 Running with Claude Code (project configuration)
 
 This repo includes Claude Code project configuration for running the swarm directly:
 - `.claude/agents/`: project subagents (YAML frontmatter + system prompt)
@@ -46,24 +46,39 @@ Each handoff must include a JSON object:
 {
   "type": "handoff",
   "next_role": "Reviewer",
-  "summary": "Progress summary",
-  "next_instructions": "Actionable tasks for the next agent"
+  "summary": {
+    "progress": "What was accomplished",
+    "remaining": "Outstanding tasks",
+    "risks": "Potential blockers",
+    "changes": "Key file modifications (if any)"
+  },
+  "acceptance_criteria": [
+    "List of verifiable conditions for completion"
+  ],
+  "next_instructions": "Specific, actionable task list",
+  "context": {
+    "platform_api_needed": false,
+    "session_config_updated": false,
+    "test_coverage_required": "minimal|full",
+    "risk_level": "low|medium|high"
+  }
 }
 ```
 
 Recommended constraints:
-- `summary` must include: done, todo, risks/blockers
+- `summary` must include: progress, remaining, risks, changes
 - `next_instructions` must be actionable (not just “continue”)
 
 ## 4. Parallelization and Team Orchestration (V2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
 - Use `Create an agent team...` prompts to parallelize work.
 - **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Display Modes**: Use `Shift+Down` to cycle through teammates in `in-process` mode.
 
 ### 4.2 Patterns
 - **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
