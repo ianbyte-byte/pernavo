@@ -15,8 +15,10 @@ from chung_agent_swarm.handoff import (
 def test_format_and_parse_roundtrip() -> None:
     envelope = HandoffEnvelope(
         next_role=AgentRole.REVIEWER,
-        summary="done: x",
+        summary={"progress": "done: x"},
+        acceptance_criteria=["y is reviewed"],
         next_instructions="review y",
+        context={"risk_level": "low"},
     )
     text = f"hello\n\n{format_handoff(envelope)}\n"
     parsed = parse_handoff_from_text(text)
@@ -28,8 +30,10 @@ def test_parse_handoff_case_insensitive_role() -> None:
     {
       "type": "handoff",
       "next_role": "reviewer",
-      "summary": "ok",
-      "next_instructions": "go"
+      "summary": {"progress": "ok"},
+      "acceptance_criteria": [],
+      "next_instructions": "go",
+      "context": {}
     }
     """
     parsed = parse_handoff_from_text(text)

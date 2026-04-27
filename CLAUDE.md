@@ -27,13 +27,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Core Operational Principles
 
 1. **Think before acting.** Read existing files before writing code.
-2. **Be concise in output but thorough in reasoning.
-3. **Prefer editing over rewriting whole files.** 
-4. **Do not re-read files you have already read.** 
-5. **Test your code before declaring done.**
-6. **No sycophantic openers or closing fluff.**
-7. **Keep solutions simple and direct.**
-8. **User instructions always override this file.**
+2. **Follow Swarm Roles:** Strictly adhere to the role boundaries defined in `.claude/agents/` and `CLAUDE-1.md`.
+3. **Enhanced Handoffs:** Use the structured JSON handoff envelope with summary, acceptance criteria, and context.
+4. **Parallel Coordination:** Use Agent Teams for multi-agent collaboration, following the lead/teammate pattern.
+5. **Be concise in output but thorough in reasoning.**
+6. **Prefer editing over rewriting whole files.**
+7. **Do not re-read files you have already read.**
+8. **Test your code before declaring done.**
+9. **No sycophantic openers or closing fluff.**
+10. **Keep solutions simple and direct.**
+11. **User instructions always override this file.**
 
 ### 📋 Operational Rules for Claude
 
@@ -118,6 +121,32 @@ dotnet add reference ../../ZKSoft.Common/ZKSoft.Common.csproj
   - `ZKSoft.AI` - For AI service integration
   - `ZKSoft.Report` - For reporting capabilities
   - `ZKSoft.AS` - For archive management
+
+## 🐝 Swarm Handoff Protocol
+
+Each handoff must include a JSON object in the output:
+
+```json
+{
+  "type": "handoff",
+  "next_role": "Router|Coder|Reviewer|Tester|...",
+  "summary": {
+    "progress": "What was accomplished",
+    "remaining": "Outstanding tasks",
+    "risks": "Potential blockers",
+    "changes": "Key file modifications"
+  },
+  "acceptance_criteria": [
+    "Verifiable condition 1",
+    "Verifiable condition 2"
+  ],
+  "next_instructions": "Actionable task list",
+  "context": {
+    "risk_level": "low|medium|high",
+    "test_coverage_required": "minimal|full"
+  }
+}
+```
 
 ### Example: Creating Hjg.Pmi Project
 
