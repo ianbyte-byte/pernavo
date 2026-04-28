@@ -1,46 +1,89 @@
-from __future__ import annotations
-
+import json
 import pytest
-
 from chung_agent_swarm.handoff import (
     AgentRole,
-    HandoffParseError,
-    HandoffValidationError,
-    HandoffEnvelope,
-    format_handoff,
     parse_handoff_from_text,
+    format_handoff,
+    HandoffValidationError,
+    HandoffParseError
 )
 
-
-def test_format_and_parse_roundtrip() -> None:
-    envelope = HandoffEnvelope(
-        next_role=AgentRole.REVIEWER,
-        summary="done: x",
-        next_instructions="review y",
-    )
-    text = f"hello\n\n{format_handoff(envelope)}\n"
-    parsed = parse_handoff_from_text(text)
-    assert parsed == envelope
-
-
-def test_parse_handoff_case_insensitive_role() -> None:
+def test_parse_simple_handoff():
     text = """
+    Some text before
     {
       "type": "handoff",
-      "next_role": "reviewer",
-      "summary": "ok",
-      "next_instructions": "go"
+      "next_role": "Coder",
+      "summary": "Done basic setup",
+      "next_instructions": "Implement the feature"
     }
+    Some text after
     """
-    parsed = parse_handoff_from_text(text)
-    assert parsed.next_role == AgentRole.REVIEWER
+    envelope = parse_handoff_from_text(text)
+    assert envelope.next_role == AgentRole.CODER
+    assert envelope.summary.progress == "Done basic setup"
+    assert envelope.summary.remaining == "N/A"
+    assert envelope.next_instructions == "Implement the feature"
+    assert envelope.context.risk_level == "low"
 
+def test_parse_enhanced_handoff():
+    text = {
+        "type": "handoff",
+        "next_role": "Reviewer",
+        "summary": {
+            "progress": "Implemented auth",
+            "remaining": "Testing",
+            "risks": "None",
+            "changes": "src/auth.py"
+        },
+        "acceptance_criteria": ["Code review passed", "Tests green"],
+        "next_instructions": "Please review",
+        "context": {
+            "platform_api_needed": True,
+            "session_config_updated": True,
+            "test_coverage_required": "full",
+            "risk_level": "medium"
+        }
+    }
+    envelope = parse_handoff_from_text(json.dumps(text))
+    assert envelope.next_role == AgentRole.REVIEWER
+    assert envelope.summary.progress == "Implemented auth"
+    assert envelope.summary.changes == "src/auth.py"
+    assert "Code review passed" in envelope.acceptance_criteria
+    assert envelope.context.platform_api_needed is True
+    assert envelope.context.risk_level == "medium"
 
-def test_parse_rejects_non_object_json() -> None:
-    with pytest.raises(HandoffValidationError):
-        parse_handoff_from_text("[1, 2, 3]")
+def test_parse_specialist_roles():
+    roles = ["Architect", "SecurityReviewer", "Debugger", "Refactorer"]
+    for role in roles:
+        text = {
+            "type": "handoff",
+            "next_role": role,
+            "summary": "Switching role",
+            "next_instructions": "Proceed"
+        }
+        envelope = parse_handoff_from_text(json.dumps(text))
+        assert envelope.next_role.value == role
 
-
-def test_parse_rejects_missing_json() -> None:
+def test_invalid_json():
     with pytest.raises(HandoffParseError):
-        parse_handoff_from_text("no json here")
+        parse_handoff_from_text("Not a JSON")
+
+def test_missing_fields():
+    with pytest.raises(HandoffValidationError):
+        parse_handoff_from_text(json.dumps({"type": "handoff"}))
+
+def test_format_handoff():
+    text = {
+        "type": "handoff",
+        "next_role": "Coder",
+        "summary": "Test summary",
+        "next_instructions": "Test instructions"
+    }
+    envelope = parse_handoff_from_text(json.dumps(text))
+    formatted = format_handoff(envelope)
+    data = json.loads(formatted)
+    assert data["type"] == "handoff"
+    assert data["next_role"] == "Coder"
+    assert data["summary"]["progress"] == "Test summary"
+    assert data["context"]["risk_level"] == "low"

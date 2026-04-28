@@ -25,9 +25,23 @@ Each handoff must include a JSON object in the output:
 ```json
 {
   "type": "handoff",
-  "next_role": "Router|Coder|Reviewer|Tester",
-  "summary": "Progress summary (done/todo/risks)",
-  "next_instructions": "Actionable task list for the next agent"
+  "next_role": "Router|Coder|Reviewer|Tester|Architect|Product|SecurityReviewer|Debugger|Refactorer|...",
+  "summary": {
+    "progress": "What was accomplished",
+    "remaining": "Outstanding tasks",
+    "risks": "Potential blockers",
+    "changes": "Key file modifications"
+  },
+  "acceptance_criteria": [
+    "List of verifiable conditions for completion"
+  ],
+  "next_instructions": "Specific, actionable task list",
+  "context": {
+    "platform_api_needed": false,
+    "session_config_updated": false,
+    "test_coverage_required": "minimal|full",
+    "risk_level": "low|medium|high"
+  }
 }
 ```
 
@@ -42,12 +56,16 @@ Agent teams allow parallel execution and decentralized coordination.
 
 - **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
 - **Teammates**: Independent agents with their own context windows.
+- **Display Modes**:
+  - `In-process` (default): Use `Shift+Down` to cycle, `Ctrl+T` to toggle tasks.
+  - `Split panes`: Requires tmux or iTerm2. Use `claude --teammate-mode split-panes`.
+- **Naming**: Assign predictable names to teammates (e.g., `coder-1`, `reviewer-security`) to facilitate referencing.
 - **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
 - **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
 - **Communication**:
-  - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
+  - `message <teammate>`: Send a direct message to a specific teammate.
   - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+- **Cleanup**: Once the task is complete, the lead must first ask teammates to **shut down** and then run `Clean up the team` to remove shared resources.
 - **Parallel patterns**:
   - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
@@ -57,8 +75,9 @@ Agent teams allow parallel execution and decentralized coordination.
 
 Automated checks are enforced via `.claude/settings.json` and `.claude/hooks/`.
 
-- **TaskCompleted**: Fires when a task is closed. Used to verify completion criteria.
-- **TeammateIdle**: Fires before a teammate stops. Used to ensure no work is left in a pending state.
+- **TaskCreated**: Fires when a task is being created. Used to enforce naming conventions and task sizing.
+- **TaskCompleted**: Fires when a task is closed. Used to verify completion criteria and presence of handoff reports.
+- **TeammateIdle**: Fires before a teammate stops. Used to ensure no work is left in a pending state or with unaddressed errors.
 
 ## 7) Failure handling
 
