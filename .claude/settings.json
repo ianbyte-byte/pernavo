@@ -23,6 +23,16 @@
         ]
       }
     ],
+    "TaskCreated": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/lcc-quality-gate.sh"
+          }
+        ]
+      }
+    ],
     "TeammateIdle": [
       {
         "hooks": [

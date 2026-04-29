@@ -49,6 +49,7 @@ Agent teams allow parallel execution and decentralized coordination.
   - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
   - `broadcast <message>`: Send to all teammates (use sparingly).
 - **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+- **Shortcuts**: Use `Shift+Down` to cycle through teammates, `Ctrl+T` to toggle the task list, and `Enter` to view a teammate's session.
 - **Parallel patterns**:
   - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
