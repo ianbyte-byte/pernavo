@@ -93,7 +93,7 @@ For complex tasks, the Router will propose an **Agent Team**:
 ```json
 {
   "type": "handoff",
-  "next_role": "Router|Coder|Reviewer|Tester|Architect|Product|SecurityReviewer|Debugger|Refactorer",
+  "next_role": "Router|Coder|Reviewer|Tester|Architect|AiNativeArchitect|Product|SecurityReviewer|Debugger|Refactorer|PerformanceOptimizer|SqlOptimizer|DocsWriter|ReleaseManager|IncidentTriage|DependencyUpgrader|GitWorktreeManager|Simplifier",
   "summary": {
     "progress": "What was accomplished",
     "remaining": "Outstanding tasks",
