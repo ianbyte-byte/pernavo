@@ -257,3 +257,43 @@ Test projects use **xUnit** with **FluentAssertions** and **Moq**:
 - `README.md`: Project overview and high-level documentation
 - `knowledge.md`: Architecture and development guidelines
 - `docs/`: Module-specific documentation (e.g., `docs/AI-Query-Module-Design.md`)
+
+---
+
+# Swarm Global Rules (Integration)
+
+## 1) Goals
+- Organize multi-agent collaboration using a Router–Worker architecture.
+- Ensure continuity via a traceable handoff protocol.
+
+## 2) Role boundaries
+- **Router**: routing, decomposition, acceptance criteria. No code edits.
+- **Coder**: implements changes. Hands off to Reviewer.
+- **Reviewer**: reviews security/correctness/maintainability. No file edits.
+- **Tester**: runs/designs tests and produces repro steps.
+
+## 3) Handoff protocol
+Each handoff must include a JSON object:
+```json
+{
+  "type": "handoff",
+  "next_role": "Router|Coder|Reviewer|Tester",
+  "summary": "Progress summary (done/todo/risks)",
+  "next_instructions": "Actionable task list for the next agent"
+}
+```
+
+## 4) Agent teams (Experimental)
+- **Team lead**: Main session. Spawns team, approves plans, final synthesis.
+- **Teammates**: Independent agents.
+- **Shared task list**: Decentralized coordination. Teammates self-claim tasks.
+- **Plan Approval**: Use `Require plan approval` for implementation. Lead reviews autonomously.
+- **Mailbox**: Use `message <teammate>` or `broadcast`.
+- **UI Shortcuts**: `Shift+Down` (cycle), `Ctrl+T` (tasks), `Enter` (view), `Escape` (interrupt).
+- **Cleanup**: Lead shuts down teammates and runs `Clean up the team`.
+- **Troubleshooting**: If tasks lag, update status manually. Use `tmux kill-session` for orphaned sessions.
+
+## 5) Hooks and quality gates
+- **TaskCreated**: Rejects subjects < 10 chars or with "TODO".
+- **TaskCompleted**: Verifies summary/handoff exists.
+- **TeammateIdle**: Ensures no unaddressed errors.
