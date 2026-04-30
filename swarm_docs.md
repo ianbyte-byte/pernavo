@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -32,12 +32,6 @@ The Python package provides a small CLI to validate workflow artifacts:
 - `chung-swarm session-config validate`: validate `.claude/session_config.json`
 - `chung-swarm handoff validate`: validate a handoff envelope pasted from output
 
-### 2.3 Running with Claude Code (project configuration)
-
-This repo includes Claude Code project configuration for running the swarm directly:
-- `.claude/agents/`: project subagents (YAML frontmatter + system prompt)
-- `.claude/skills/swarm/`: the `/swarm` workflow skill (manual invocation)
-
 ## 3. Handoff protocol
 
 Each handoff must include a JSON object:
@@ -46,43 +40,54 @@ Each handoff must include a JSON object:
 {
   "type": "handoff",
   "next_role": "Reviewer",
-  "summary": "Progress summary",
-  "next_instructions": "Actionable tasks for the next agent"
+  "summary": {
+    "progress": "What was accomplished",
+    "remaining": "Outstanding tasks",
+    "risks": "Potential blockers",
+    "changes": "Key file modifications"
+  },
+  "acceptance_criteria": [
+    "List of verifiable conditions"
+  ],
+  "next_instructions": "Specific, actionable task list"
 }
 ```
 
-Recommended constraints:
-- `summary` must include: done, todo, risks/blockers
-- `next_instructions` must be actionable (not just “continue”)
+## 4. Team Orchestration (V2.2)
 
-## 4. Parallelization and Team Orchestration (V2)
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+### 4.1 Display Modes and Terminal Requirements
+Agent teams support two display modes:
+- **In-process**: All teammates run inside the main terminal. Use `Shift+Down` to cycle. Works everywhere.
+- **Split panes**: Each teammate gets its own pane. Requires **tmux** or **iTerm2** (with Python API and `it2` CLI).
+- Configuration: Set `"teammateMode": "in-process" | "split-panes" | "auto"` in `~/.claude/settings.json`.
 
-### 4.1 Orchestration
-- **Router** acts as the team lead.
-- Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
-- **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+### 4.2 Advanced Orchestration Patterns
+- **Scientific Debate**: 5+ teammates investigate competing hypotheses, using `message` to challenge each other. Prevents "anchoring bias".
+- **Parallel Review**: Specialists for Security, Performance, and Coverage provide thorough attention simultaneously.
+- **Parallel Implementation**: Teammates own separate modules or files to avoid conflicts.
 
-### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
-- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
+### 4.3 Coordination & Communication
+- **Shared Task List**: Centralized tracking for the whole team.
+- **Mailbox**: Inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
+- **Plan Approval**: Mandatory for complex tasks. Lead reviews plans before implementation.
+- **Team Discovery**: Teammates can read `~/.claude/teams/{team-name}/config.json` to discover other members.
 
-### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+### 4.4 Lifecycle Management
+- **Spawn Prompt**: Must be rich and self-contained (teammates don't inherit lead's history).
+- **Cleanup Sequence**: 1) Wait for tasks, 2) Synthesis, 3) Shut down teammates, 4) `Clean up the team`.
 
-### 4.4 Automated Quality Gates
-- `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
-- `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
+### 4.5 Troubleshooting
+- **Orphaned tmux sessions**: Use `tmux ls` and `tmux kill-session -t <name>` to clean up if the lead exits prematurely.
+- **Stuck Tasks**: If task status lags, check teammate output or update status manually via the lead.
+
+### 4.6 Automated Quality Gates
+- `TaskCreated`: Rejects subjects < 10 chars or containing "TODO".
+- `TaskCompleted`: Ensures a handoff report/summary exists in the transcript.
+- `TeammateIdle`: Prevents going idle with unaddressed errors.
 
 ## 5. Testing guidance
 
-Suggested scenario:
-- From an empty directory, scaffold a FastAPI project with unit tests
-
-Expected loop:
-- Coder generates code → Tester runs tests → Reviewer outputs LGTM or a fix list → iterate until verified
+Suggested loop:
+Coder generates code → Tester runs tests → Reviewer outputs LGTM or a fix list → iterate until verified
