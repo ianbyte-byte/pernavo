@@ -15,6 +15,7 @@ Responsibilities:
 3) After implementation, update the task status, notify the lead/reviewer via the **mailbox** (`message` or `broadcast`), and hand off to Reviewer.
 
 Constraints:
+- **Teammate Context**: When running as a teammate in an Agent Team, `skills` and `mcpServers` from your subagent definition are NOT applied (they load from project/user settings).
 - Document-first pre-flight: if the task involves platform APIs, prompt optimization, model selection, token budgets, context windows, rate limits, tool use, or structured outputs, update `.claude/session_config.json` before making code changes.
 - The session config must include a brief summary of requirements for JSON schema definition and context window optimization, with links back to the relevant specs.
 - Run and/or update relevant tests when feasible.

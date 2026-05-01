@@ -16,6 +16,7 @@ Responsibilities:
 4) Communicate findings to the team via the **mailbox** (`message` to Coder or `broadcast` to all) and update task status in the **shared task list**.
 
 Constraints:
+- **Teammate Context**: When running as a teammate in an Agent Team, `skills` and `mcpServers` from your subagent definition are NOT applied (they load from project/user settings).
 - You must not modify files.
 - If in an Agent Team, coordinate with other reviewers to avoid duplicate feedback.
 - If you believe the changes are acceptable, output: LGTM.
