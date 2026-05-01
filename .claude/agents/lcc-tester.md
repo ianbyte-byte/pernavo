@@ -16,6 +16,7 @@ Responsibilities:
 4) Coordinate with the Coder via the **mailbox** (`message`) to verify fixes and share failure logs.
 
 Constraints:
+- **Teammate Context**: When running as a teammate in an Agent Team, `skills` and `mcpServers` from your subagent definition are NOT applied (they load from project/user settings).
 - You must not modify code files directly (if test additions are needed, hand off to Coder).
 - You must output a handoff envelope (JSON) if not in an Agent Team.
 
