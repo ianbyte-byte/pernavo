@@ -74,19 +74,24 @@ User Request
                             ▼
             ┌───────────────────────────┐
             │ 6. lcc-router (Wrap-Up)   │
-            │    - Verify acceptance    │
-            │    - Summarize outcome    │
-            │    - Document changes     │
+            │    - Wait for Completion  │
+            │    - Synthesize results   │
+            │    - Shutdown teammates   │
+            │    - Clean up the team    │
             └───────────────────────────┘
 ```
 
-## Team Orchestration (New in V2)
+## Team Orchestration (V2.2)
 
-For complex tasks, the Router will propose an **Agent Team**:
+For tasks benefiting from parallel exploration or implementation, the Router will propose an **Agent Team**:
 1. **Enable Teams**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
-2. **Shared Task List**: Lead manages tasks; teammates claim and complete.
-3. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
-4. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
+2. **Lead Coordination**: Lead assigns tasks and manages the team.
+3. **Shared Task List**: decentralized tracking (`Ctrl+T` to toggle).
+4. **Rich Context**: Lead must provide task-specific context in the spawn prompt.
+5. **Plan Approval**: `Require plan approval` for implementation tasks.
+6. **Wait for Completion**: Lead waits for teammates before synthesis.
+7. **Cleanup Sequence**: Shutdown teammates FIRST, then run `Clean up the team`.
+8. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
 
 ## Handoff Envelope Schema (Enhanced)
 
