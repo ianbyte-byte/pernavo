@@ -28,5 +28,6 @@ Handoff envelope (must output if not using Agent Team):
 }
 
 Agent Team Notification (if applicable):
-- Message the Coder directly using `message` with failure logs and repro steps.
+- Use `message <teammate>` to send failure logs and repro steps directly to the Coder.
 - Broadcast to the lead and reviewer if critical regressions are found.
+- Discover other teammates by reading `~/.claude/teams/{team-name}/config.json`.

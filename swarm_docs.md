@@ -62,18 +62,19 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
 - Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
+- **Spawning**: When spawning teammates, prefer `lcc-*` subagent types and assign predictable names. For complex/risky tasks, include `Require plan approval before they make any changes`.
+- **Plan Approval**: The lead reviews and approves/rejects plans autonomously before implementation begins.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
-- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
+- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other to converge on the root cause.
+- **Parallel Review**: Specialists for Security, Performance, and Test Coverage apply different lenses to the same code.
+- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel on their respective layers.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Shared Task List**: Centralized task tracking where teammates can self-claim work.
+- **Mailbox**: Direct messaging via `message <teammate>` and team-wide `broadcast`. Teammates can discover others via `~/.claude/teams/{team-name}/config.json`.
+- **Cleanup**: The lead must shut down teammates (e.g., `Ask the researcher teammate to shut down`) and run `Clean up the team` after completion.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
