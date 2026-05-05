@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -62,20 +62,47 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
 - Use `Create an agent team...` prompts to parallelize work.
+- **Display Modes**:
+  - `in-process`: Teammates run in the main terminal.
+  - `split panes`: Teammates run in separate panes (requires `tmux` or iTerm2).
+  - Configurable via `teammateMode` in `settings.json`.
+- **UI Shortcuts**:
+  - `Shift+Down`: Cycle through teammates.
+  - `Ctrl+T`: Toggle shared task list.
+  - `Enter`: View teammate's session.
+  - `Escape`: Interrupt current turn.
 - **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
 
-### 4.2 Patterns
+### 4.2 Task Management & Dependencies
+- **Automated Dependencies**: Pending tasks with unresolved dependencies cannot be claimed. Blocked tasks unblock automatically when dependencies complete.
+- **Task Claiming**: Uses file locking to prevent race conditions.
+- **Self-Claiming**: Teammates pick up the next unassigned, unblocked task upon completion.
+
+### 4.3 Patterns
 - **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
 - **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
-### 4.3 Coordination
+### 4.4 Coordination
 - **Shared Task List**: decentralized task tracking.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Teammate Discovery**: Teammates can read `~/.claude/teams/{team-name}/config.json` to discover members.
+- **Shutdown & Cleanup**:
+  - Shut down teammates first: `Ask the [name] teammate to shut down`.
+  - Final cleanup by Lead: `Clean up the team`. This removes shared resources.
 
-### 4.4 Automated Quality Gates
+### 4.5 Limitations & Best Practices
+- **Limitations**:
+  - No session resumption (`/resume`/`/rewind`) for in-process teammates.
+  - Task status can sometimes lag (manual update/nudge may be needed).
+  - One team per session; no nested teams.
+- **Best Practices**:
+  - Give teammates specific context in the spawn prompt (they don't inherit history).
+  - Avoid file conflicts by partitioning work.
+  - Lead should wait for teammates to finish before proceeding.
+
+### 4.6 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
 - `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
 
