@@ -42,9 +42,13 @@ Agent teams allow parallel execution and decentralized coordination.
 
 - **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
 - **Teammates**: Independent agents with their own context windows.
-- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
+- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity. Use `Ctrl+T` to toggle the task list.
 - **UI Shortcuts**: Use `Shift+Down` to cycle through teammates, `Ctrl+T` to toggle the task list, `Enter` to view a teammate's session, and `Escape` to interrupt.
 - **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
+- **Display Modes**:
+  - `teammateMode: "auto"` (default): uses split panes if in tmux, else in-process.
+  - `teammateMode: "tmux"`: forces split panes (requires tmux or iTerm2).
+  - `teammateMode: "in-process"`: all teammates run in the main terminal.
 - **Communication**:
   - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
   - `broadcast <message>`: Send to all teammates (use sparingly).
@@ -54,7 +58,15 @@ Agent teams allow parallel execution and decentralized coordination.
   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
   - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
 
-## 6) Hooks and quality gates
+## 6) Limitations & Troubleshooting (V2.2)
+
+- **No Session Resumption**: `/resume` and `/rewind` do not restore in-process teammates.
+- **One Team Per Session**: Only one team can be managed at a time. Cleanup before starting another.
+- **No Nested Teams**: Teammates cannot spawn their own teams.
+- **Task Status Lag**: If a task seems stuck, check the teammate's session and update manually.
+- **Orphaned Sessions**: If tmux persists, use `tmux ls` and `tmux kill-session -t <name>` to clean up.
+
+## 7) Hooks and quality gates
 
 Automated checks are enforced via `.claude/settings.json` and `.claude/hooks/`.
 
@@ -62,11 +74,11 @@ Automated checks are enforced via `.claude/settings.json` and `.claude/hooks/`.
 - **TaskCompleted**: Fires when a task is closed. Verifies that a summary or handoff report exists in the transcript and rejects "TODO" in subjects.
 - **TeammateIdle**: Fires before a teammate stops. Ensures no work is left with unaddressed errors.
 
-## 7) Failure handling
+## 8) Failure handling
 
 - If blocked, the summary must include: failure reason, repro steps, and a recommended fix path
 
-## 8) Document-first workflow (mandatory for platform/API/prompt/limits + Claude Code configuration)
+## 9) Document-first workflow (mandatory for platform/API/prompt/limits + Claude Code configuration)
 
 Before any code changes for tasks involving platform APIs, prompt optimization, model selection, token budgets, context windows, rate limits, structured outputs, or Claude Code configuration (subagents/skills/hooks/permissions):
 
