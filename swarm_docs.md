@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -79,7 +79,15 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
 - `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
 
-## 5. Testing guidance
+## 5. Limitations & Troubleshooting (V2.2)
+
+- **No Session Resumption**: `/resume` and `/rewind` do not restore in-process teammates.
+- **One Team Per Session**: A lead can only manage one team at a time.
+- **No Nested Teams**: Teammates cannot spawn their own teams.
+- **Task Status Lag**: Teammates sometimes fail to mark tasks as completed. Update manually or nudge the teammate.
+- **Orphaned Sessions**: Use `tmux kill-session -t <name>` if split-pane mode fails to clean up properly.
+
+## 6. Testing guidance
 
 Suggested scenario:
 - From an empty directory, scaffold a FastAPI project with unit tests

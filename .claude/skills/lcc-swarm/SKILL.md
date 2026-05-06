@@ -8,11 +8,18 @@ Run the comprehensive Swarm workflow for this repository. Break complex tasks in
 
 ## Core Principles
 
-- **Agent Teams**: Use for parallel work, shared task lists, and inter-agent coordination.
+- **Agent Team First**: For complex tasks, prioritize parallel exploration and implementation using Agent Teams.
+- **Shared Coordination**: Leverage shared task lists and inter-agent messaging for decentralized coordination.
 - **Context Isolation**: Keep exploration/implementation out of main conversation.
 - **Tool Constraints**: Use read-only agents for exploration, write-enabled for implementation.
 - **Specialization**: Match tasks to focused system prompts (Router, Coder, etc.).
 - **Automated Quality Gates**: Use hooks (`TaskCompleted`, `TeammateIdle`) to enforce rules.
+
+## Team Orchestration Patterns
+
+- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
+- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
+- **Cross-layer Coordination**: Separate teammates for frontend, backend, and testing.
 
 ## Full Workflow
 
@@ -80,13 +87,16 @@ User Request
             └───────────────────────────┘
 ```
 
-## Team Orchestration (New in V2)
+## Team Orchestration (V2.2)
 
 For complex tasks, the Router will propose an **Agent Team**:
-1. **Enable Teams**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
-2. **Shared Task List**: Lead manages tasks; teammates claim and complete.
-3. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
-4. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
+1. **Enable Teams**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` in `settings.json`.
+2. **Display Mode**: Use `teammateMode: "auto"` or `"tmux"` for split-pane visibility.
+3. **Shared Task List**: Lead manages tasks; teammates claim and complete. Use `Ctrl+T` to toggle.
+4. **Plan Approval**: Use `Require plan approval` for implementation to enable lead review.
+5. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
+6. **Shortcuts**: `Shift+Down` to cycle, `Enter` to view, `Escape` to interrupt.
+7. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
 
 ## Handoff Envelope Schema (Enhanced)
 
@@ -136,13 +146,16 @@ When Router identifies specific needs, delegate to specialist agents first:
 
 ## Best Practices
 
-1. **Prefer Read-Only First**: Use Explore or Router for discovery before Coder
-2. **Session Config**: For platform API tasks, always update `.claude/session_config.json` first
-3. **Parallel Exploration**: Use multiple read-only agents to research separate areas, then Router synthesizes
-4. **Incremental Delivery**: Break into small, reviewable chunks
-5. **Model Selection**:
+1. **Prefer Read-Only First**: Use Explore or Router for discovery before Coder.
+2. **Session Config**: For platform API tasks, always update `.claude/session_config.json` first.
+3. **Parallel Exploration**: Use multiple read-only agents to research separate areas, then Router synthesizes.
+4. **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+5. **Contextual Spawning**: Provide rich, task-specific details in the spawn prompt as teammates don't inherit history.
+6. **Wait for Completion**: Lead should explicitly wait for teammates to finish before synthesis.
+7. **Cleanup**: Always use the lead to "Clean up the team" after shutting down teammates.
+8. **Model Selection**:
    - Router → Haiku (fast, read-only)
-   - Coder/Reviewer/Tester → inherit (balanced capability)
+   - Coder/Reviewer/Tester → Sonnet (balanced capability)
 
 ## Project Subagents
 
