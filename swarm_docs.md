@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -61,19 +61,30 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
-- Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
-- **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Spawning**: Use `Create an agent team...` prompts. Specify models (prefer Sonnet) and roles.
+- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans autonomously based on explicit criteria.
+- **Display Modes**:
+  - `in-process`: All teammates run inside the main terminal (default).
+  - `split panes`: Each teammate in its own pane. Requires `tmux` or `it2` CLI for iTerm2.
+- **Task Sizing**: Aim for 5-6 tasks per teammate.
+- **Dependencies**: Use task dependencies for sequential work; they unblock automatically.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
-- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
+- **Scientific Debate**: 5+ teammates investigating competing hypotheses. The key is the adversarial structure where teammates try to disprove each other to reach consensus.
+- **Parallel Review**: Assign distinct lenses (Security, Performance, Test Coverage) to separate reviewers to ensure thorough attention to each domain.
+- **Cross-layer coordination**: Separate specialists for Frontend, Backend, and Tests working in parallel.
 
-### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+### 4.3 Coordination & Communication
+- **Shared Task List**: Centralized task tracking. Teammates can self-claim tasks.
+- **Mailbox**: Direct messaging via `message <teammate>` and `broadcast`.
+- **Context**: Teammates load project context but not history. Include specific details in spawn prompts.
+- **Cleanup**: The lead MUST shut down teammates first, then run `Clean up the team`.
+
+### 4.4 Limitations (Experimental)
+- **No Session Resumption**: `/resume` and `/rewind` do not restore in-process teammates.
+- **Task Status Lag**: Teammates may occasionally fail to mark tasks as complete. Lead should nudge them or update manually.
+- **Slow Shutdown**: Teammates finish their current turn before exiting.
+- **One Team per Session**: Clean up before starting a new team. No nested teams.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
