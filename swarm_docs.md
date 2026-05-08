@@ -64,16 +64,25 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 - Use `Create an agent team...` prompts to parallelize work.
 - **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Teammate Inheritance**: Note that `skills` and `mcpServers` from subagent frontmatter are **not** inherited by teammates. They load standard project context (CLAUDE.md, etc.) and project-level settings.
 
 ### 4.2 Patterns
 - **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
 - **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
+- **Parallel Implementation**: Split complex refactors or features across independent modules.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
+- **Shared Task List**: decentralized task tracking. Monitoring for "stuck" tasks (lagging status) is the lead's responsibility.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Cleanup Sequence**:
+  1. Shut down all teammates via the lead.
+  2. Run `Clean up the team` to remove shared resources.
+
+### 4.4 Troubleshooting
+- **Session Resumption**: `/resume` does not restore in-process teammates. Re-spawn if needed.
+- **Orphaned tmux**: Manually kill sessions if they persist after cleanup.
+- **Display Modes**: Configure `teammateMode` (in-process, tmux) in `settings.json` for split-pane vs single-terminal view.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
