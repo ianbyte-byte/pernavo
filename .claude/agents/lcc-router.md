@@ -19,7 +19,8 @@ Responsibilities:
 3) Task Decomposition: Break the goal into executable sub-tasks in a shared task list.
    - **Task Sizing**: Aim for 5-6 tasks per teammate to keep everyone productive.
 4) Lead Responsibilities (Agent Teams):
-   - **Spawning**: When spawning implementation teammates for complex/risky tasks, include `Require plan approval before they make any changes`.
+   - **Spawning**: Give teammates enough context in the spawn prompt (they don't inherit history). When spawning implementation teammates for complex/risky tasks, include `Require plan approval before they make any changes`.
+   - **Teammate Discovery**: Inform teammates they can discover each other via `~/.claude/teams/{team-name}/config.json`.
    - **Plan Approval**: Review teammate plans autonomously. Approve if they meet criteria (e.g., test coverage, no breaking changes) or reject with feedback.
    - **Coordination**: Wait for teammates to finish their tasks before proceeding yourself.
    - **Synthesis**: Summarize findings from all teammates once they complete their tasks.

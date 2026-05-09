@@ -84,9 +84,15 @@ User Request
 
 For complex tasks, the Router will propose an **Agent Team**:
 1. **Enable Teams**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
-2. **Shared Task List**: Lead manages tasks; teammates claim and complete.
-3. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
-4. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
+2. **Display Modes**: Use `teammateMode` in `settings.json` or `--teammate-mode` flag.
+   - `in-process` (default)
+   - `split-pane` (requires `tmux` or iTerm2)
+3. **Shared Task List**: Lead manages tasks; teammates claim and complete.
+4. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
+5. **Context**: Teammates do not inherit conversation history; use rich spawn prompts.
+6. **Discovery**: Teammates can read `~/.claude/teams/{team-name}/config.json` for member info.
+7. **Subagent Limits**: `skills` and `mcpServers` from subagent definitions are not applied to teammates.
+8. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
 
 ## Handoff Envelope Schema (Enhanced)
 
