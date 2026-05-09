@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -57,25 +57,32 @@ Recommended constraints:
 
 ## 4. Parallelization and Team Orchestration (V2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
-- Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
-- **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Spawn Prompting**: Include task-specific details in the spawn prompt as teammates do not inherit conversation history.
+- **Plan Approval**: Use `Require plan approval` for complex/risky tasks. The lead reviews and approves/rejects plans autonomously before implementation begins.
+- **Wait for Completion**: The lead should wait for teammates to finish tasks before proceeding.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
-- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
+- **Scientific Debate**: 5+ teammates investigating competing hypotheses and actively trying to disprove each other.
+- **Parallel Review**: Specialists for Security, Performance, and Test Coverage reviewing the same PR from different lenses.
+- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel on separate pieces.
 
-### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
+### 4.3 Sizing and Best Practices
+- **Team Size**: 3-5 teammates is a good balance.
+- **Task Sizing**: 5-6 tasks per teammate keeps everyone productive.
+- **Avoid Conflicts**: Ensure teammates own different sets of files to avoid overwrites.
+- **Start with Research**: New teams should start with clear-boundary tasks like review or research.
+
+### 4.4 Coordination
+- **Shared Task List**: Decentralized task tracking. Blocked tasks unblock automatically when dependencies are met.
+- **Mailbox**: Inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
+- **Teammate Discovery**: Teammates can read `~/.claude/teams/{team-name}/config.json` to find other members.
 - **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
 
-### 4.4 Automated Quality Gates
+### 4.5 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
 - `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
 

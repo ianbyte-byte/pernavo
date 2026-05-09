@@ -40,9 +40,19 @@ Each handoff must include a JSON object in the output:
 
 Agent teams allow parallel execution and decentralized coordination.
 
-- **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
+- **Team lead**: The main agent session. Responsible for spawning the team, assigning tasks, approving plans, and final synthesis.
+  - **Wait for teammates**: Do not start implementing tasks yourself if teammates are active. Use "Wait for your teammates to complete their tasks before proceeding" if needed.
+  - **Shutdown**: Shut down teammates gracefully before running cleanup.
 - **Teammates**: Independent agents with their own context windows.
-- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
+  - **Context**: Teammates load project context (CLAUDE.md, etc.) but do not inherit the lead's conversation history.
+  - **Discovery**: Teammates can discover other members via `~/.claude/teams/{team-name}/config.json`.
+  - **Limitations**: `skills` and `mcpServers` defined in a subagent's frontmatter are NOT applied when used as a teammate. They load from project/user settings instead.
+- **Display Modes**:
+  - `in-process`: Default. Teammates run in the main terminal.
+  - `split-pane`: Requires `tmux` or iTerm2. Set `teammateMode: "tmux"` or `"auto"` in `settings.json`.
+- **Sizing**:
+  - **Team Size**: 3-5 teammates is optimal.
+  - **Task Size**: Aim for 5-6 tasks per teammate to maximize productivity.
 - **UI Shortcuts**: Use `Shift+Down` to cycle through teammates, `Ctrl+T` to toggle the task list, `Enter` to view a teammate's session, and `Escape` to interrupt.
 - **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
 - **Communication**:
