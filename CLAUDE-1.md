@@ -40,19 +40,31 @@ Each handoff must include a JSON object in the output:
 
 Agent teams allow parallel execution and decentralized coordination.
 
-- **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
-- **Teammates**: Independent agents with their own context windows.
-- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
-- **UI Shortcuts**: Use `Shift+Down` to cycle through teammates, `Ctrl+T` to toggle the task list, `Enter` to view a teammate's session, and `Escape` to interrupt.
-- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
+- **Team lead**: The main agent session. Coordinates work, assigns tasks, approves plans, and synthesizes results.
+- **Teammates**: Independent Claude Code instances with their own context windows.
+  - **Subagent Definitions**: Teammates can use existing subagent types. They inherit the definition's `prompt` and `tools`, but **not** `skills` or `mcpServers` (which are loaded from project/user settings).
+- **Shared task list**: Decentralized task tracking. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
+- **UI Shortcuts**:
+  - `Shift+Down`: Cycle through teammates.
+  - `Ctrl+T`: Toggle the shared task list.
+  - `Enter`: View a teammate's session.
+  - `Escape`: Interrupt a teammate's current turn.
+- **Plan Approval**: For complex or risky tasks, the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
 - **Communication**:
-  - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
-  - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+  - `message <teammate>`: Direct message to a specific teammate.
+  - `broadcast <message>`: Message to all teammates.
+- **Display Modes**: Set via `teammateMode` in `settings.json` or `--teammate-mode`. Options: `in-process` (default) or `split-panes` (requires tmux/iTerm2).
+- **Cleanup**: The lead must shut down all teammates (`Ask <teammate> to shut down`) and then run `Clean up the team`.
 - **Parallel patterns**:
-  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
-  - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
-  - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
+  - **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
+  - **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
+  - **Cross-layer coordination**: Frontend, Backend, and Tests specialists.
+
+### 5.1 Limitations
+- **No Session Resumption**: `/resume` and `/rewind` do not restore in-process teammates.
+- **Task Lag**: Status can sometimes lag; nudge teammates or update manually if stuck.
+- **Single Team**: One active team per lead session.
+- **No Nesting**: Teammates cannot spawn their own teams.
 
 ## 6) Hooks and quality gates
 

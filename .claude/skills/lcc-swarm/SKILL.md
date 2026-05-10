@@ -30,12 +30,11 @@ User Request
 └─────────────────────────────────────────────────────────────┘
     │
     ├───────────────────────┬───────────────────────┐
-    │                       │                       │
+    │ (Optional Teams)      │ (Optional Teams)      │
     ▼                       ▼                       ▼
 ┌───────────────┐   ┌───────────────┐   ┌───────────────┐
-│ 2a. lcc-     │   │ 2b. lcc-     │   │ 2c. Parallel  │
-│ architect     │   │ product       │   │ Exploration   │
-│ (Optional)    │   │ (Optional)    │   │ (Explore)     │
+│ 2a. Researcher│   │ 2b. Hypotheses│   │ 2c. Reviewers │
+│ (Parallel)    │   │ (Scientific)  │   │ (Multi-lens)  │
 └───────────────┘   └───────────────┘   └───────────────┘
     │                       │                       │
     └───────────────────────┴───────────────────────┘
@@ -80,13 +79,16 @@ User Request
             └───────────────────────────┘
 ```
 
-## Team Orchestration (New in V2)
+## Team Orchestration (V2.2)
 
 For complex tasks, the Router will propose an **Agent Team**:
-1. **Enable Teams**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
-2. **Shared Task List**: Lead manages tasks; teammates claim and complete.
-3. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
-4. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
+1. **Enable Teams**: `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
+2. **Lead vs. Teammate**:
+   - **Lead**: Manages tasks, approves plans, synthesizes results.
+   - **Teammate**: Claims tasks, messages other teammates, shuts down when asked.
+3. **Task List**: Shared across all teammates. Aim for 5-6 tasks per teammate.
+4. **Wait Policy**: Lead waits for teammates to finish before synthesis.
+5. **Cleanup**: Shut down teammates first, then run `Clean up the team`.
 
 ## Handoff Envelope Schema (Enhanced)
 
