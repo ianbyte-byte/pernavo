@@ -11,13 +11,13 @@ if [[ "$EVENT" == "TaskCreated" ]]; then
 
   # Reject subjects that are too short
   if [[ ${#TASK_SUBJECT} -lt 10 ]]; then
-     echo "Task subject is too short ($TASK_SUBJECT). Please provide at least 10 characters." >&2
+     echo "Quality Gate: Task subject is too short ($TASK_SUBJECT). Please provide at least 10 characters." >&2
      exit 2
   fi
 
   # Reject subjects with TODO
   if [[ "$TASK_SUBJECT" == *"TODO"* ]]; then
-     echo "Task subject contains TODO. Please provide a concrete subject." >&2
+     echo "Quality Gate: Task subject contains TODO. Please provide a concrete subject." >&2
      exit 2
   fi
 fi
@@ -35,7 +35,7 @@ if [[ "$EVENT" == "TaskCompleted" ]]; then
   # Basic verification: Ensure there is a handoff or a report in the transcript
   if [[ -f "$TRANSCRIPT_PATH" ]]; then
     if ! grep -qiE "handoff|summary|report|LGTM|verified" "$TRANSCRIPT_PATH"; then
-       echo "Task completion requires a summary or handoff report in the transcript." >&2
+       echo "Quality Gate: Task completion requires evidence of work (handoff, summary, report, LGTM, or verification) in the transcript." >&2
        exit 2
     fi
   fi
@@ -46,8 +46,8 @@ if [[ "$EVENT" == "TeammateIdle" ]]; then
 
   # Ensure teammates don't go idle with unaddressed issues
   if [[ -f "$TRANSCRIPT_PATH" ]]; then
-    if grep -qi "error" "$TRANSCRIPT_PATH" && ! grep -qiE "fixed|resolved|workaround" "$TRANSCRIPT_PATH"; then
-       echo "Teammate $TEAMMATE is going idle with potential unaddressed errors in the transcript." >&2
+    if grep -qi "error" "$TRANSCRIPT_PATH" && ! grep -qiE "fixed|resolved|workaround|mitigated" "$TRANSCRIPT_PATH"; then
+       echo "Quality Gate: Teammate $TEAMMATE is going idle with potential unaddressed errors. Resolve or acknowledge them (fixed, resolved, workaround, or mitigated) before stopping." >&2
        exit 2
     fi
   fi
