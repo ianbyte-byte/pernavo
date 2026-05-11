@@ -62,8 +62,11 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
 - Use `Create an agent team...` prompts to parallelize work.
+- **Context Injection**: Give teammates rich context in spawn prompts (no history inheritance).
+- **Teammate Discovery**: Teammates can discover each other via `~/.claude/teams/{team-name}/config.json`.
 - **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Self-Claiming**: Teammates self-claim unassigned, unblocked tasks when idle.
 
 ### 4.2 Patterns
 - **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
@@ -73,11 +76,18 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 ### 4.3 Coordination
 - **Shared Task List**: decentralized task tracking.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Shutdown Protocol**: Lead messages teammates to shut down; teammates confirm or explain if busy.
+- **Cleanup**: After all teammates are shut down, run `Clean up the team`.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
 - `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
+- `TaskCreated` hook rejects trivial or "TODO" task subjects.
+
+### 4.5 Technical Limitations & Configuration
+- **teammateMode**: "auto", "in-process", "tmux" in `settings.json`.
+- **Session Resumption**: `/resume` and `/rewind` do not restore in-process teammates.
+- **Task Lag**: Nudge teammates if they forget to mark tasks as completed.
 
 ## 5. Testing guidance
 
