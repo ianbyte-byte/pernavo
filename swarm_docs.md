@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -46,24 +46,39 @@ Each handoff must include a JSON object:
 {
   "type": "handoff",
   "next_role": "Reviewer",
-  "summary": "Progress summary",
-  "next_instructions": "Actionable tasks for the next agent"
+  "summary": {
+    "progress": "What was accomplished",
+    "remaining": "Outstanding tasks",
+    "risks": "Potential blockers",
+    "changes": "Key file modifications (if any)"
+  },
+  "acceptance_criteria": [
+    "List of verifiable conditions for completion"
+  ],
+  "next_instructions": "Specific, actionable task list",
+  "context": {
+    "platform_api_needed": false,
+    "session_config_updated": false,
+    "test_coverage_required": "minimal|full",
+    "risk_level": "low|medium|high"
+  }
 }
 ```
 
 Recommended constraints:
-- `summary` must include: done, todo, risks/blockers
-- `next_instructions` must be actionable (not just “continue”)
+- `summary` must include: progress, remaining, risks, changes.
+- `next_instructions` must be actionable and specific.
 
-## 4. Parallelization and Team Orchestration (V2)
+## 4. Parallelization and Team Orchestration (V2.2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
 - Use `Create an agent team...` prompts to parallelize work.
 - **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Task Dependencies**: Leverage task dependencies to ensure correct execution order. Blocked tasks cannot be claimed until dependencies are met.
 
 ### 4.2 Patterns
 - **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
@@ -71,9 +86,10 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
+- **Shared Task List**: decentralized task tracking with dependency support.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Teammate Discovery**: Teammates can discover other members by reading `~/.claude/teams/{team-name}/config.json`.
+- **Cleanup**: The lead must shut down all teammates first. `Clean up the team` will fail if any teammates are still running.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
