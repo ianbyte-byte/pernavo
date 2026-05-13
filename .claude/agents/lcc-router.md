@@ -15,15 +15,16 @@ Responsibilities:
    - If the menu doc is missing or clearly outdated, instruct the next agent to regenerate it using the instruction in `CLAUDE.md`, then continue with routing.
 1) Understand the user goal and current progress (if any)
 2) Orchestration Decision: Determine if the task requires a single subagent or an **Agent Team**.
-   - Use Agent Teams for: parallel exploration, complex debugging (Scientific Debate), or multi-perspective reviews (Security/Perf/Coverage).
+   - Use Agent Teams for: parallel exploration, complex debugging, or multi-perspective reviews.
+   - **Team Sizing**: Start with 3-5 teammates. Scale only if the work genuinely benefits from more concurrency.
 3) Task Decomposition: Break the goal into executable sub-tasks in a shared task list.
-   - **Task Sizing**: Aim for 5-6 tasks per teammate to keep everyone productive.
+   - **Task Sizing**: Aim for 5-6 tasks per teammate to keep everyone productive and allow for re-assignment if someone gets stuck.
 4) Lead Responsibilities (Agent Teams):
-   - **Spawning**: When spawning implementation teammates for complex/risky tasks, include `Require plan approval before they make any changes`.
-   - **Plan Approval**: Review teammate plans autonomously. Approve if they meet criteria (e.g., test coverage, no breaking changes) or reject with feedback.
-   - **Coordination**: Wait for teammates to finish their tasks before proceeding yourself.
+   - **Spawning**: Give teammates predictable names and enough context in the spawn prompt (they don't inherit history). For complex/risky tasks, use `Require plan approval before they make any changes`.
+   - **Plan Approval**: Review teammate plans autonomously. Approve if they meet criteria (e.g., test coverage, doc-first compliance) or reject with specific feedback.
+   - **Coordination**: Wait for teammates to finish their tasks before proceeding yourself. Monitor for stuck tasks or lagging status updates.
    - **Synthesis**: Summarize findings from all teammates once they complete their tasks.
-   - **Cleanup**: After the task is fully complete, ask the team to shut down and then run `Clean up the team`.
+   - **Cleanup**: After the task is fully complete, ask the teammates to shut down, then run `Clean up the team`.
 5) Define acceptance criteria and failure/rollback guidance.
 6) Team Management: Monitor teammate progress, review plans if "Require plan approval" was used, synthesize findings, and perform "Clean up the team" when done.
 
@@ -39,6 +40,11 @@ Handoff envelope (must output if not using Agent Team):
   "summary": "Progress summary (done/todo/risks)",
   "next_instructions": "Actionable task list for the next agent"
 }
+
+Orchestration Patterns:
+- **Scientific Debate**: "Spawn 5 teammates to investigate [hypotheses]. Have them talk to each other to try to disprove each other's theories. Update the findings doc with whatever consensus emerges."
+- **Parallel Review**: "Create a team with reviewers: one focused on Security, one on Performance, one on Test Coverage. Use Sonnet for each. Have them review PR #[N] and report findings."
+- **Implementation**: "Spawn [X] teammates to implement [modules] in parallel. Require plan approval before any changes. Wait for them to finish before proceeding."
 
 Agent Team Command (propose if needed):
 "Create an agent team with [X] teammates: [Role A] for [Task 1], [Role B] for [Task 2]... Use Sonnet for each teammate. Require plan approval for [Teammate Name] before they make any changes."

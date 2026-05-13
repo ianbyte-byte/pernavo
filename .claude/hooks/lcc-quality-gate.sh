@@ -11,13 +11,13 @@ if [[ "$EVENT" == "TaskCreated" ]]; then
 
   # Reject subjects that are too short
   if [[ ${#TASK_SUBJECT} -lt 10 ]]; then
-     echo "Task subject is too short ($TASK_SUBJECT). Please provide at least 10 characters." >&2
+     echo "Quality Gate: Task subject is too short ($TASK_SUBJECT). Please provide at least 10 characters." >&2
      exit 2
   fi
 
   # Reject subjects with TODO
   if [[ "$TASK_SUBJECT" == *"TODO"* ]]; then
-     echo "Task subject contains TODO. Please provide a concrete subject." >&2
+     echo "Quality Gate: Task subject contains TODO. Please provide a concrete subject." >&2
      exit 2
   fi
 fi
@@ -26,16 +26,16 @@ if [[ "$EVENT" == "TaskCompleted" ]]; then
   TASK_ID=$(echo "$INPUT" | jq -r '.task_id')
   TASK_SUBJECT=$(echo "$INPUT" | jq -r '.task_subject')
 
-  # If it's a coder task, ensure it doesn't say "TODO"
+  # If it's a task, ensure it doesn't say "TODO" in the subject
   if [[ "$TASK_SUBJECT" == *"TODO"* ]]; then
-     echo "Task subject contains TODO. Please provide a concrete subject before completing." >&2
+     echo "Quality Gate: Task subject contains TODO ($TASK_SUBJECT). Please provide a concrete subject before completing." >&2
      exit 2
   fi
 
   # Basic verification: Ensure there is a handoff or a report in the transcript
-  if [[ -f "$TRANSCRIPT_PATH" ]]; then
-    if ! grep -qiE "handoff|summary|report|LGTM|verified" "$TRANSCRIPT_PATH"; then
-       echo "Task completion requires a summary or handoff report in the transcript." >&2
+  if [[ -n "$TRANSCRIPT_PATH" && -f "$TRANSCRIPT_PATH" ]]; then
+    if ! grep -qiE "handoff|summary|report|LGTM|verification|verified" "$TRANSCRIPT_PATH"; then
+       echo "Quality Gate: Task completion requires a summary, handoff report, or LGTM in the transcript." >&2
        exit 2
     fi
   fi
@@ -45,9 +45,9 @@ if [[ "$EVENT" == "TeammateIdle" ]]; then
   TEAMMATE=$(echo "$INPUT" | jq -r '.teammate_name')
 
   # Ensure teammates don't go idle with unaddressed issues
-  if [[ -f "$TRANSCRIPT_PATH" ]]; then
-    if grep -qi "error" "$TRANSCRIPT_PATH" && ! grep -qiE "fixed|resolved|workaround" "$TRANSCRIPT_PATH"; then
-       echo "Teammate $TEAMMATE is going idle with potential unaddressed errors in the transcript." >&2
+  if [[ -n "$TRANSCRIPT_PATH" && -f "$TRANSCRIPT_PATH" ]]; then
+    if grep -qi "error" "$TRANSCRIPT_PATH" && ! grep -qiE "fixed|resolved|workaround|mitigated" "$TRANSCRIPT_PATH"; then
+       echo "Quality Gate: Teammate $TEAMMATE is going idle with potential unaddressed errors in the transcript." >&2
        exit 2
     fi
   fi
