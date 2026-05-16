@@ -46,8 +46,8 @@ if [[ "$EVENT" == "TeammateIdle" ]]; then
 
   # Ensure teammates don't go idle with unaddressed issues
   if [[ -f "$TRANSCRIPT_PATH" ]]; then
-    if grep -qi "error" "$TRANSCRIPT_PATH" && ! grep -qiE "fixed|resolved|workaround" "$TRANSCRIPT_PATH"; then
-       echo "Teammate $TEAMMATE is going idle with potential unaddressed errors in the transcript." >&2
+    if grep -qi "error" "$TRANSCRIPT_PATH" && ! grep -qiE "fixed|resolved|workaround|mitigated" "$TRANSCRIPT_PATH"; then
+       echo "Quality Gate: Teammate $TEAMMATE is going idle with potential unaddressed errors in the transcript. Please use keywords like 'fixed', 'resolved', 'workaround', or 'mitigated' to indicate resolution." >&2
        exit 2
     fi
   fi

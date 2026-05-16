@@ -62,18 +62,20 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
 - Use `Create an agent team...` prompts to parallelize work.
+- **Spawning**: Use `Spawn a teammate using the [agent-type] agent type`.
 - **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
-- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
+- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other to disprove theories.
+- **Parallel Review**: Specialists for Security, Performance, and Test Coverage reviewing the same module simultaneously.
+- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel on the same feature.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
+- **Shared Task List**: decentralized task tracking. Use `depends on` for dependencies.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Synchronization**: Use the command "Wait for your teammates to complete their tasks before proceeding".
+- **Cleanup**: The lead must shut down teammates and then run `Clean up the team` after completion.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
