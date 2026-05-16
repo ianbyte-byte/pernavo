@@ -80,13 +80,27 @@ User Request
             └───────────────────────────┘
 ```
 
-## Team Orchestration (New in V2)
+## Team Orchestration (V2.2)
 
-For complex tasks, the Router will propose an **Agent Team**:
-1. **Enable Teams**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
-2. **Shared Task List**: Lead manages tasks; teammates claim and complete.
-3. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
-4. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
+For complex tasks requiring parallel exploration, multi-perspective review, or competing hypotheses, the Router will propose an **Agent Team**:
+
+- **Subagents vs. Agent Teams**:
+  - **Subagents**: Focused, single-purpose workers that report results back to the main agent. Best for quick, isolated tasks.
+  - **Agent Teams**: Collaborative, independent agents with their own context windows. Best for complex work requiring discussion, shared task lists, and inter-agent coordination.
+
+### Team Operations
+1. **Enable Teams**: Ensure `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` is in `.claude/settings.json`.
+2. **Shared Task List**: The Lead manages tasks; teammates claim and complete. Use `depends on` for task dependencies.
+3. **Mailbox**: Teammates use `message <teammate>` (direct) and `broadcast <message>` (team-wide) to coordinate.
+4. **Orchestration Commands**:
+   - "Wait for your teammates to complete their tasks before proceeding" (Prevents Lead from premature synthesis).
+   - "Clean up the team" (Execute only after all teammates are shut down).
+5. **Hooks**: Automated validation via `.claude/hooks/lcc-quality-gate.sh`.
+
+### Orchestration Patterns
+- **Scientific Debate**: Spawn 5+ teammates to investigate different hypotheses. Their goal is to disprove each other's theories to converge on the truth.
+- **Parallel Review**: Assign teammates distinct lenses (e.g., Security, Performance, Test Coverage) to review the same PR or module simultaneously.
+- **Cross-Layer Coordination**: Assign separate teammates for Frontend, Backend, and Tests to work on a feature in parallel.
 
 ## Handoff Envelope Schema (Enhanced)
 
