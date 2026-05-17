@@ -42,17 +42,32 @@ Agent teams allow parallel execution and decentralized coordination.
 
 - **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
 - **Teammates**: Independent agents with their own context windows.
-- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
+- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks.
 - **UI Shortcuts**: Use `Shift+Down` to cycle through teammates, `Ctrl+T` to toggle the task list, `Enter` to view a teammate's session, and `Escape` to interrupt.
-- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
+- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously. Influence judgment by providing explicit criteria in the spawn prompt (e.g., "only approve plans that include test coverage").
 - **Communication**:
   - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
   - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources. Always use the lead for cleanup.
 - **Parallel patterns**:
-  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
+  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other's theories to find the root cause.
   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
   - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
+
+### 5.1) Best Practices
+- **Give Context**: Teammates don't inherit conversation history. Include task-specific details, file paths, and technical requirements in the spawn prompt.
+- **Team Size**: Start with 3-5 teammates. This balances parallel work with manageable coordination.
+- **Task Sizing**: Aim for 5-6 tasks per teammate. Ensure units are self-contained with clear deliverables.
+- **Avoid File Conflicts**: Ensure teammates own different sets of files to prevent overwrites.
+- **Research First**: For new workflows, start with research/review tasks before moving to parallel implementation.
+- **Monitor and Steer**: Check progress regularly. Redirect approaches that aren't working to avoid wasted effort.
+
+### 5.2) Troubleshooting
+- **Teammates not appearing**: Check `Shift+Down` in in-process mode or verify `tmux`/`it2` for split panes.
+- **Permission prompts**: Pre-approve common operations in settings to reduce friction.
+- **Stuck tasks**: If a task lags, check if work is done and update status manually or nudge the teammate.
+- **Lead shuts down early**: If the lead stops before tasks are complete, tell it to keep going or wait for teammates.
+- **Errors**: If a teammate stops on error, give additional instructions directly or spawn a replacement.
 
 ## 6) Hooks and quality gates
 
