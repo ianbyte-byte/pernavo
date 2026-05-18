@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -62,18 +62,19 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
 - Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
-- **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Plan Approval**: Use `Require plan approval` for complex or risky tasks. The lead reviews and approves/rejects plans autonomously before implementation begins. Teammates stay in read-only mode until approved.
+- **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity and allow reassignment if stuck.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
+- **Scientific Debate**: 5+ teammates investigating competing hypotheses and actively trying to disprove each other. Consensus is documented after debate.
+- **Parallel Review**: Specialists for Security, Performance, and Test Coverage reviewing the same artifact from different lenses.
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Shared Task List**: decentralized task tracking with dependency management.
+- **Mailbox**: inter-agent messaging via `message <teammate> <message>` (direct) and `broadcast <message>` (team-wide).
+- **Monitoring**: Lead monitors progress via `Shift+Down` (UI) and can nudge teammates if tasks lag.
+- **Cleanup**: The lead MUST shut down teammates (`Ask the [Name] teammate to shut down`) and THEN run `Clean up the team`.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
