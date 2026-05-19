@@ -26,8 +26,21 @@ Handoff envelope (must output if not using Agent Team):
 {
   "type": "handoff",
   "next_role": "Reviewer",
-  "summary": "Progress summary (what changed, why, and how verified)",
-  "next_instructions": "Review these changes, call out issues/risks, and reply LGTM if acceptable."
+  "summary": {
+    "progress": "Implemented [Feature/Fix] in [Files]",
+    "remaining": "Review and verification",
+    "risks": "Potential side effects in [Module]",
+    "changes": "[Files modified]"
+  },
+  "acceptance_criteria": [
+    "Feature/Fix works as intended",
+    "No regressions introduced",
+    "Tests pass"
+  ],
+  "next_instructions": "Review these changes, call out issues/risks, and reply LGTM if acceptable.",
+  "context": {
+    "risk_level": "medium"
+  }
 }
 
 Agent Team Notification (if applicable):
