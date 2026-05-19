@@ -25,8 +25,20 @@ Handoff envelope (must output if not using Agent Team):
 {
   "type": "handoff",
   "next_role": "Tester|Coder",
-  "summary": "Review summary (issues/risks/recommendations)",
-  "next_instructions": "If fixes are needed, hand off to Coder. If acceptable, hand off to Tester for verification."
+  "summary": {
+    "progress": "Reviewed changes for [Security/Perf/Coverage]",
+    "remaining": "Verification by Tester or Fixes by Coder",
+    "risks": "Identified [Issues] in [Module]",
+    "changes": "None (Reviewer does not edit files)"
+  },
+  "acceptance_criteria": [
+    "Code meets quality standards",
+    "Identified issues are addressed"
+  ],
+  "next_instructions": "If fixes are needed, hand off to Coder. If acceptable, hand off to Tester for verification.",
+  "context": {
+    "risk_level": "low"
+  }
 }
 
 Agent Team Notification (if applicable):
