@@ -1,88 +1,61 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
-In a Claude Code workflow, an Agent Swarm can be implemented as a network of specialized roles coordinated by a Router and linked via a handoff protocol that preserves continuity.
+An Agent Swarm is a network of specialized roles coordinated by a Router/Lead and linked via a shared task list and messaging protocol.
 
-Core capabilities:
-- Handoffs: one specialist finishes a phase and hands control to the next
-- Parallelization: multiple specialists can be queried in parallel for comparison/verification, then synthesized by Router (or an integrator)
-- Shared context: all roles rely on the same project rules and artifacts (for example `CLAUDE.md` + `.claude/session_config.json`)
+## 2. Architecture: Router–Worker
 
-## 2. Reference implementation (this repository)
+- **Router (Lead)**: Understands goals, decomposes tasks, manages the team, and synthesizes results.
+- **Workers (Teammates)**:
+  - **Coder**: Implements changes.
+  - **Reviewer**: Audits for security, performance, and correctness.
+  - **Tester**: Verifies with tests and repro steps.
+  - **Specialists**: Architect, Product, Debugger, etc.
 
-### 2.1 Architecture: Router–Worker
-- Router: understands the goal, decomposes tasks, selects the next agent, defines acceptance criteria
-- Workers:
-  - Coder: implements changes
-  - Reviewer: audits and suggests fixes
-  - Tester: verifies with tests and repro steps
+## 3. Team Orchestration (Native Agent Teams)
 
-### 2.2 Key artifacts
-- `CLAUDE.md`: global rules (role boundaries, handoff schema, agent teams, hooks)
-- `.claude/agents/`: Claude Code subagents (Router/Coder/Reviewer/Tester + specialists)
-- `.claude/skills/`: Claude Code skills (including the `/swarm` workflow)
-- `.claude/settings.json`: project settings (enables agent teams and hooks)
-- `.claude/hooks/`: automated quality gate scripts
-- `.claude/session_config.json`: per-session pre-flight notes required by the document-first workflow
+Agent teams (v2.2) leverage native Claude Code capabilities for parallel work.
 
-### 2.3 Key CLI helpers (optional)
-The Python package provides a small CLI to validate workflow artifacts:
-- `chung-swarm check`: verify required files exist
-- `chung-swarm session-config validate`: validate `.claude/session_config.json`
-- `chung-swarm handoff validate`: validate a handoff envelope pasted from output
+### 4.1 Orchestration
+- **Enable**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
+- **Spawning**: Give teammates specific context and objectives in the spawn prompt.
+- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead must approve plans before implementation begins.
+- **Wait for Completion**: The lead should wait for teammates to finish before synthesis.
 
-### 2.3 Running with Claude Code (project configuration)
+### 4.2 Patterns
+- **Scientific Debate**: Multiple teammates investigate competing hypotheses and challenge each other's theories to find the root cause.
+- **Parallel Review**: Specialists with distinct lenses (Security, Performance, Coverage) review the same PR/module simultaneously.
+- **Cross-layer Coordination**: Separate teammates for frontend, backend, and testing.
 
-This repo includes Claude Code project configuration for running the swarm directly:
-- `.claude/agents/`: project subagents (YAML frontmatter + system prompt)
-- `.claude/skills/swarm/`: the `/swarm` workflow skill (manual invocation)
+### 4.3 Coordination
+- **Shared Task List**: Decentralized task tracking. Aim for 5-6 tasks per teammate.
+- **Mailbox**: Inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
+- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
 
-## 3. Handoff protocol
+## 4. Automated Quality Gates (Hooks)
 
-Each handoff must include a JSON object:
+- **TaskCreated**: Validates task subjects.
+- **TaskCompleted**: Ensures handoff/summary existence.
+- **TeammateIdle**: Prevents idling with unaddressed errors.
+
+## 5. Handoff Protocol (Sequential)
+
+For non-team (sequential) workflows, use the JSON handoff envelope to preserve continuity across role transitions.
 
 ```json
 {
   "type": "handoff",
   "next_role": "Reviewer",
-  "summary": "Progress summary",
-  "next_instructions": "Actionable tasks for the next agent"
+  "summary": { "progress": "...", "remaining": "...", "risks": "..." },
+  "next_instructions": "..."
 }
 ```
 
-Recommended constraints:
-- `summary` must include: done, todo, risks/blockers
-- `next_instructions` must be actionable (not just “continue”)
+## 6. Best Practices
 
-## 4. Parallelization and Team Orchestration (V2)
-
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
-
-### 4.1 Orchestration
-- **Router** acts as the team lead.
-- Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
-- **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
-
-### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
-- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
-
-### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
-
-### 4.4 Automated Quality Gates
-- `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
-- `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
-
-## 5. Testing guidance
-
-Suggested scenario:
-- From an empty directory, scaffold a FastAPI project with unit tests
-
-Expected loop:
-- Coder generates code → Tester runs tests → Reviewer outputs LGTM or a fix list → iterate until verified
+- **Give Context**: Teammates don't inherit history; provide everything needed in the spawn prompt.
+- **Avoid Conflicts**: Assign distinct file sets to different teammates.
+- **Size Tasks**: Keep tasks small enough for frequent check-ins but large enough to be a meaningful unit of work.
+- **Monitor and Steer**: Don't let teammates run unattended for too long.
+- **Cleanup**: Always clean up team resources to avoid inconsistent state.
