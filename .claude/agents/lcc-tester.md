@@ -28,5 +28,5 @@ Handoff envelope (must output if not using Agent Team):
 }
 
 Agent Team Notification (if applicable):
-- Message the Coder directly using `message` with failure logs and repro steps.
+- Message the Coder directly using `message` with failure logs and repro steps. Example: `message coder-1 Tests failed for the auth module with a timeout error. Here is the log: [logs]`
 - Broadcast to the lead and reviewer if critical regressions are found.

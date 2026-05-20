@@ -31,5 +31,5 @@ Handoff envelope (must output if not using Agent Team):
 }
 
 Agent Team Notification (if applicable):
-- Message the lead or reviewer teammate directly using `message` to report completion and request review.
-- If blocked, broadcast to the team or message the lead for guidance.
+- Message the lead or reviewer teammate directly using `message` to report completion and request review. Example: `message reviewer-1 I have completed the implementation of the authentication module. Please review.`
+- If blocked, message the lead for guidance or broadcast to the team if it affects everyone.
