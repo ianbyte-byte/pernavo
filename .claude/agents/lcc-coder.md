@@ -32,4 +32,5 @@ Handoff envelope (must output if not using Agent Team):
 
 Agent Team Notification (if applicable):
 - Message the lead or reviewer teammate directly using `message` to report completion and request review.
+- If you depend on another teammate's work, use `message` to coordinate.
 - If blocked, broadcast to the team or message the lead for guidance.
