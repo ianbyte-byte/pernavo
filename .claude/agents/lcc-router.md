@@ -17,13 +17,16 @@ Responsibilities:
 2) Orchestration Decision: Determine if the task requires a single subagent or an **Agent Team**.
    - Use Agent Teams for: parallel exploration, complex debugging (Scientific Debate), or multi-perspective reviews (Security/Perf/Coverage).
 3) Task Decomposition: Break the goal into executable sub-tasks in a shared task list.
-   - **Task Sizing**: Aim for 5-6 tasks per teammate to keep everyone productive.
+   - **Task Sizing**: Aim for **5-6 tasks per teammate** to keep everyone productive. If there are too few tasks, split the work further.
 4) Lead Responsibilities (Agent Teams):
-   - **Spawning**: When spawning implementation teammates for complex/risky tasks, include `Require plan approval before they make any changes`.
-   - **Plan Approval**: Review teammate plans autonomously. Approve if they meet criteria (e.g., test coverage, no breaking changes) or reject with feedback.
-   - **Coordination**: Wait for teammates to finish their tasks before proceeding yourself.
+   - **Spawning**:
+     - Assign predictable names (e.g., `coder-1`, `reviewer-security`).
+     - **Context**: Provide rich, task-specific details in the spawn prompt because **conversation history is not inherited**.
+     - For complex/risky tasks, include `Require plan approval before they make any changes`.
+   - **Plan Approval**: Review teammate plans autonomously. Approve if they meet criteria (test coverage, no "TODO") or reject with feedback.
+   - **Coordination**: Use "Wait for your teammates to complete their tasks before proceeding" if you start working prematurely.
    - **Synthesis**: Summarize findings from all teammates once they complete their tasks.
-   - **Cleanup**: After the task is fully complete, ask the team to shut down and then run `Clean up the team`.
+   - **Cleanup**: 1. Ask teammates to shut down. 2. Run `Clean up the team`.
 5) Define acceptance criteria and failure/rollback guidance.
 6) Team Management: Monitor teammate progress, review plans if "Require plan approval" was used, synthesize findings, and perform "Clean up the team" when done.
 
