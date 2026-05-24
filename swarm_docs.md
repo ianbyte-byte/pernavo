@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -32,12 +32,6 @@ The Python package provides a small CLI to validate workflow artifacts:
 - `chung-swarm session-config validate`: validate `.claude/session_config.json`
 - `chung-swarm handoff validate`: validate a handoff envelope pasted from output
 
-### 2.3 Running with Claude Code (project configuration)
-
-This repo includes Claude Code project configuration for running the swarm directly:
-- `.claude/agents/`: project subagents (YAML frontmatter + system prompt)
-- `.claude/skills/swarm/`: the `/swarm` workflow skill (manual invocation)
-
 ## 3. Handoff protocol
 
 Each handoff must include a JSON object:
@@ -55,31 +49,40 @@ Recommended constraints:
 - `summary` must include: done, todo, risks/blockers
 - `next_instructions` must be actionable (not just “continue”)
 
-## 4. Parallelization and Team Orchestration (V2)
+## 4. Parallelization and Team Orchestration
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration.
 
-### 4.1 Orchestration
+### 4.1 Subagents vs Agent Teams
+Choose the right tool for the job:
+- **Subagents**: Best for sequential tasks, quick research, or verification within a single session. Lower token cost.
+- **Agent Teams**: Best for parallel exploration, complex debugging, or multi-perspective reviews where teammates need to communicate directly. Higher token cost.
+
+### 4.2 Orchestration
 - **Router** acts as the team lead.
-- Use `Create an agent team...` prompts to parallelize work.
 - **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Mailbox**: Direct inter-agent communication via `message <teammate>` and `broadcast`.
 
-### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
-- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
+### 4.3 Orchestration Patterns
+- **Scientific Debate**: 5+ teammates investigate competing hypotheses and actively try to disprove each other. Converges on more robust root causes.
+- **Parallel Review**: Assign distinct "lenses" (Security, Performance, Test Coverage) to separate reviewers.
+- **Cross-layer Coordination**: Separate teammates for Frontend, Backend, and Testing.
 
-### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+### 4.4 Best Practices & Troubleshooting
+- **Context**: Teammates load project context but NOT conversation history. Include task-specific details in the spawn prompt.
+- **File Conflicts**: Assign distinct file sets to teammates to avoid overwrites.
+- **Waiting**: If the lead starts doing work instead of waiting, use: `Wait for your teammates to complete their tasks before proceeding`.
+- **Cleanup**: Always shut down teammates before running `Clean up the team`.
+- **Stuck Tasks**: If task status lags, manually update it or nudge the teammate via the mailbox.
 
-### 4.4 Automated Quality Gates
-- `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
-- `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
+## 5. Automated Quality Gates
+Enforced via `.claude/hooks/lcc-quality-gate.sh`:
+- `TaskCreated`: Rejects subjects < 10 chars or containing "TODO".
+- `TaskCompleted`: Ensures a handoff report or summary exists in the transcript.
+- `TeammateIdle`: Prevents going idle with unaddressed errors.
 
-## 5. Testing guidance
+## 6. Testing guidance
 
 Suggested scenario:
 - From an empty directory, scaffold a FastAPI project with unit tests
