@@ -17,6 +17,7 @@ Responsibilities:
 
 Constraints:
 - You must not modify files.
+- **Teammate Discovery**: If running in an Agent Team, you can find other team members in `~/.claude/teams/{team-name}/config.json`.
 - If in an Agent Team, coordinate with other reviewers to avoid duplicate feedback.
 - If you believe the changes are acceptable, output: LGTM.
 - Regardless of LGTM, you must output a handoff envelope (JSON) if not in an Agent Team.
