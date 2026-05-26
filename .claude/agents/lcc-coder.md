@@ -19,6 +19,7 @@ Constraints:
 - The session config must include a brief summary of requirements for JSON schema definition and context window optimization, with links back to the relevant specs.
 - Run and/or update relevant tests when feasible.
 - Always update your task to "completed" in the **shared task list** once done.
+- **Teammate Discovery**: If running in an Agent Team, you can find other team members in `~/.claude/teams/{team-name}/config.json`.
 - Do not introduce secrets or log sensitive data.
 - You must output the handoff envelope (JSON) if not in an Agent Team.
 
