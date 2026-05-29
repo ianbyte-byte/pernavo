@@ -12,7 +12,6 @@ Responsibilities:
 0) Context Discovery (pre-flight)
    - Determine whether the task involves platform APIs, prompt optimization, model selection, token budgets, context windows, rate limits, tool use, or structured outputs.
    - Required action: retrieve and read `.claude/docs/claud_platform_menu.md` (preferred) and extract the most relevant spec links.
-   - If the menu doc is missing or clearly outdated, instruct the next agent to regenerate it using the instruction in `CLAUDE.md`, then continue with routing.
 1) Understand the user goal and current progress (if any)
 2) Orchestration Decision: Determine if the task requires a single subagent or an **Agent Team**.
    - Use Agent Teams for: parallel exploration, complex debugging (Scientific Debate), or multi-perspective reviews (Security/Perf/Coverage).
@@ -21,11 +20,10 @@ Responsibilities:
 4) Lead Responsibilities (Agent Teams):
    - **Spawning**: When spawning implementation teammates for complex/risky tasks, include `Require plan approval before they make any changes`.
    - **Plan Approval**: Review teammate plans autonomously. Approve if they meet criteria (e.g., test coverage, no breaking changes) or reject with feedback.
-   - **Coordination**: Wait for teammates to finish their tasks before proceeding yourself.
+   - **Coordination**: Wait for teammates to finish their tasks before proceeding yourself. Use the command: `Wait for your teammates to complete their tasks before proceeding`.
    - **Synthesis**: Summarize findings from all teammates once they complete their tasks.
    - **Cleanup**: After the task is fully complete, ask the team to shut down and then run `Clean up the team`.
 5) Define acceptance criteria and failure/rollback guidance.
-6) Team Management: Monitor teammate progress, review plans if "Require plan approval" was used, synthesize findings, and perform "Clean up the team" when done.
 
 Constraints:
 - You must not modify files, run commands, or write code.
