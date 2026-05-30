@@ -1,6 +1,6 @@
 ---
 name: lcc-swarm
-description: Run a comprehensive Swarm workflow using specialized agents: Router, Coder, Reviewer, Tester and optional specialists.
+description: Run a comprehensive Swarm workflow (v2.2) using specialized agents: Router, Coder, Reviewer, Tester and optional specialists.
 disable-model-invocation: true
 ---
 
@@ -9,9 +9,10 @@ Run the comprehensive Swarm workflow for this repository. Break complex tasks in
 ## Core Principles
 
 - **Agent Teams**: Use for parallel work, shared task lists, and inter-agent coordination.
+- **Scientific Debate**: Use competing hypotheses to find root causes.
+- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
 - **Context Isolation**: Keep exploration/implementation out of main conversation.
 - **Tool Constraints**: Use read-only agents for exploration, write-enabled for implementation.
-- **Specialization**: Match tasks to focused system prompts (Router, Coder, etc.).
 - **Automated Quality Gates**: Use hooks (`TaskCompleted`, `TeammateIdle`) to enforce rules.
 
 ## Full Workflow
@@ -21,12 +22,11 @@ User Request
     │
     ▼
 ┌─────────────────────────────────────────────────────────────┐
-│ 1. lcc-router (Haiku, Read-Only)                            │
+│ 1. lcc-router (Haiku, Read-Only, v2.2)                      │
 │    - Context Discovery: Read .claude/docs/claud_platform_menu.md│
-│    - Task Decomposition: Break into subtasks                 │
-│    - Acceptance Criteria: Define done conditions             │
-│    - Risk Assessment: Identify blockers/rollback path        │
-│    - Specialist Selection: Choose next role(s)               │
+│    - Orchestration: Single subagent OR Agent Team           │
+│    - Patterns: Scientific Debate, Parallel Review           │
+│    - Task Decomposition: Shared Task List (5-6 per agent)   │
 └─────────────────────────────────────────────────────────────┘
     │
     ├───────────────────────┬───────────────────────┐
@@ -35,7 +35,7 @@ User Request
 ┌───────────────┐   ┌───────────────┐   ┌───────────────┐
 │ 2a. lcc-     │   │ 2b. lcc-     │   │ 2c. Parallel  │
 │ architect     │   │ product       │   │ Exploration   │
-│ (Optional)    │   │ (Optional)    │   │ (Explore)     │
+│ (Optional)    │   │ (Optional)    │   │ (Team)        │
 └───────────────┘   └───────────────┘   └───────────────┘
     │                       │                       │
     └───────────────────────┴───────────────────────┘
@@ -44,17 +44,15 @@ User Request
             ┌───────────────────────────┐
             │ 3. lcc-coder              │
             │    - Implement changes    │
-            │    - Minimal, testable    │
-            │    - Update session_config│
-            │      if platform API task │
+            │    - Plan Approval if req │
+            │    - Direct Messaging     │
             └───────────────────────────┘
                             │
                             ▼
             ┌───────────────────────────┐
             │ 4. lcc-reviewer           │
-            │    - Security review      │
-            │    - Correctness check    │
-            │    - Maintainability      │
+            │    - Parallel domain-focus│
+            │    - Direct peer-feedback │
             │    - Output LGTM if OK    │
             └───────────────────────────┘
                     │               │
@@ -64,7 +62,7 @@ User Request
             ┌──────────┐    ┌───────────────────┐
             │ lcc-     │    │ 5. lcc-tester     │
             │ coder    │    │    - Run tests    │
-            │ (fix)    │    │    - Repro steps  │
+            │ (fix)    │    │    - Share logs   │
             └──────────┘    └───────────────────┘
                     │               │
                     └───────────────┘
@@ -74,40 +72,36 @@ User Request
                             ▼
             ┌───────────────────────────┐
             │ 6. lcc-router (Wrap-Up)   │
-            │    - Verify acceptance    │
-            │    - Summarize outcome    │
-            │    - Document changes     │
+            │    - Synthesis of team    │
+            │    - Cleanup (Shutdown)   │
             └───────────────────────────┘
 ```
 
-## Team Orchestration (New in V2)
+## Team Orchestration (V2.2)
 
 For complex tasks, the Router will propose an **Agent Team**:
-1. **Enable Teams**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
-2. **Shared Task List**: Lead manages tasks; teammates claim and complete.
-3. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
-4. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
+1. **Wait for Teammates**: Lead waits for completion before starting its own work.
+2. **Mailbox**: Teammates use `message` and `broadcast` for direct peer coordination.
+3. **Task Status**: Update the shared task list immediately to unblock dependencies.
+4. **Cleanup**: Lead shuts down teammates first, then runs `Clean up the team`.
 
 ## Handoff Envelope Schema (Enhanced)
 
 ```json
 {
   "type": "handoff",
-  "next_role": "Router|Coder|Reviewer|Tester|Architect|AiNativeArchitect|Product|SecurityReviewer|Debugger|Refactorer|PerformanceOptimizer|SqlOptimizer|DocsWriter|ReleaseManager|IncidentTriage|DependencyUpgrader|GitWorktreeManager|Simplifier",
+  "next_role": "Router|Coder|Reviewer|Tester|Architect|Product|...",
   "summary": {
     "progress": "What was accomplished",
     "remaining": "Outstanding tasks",
     "risks": "Potential blockers",
-    "changes": "Key file modifications (if any)"
+    "changes": "Key file modifications"
   },
   "acceptance_criteria": [
-    "List of verifiable conditions for completion"
+    "Verifiable conditions"
   ],
-  "next_instructions": "Specific, actionable task list",
+  "next_instructions": "Actionable task list",
   "context": {
-    "platform_api_needed": false,
-    "session_config_updated": false,
-    "test_coverage_required": "minimal|full",
     "risk_level": "low|medium|high"
   }
 }
@@ -118,44 +112,20 @@ For complex tasks, the Router will propose an **Agent Team**:
 When Router identifies specific needs, delegate to specialist agents first:
 
 - **lcc-architect**: Design, architecture, refactoring guidance
-- **lcc-product**: Requirements clarification, user story mapping
-- **lcc-security-reviewer**: Security audit (can be called after Reviewer)
-- **lcc-debugger**: Complex debugging scenarios
+- **lcc-product**: Requirements clarification
+- **lcc-security-reviewer**: Security audit
+- **lcc-debugger**: Complex debugging (Debate leader)
 - **lcc-refactorer**: Large-scale code reorganization
 - **lcc-performance-optimizer**: Performance tuning
-- **lcc-simplifier**: Code simplification
-- **lcc-docs-writer**: Documentation generation
-- **lcc-release-manager**: Release orchestration
-
-## Error Handling & Rollback
-
-- **Coder Failure**: Hand back to Router with error details for re-planning
-- **Reviewer Blockers**: Router prioritizes fixes and re-routes to Coder
-- **Test Failures**: Include minimal repro steps + suggested fix path
-- **Context Drift**: Re-run Router to re-sync with current state
 
 ## Best Practices
 
-1. **Prefer Read-Only First**: Use Explore or Router for discovery before Coder
-2. **Session Config**: For platform API tasks, always update `.claude/session_config.json` first
-3. **Parallel Exploration**: Use multiple read-only agents to research separate areas, then Router synthesizes
-4. **Incremental Delivery**: Break into small, reviewable chunks
-5. **Model Selection**:
-   - Router → Haiku (fast, read-only)
-   - Coder/Reviewer/Tester → inherit (balanced capability)
-
-## Project Subagents
-
-Location: `.claude/agents/`
-
-- **lcc-router** - Orchestration & planning
-- **lcc-coder** - Implementation
-- **lcc-reviewer** - Code review
-- **lcc-tester** - Testing & verification
-- **lcc-architect**, **lcc-product**, **lcc-security-reviewer**, etc. - Specialists
+1. **Wait for Teammates**: Always ask the lead to wait for teammates to finish.
+2. **Direct Messaging**: Coder → Reviewer notifications speed up the loop.
+3. **Scientific Debate**: Use 5+ teammates for investigation.
+4. **Cleanup**: Never skip the lead-driven cleanup.
 
 ## Related Resources
 
 - Run `/workflow-index` for full workflow inventory
-- See `.claude/docs/claude_code/SUBAGENTS.md` for Claude Code subagent best practices
-- See `.claude/docs/INDEX.md` for project docs navigation
+- See `CLAUDE.md` and `swarm_docs.md` for global rules and architecture.
