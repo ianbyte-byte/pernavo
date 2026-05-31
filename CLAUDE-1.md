@@ -1,4 +1,4 @@
-# Swarm Global Rules
+# Swarm Global Rules (V2.2)
 
 ## First Principle: Intent-Driven Minimalism
 - **Code is Liability:** Never write a line of code that doesn't need to exist. Prefer reusing existing patterns over creating new abstractions.
@@ -25,9 +25,16 @@ Each handoff must include a JSON object in the output:
 ```json
 {
   "type": "handoff",
-  "next_role": "Router|Coder|Reviewer|Tester",
-  "summary": "Progress summary (done/todo/risks)",
-  "next_instructions": "Actionable task list for the next agent"
+  "next_role": "Router|Coder|Reviewer|Tester|...",
+  "summary": {
+    "progress": "What was accomplished",
+    "remaining": "Outstanding tasks",
+    "risks": "Potential blockers",
+    "changes": "Key file modifications"
+  },
+  "acceptance_criteria": ["Criteria 1", "Criteria 2"],
+  "next_instructions": "Specific, actionable task list",
+  "context": { "platform_api_needed": false, "risk_level": "low" }
 }
 ```
 
@@ -36,19 +43,25 @@ Each handoff must include a JSON object in the output:
 - Must include: progress summary, next steps, and required context (files/commands/failure reasons)
 - Must not include: secrets, tokens, or sensitive information
 
-## 5) Agent teams (Experimental)
+## 5) Agent teams
 
-Agent teams allow parallel execution and decentralized coordination.
+Agent teams allow parallel execution and decentralized coordination. Enable via `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
 
 - **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
 - **Teammates**: Independent agents with their own context windows.
+  - **Context**: Teammates load project context (CLAUDE.md, etc.) but *not* conversation history. **Always provide rich, task-specific details in the spawn prompt.**
+  - **Models**: Default is leader's model. Can be overridden in spawn prompt or `/config`. Sonnet is recommended for balance.
 - **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
-- **UI Shortcuts**: Use `Shift+Down` to cycle through teammates, `Ctrl+T` to toggle the task list, `Enter` to view a teammate's session, and `Escape` to interrupt.
-- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
+- **Display Modes**:
+  - `in-process`: Default. Use `Shift+Down` to cycle.
+  - `tmux`: Split-pane mode. Requires tmux or iTerm2.
+- **UI Shortcuts**: Use `Shift+Down` to cycle, `Ctrl+T` for task list, `Enter` to view, `Escape` to interrupt.
+- **Plan Approval**: Use `Require plan approval before they make any changes` for complex tasks. Lead approves/rejects plans autonomously.
 - **Communication**:
-  - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
-  - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+  - `message <teammate>`: Direct message.
+  - `broadcast <message>`: Team-wide.
+- **Cleanup**: Lead must shut down teammates first, then run `Clean up the team`.
+- **Token Usage**: Scales linearly with teammates. Use teams for research/review/new features; single sessions for routine tasks.
 - **Parallel patterns**:
   - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
@@ -58,24 +71,23 @@ Agent teams allow parallel execution and decentralized coordination.
 
 Automated checks are enforced via `.claude/settings.json` and `.claude/hooks/`.
 
-- **TaskCreated**: Fires when a task is being created. Rejects subjects < 10 characters or containing "TODO".
-- **TaskCompleted**: Fires when a task is closed. Verifies that a summary or handoff report exists in the transcript and rejects "TODO" in subjects.
-- **TeammateIdle**: Fires before a teammate stops. Ensures no work is left with unaddressed errors.
+- **TaskCreated**: Rejects subjects < 10 characters or containing "TODO".
+- **TaskCompleted**: Verifies handoff report in transcript and rejects "TODO".
+- **TeammateIdle**: Ensures no unaddressed errors in transcript.
 
-## 7) Failure handling
+## 7) Failure handling & Troubleshooting
 
-- If blocked, the summary must include: failure reason, repro steps, and a recommended fix path
+- **Stuck Tasks**: If a task lags, check the teammate's session and update status manually or nudge them.
+- **Slow Shutdown**: Teammates finish current tool calls before exiting.
+- **Orphaned Sessions**: Use `tmux ls` and `tmux kill-session -t <name>` if cleanup fails.
+- If blocked, the summary must include: failure reason, repro steps, and a recommended fix path.
 
-## 8) Document-first workflow (mandatory for platform/API/prompt/limits + Claude Code configuration)
+## 8) Document-first workflow (mandatory)
 
-Before any code changes for tasks involving platform APIs, prompt optimization, model selection, token budgets, context windows, rate limits, structured outputs, or Claude Code configuration (subagents/skills/hooks/permissions):
+Before any code changes for tasks involving platform APIs, prompt optimization, model selection, token budgets, context windows, rate limits, structured outputs, or Claude Code configuration:
 
-- The Router must ensure relevant specs are reviewed first (local docs preferred).
-- The Coder must not start implementation until the session config is updated (see below).
-
-### Document index (project)
-
-- Primary: `.claude/docs/claud_platform_menu.md`
+- The Router must ensure relevant specs are reviewed first.
+- The Coder must not start implementation until the session config is updated.
 
 ### Instruction to (re)generate the menu doc
 
@@ -83,19 +95,4 @@ In Claude (chat) or Claude Code, run:
 
 > Please visit `https://platform.claude.com/docs/en/home` and its core sub-pages (such as Prompt Engineering, Models, API Reference), extract all the core topics, and generate a Markdown format link menu document for me. The document should be categorized as 'Basic Concepts', 'Development Guidelines', and 'Performance Optimization', and retain the original URLs.
 
-### “Read the book first, then do the work” starter instruction
-
-When starting a development task, use:
-
-> Based on the best practices outlined in the relevant specifications linked in `.claude/docs/claud_platform_menu.md`, please perform the following tasks: [your requirements].
-
-### Session pre-flight (required)
-
-Before `lcc-coder` writes code, it must summarize requirements from the relevant specs regarding:
-
-- JSON schema definition (structured outputs / tool input schemas)
-- Context window optimization (token budgets, long context, caching/compaction strategies)
-
-and write them into:
-
-- `.claude/session_config.json`
+### Session pre-flight: Write requirements into `.claude/session_config.json`.
