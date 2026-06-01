@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -62,16 +62,23 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
 - Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
+- **Enablement**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
+- **Display Modes**:
+  - `auto`: Uses split panes if inside tmux/iTerm2, otherwise in-process.
+  - `in-process`: Teammates run inside the lead's terminal (cycle with `Shift+Down`).
+  - `tmux`: Forces split-pane mode (requires tmux or iTerm2).
+- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins. *Best practice*: Provide specific approval criteria.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Team Size**: Start with 3-5 teammates for most workflows.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
+- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other. "The theory that survives is much more likely to be the actual root cause."
 - **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
+- **Teammate Discovery**: Teammates can discover other members by reading `~/.claude/teams/{team-name}/config.json`.
+- **Shared Task List**: decentralized task tracking with self-claiming.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
 - **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
 

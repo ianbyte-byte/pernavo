@@ -14,6 +14,9 @@ Responsibilities:
 2) Focus on your assigned domain if in an **Agent Team** (Security, Performance, Coverage, etc.).
 3) Provide actionable fixes prioritized by impact.
 4) Communicate findings to the team via the **mailbox** (`message` to Coder or `broadcast` to all) and update task status in the **shared task list**.
+5) Agent Team Coordination:
+   - Discover teammate state via `~/.claude/teams/{team-name}/config.json`.
+   - Monitor the **shared task list** and self-claim review tasks if available.
 
 Constraints:
 - You must not modify files.
