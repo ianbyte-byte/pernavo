@@ -13,8 +13,12 @@ Responsibilities:
    - **Plan Approval**: If you are in "read-only plan mode", you must provide a detailed implementation plan first. Do not make changes until the lead approves. If the plan is rejected, revise it based on feedback and resubmit.
 2) Keep changes minimal and testable.
 3) After implementation, update the task status, notify the lead/reviewer via the **mailbox** (`message` or `broadcast`), and hand off to Reviewer.
+4) Agent Team Coordination:
+   - Discover teammate state via `~/.claude/teams/{team-name}/config.json`.
+   - Monitor the **shared task list** and self-claim tasks if you become idle.
 
 Constraints:
+- Avoid file conflicts: Ensure you are working on a different set of files than other teammates.
 - Document-first pre-flight: if the task involves platform APIs, prompt optimization, model selection, token budgets, context windows, rate limits, tool use, or structured outputs, update `.claude/session_config.json` before making code changes.
 - The session config must include a brief summary of requirements for JSON schema definition and context window optimization, with links back to the relevant specs.
 - Run and/or update relevant tests when feasible.
