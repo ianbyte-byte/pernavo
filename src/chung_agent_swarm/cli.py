@@ -5,7 +5,13 @@ import json
 import sys
 from pathlib import Path
 
-from .handoff import HandoffParseError, HandoffValidationError, format_handoff, parse_handoff_from_text
+from .handoff import (
+    HandoffParseError,
+    HandoffValidationError,
+    format_handoff,
+    parse_handoff_dict,
+    parse_handoff_from_text,
+)
 from .project import check_project_layout
 from .session_config import (
     load_session_config,
@@ -42,6 +48,8 @@ def _build_parser() -> argparse.ArgumentParser:
     handoff_new.add_argument("--next-role", required=True)
     handoff_new.add_argument("--summary", required=True)
     handoff_new.add_argument("--next-instructions", required=True)
+    handoff_new.add_argument("--acceptance-criteria", nargs="+", default=None)
+    handoff_new.add_argument("--context", type=json.loads, default=None)
 
     sess = subparsers.add_parser("session-config", help="Validate or initialize session_config.json.")
     sess_sub = sess.add_subparsers(dest="session_cmd", required=True)
@@ -80,16 +88,18 @@ def _dispatch(args: argparse.Namespace) -> int:
             return 0
 
         if args.handoff_cmd == "new":
-            envelope = parse_handoff_from_text(
-                json.dumps(
-                    {
-                        "type": "handoff",
-                        "next_role": args.next_role,
-                        "summary": args.summary,
-                        "next_instructions": args.next_instructions,
-                    }
-                )
-            )
+            payload = {
+                "type": "handoff",
+                "next_role": args.next_role,
+                "summary": args.summary,
+                "next_instructions": args.next_instructions,
+            }
+            if args.acceptance_criteria:
+                payload["acceptance_criteria"] = args.acceptance_criteria
+            if args.context:
+                payload["context"] = args.context
+
+            envelope = parse_handoff_dict(payload)
             print(format_handoff(envelope))
             return 0
 

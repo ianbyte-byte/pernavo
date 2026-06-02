@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -64,6 +64,7 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 - Use `Create an agent team...` prompts to parallelize work.
 - **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **File Conflict Avoidance**: Ensure teammates work on independent file sets.
 
 ### 4.2 Patterns
 - **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
@@ -71,9 +72,10 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
+- **Shared Task List**: decentralized task tracking. Teammates self-claim unblocked tasks.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Discovery**: Teammates can discover each other via `~/.claude/teams/{team-name}/config.json`.
+- **Cleanup**: The lead must ask teammates to shut down, wait for them to finish, and then run `Clean up the team` after completion.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
