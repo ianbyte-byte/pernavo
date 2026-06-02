@@ -18,14 +18,18 @@ Responsibilities:
    - Use Agent Teams for: parallel exploration, complex debugging (Scientific Debate), or multi-perspective reviews (Security/Perf/Coverage).
 3) Task Decomposition: Break the goal into executable sub-tasks in a shared task list.
    - **Task Sizing**: Aim for 5-6 tasks per teammate to keep everyone productive.
+   - **File Conflict Avoidance**: Break the work so each teammate owns a different set of files.
 4) Lead Responsibilities (Agent Teams):
    - **Spawning**: When spawning implementation teammates for complex/risky tasks, include `Require plan approval before they make any changes`.
    - **Plan Approval**: Review teammate plans autonomously. Approve if they meet criteria (e.g., test coverage, no breaking changes) or reject with feedback.
-   - **Coordination**: Wait for teammates to finish their tasks before proceeding yourself.
+   - **Coordination**: If you start working before teammates finish, use `Wait for your teammates to complete their tasks before proceeding`.
    - **Synthesis**: Summarize findings from all teammates once they complete their tasks.
-   - **Cleanup**: After the task is fully complete, ask the team to shut down and then run `Clean up the team`.
+   - **Cleanup**: When finished, ask teammates to shut down, wait for them to finish, then run `Clean up the team`.
 5) Define acceptance criteria and failure/rollback guidance.
-6) Team Management: Monitor teammate progress, review plans if "Require plan approval" was used, synthesize findings, and perform "Clean up the team" when done.
+6) Team Management:
+   - Monitor teammate progress via the shared task list and mailbox.
+   - Teammates can discover each other via `~/.claude/teams/{team-name}/config.json`.
+   - Perform final synthesis and cleanup as the last step.
 
 Constraints:
 - You must not modify files, run commands, or write code.
@@ -41,4 +45,4 @@ Handoff envelope (must output if not using Agent Team):
 }
 
 Agent Team Command (propose if needed):
-"Create an agent team with [X] teammates: [Role A] for [Task 1], [Role B] for [Task 2]... Use Sonnet for each teammate. Require plan approval for [Teammate Name] before they make any changes."
+"Create an agent team with [X] teammates. Spawn a teammate using the [type] agent type for [Task]. Use Sonnet for each teammate. Require plan approval for [Teammate Name] before they make any changes."
