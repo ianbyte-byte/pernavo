@@ -36,19 +36,25 @@ Each handoff must include a JSON object in the output:
 - Must include: progress summary, next steps, and required context (files/commands/failure reasons)
 - Must not include: secrets, tokens, or sensitive information
 
-## 5) Agent teams (Experimental)
+## 5) Agent teams (V2.2)
 
 Agent teams allow parallel execution and decentralized coordination.
 
 - **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
 - **Teammates**: Independent agents with their own context windows.
+- **Discovery**: Teammates can discover peers via `~/.claude/teams/{team-name}/config.json`.
 - **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
 - **UI Shortcuts**: Use `Shift+Down` to cycle through teammates, `Ctrl+T` to toggle the task list, `Enter` to view a teammate's session, and `Escape` to interrupt.
 - **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
+- **Steering**: If the lead starts working instead of delegating, use: `Wait for your teammates to complete their tasks before proceeding`.
+- **Naming**: Assign predictable names in the spawn prompt (e.g., `coder-1`) for easier referencing.
+- **File Conflicts**: Avoid multiple teammates editing the same file simultaneously to prevent overwrites.
+- **Task Status**: If a task appears stuck, update status manually or tell the lead to nudge the teammate.
 - **Communication**:
   - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
   - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team`.
+- **Troubleshooting**: If tmux sessions persist, use `tmux ls` and `tmux kill-session -t <session-name>`.
 - **Parallel patterns**:
   - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).

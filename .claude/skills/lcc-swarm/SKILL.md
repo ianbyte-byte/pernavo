@@ -80,13 +80,15 @@ User Request
             └───────────────────────────┘
 ```
 
-## Team Orchestration (New in V2)
+## Team Orchestration (V2.2)
 
 For complex tasks, the Router will propose an **Agent Team**:
 1. **Enable Teams**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
 2. **Shared Task List**: Lead manages tasks; teammates claim and complete.
 3. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
-4. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
+4. **Discovery**: Teammates can read `~/.claude/teams/{team-name}/config.json` to discover peer IDs.
+5. **Steering**: Use `Wait for your teammates...` to ensure delegation.
+6. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
 
 ## Handoff Envelope Schema (Enhanced)
 
