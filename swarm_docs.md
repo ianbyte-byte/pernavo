@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -73,9 +73,17 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 ### 4.3 Coordination
 - **Shared Task List**: decentralized task tracking.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
+- **Teammate Discovery**: Teammates can read `~/.claude/teams/{team-name}/config.json` to find other members.
+- **Wait for Completion**: Use `Wait for your teammates to complete their tasks before proceeding` to prevent the lead from over-committing.
 - **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
 
-### 4.4 Automated Quality Gates
+### 4.4 Troubleshooting
+- **Teammates not appearing**: Check complexity, press `Shift+Down` in in-process mode, or verify `tmux`/`it2` for split panes.
+- **Too many permission prompts**: Pre-approve common operations in permission settings.
+- **Stuck tasks**: Manually update status if a teammate fails to mark it complete.
+- **Orphaned sessions**: Use `tmux ls` and `tmux kill-session -t <name>` to clean up leftover split-pane sessions.
+
+### 4.5 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
 - `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
 
