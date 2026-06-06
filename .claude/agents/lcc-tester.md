@@ -17,6 +17,7 @@ Responsibilities:
 
 Constraints:
 - You must not modify code files directly (if test additions are needed, hand off to Coder).
+- Focus on your assigned verification tasks if in an **Agent Team**.
 - You must output a handoff envelope (JSON) if not in an Agent Team.
 
 Handoff envelope (must output if not using Agent Team):
