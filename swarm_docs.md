@@ -1,8 +1,8 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
-In a Claude Code workflow, an Agent Swarm can be implemented as a network of specialized roles coordinated by a Router and linked via a handoff protocol that preserves continuity.
+In a Claude Code workflow, an Agent Swarm can be implemented as a network of specialized roles coordinated by a Router and linked via a handoff protocol that preserves continuity. V2.2 leverages native **Agent Teams** for high-concurrency parallel exploration and implementation.
 
 Core capabilities:
 - Handoffs: one specialist finishes a phase and hands control to the next
@@ -55,25 +55,29 @@ Recommended constraints:
 - `summary` must include: done, todo, risks/blockers
 - `next_instructions` must be actionable (not just “continue”)
 
-## 4. Parallelization and Team Orchestration (V2)
+## 4. Parallelization and Team Orchestration (V2.2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with decentralized coordination:
 
 ### 4.1 Orchestration
-- **Router** acts as the team lead.
-- Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
-- **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Router** acts as the team lead. It handles team creation, task decomposition, plan approval, and synthesis.
+- **Teammates**: Spawn using specific agent types (e.g., `lcc-coder`, `lcc-reviewer`). They operate in independent context windows.
+- **Context Injection**: Teammates do not inherit lead history. Spawn prompts must be self-contained and descriptive.
+- **Plan Approval**: Enforce with `Require plan approval` for risky changes. Teammates work in read-only mode until the lead approves.
+- **Task Sizing**: 5-6 tasks per teammate. Smaller tasks reduce risk; larger tasks reduce coordination overhead.
 
-### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
-- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
+### 4.2 Advanced Patterns
+- **Scientific Debate**: 5+ teammates. Focus on *anchoring* avoidance. Teammates must actively try to disprove each other's theories to find the true root cause.
+- **Parallel Review**: Assign distinct "lenses" (Security, Performance, Test Coverage) to ensure thorough multi-dimensional auditing.
+- **Cross-layer Coordination**: Horizontal split by stack layers (Frontend, Backend, DB, Tests) or vertical split by feature modules.
 
-### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+### 4.3 Coordination Mechanics
+- **Shared Task List**: The source of truth for work status. Supports dependencies (blocking/unblocking).
+- **Mailbox**: Enables direct peer-to-peer communication. Coder can message Reviewer directly without lead intervention.
+- **Shutdown & Cleanup**:
+  - Sequential: Shut down teammates first (`Ask... to shut down`).
+  - Final: Lead runs `Clean up the team` only after all teammates have exited.
+- **Display Modes**: Use `in-process` (default) or `split-panes` (requires tmux/iTerm2).
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.

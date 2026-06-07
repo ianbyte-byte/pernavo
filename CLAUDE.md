@@ -225,6 +225,26 @@ For database quote styles: use single quotes (') for string literals. Confirm us
 
 **Important:** For API endpoints accepting complex configuration objects, always use `[FromBody]` binding, not query parameters. Confirm binding approach before implementing controllers.
 
+## 🤖 Agent Teams & Swarm Orchestration (V2.2)
+
+For complex tasks requiring parallelization, leverage **Agent Teams** via the `lcc-swarm` workflow.
+
+### Team Lead (Router)
+- **Role**: Coordinates team, decomposes tasks, approves plans, and synthesizes results.
+- **Workflow**: `Create an agent team...` -> `Wait for teammates...` -> `Ask... to shut down` -> `Clean up the team`.
+- **Plan Approval**: Mandatory for risky implementation. Use `Require plan approval` when spawning.
+
+### Teammates (Workers)
+- **Types**: `lcc-coder`, `lcc-reviewer`, `lcc-tester`, and specialists.
+- **Context**: Independent windows; do NOT inherit lead history. Use descriptive spawn prompts.
+- **Mailbox**: Peer-to-peer messaging via `message <teammate>` (e.g., Coder to Reviewer).
+
+### Key Shortcuts & Commands
+- **Cycle Teammates**: `Shift+Down`
+- **Toggle Task List**: `Ctrl+T`
+- **Direct Message**: `message <name> <content>`
+- **Team Broadcast**: `broadcast <content>`
+
 ### Key Configuration
 
 - **NuGet**: Uses internal feed `http://nuget.zksoft.cc/v3/index.json` (see `nuget.config`)
