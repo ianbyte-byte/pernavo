@@ -42,8 +42,15 @@ Agent teams allow parallel execution and decentralized coordination.
 
 - **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
 - **Teammates**: Independent agents with their own context windows.
+- **Display Modes**:
+  - `teammateMode` in `settings.json` can be `auto`, `in-process` (works in any terminal), or `tmux` (split panes, requires tmux/iTerm2).
+  - Use `claude --teammate-mode in-process` to force it for a single session.
 - **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
-- **UI Shortcuts**: Use `Shift+Down` to cycle through teammates, `Ctrl+T` to toggle the task list, `Enter` to view a teammate's session, and `Escape` to interrupt.
+- **UI Shortcuts**:
+  - `Shift+Down`: Cycle through teammates.
+  - `Ctrl+T`: Toggle the task list.
+  - `Enter`: View a teammate's session.
+  - `Escape`: Interrupt the current turn.
 - **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
 - **Communication**:
   - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
@@ -53,6 +60,12 @@ Agent teams allow parallel execution and decentralized coordination.
   - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
   - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
+- **Best Practices**:
+  - **Avoid file conflicts**: Two teammates editing the same file leads to overwrites. Break work so each teammate owns different files. Use `lcc-git-worktree-manager` to handle parallel implementation in isolated environments.
+  - **Wait for teammates**: If the lead starts implementing tasks instead of waiting, tell it: `Wait for your teammates to complete their tasks before proceeding`.
+- **Limitations**:
+  - **Session resumption**: `/resume` and `/rewind` do not restore in-process teammates. If resuming, tell the lead to spawn new teammates.
+  - **Cleanup**: The lead must shut down teammates first, then run `Clean up the team`.
 
 ## 6) Hooks and quality gates
 
