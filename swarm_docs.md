@@ -57,13 +57,15 @@ Recommended constraints:
 
 ## 4. Parallelization and Team Orchestration (V2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
 - Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
+- **Teammate Discovery**: Teammates can read `~/.claude/teams/{team-name}/config.json` to discover other team members.
+- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans autonomously before implementation begins. Plans must not contain 'TODO' markers.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Display Modes**: Supports `in-process` (default) and `split panes` (requires tmux or iTerm2). Configure via `teammateMode` in `~/.claude/settings.json`.
 
 ### 4.2 Patterns
 - **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
@@ -71,9 +73,10 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
+- **Shared Task List**: decentralized task tracking. Teammates should self-claim the next unassigned, unblocked task when idle.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Cleanup**: The lead must follow a strict sequence: shut down all teammates first, wait for confirmation, and *then* run `Clean up the team`.
+- **Limitations**: `/resume` and `/rewind` do not restore in-process teammates.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
