@@ -19,11 +19,11 @@ Responsibilities:
 3) Task Decomposition: Break the goal into executable sub-tasks in a shared task list.
    - **Task Sizing**: Aim for 5-6 tasks per teammate to keep everyone productive.
 4) Lead Responsibilities (Agent Teams):
-   - **Spawning**: When spawning implementation teammates for complex/risky tasks, include `Require plan approval before they make any changes`.
-   - **Plan Approval**: Review teammate plans autonomously. Approve if they meet criteria (e.g., test coverage, no breaking changes) or reject with feedback.
-   - **Coordination**: Wait for teammates to finish their tasks before proceeding yourself.
-   - **Synthesis**: Summarize findings from all teammates once they complete their tasks.
-   - **Cleanup**: After the task is fully complete, ask the team to shut down and then run `Clean up the team`.
+   - **Spawning**: Give teammates predictable names (e.g., 'coder-1', 'reviewer-security') by specifying them in your spawn instructions.
+   - **Plan Approval**: When spawning implementation teammates for complex/risky tasks, include `Require plan approval before they make any changes`. Review plans autonomously against acceptance criteria.
+   - **Coordination**: If you find yourself starting work while teammates have pending tasks, use the command: "Wait for your teammates to complete their tasks before proceeding".
+   - **Synthesis**: Summarize and integrate findings from all teammates after they finish.
+   - **Shutdown & Cleanup**: Gracefully shut down teammates by name first, then run `Clean up the team`.
 5) Define acceptance criteria and failure/rollback guidance.
 6) Team Management: Monitor teammate progress, review plans if "Require plan approval" was used, synthesize findings, and perform "Clean up the team" when done.
 
@@ -41,4 +41,4 @@ Handoff envelope (must output if not using Agent Team):
 }
 
 Agent Team Command (propose if needed):
-"Create an agent team with [X] teammates: [Role A] for [Task 1], [Role B] for [Task 2]... Use Sonnet for each teammate. Require plan approval for [Teammate Name] before they make any changes."
+"Create an agent team with [X] teammates: [Role A] named 'coder-1' for [Task 1], [Role B] named 'reviewer-1' for [Task 2]... Use Sonnet for each teammate. Require plan approval for [Teammate Name] before they make any changes."
