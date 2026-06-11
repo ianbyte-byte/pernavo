@@ -139,6 +139,32 @@ dotnet add reference ../../ZKSoft.AA/ZKSoft.AA.csproj \
 
 ## Architecture
 
+### Agent Teams & Swarm Orchestration (V2.2)
+
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration:
+
+#### 1. Lifecycle Management
+- **Team Lead (Router)**:
+  - Spawns teammates with context-rich prompts.
+  - Monitors via `Shift+Down` (cycle), `Ctrl+T` (tasks), `Enter` (view).
+  - Syncs via: "Wait for your teammates to complete their tasks before proceeding".
+  - **Shutdown Sequence**: Explicitly ask teammates to shut down, then run "Clean up the team".
+- **Teammates (Coder/Reviewer/Tester)**:
+  - Discover others via `~/.claude/teams/{team-name}/config.json`.
+  - Self-claim tasks from shared list.
+  - Coordinate via `message <name> <msg>`.
+
+#### 2. Best Practices
+- **Team Sizing**: 3-5 teammates for most workflows.
+- **Task Sizing**: 5-6 tasks per teammate to maximize productivity.
+- **Plan Approval**: Mandatory for complex/risky implementation tasks.
+- **Conflict Avoidance**: Each teammate should own a distinct set of files or lens (e.g., Security vs. Perf).
+
+#### 3. Troubleshooting
+- **Orphaned Sessions**: If `tmux` persists, use `tmux ls` and `tmux kill-session -t <name>`.
+- **Stuck Tasks**: If a task is finished but status hasn't updated, update it manually or nudge the teammate.
+- **Permission Friction**: Pre-approve common operations in settings before spawning.
+
 ### Project Structure
 
 - **ZKSoft/**: Main ASP.NET Core web application (entry point)
