@@ -1,4 +1,4 @@
-# Swarm Global Rules
+# Swarm Global Rules (V2.2)
 
 ## First Principle: Intent-Driven Minimalism
 - **Code is Liability:** Never write a line of code that doesn't need to exist. Prefer reusing existing patterns over creating new abstractions.
@@ -38,19 +38,25 @@ Each handoff must include a JSON object in the output:
 
 ## 5) Agent teams (Experimental)
 
-Agent teams allow parallel execution and decentralized coordination.
+Agent teams allow parallel execution and decentralized coordination (Requires Claude Code v2.1.32+).
 
 - **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
-- **Teammates**: Independent agents with their own context windows.
-- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
+- **Teammates**: Independent agents with their own context windows. They do NOT inherit the lead's conversation history or `/model` selection by default.
+- **Teammate Discovery**: Teammates can discover other team members by reading `~/.claude/teams/{team-name}/config.json`.
+- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity. The lead should monitor for "stuck" tasks and nudge teammates via the mailbox. Use the command `Wait for your teammates to complete their tasks before proceeding` to synchronize.
+- **Display Modes**: Configure `teammateMode` in `.claude/settings.json` ("auto", "in-process", or "tmux"). "in-process" is recommended for environments without tmux/iTerm2.
 - **UI Shortcuts**: Use `Shift+Down` to cycle through teammates, `Ctrl+T` to toggle the task list, `Enter` to view a teammate's session, and `Escape` to interrupt.
-- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
+- **Avoid file conflicts**: When performing parallel implementation, the lead MUST use `lcc-git-worktree-manager` to assign teammates to isolated worktrees.
+- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously. Rejection criteria: "TODO" markers, lack of test coverage, or breaking changes.
 - **Communication**:
   - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
   - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+- **Cleanup Sequence**: Mandatory sequence:
+  1. Lead requests all teammates to shut down (`Ask the [name] teammate to shut down`).
+  2. Wait for teammates to complete active tool calls and exit.
+  3. Lead runs `Clean up the team` to remove shared resources.
 - **Parallel patterns**:
-  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
+  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively "disprove each other's theories".
   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
   - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
 
