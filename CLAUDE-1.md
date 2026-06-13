@@ -42,16 +42,23 @@ Agent teams allow parallel execution and decentralized coordination.
 
 - **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
 - **Teammates**: Independent agents with their own context windows.
+- **Teammate Discovery**: Teammates can read the configuration file at `~/.claude/teams/{team-name}/config.json` to discover other members (names, agent IDs, agent types) for coordination.
 - **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
 - **UI Shortcuts**: Use `Shift+Down` to cycle through teammates, `Ctrl+T` to toggle the task list, `Enter` to view a teammate's session, and `Escape` to interrupt.
 - **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
 - **Communication**:
   - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
   - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+- **Lifecycle Management (Lead)**:
+  - If you start implementing instead of delegating: `Wait for your teammates to complete their tasks before proceeding`.
+  - To end a teammate's session: `Ask the [teammate-name] teammate to shut down`.
+  - **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+- **Troubleshooting**:
+  - **Task lag**: If a task appears stuck, check if work is done and update status manually or nudge the teammate.
+  - **Session resumption**: `/resume` does not restore in-process teammates. If lost, tell the lead to spawn new ones.
 - **Parallel patterns**:
-  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
-  - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
+  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses. Use prompt: "Have them talk to each other to try to disprove each other's theories, like a scientific debate. Update the findings doc with whatever consensus emerges."
+  - **Parallel Review**: Assign reviewers with distinct lenses. Use prompt: "Create an agent team to review PR #[ID]. Spawn three reviewers: one focused on security, one checking performance, one validating test coverage."
   - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
 
 ## 6) Hooks and quality gates
