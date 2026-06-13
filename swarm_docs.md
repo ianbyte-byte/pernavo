@@ -71,11 +71,24 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
 ### 4.3 Coordination
+- **Teammate Discovery**: Teammates can discover each other by reading `~/.claude/teams/{team-name}/config.json`.
 - **Shared Task List**: decentralized task tracking.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
 - **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
 
-### 4.4 Automated Quality Gates
+### 4.4 Best Practices
+- **Give teammates enough context**: Teammates don't inherit conversation history. Provide task-specific details in the spawn prompt.
+- **Appropriate team size**: Start with 3-5 teammates.
+- **Size tasks appropriately**: Aim for 5-6 tasks per teammate to keep everyone productive.
+- **Wait for teammates to finish**: Use `Wait for your teammates to complete their tasks before proceeding` to prevent the lead from over-implementing.
+- **Avoid file conflicts**: Ensure each teammate owns a different set of files.
+
+### 4.5 Limitations
+- **No session resumption**: `/resume` does not restore in-process teammates.
+- **Task status lag**: Teammates may fail to mark tasks as completed. Update manually or nudge if stuck.
+- **Slow shutdown**: Teammates finish current requests before exiting.
+
+### 4.6 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
 - `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
 
