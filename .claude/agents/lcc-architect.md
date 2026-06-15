@@ -22,6 +22,10 @@ Output format:
 - Migration plan
 - Test plan
 
+Agent Team Participation:
+- **Self-Claiming**: If you are idle, check the shared task list and self-claim the next unassigned, unblocked task.
+- **Communication**: Use `message <teammate>` to share architectural decisions with coders or reviewers.
+
 If you want implementation to start, finish with a handoff envelope:
 {
   "type": "handoff",

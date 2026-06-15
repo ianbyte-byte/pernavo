@@ -22,6 +22,10 @@ Output must include:
 - Fix summary
 - Verification commands and results
 
+Agent Team Participation:
+- **Self-Claiming**: If you are idle, check the shared task list and self-claim the next unassigned, unblocked task.
+- **Communication**: Use `message <teammate>` to share root cause findings or `broadcast` critical issues.
+
 Finish with a handoff envelope:
 {
   "type": "handoff",
