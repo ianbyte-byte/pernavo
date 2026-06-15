@@ -55,27 +55,41 @@ Recommended constraints:
 - `summary` must include: done, todo, risks/blockers
 - `next_instructions` must be actionable (not just “continue”)
 
-## 4. Parallelization and Team Orchestration (V2)
+## 4. Parallelization and Team Orchestration (V2.2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration and improved coordination:
 
 ### 4.1 Orchestration
-- **Router** acts as the team lead.
-- Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
+- **Router** acts as the team lead. It coordinates work, assigns tasks, and synthesizes results.
+- **Lead Command**: Use `Create an agent team...` prompts to parallelize work.
+- **Plan Approval**: Use `Require plan approval before they make any changes` for complex/risky tasks. The lead reviews and approves/rejects plans autonomously before implementation begins.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Task Dependencies**: Define dependencies to ensure correct execution order.
+- **Coordination**: Use "Wait for your teammates to complete their tasks before proceeding" to keep the lead focused on orchestration.
 
 ### 4.2 Patterns
 - **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
+- **Parallel Review**: Specialists with distinct lenses (Security, Performance, Test Coverage).
+- **Parallel Implementation**: Refactor or implement multiple modules simultaneously.
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
-### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+### 4.3 Coordination & Communication
+- **Shared Task List**: Decentralized task tracking. Teammates self-claim the next unassigned, unblocked task.
+- **Mailbox**: Inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
+- **UI Shortcuts**: `Shift+Down` (cycle teammates), `Ctrl+T` (task list), `Enter` (view session), `Escape` (interrupt).
+- **Display Modes**: Supports `in-process` (all terminals) and `split panes` (tmux/iTerm2).
 
-### 4.4 Automated Quality Gates
+### 4.4 Cleanup
+- **Sequence**: The lead must ask teammates to shut down first, then run `Clean up the team`.
+- **Troubleshooting**: Use `tmux ls` and `tmux kill-session -t <name>` for orphaned sessions.
+
+### 4.5 Limitations
+- **No Session Resumption**: `/resume` and `/rewind` do not restore in-process teammates.
+- **Task Lag**: Status can sometimes lag; manual updates or lead nudges may be needed.
+- **One Team at a Time**: A lead can only manage one team.
+- **No Nested Teams**: Teammates cannot spawn their own teams.
+
+### 4.6 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
 - `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
 
