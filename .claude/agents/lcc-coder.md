@@ -26,8 +26,21 @@ Handoff envelope (must output if not using Agent Team):
 {
   "type": "handoff",
   "next_role": "Reviewer",
-  "summary": "Progress summary (what changed, why, and how verified)",
-  "next_instructions": "Review these changes, call out issues/risks, and reply LGTM if acceptable."
+  "summary": {
+    "progress": "Implemented changes for X",
+    "remaining": "Verification and final review",
+    "risks": "Minimal, tested locally",
+    "changes": "Modified src/foo.py"
+  },
+  "acceptance_criteria": [
+    "Changes pass local tests",
+    "No regressions in existing functionality"
+  ],
+  "next_instructions": "Review these changes, call out issues/risks, and reply LGTM if acceptable.",
+  "context": {
+    "platform_api_needed": false,
+    "risk_level": "low"
+  }
 }
 
 Agent Team Notification (if applicable):
