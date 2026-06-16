@@ -25,8 +25,21 @@ Handoff envelope (must output if not using Agent Team):
 {
   "type": "handoff",
   "next_role": "Tester|Coder",
-  "summary": "Review summary (issues/risks/recommendations)",
-  "next_instructions": "If fixes are needed, hand off to Coder. If acceptable, hand off to Tester for verification."
+  "summary": {
+    "progress": "Reviewed changes for X",
+    "remaining": "Testing and verification",
+    "risks": "Identified potential performance bottleneck in loop",
+    "changes": "None (read-only)"
+  },
+  "acceptance_criteria": [
+    "Address performance feedback",
+    "Ensure all tests pass"
+  ],
+  "next_instructions": "If fixes are needed, hand off to Coder. If acceptable, hand off to Tester for verification.",
+  "context": {
+    "platform_api_needed": false,
+    "risk_level": "medium"
+  }
 }
 
 Agent Team Notification (if applicable):

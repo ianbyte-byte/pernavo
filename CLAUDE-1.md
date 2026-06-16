@@ -25,30 +25,49 @@ Each handoff must include a JSON object in the output:
 ```json
 {
   "type": "handoff",
-  "next_role": "Router|Coder|Reviewer|Tester",
-  "summary": "Progress summary (done/todo/risks)",
-  "next_instructions": "Actionable task list for the next agent"
+  "next_role": "Router|Coder|Reviewer|Tester|...",
+  "summary": {
+    "progress": "What was accomplished",
+    "remaining": "Outstanding tasks",
+    "risks": "Potential blockers",
+    "changes": "Key file modifications (if any)"
+  },
+  "acceptance_criteria": [
+    "List of verifiable conditions for completion"
+  ],
+  "next_instructions": "Specific, actionable task list",
+  "context": {
+    "platform_api_needed": false,
+    "risk_level": "low|medium|high"
+  }
 }
 ```
 
 ## 4) Handoff content requirements
 
-- Must include: progress summary, next steps, and required context (files/commands/failure reasons)
+- Must include: progress summary (v2.2 uses structured object), next steps, acceptance criteria, and required context (files/commands/failure reasons)
 - Must not include: secrets, tokens, or sensitive information
 
-## 5) Agent teams (Experimental)
+## 5) Agent teams (V2.2)
 
-Agent teams allow parallel execution and decentralized coordination.
+Agent teams allow parallel execution and decentralized coordination. Enable via `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
 
 - **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
 - **Teammates**: Independent agents with their own context windows.
+- **Team Size**: Optimal size is 3-5 teammates for most workflows.
 - **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
 - **UI Shortcuts**: Use `Shift+Down` to cycle through teammates, `Ctrl+T` to toggle the task list, `Enter` to view a teammate's session, and `Escape` to interrupt.
 - **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
+- **Display Modes**: Default is "auto". Override via `teammateMode` in settings or `--teammate-mode` flag (e.g., `in-process`, `tmux`).
+- **Model Selection**: Specify models in spawn prompts (prefer Sonnet for implementation). Set "Default teammate model" in `/config`.
 - **Communication**:
   - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
   - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+- **Wait for completion**: If the lead starts working instead of delegating, use: "Wait for your teammates to complete their tasks before proceeding".
+- **Cleanup Sequence**: Once the task is complete:
+  1. Perform final synthesis.
+  2. Ask teammates to shut down.
+  3. Run `Clean up the team`.
 - **Parallel patterns**:
   - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
@@ -56,7 +75,7 @@ Agent teams allow parallel execution and decentralized coordination.
 
 ## 6) Hooks and quality gates
 
-Automated checks are enforced via `.claude/settings.json` and `.claude/hooks/`.
+Automated checks are enforced via `.claude/settings.json` and `.claude/hooks/`. Errors should be prefixed with "Quality Gate:".
 
 - **TaskCreated**: Fires when a task is being created. Rejects subjects < 10 characters or containing "TODO".
 - **TaskCompleted**: Fires when a task is closed. Verifies that a summary or handoff report exists in the transcript and rejects "TODO" in subjects.

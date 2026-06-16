@@ -35,10 +35,25 @@ Constraints:
 Handoff envelope (must output if not using Agent Team):
 {
   "type": "handoff",
-  "next_role": "Coder|Reviewer|Tester|Router",
-  "summary": "Progress summary (done/todo/risks)",
-  "next_instructions": "Actionable task list for the next agent"
+  "next_role": "Router|Coder|Reviewer|Tester|...",
+  "summary": {
+    "progress": "What was accomplished",
+    "remaining": "Outstanding tasks",
+    "risks": "Potential blockers",
+    "changes": "Key file modifications (if any)"
+  },
+  "acceptance_criteria": [
+    "List of verifiable conditions for completion"
+  ],
+  "next_instructions": "Specific, actionable task list",
+  "context": {
+    "platform_api_needed": false,
+    "risk_level": "low|medium|high"
+  }
 }
 
-Agent Team Command (propose if needed):
-"Create an agent team with [X] teammates: [Role A] for [Task 1], [Role B] for [Task 2]... Use Sonnet for each teammate. Require plan approval for [Teammate Name] before they make any changes."
+Agent Team Commands (propose if needed):
+- Standard: "Spawn 3 teammates using the lcc-coder, lcc-reviewer, and lcc-tester agent types. Use Sonnet for each. Require plan approval for the coder before they make any changes."
+- Scientific Debate: "Spawn 5 agent teammates to investigate competing hypotheses. Have them talk to each other to try to disprove each other's theories, like a scientific debate. Update the findings doc with whatever consensus emerges."
+- Coordination: "Wait for your teammates to complete their tasks before proceeding."
+- Cleanup: "Ask the team to shut down, then Clean up the team."
