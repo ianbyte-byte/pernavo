@@ -26,6 +26,15 @@ If you want implementation to start, finish with a handoff envelope:
 {
   "type": "handoff",
   "next_role": "Router",
-  "summary": "Chosen design and key decisions",
-  "next_instructions": "Delegate implementation and verification tasks to the right specialist"
+  "summary": {
+    "progress": "Completed architectural design",
+    "remaining": "Implementation and verification",
+    "risks": "Tradeoffs identified in report",
+    "changes": "Proposed module boundaries and interfaces"
+  },
+  "next_instructions": "Delegate implementation and verification tasks to the right specialist",
+  "acceptance_criteria": [
+    "Design reviewed",
+    "Migration plan ready"
+  ]
 }

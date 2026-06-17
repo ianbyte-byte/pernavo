@@ -25,8 +25,17 @@ Handoff envelope (must output if not using Agent Team):
 {
   "type": "handoff",
   "next_role": "Tester|Coder",
-  "summary": "Review summary (issues/risks/recommendations)",
-  "next_instructions": "If fixes are needed, hand off to Coder. If acceptable, hand off to Tester for verification."
+  "summary": {
+    "progress": "Review completed",
+    "remaining": "Verification or fixes",
+    "risks": "Identified issues/risks",
+    "changes": "Review comments/findings"
+  },
+  "next_instructions": "If fixes are needed, hand off to Coder. If acceptable, hand off to Tester for verification.",
+  "acceptance_criteria": [
+    "All issues addressed",
+    "LGTM provided"
+  ]
 }
 
 Agent Team Notification (if applicable):

@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -40,33 +40,41 @@ This repo includes Claude Code project configuration for running the swarm direc
 
 ## 3. Handoff protocol
 
-Each handoff must include a JSON object:
+Each handoff must include a JSON object with a structured summary (Enhanced Handoff Schema V2.2):
 
 ```json
 {
   "type": "handoff",
   "next_role": "Reviewer",
-  "summary": "Progress summary",
-  "next_instructions": "Actionable tasks for the next agent"
+  "summary": {
+    "progress": "Detailed summary of what was completed",
+    "remaining": "List of pending items",
+    "risks": "Identified blockers or potential issues",
+    "changes": "Summary of file and logic modifications"
+  },
+  "next_instructions": "Actionable tasks for the next agent",
+  "acceptance_criteria": ["Criteria 1", "Criteria 2"],
+  "context": { "platform_api_needed": true }
 }
 ```
 
 Recommended constraints:
-- `summary` must include: done, todo, risks/blockers
-- `next_instructions` must be actionable (not just “continue”)
+- `summary` fields are mandatory for V2.2 compliance.
+- `next_instructions` must be specific and actionable.
 
-## 4. Parallelization and Team Orchestration (V2)
+## 4. Parallelization and Team Orchestration (V2.2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration and unified discovery:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
-- Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
+- **Spawning**: Use natural language: `Spawn 3 teammates using the lcc-coder agent type to...`.
+- **Discovery**: Teammates can read `~/.claude/teams/{team-name}/config.json` to find other members.
+- **Plan Approval**: Use `Require plan approval` for complex/risky tasks. The lead reviews and approves/rejects plans autonomously in read-only mode.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
+- **Scientific Debate**: 5+ teammates investigating competing hypotheses and actively "disproving each other's theories".
 - **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
