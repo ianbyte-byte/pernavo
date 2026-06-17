@@ -24,6 +24,15 @@ Finish with a handoff envelope:
 {
   "type": "handoff",
   "next_role": "Router",
-  "summary": "Release readiness and next steps",
-  "next_instructions": "Concrete actions required to ship"
+  "summary": {
+    "progress": "What was accomplished",
+    "remaining": "What still needs to be done",
+    "risks": "Potential blockers or risks",
+    "changes": "Summary of file/logic changes"
+  },
+  "next_instructions": "Review the findings and decide on next steps.",
+  "acceptance_criteria": [
+    "All tasks completed",
+    "Verified"
+  ]
 }

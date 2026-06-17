@@ -20,14 +20,21 @@
 
 ## 3) Handoff protocol (mandatory)
 
-Each handoff must include a JSON object in the output:
+Each handoff must include a JSON object in the output. The `summary` field must be a structured object (Enhanced Handoff Schema V2.2).
 
 ```json
 {
   "type": "handoff",
   "next_role": "Router|Coder|Reviewer|Tester",
-  "summary": "Progress summary (done/todo/risks)",
-  "next_instructions": "Actionable task list for the next agent"
+  "summary": {
+    "progress": "What was accomplished",
+    "remaining": "What still needs to be done",
+    "risks": "Potential blockers or risks",
+    "changes": "Summary of file/logic changes"
+  },
+  "next_instructions": "Actionable task list for the next agent",
+  "acceptance_criteria": ["List", "of", "criteria"],
+  "context": { "key": "optional metadata" }
 }
 ```
 
@@ -40,19 +47,21 @@ Each handoff must include a JSON object in the output:
 
 Agent teams allow parallel execution and decentralized coordination.
 
-- **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
-- **Teammates**: Independent agents with their own context windows.
-- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
-- **UI Shortcuts**: Use `Shift+Down` to cycle through teammates, `Ctrl+T` to toggle the task list, `Enter` to view a teammate's session, and `Escape` to interrupt.
-- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
+- **Team lead**: The main agent session (Router). Responsible for spawning the team, assigning tasks, approving plans, and final synthesis.
+- **Teammates**: Independent agents with their own context windows. Discovered via `~/.claude/teams/{team-name}/config.json`.
+- **Spawning**: Use `Spawn [N] teammates using the [agent-type] agent type...`. Specify models (prefer Sonnet for implementation/review).
+- **Display Modes**: Managed via `teammateMode` in `settings.json` (`auto`|`in-process`|`tmux`).
+- **Shared task list**: Decentralized task tracking. Teammates self-claim unblocked tasks. Aim for 5-6 tasks per teammate.
+- **UI Shortcuts**: `Shift+Down` (cycle), `Ctrl+T` (toggle task list), `Enter` (view session), `Escape` (interrupt).
+- **Plan Approval**: Spawn teammates with `Require plan approval before they make any changes`. Lead reviews and approves/rejects plans in read-only mode.
 - **Communication**:
-  - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
-  - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+  - `message <teammate>`: Direct messaging between any teammates.
+  - `broadcast <message>`: Team-wide announcement.
+- **Cleanup**: Lead must ask teammates to shut down, then run `Clean up the team`.
 - **Parallel patterns**:
-  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
-  - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
-  - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
+  - **Scientific Debate**: 5+ teammates investigate competing hypotheses and actively "disprove each other's theories".
+  - **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
+  - **Cross-layer coordination**: Parallel work on Frontend, Backend, and Tests.
 
 ## 6) Hooks and quality gates
 

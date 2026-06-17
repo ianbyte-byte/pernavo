@@ -23,8 +23,17 @@ Handoff envelope (must output if not using Agent Team):
 {
   "type": "handoff",
   "next_role": "Coder|Reviewer|Router",
-  "summary": "Test summary (pass/fail, key logs, repro steps)",
-  "next_instructions": "If failing, hand off to Coder to fix. If passing, hand off to Reviewer for final sign-off or Router to wrap up."
+  "summary": {
+    "progress": "Testing completed",
+    "remaining": "Verification of fixes if needed",
+    "risks": "Identified regressions/failures",
+    "changes": "Test results/logs"
+  },
+  "next_instructions": "If failing, hand off to Coder to fix. If passing, hand off to Reviewer for final sign-off or Router to wrap up.",
+  "acceptance_criteria": [
+    "All tests passing",
+    "No regressions"
+  ]
 }
 
 Agent Team Notification (if applicable):

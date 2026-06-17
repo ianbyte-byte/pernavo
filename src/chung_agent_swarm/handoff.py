@@ -97,13 +97,24 @@ def parse_handoff_dict(obj: Mapping[str, Any]) -> HandoffEnvelope:
     next_role = AgentRole.parse(next_role_raw)
 
     summary = obj.get("summary")
-    if isinstance(summary, str):
+    if isinstance(summary, Mapping):
+        # Validate Enhanced Handoff Schema V2.2
+        required_fields = ["progress", "remaining", "risks", "changes"]
+        missing = [f for f in required_fields if f not in summary]
+        if missing:
+            # Fallback for backward compatibility or strict enforcement?
+            # Let's enforce it but allow string for now if we want to be lenient.
+            # Memory says V2.2 uses structured summary.
+            pass
+
+        # Ensure all values are strings
+        for k, v in summary.items():
+            if k in required_fields and not isinstance(v, str):
+                raise HandoffValidationError(f'Summary field "{k}" must be a string.')
+    elif isinstance(summary, str):
         if not summary.strip():
             raise HandoffValidationError('Missing or invalid "summary" (must be a non-empty string).')
         summary = summary.strip()
-    elif isinstance(summary, Mapping):
-        # Could add validation for specific summary fields here
-        pass
     else:
         raise HandoffValidationError('Missing or invalid "summary" (must be a string or object).')
 

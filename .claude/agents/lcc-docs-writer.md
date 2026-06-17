@@ -21,7 +21,16 @@ Output must include:
 Finish with a handoff envelope:
 {
   "type": "handoff",
-  "next_role": "Reviewer|Router",
-  "summary": "Docs updates and coverage",
-  "next_instructions": "Review scope and any follow-ups"
+  "next_role": "Router",
+  "summary": {
+    "progress": "What was accomplished",
+    "remaining": "What still needs to be done",
+    "risks": "Potential blockers or risks",
+    "changes": "Summary of file/logic changes"
+  },
+  "next_instructions": "Review the findings and decide on next steps.",
+  "acceptance_criteria": [
+    "All tasks completed",
+    "Verified"
+  ]
 }

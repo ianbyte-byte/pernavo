@@ -26,8 +26,17 @@ Handoff envelope (must output if not using Agent Team):
 {
   "type": "handoff",
   "next_role": "Reviewer",
-  "summary": "Progress summary (what changed, why, and how verified)",
-  "next_instructions": "Review these changes, call out issues/risks, and reply LGTM if acceptable."
+  "summary": {
+    "progress": "What was accomplished",
+    "remaining": "What still needs to be done",
+    "risks": "Potential blockers or risks",
+    "changes": "Summary of file/logic changes"
+  },
+  "next_instructions": "Review these changes, call out issues/risks, and reply LGTM if acceptable.",
+  "acceptance_criteria": [
+    "All tests pass",
+    "Linter clean"
+  ]
 }
 
 Agent Team Notification (if applicable):

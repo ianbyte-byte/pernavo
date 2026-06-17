@@ -26,6 +26,15 @@ If you want implementation to start, finish with a handoff envelope:
 {
   "type": "handoff",
   "next_role": "Router",
-  "summary": "What you clarified and what remains uncertain",
-  "next_instructions": "Turn acceptance criteria into an execution plan and delegate to the right specialist"
+  "summary": {
+    "progress": "What was accomplished",
+    "remaining": "What still needs to be done",
+    "risks": "Potential blockers or risks",
+    "changes": "Summary of file/logic changes"
+  },
+  "next_instructions": "Turn acceptance criteria into an execution plan and delegate to the right specialist",
+  "acceptance_criteria": [
+    "Requirements clarified",
+    "Acceptance criteria defined"
+  ]
 }

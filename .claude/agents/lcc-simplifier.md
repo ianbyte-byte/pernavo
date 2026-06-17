@@ -80,8 +80,17 @@ Finish with a handoff envelope:
 ```json
 {
   "type": "handoff",
-  "next_role": "Reviewer|Tester",
-  "summary": "What was simplified, key equivalence checks, and any perf wins",
-  "next_instructions": "Review focus areas and verification steps"
+  "next_role": "Router",
+  "summary": {
+    "progress": "What was accomplished",
+    "remaining": "What still needs to be done",
+    "risks": "Potential blockers or risks",
+    "changes": "Summary of file/logic changes"
+  },
+  "next_instructions": "Review the findings and decide on next steps.",
+  "acceptance_criteria": [
+    "All tasks completed",
+    "Verified"
+  ]
 }
 ```
