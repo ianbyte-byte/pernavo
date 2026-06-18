@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -40,40 +40,50 @@ This repo includes Claude Code project configuration for running the swarm direc
 
 ## 3. Handoff protocol
 
-Each handoff must include a JSON object:
+Each handoff must include a JSON object following the **Enhanced Handoff Schema**:
 
 ```json
 {
   "type": "handoff",
   "next_role": "Reviewer",
-  "summary": "Progress summary",
-  "next_instructions": "Actionable tasks for the next agent"
+  "summary": {
+    "progress": "What was accomplished",
+    "remaining": "What still needs to be done",
+    "risks": "Potential blockers or side effects",
+    "changes": "Brief list of modified files/logic"
+  },
+  "next_instructions": "Actionable task list for the next agent",
+  "acceptance_criteria": ["condition 1"],
+  "context": { "platform_api_needed": "false" }
 }
 ```
 
 Recommended constraints:
-- `summary` must include: done, todo, risks/blockers
-- `next_instructions` must be actionable (not just “continue”)
+- `summary` must be structured (V2.2+).
+- `next_instructions` must be actionable.
+- Use `chung-swarm handoff new` CLI for validation.
 
-## 4. Parallelization and Team Orchestration (V2)
+## 4. Parallelization and Team Orchestration (V2.2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with decentralized coordination:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
-- Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
-- **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Spawning**: Use `Spawn a teammate using the [agent-type] agent type` for role consistency. Provide rich context in the spawn prompt.
+- **Plan Approval**: Use `Require plan approval` for implementation. The lead reviews and approves/rejects plans autonomously based on quality criteria (e.g., test coverage, no "TODO" markers).
+- **Task Sizing**: Aim for 5-6 tasks per teammate.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
-- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
+- **Scientific Debate**: 5+ teammates investigating competing hypotheses and actively trying to "disprove each other's theories".
+- **Parallel Review**: Specialists (Security, Performance, Test Coverage) reviewing in parallel.
+- **Cross-layer coordination**: Frontend, Backend, and Tests specialists.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Shared Task List**: Automatic decentralized task tracking.
+- **Mailbox**: Inter-agent messaging via `message <teammate>` and `broadcast`.
+- **Synchronization**: Use "Wait for your teammates to complete their tasks before proceeding" for lead-driven synthesis.
+- **Teammate Discovery**: Teammates can discover others via `~/.claude/teams/{team-name}/config.json`.
+- **Cleanup**: Cleanup is automatic upon session exit (v2.1.178+). Explicitly shut down teammates when done.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
