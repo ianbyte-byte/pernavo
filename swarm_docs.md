@@ -61,19 +61,22 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
-- Use `Create an agent team...` prompts to parallelize work.
+- **Context Discovery**: Lead should perform a "pre-flight" check of `.claude/docs/claud_platform_menu.md` and include relevant spec details in spawn prompts.
+- **Spawn Teammates**: Use natural language to describe roles or reference subagent types: `Spawn a teammate using the security-reviewer agent type`.
 - **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
+- **Team Sizing**: Start with 3-5 teammates for most workflows.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
+- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other to disprove theories.
+- **Parallel Review**: Specialists for Security, Performance, and Test Coverage assigned distinct lenses.
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
+- **Shared Task List**: decentralized task tracking. Use `Ctrl+T` to toggle.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Wait for Teammates**: If the lead starts implementing instead of waiting: `Wait for your teammates to complete their tasks before proceeding`.
+- **Cleanup**: Automatic upon session exit (since v2.1.178). Shared directories are removed.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
