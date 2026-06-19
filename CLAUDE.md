@@ -26,6 +26,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Core Operational Principles
 
+0. **Follow Swarm Global Rules:** Adhere to the orchestration patterns and handoff protocols defined in [CLAUDE-1.md](CLAUDE-1.md) and [swarm_docs.md](swarm_docs.md).
 1. **Think before acting.** Read existing files before writing code.
 2. **Be concise in output but thorough in reasoning.
 3. **Prefer editing over rewriting whole files.** 
