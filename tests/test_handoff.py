@@ -105,3 +105,18 @@ def test_parse_rejects_invalid_context() -> None:
     )
     with pytest.raises(HandoffValidationError, match="Invalid \"context\""):
         parse_handoff_from_text(text)
+
+def test_parse_rejects_incomplete_summary_object() -> None:
+    text = json.dumps(
+        {
+            "type": "handoff",
+            "next_role": "Router",
+            "summary": {
+                "progress": "working"
+                # missing other fields
+            },
+            "next_instructions": "go",
+        }
+    )
+    with pytest.raises(HandoffValidationError, match="Missing required field 'remaining' in \"summary\" object."):
+        parse_handoff_from_text(text)
