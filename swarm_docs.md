@@ -73,7 +73,7 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 ### 4.3 Coordination
 - **Shared Task List**: decentralized task tracking.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Cleanup**: Cleanup happens automatically upon session exit. You can ask teammates to shut down when they are finished.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
