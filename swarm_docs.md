@@ -71,9 +71,11 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
+- **Shared Task List**: decentralized task tracking and self-claiming.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Display Mode**: Set `teammateMode` in `settings.json` to `in-process`, `auto`, `tmux`, or `iterm2`.
+- **Cleanup**: Automatic upon session exit. `Clean up the team` is deprecated. To terminate a teammate early, use `Ask the [name] teammate to shut down`.
+- **Context**: Teammates load project context but not the lead's history. Provide context in the spawn prompt.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
