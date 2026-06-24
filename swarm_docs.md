@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -40,40 +40,57 @@ This repo includes Claude Code project configuration for running the swarm direc
 
 ## 3. Handoff protocol
 
-Each handoff must include a JSON object:
+Each handoff must include a JSON object using the **Enhanced Handoff Schema**:
 
 ```json
 {
   "type": "handoff",
   "next_role": "Reviewer",
-  "summary": "Progress summary",
-  "next_instructions": "Actionable tasks for the next agent"
+  "summary": {
+    "progress": "Detailed summary of what was completed",
+    "remaining": "What remains to be done",
+    "risks": "Any blockers, risks, or technical debt introduced",
+    "changes": "Brief list of file changes"
+  },
+  "next_instructions": "Actionable tasks for the next agent",
+  "acceptance_criteria": ["criteria 1", "criteria 2"],
+  "context": {
+    "platform_api_needed": false,
+    "risk_level": "low"
+  }
 }
 ```
 
 Recommended constraints:
-- `summary` must include: done, todo, risks/blockers
-- `next_instructions` must be actionable (not just “continue”)
+- `summary` mapping must contain all 4 keys: `progress`, `remaining`, `risks`, `changes`.
+- `next_instructions` must be actionable (not just “continue”).
 
-## 4. Parallelization and Team Orchestration (V2)
+## 4. Parallelization and Team Orchestration (V2.2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
-- Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
+- **Display Mode**: Use `teammateMode: auto` to enable split panes in compatible terminals.
+- **Spawning**: Use subagent types for consistent behavior.
+  - Command: `Spawn a teammate using the [type] agent type`.
+- **Plan Approval**: Mandatory for implementation/refactoring tasks.
+  - Use: `Require plan approval before they make any changes`.
+  - Lead reviews plans in read-only mode.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Wait for Teammates**: If the lead starts implementing itself, use: `Wait for your teammates to complete their tasks before proceeding`.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
+- **Scientific Debate**: 5+ teammates investigating competing hypotheses.
+  - Key instruction: "Have them talk to each other to try to disprove each other's theories".
 - **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Shared Task List**: Decentralized task tracking and self-claiming.
+- **Mailbox**: Direct inter-agent messaging via `message <teammate>`.
+- **Discovery**: Teammates can read `~/.claude/teams/{team-name}/config.json` to find other members.
+- **Cleanup**: Automatic upon lead session exit. Manual cleanup tools are no longer required.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
