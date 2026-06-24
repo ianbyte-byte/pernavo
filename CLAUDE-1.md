@@ -1,4 +1,4 @@
-# Swarm Global Rules
+# Swarm Global Rules (V2.2)
 
 ## First Principle: Intent-Driven Minimalism
 - **Code is Liability:** Never write a line of code that doesn't need to exist. Prefer reusing existing patterns over creating new abstractions.
@@ -20,14 +20,24 @@
 
 ## 3) Handoff protocol (mandatory)
 
-Each handoff must include a JSON object in the output:
+Each handoff must include a JSON object in the output using the **Enhanced Handoff Schema**:
 
 ```json
 {
   "type": "handoff",
-  "next_role": "Router|Coder|Reviewer|Tester",
-  "summary": "Progress summary (done/todo/risks)",
-  "next_instructions": "Actionable task list for the next agent"
+  "next_role": "Router|Coder|Reviewer|Tester|Architect|...",
+  "summary": {
+    "progress": "What was achieved",
+    "remaining": "What is left to do",
+    "risks": "Potential blockers or risks",
+    "changes": "Summary of files modified or created"
+  },
+  "next_instructions": "Actionable task list for the next agent",
+  "acceptance_criteria": ["criteria 1", "criteria 2"],
+  "context": {
+    "platform_api_needed": true,
+    "risk_level": "low|medium|high"
+  }
 }
 ```
 
@@ -38,21 +48,23 @@ Each handoff must include a JSON object in the output:
 
 ## 5) Agent teams (Experimental)
 
-Agent teams allow parallel execution and decentralized coordination.
+Agent teams allow parallel execution and decentralized coordination. (v2.1.178+)
 
 - **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
 - **Teammates**: Independent agents with their own context windows.
-- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
-- **UI Shortcuts**: Use `Shift+Down` to cycle through teammates, `Ctrl+T` to toggle the task list, `Enter` to view a teammate's session, and `Escape` to interrupt.
-- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
-- **Communication**:
-  - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
-  - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+- **Display Mode**: Set `teammateMode: auto` in `settings.json` for optimal experience (split panes in tmux/iTerm2).
+- **Spawning**: Mandatory use of subagent types. Example: `Spawn a teammate using the lcc-coder agent type`.
+- **Shared task list**: Use it to assign and track work. Teammates self-claim unassigned, unblocked tasks.
+- **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **UI Shortcuts**: Use `Up/Down` or `Shift+Down` to cycle teammates, `Ctrl+T` for task list, `Enter` to view transcript.
+- **Plan Approval**: For implementation tasks, use `Require plan approval before they make any changes`. The lead reviews plans in read-only mode and approves/rejects autonomously.
+- **Communication**: Use `message <teammate>` for direct coordination (e.g., "message lcc-reviewer Review complete, LGTM").
+- **Wait for Teammates**: If the lead starts implementing itself, use: `Wait for your teammates to complete their tasks before proceeding`.
+- **Cleanup**: Automatic upon session exit. No manual `Clean up the team` tool is needed.
 - **Parallel patterns**:
-  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
-  - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
-  - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
+  - **Scientific Debate**: Spawn 5+ teammates; instruction: "disprove each other's theories".
+  - **Parallel Review**: Specialists with distinct lenses (Security, Performance, Test Coverage).
+  - **Cross-layer coordination**: Frontend, Backend, and Tests specialists.
 
 ## 6) Hooks and quality gates
 
