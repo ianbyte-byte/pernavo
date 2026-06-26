@@ -38,20 +38,23 @@ Each handoff must include a JSON object in the output:
 
 ## 5) Agent teams (Experimental)
 
-Agent teams allow parallel execution and decentralized coordination.
+Agent teams allow parallel execution and decentralized coordination (v2.2).
 
-- **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
-- **Teammates**: Independent agents with their own context windows.
-- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
-- **UI Shortcuts**: Use `Shift+Down` to cycle through teammates, `Ctrl+T` to toggle the task list, `Enter` to view a teammate's session, and `Escape` to interrupt.
-- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
-- **Communication**:
-  - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
-  - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+- **Team lead**: The main agent session. Coordinates work, assigns tasks, and synthesizes results.
+- **Teammates**: Independent agents with their own context windows. Load project context (CLAUDE.md) but not lead history.
+- **Display Modes**:
+  - **In-process**: Teammates run in the agent panel below the prompt.
+  - **Split panes**: Teammates in separate panes (requires tmux or iTerm2). Set `teammateMode: "auto"` in settings.
+- **Shared task list**: Use it to assign and track work. Teammates can self-claim available work. Aim for 5-6 tasks per teammate.
+- **UI Shortcuts**: Use `Up/Down` to select a teammate in the agent panel, `Enter` to view and message directly, `Ctrl+T` for task list, and `Escape` to interrupt.
+- **Plan Approval**: For complex/risky tasks, spawn teammates with `Require plan approval before they make any changes`. Teammates stay in read-only plan mode; the lead approves or rejects plans autonomously.
+- **Communication**: Teammates message each other directly.
+  - `message <teammate>`: Direct message to a teammate by name.
+  - `broadcast <message>`: Team-wide announcement.
+- **Cleanup**: Resources are cleaned up automatically upon session exit. No separate cleanup tool is needed.
 - **Parallel patterns**:
   - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
-  - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
+  - **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
   - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
 
 ## 6) Hooks and quality gates

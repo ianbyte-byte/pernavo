@@ -8,6 +8,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Solve the Problem, Not the Ticket:** Understand the "why" behind a request. If a requested change contradicts system integrity or introduces unnecessary complexity, propose a simpler alternative.
 - **Atomic & Reversible:** Every intervention should be as small as possible and easy to roll back.
 
+## Swarm Global Rules (V2.2)
+- **Mandatory Compliance:** All agent interactions must follow the role boundaries, handoff protocols, and Agent Team orchestration rules defined in [CLAUDE-1.md](CLAUDE-1.md) and [swarm_docs.md](swarm_docs.md).
+
 ## 🛠️ Core Engineering Philosophy & Constraints
 
 > "There are two ways of constructing a software design: One way is to make it so simple that there are **obviously no deficiencies**, and the other way is to make it so complicated that there are no obvious deficiencies."
