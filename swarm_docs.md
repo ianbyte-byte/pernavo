@@ -73,9 +73,14 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 ### 4.3 Coordination
 - **Shared Task List**: decentralized task tracking.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Teammate Discovery**: Teammates can discover other team members by reading `~/.claude/teams/{team-name}/config.json`.
+- **Cleanup**: Cleanup happens automatically upon session exit (v2.1.178+). The team config directory is removed, while the task list persists for resumed sessions.
 
-### 4.4 Automated Quality Gates
+### 4.4 Display Modes (v2.1.179+)
+- **In-process**: Default. All teammates run within the main terminal.
+- **Split panes**: Requires `tmux` or `iTerm2` (v2.1.186+). Set `teammateMode: "auto"` in `settings.json` to enable.
+
+### 4.5 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
 - `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
 
