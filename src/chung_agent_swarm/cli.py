@@ -42,6 +42,8 @@ def _build_parser() -> argparse.ArgumentParser:
     handoff_new.add_argument("--next-role", required=True)
     handoff_new.add_argument("--summary", required=True)
     handoff_new.add_argument("--next-instructions", required=True)
+    handoff_new.add_argument("--acceptance-criteria", nargs="+", help="List of acceptance criteria.")
+    handoff_new.add_argument("--context", type=json.loads, help="Context JSON object.")
 
     sess = subparsers.add_parser("session-config", help="Validate or initialize session_config.json.")
     sess_sub = sess.add_subparsers(dest="session_cmd", required=True)
@@ -80,16 +82,24 @@ def _dispatch(args: argparse.Namespace) -> int:
             return 0
 
         if args.handoff_cmd == "new":
-            envelope = parse_handoff_from_text(
-                json.dumps(
-                    {
-                        "type": "handoff",
-                        "next_role": args.next_role,
-                        "summary": args.summary,
-                        "next_instructions": args.next_instructions,
-                    }
-                )
-            )
+            data = {
+                "type": "handoff",
+                "next_role": args.next_role,
+                "summary": args.summary,
+                "next_instructions": args.next_instructions,
+            }
+            if args.acceptance_criteria:
+                data["acceptance_criteria"] = args.acceptance_criteria
+            if args.context:
+                data["context"] = args.context
+
+            # If summary is valid JSON, parse it to allow object summary
+            try:
+                data["summary"] = json.loads(args.summary)
+            except (json.JSONDecodeError, TypeError):
+                pass
+
+            envelope = parse_handoff_from_text(json.dumps(data))
             print(format_handoff(envelope))
             return 0
 
