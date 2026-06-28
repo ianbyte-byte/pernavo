@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -38,42 +38,59 @@ This repo includes Claude Code project configuration for running the swarm direc
 - `.claude/agents/`: project subagents (YAML frontmatter + system prompt)
 - `.claude/skills/swarm/`: the `/swarm` workflow skill (manual invocation)
 
-## 3. Handoff protocol
+## 3. Handoff protocol (V2.2)
 
-Each handoff must include a JSON object:
+Each handoff must include a JSON object following the **Enhanced Handoff Schema**:
 
 ```json
 {
   "type": "handoff",
   "next_role": "Reviewer",
-  "summary": "Progress summary",
-  "next_instructions": "Actionable tasks for the next agent"
+  "summary": {
+    "progress": "Detailed summary of what was accomplished",
+    "remaining": "What still needs to be done",
+    "risks": "Potential blockers, risks, or critical failures",
+    "changes": "Summary of files modified or created"
+  },
+  "next_instructions": "Actionable, concrete task list for the next agent",
+  "acceptance_criteria": ["Criterion 1", "Criterion 2"],
+  "context": {
+    "metadata": "Optional metadata"
+  }
 }
 ```
 
 Recommended constraints:
-- `summary` must include: done, todo, risks/blockers
-- `next_instructions` must be actionable (not just “continue”)
+- `summary` MUST be an object with the four mandatory keys: `progress`, `remaining`, `risks`, `changes`.
+- `next_instructions` must be actionable (not just “continue”).
+- `acceptance_criteria` should be used to define "done" for the next phase.
 
-## 4. Parallelization and Team Orchestration (V2)
+## 4. Parallelization and Team Orchestration (V2.2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
-- Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
+- Use `Spawn [X] teammates...` prompts to parallelize work.
+- **Context Discovery**: Router reads `.claude/docs/claud_platform_menu.md` to identify relevant specifications before routing.
+- **Plan Approval**: Use `Require plan approval` for complex/risky tasks. The lead reviews and approves/rejects plans before implementation begins.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Predictable Naming**: Assign clear names (e.g., "frontend-dev") to facilitate direct messaging.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
+- **Scientific Debate**: 5+ teammates investigating competing hypotheses and actively trying to disprove each other.
+- **Parallel Review**: Specialists for Security, Performance, and Test Coverage (coordinate via `message` to avoid duplicate feedback).
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
+- **Shared Task List**: centralized task tracking (`Ctrl+T` to toggle).
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Cleanup**: Handled automatically when the session exits. No manual cleanup tool required.
+
+### 4.4 Limitations
+- **Session Resumption**: `/resume` and `/rewind` do not restore in-process teammates.
+- **Task Status**: Can sometimes lag; check work manually if a task appears stuck.
+- **One Team**: Only one team per session; no nested teams.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.

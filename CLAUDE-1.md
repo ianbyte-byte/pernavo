@@ -1,4 +1,4 @@
-# Swarm Global Rules
+# Swarm Global Rules (V2.2)
 
 ## First Principle: Intent-Driven Minimalism
 - **Code is Liability:** Never write a line of code that doesn't need to exist. Prefer reusing existing patterns over creating new abstractions.
@@ -18,41 +18,61 @@
 - Reviewer: reviews security/correctness/maintainability. Does not edit files.
 - Tester: runs/designs tests and produces repro steps. No large refactors.
 
-## 3) Handoff protocol (mandatory)
+## 3) Handoff protocol (V2.2 Mandatory)
 
-Each handoff must include a JSON object in the output:
+Each handoff must include a JSON object in the output following the Enhanced Handoff Schema:
 
 ```json
 {
   "type": "handoff",
-  "next_role": "Router|Coder|Reviewer|Tester",
-  "summary": "Progress summary (done/todo/risks)",
-  "next_instructions": "Actionable task list for the next agent"
+  "next_role": "Router|Coder|Reviewer|Tester|...",
+  "summary": {
+    "progress": "Detailed summary of what was accomplished",
+    "remaining": "What still needs to be done",
+    "risks": "Potential blockers, risks, or critical failures",
+    "changes": "Summary of files modified or created"
+  },
+  "next_instructions": "Actionable, concrete task list for the next agent",
+  "acceptance_criteria": ["Criterion 1", "Criterion 2"],
+  "context": {
+    "metadata": "Optional key-value pairs for additional context"
+  }
 }
 ```
 
 ## 4) Handoff content requirements
 
-- Must include: progress summary, next steps, and required context (files/commands/failure reasons)
-- Must not include: secrets, tokens, or sensitive information
+- **Summary Object**: The `summary` field MUST be an object containing `progress`, `remaining`, `risks`, and `changes` as string values.
+- **Actionability**: `next_instructions` must be specific (e.g., "Run `npm test` and fix failures in `Auth.js`" instead of "Continue working").
+- **Acceptance Criteria**: Provide clear list of goals that must be met before the next handoff.
+- **Safety**: Must not include secrets, tokens, or sensitive information.
 
 ## 5) Agent teams (Experimental)
 
 Agent teams allow parallel execution and decentralized coordination.
 
 - **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
-- **Teammates**: Independent agents with their own context windows.
+- **Teammates**: Independent agents with their own context windows. Teammates do NOT inherit the lead's conversation history; provide enough context in the spawn prompt.
+- **Naming**: Use predictable names for teammates (e.g., "security-reviewer") to facilitate direct messaging.
 - **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
-- **UI Shortcuts**: Use `Shift+Down` to cycle through teammates, `Ctrl+T` to toggle the task list, `Enter` to view a teammate's session, and `Escape` to interrupt.
-- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
+- **UI Shortcuts**:
+  - `Up/Down Arrows`: Select a teammate in the agent panel.
+  - `Shift+Down`: Cycle through teammates (legacy shortcut).
+  - `Enter`: Open the selected teammate's transcript and message it directly.
+  - `Ctrl+T`: Toggle the shared task list.
+  - `Escape`: Interrupt the selected teammate's current turn.
+- **Plan Approval**: For complex or risky tasks, spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
 - **Communication**:
-  - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
-  - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+  - `message <teammate>`: Send a direct message to a specific teammate.
+  - `broadcast <message>`: Send to all teammates.
+- **Cleanup**: Shared directories are removed automatically when the session ends. No separate cleanup step required.
 - **Parallel patterns**:
   - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
   - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
+- **Limitations**:
+  - **Session Resumption**: `/resume` and `/rewind` do NOT restore in-process teammates.
+  - **Task Lag**: Task status can lag; update manually or nudge teammates if they appear stuck.
 
 ## 6) Hooks and quality gates
 

@@ -102,8 +102,16 @@ def parse_handoff_dict(obj: Mapping[str, Any]) -> HandoffEnvelope:
             raise HandoffValidationError('Missing or invalid "summary" (must be a non-empty string).')
         summary = summary.strip()
     elif isinstance(summary, Mapping):
-        # Could add validation for specific summary fields here
-        pass
+        # Validate V2.2 mandatory summary fields
+        required_fields = ["progress", "remaining", "risks", "changes"]
+        missing = [f for f in required_fields if f not in summary]
+        if missing:
+            raise HandoffValidationError(
+                f"Missing mandatory summary fields for V2.2: {', '.join(missing)}"
+            )
+        for field in required_fields:
+            if not isinstance(summary[field], str):
+                raise HandoffValidationError(f"Summary field {field!r} must be a string.")
     else:
         raise HandoffValidationError('Missing or invalid "summary" (must be a string or object).')
 
