@@ -40,8 +40,14 @@ def _build_parser() -> argparse.ArgumentParser:
 
     handoff_new = handoff_sub.add_parser("new", help="Generate a handoff JSON envelope.")
     handoff_new.add_argument("--next-role", required=True)
-    handoff_new.add_argument("--summary", required=True)
+    handoff_new.add_argument(
+        "--summary", required=True, help="Summary string or JSON object string."
+    )
     handoff_new.add_argument("--next-instructions", required=True)
+    handoff_new.add_argument(
+        "--acceptance-criteria", nargs="+", help="List of acceptance criteria strings."
+    )
+    handoff_new.add_argument("--context", type=json.loads, help="JSON string for context object.")
 
     sess = subparsers.add_parser("session-config", help="Validate or initialize session_config.json.")
     sess_sub = sess.add_subparsers(dest="session_cmd", required=True)
@@ -80,16 +86,24 @@ def _dispatch(args: argparse.Namespace) -> int:
             return 0
 
         if args.handoff_cmd == "new":
-            envelope = parse_handoff_from_text(
-                json.dumps(
-                    {
-                        "type": "handoff",
-                        "next_role": args.next_role,
-                        "summary": args.summary,
-                        "next_instructions": args.next_instructions,
-                    }
-                )
-            )
+            summary = args.summary
+            try:
+                summary = json.loads(args.summary)
+            except json.JSONDecodeError:
+                pass
+
+            handoff_dict: dict[str, Any] = {
+                "type": "handoff",
+                "next_role": args.next_role,
+                "summary": summary,
+                "next_instructions": args.next_instructions,
+            }
+            if args.acceptance_criteria:
+                handoff_dict["acceptance_criteria"] = args.acceptance_criteria
+            if args.context:
+                handoff_dict["context"] = args.context
+
+            envelope = parse_handoff_from_text(json.dumps(handoff_dict))
             print(format_handoff(envelope))
             return 0
 
