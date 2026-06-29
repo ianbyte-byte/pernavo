@@ -61,9 +61,10 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
-- Use `Create an agent team...` prompts to parallelize work.
+- Use `Spawn [X] teammates...` prompts to parallelize work.
 - **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Display Mode**: Configure `teammateMode` in `~/.claude/settings.json` (e.g., `"auto"`, `"in-process"`, `"tmux"`, or `"iterm2"`).
 
 ### 4.2 Patterns
 - **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
@@ -73,7 +74,7 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 ### 4.3 Coordination
 - **Shared Task List**: decentralized task tracking.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Cleanup**: Teammates can be shut down by name. Shared resources are cleaned up automatically when the session ends.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
