@@ -48,7 +48,8 @@ Agent teams allow parallel execution and decentralized coordination.
 - **Communication**:
   - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
   - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+- **Cleanup**: Teammates can be shut down by name (e.g., "Ask the researcher teammate to shut down"). The team’s shared directories are cleaned up automatically when the session ends.
+- **Discovery**: Teammates can discover other team members by reading `~/.claude/teams/{team-name}/config.json`.
 - **Parallel patterns**:
   - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
