@@ -36,23 +36,24 @@ Each handoff must include a JSON object in the output:
 - Must include: progress summary, next steps, and required context (files/commands/failure reasons)
 - Must not include: secrets, tokens, or sensitive information
 
-## 5) Agent teams (Experimental)
+## 5) Agent teams & Swarm Orchestration (V2.2)
 
-Agent teams allow parallel execution and decentralized coordination.
+Agent teams allow parallel execution and decentralized coordination. (Experimental: `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`)
 
-- **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
-- **Teammates**: Independent agents with their own context windows.
-- **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
-- **UI Shortcuts**: Use `Shift+Down` to cycle through teammates, `Ctrl+T` to toggle the task list, `Enter` to view a teammate's session, and `Escape` to interrupt.
-- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
-- **Communication**:
-  - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
-  - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+- **Team lead (Router)**: The main agent session. Responsible for spawning the team, assigning tasks, approving plans, and final synthesis.
+- **Teammates (Workers)**: Separate Claude Code instances. Use subagent types (e.g., `lcc-coder`) to spawn them.
+- **Shared task list**: Decentralized coordination. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate.
+- **UI Shortcuts**: `Up/Down` to cycle, `Ctrl+T` to toggle tasks, `Enter` to view transcript, `Escape` to interrupt.
+- **Plan Approval**: Use `Require plan approval before they make any changes` for risky tasks. Lead approves/rejects autonomously based on criteria (e.g., "must have tests").
+- **Mailbox**:
+  - `message <teammate>`: Direct inter-agent communication.
+  - `broadcast <message>`: Team-wide updates.
+- **Cleanup**: Automatic upon session exit. `TeamCreate`/`TeamDelete` tools are deprecated. To shut down early, use `Ask the [name] teammate to shut down`.
 - **Parallel patterns**:
-  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
-  - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
-  - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
+  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and "disprove each other's theories".
+  - **Parallel Review**: Distinct lenses (Security, Performance, Coverage). Reviewers coordinate via `message` to avoid duplicates.
+  - **Cross-layer coordination**: Frontend, Backend, and Tests specialists.
+  - **Avoid file conflicts**: Ensure teammates own separate file sets. Use `lcc-git-worktree-manager` for parallel implementation.
 
 ## 6) Hooks and quality gates
 

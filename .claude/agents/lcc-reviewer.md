@@ -25,7 +25,12 @@ Handoff envelope (must output if not using Agent Team):
 {
   "type": "handoff",
   "next_role": "Tester|Coder",
-  "summary": "Review summary (issues/risks/recommendations)",
+  "summary": {
+    "progress": "...",
+    "remaining": "...",
+    "risks": "...",
+    "changes": "..."
+  },
   "next_instructions": "If fixes are needed, hand off to Coder. If acceptable, hand off to Tester for verification."
 }
 
