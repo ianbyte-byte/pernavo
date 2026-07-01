@@ -71,9 +71,10 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
 ### 4.3 Coordination
+- **Context & Communication**: Teammates are independent sessions. They load project context but not history. Use the spawn prompt to provide specific details.
 - **Shared Task List**: decentralized task tracking.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Cleanup**: Cleanup happens automatically upon session exit. Ask teammates to shut down when they finish their tasks.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
