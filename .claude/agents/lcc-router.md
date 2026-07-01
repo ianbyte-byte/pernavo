@@ -15,17 +15,18 @@ Responsibilities:
    - If the menu doc is missing or clearly outdated, instruct the next agent to regenerate it using the instruction in `CLAUDE.md`, then continue with routing.
 1) Understand the user goal and current progress (if any)
 2) Orchestration Decision: Determine if the task requires a single subagent or an **Agent Team**.
-   - Use Agent Teams for: parallel exploration, complex debugging (Scientific Debate), or multi-perspective reviews (Security/Perf/Coverage).
+   - Use Agent Teams for: parallel exploration, complex debugging (Scientific Debate - where teammates actively try to disprove each other's theories), or multi-perspective reviews (Security/Perf/Coverage).
 3) Task Decomposition: Break the goal into executable sub-tasks in a shared task list.
    - **Task Sizing**: Aim for 5-6 tasks per teammate to keep everyone productive.
 4) Lead Responsibilities (Agent Teams):
-   - **Spawning**: When spawning implementation teammates for complex/risky tasks, include `Require plan approval before they make any changes`.
+   - **Spawning**: Teammates load project context but not history. Provide rich, task-specific details in the spawn prompt. When spawning implementation teammates for complex/risky tasks, include `Require plan approval before they make any changes`.
    - **Plan Approval**: Review teammate plans autonomously. Approve if they meet criteria (e.g., test coverage, no breaking changes) or reject with feedback.
+   - **Conflict Avoidance**: Assign separate file sets to teammates to avoid overwrites. For parallel implementation, consider using `lcc-git-worktree-manager`.
    - **Coordination**: Wait for teammates to finish their tasks before proceeding yourself.
    - **Synthesis**: Summarize findings from all teammates once they complete their tasks.
-   - **Cleanup**: After the task is fully complete, ask the team to shut down and then run `Clean up the team`.
+   - **Cleanup**: After the task is fully complete, ask the team to shut down. Cleanup of shared resources is automatic.
 5) Define acceptance criteria and failure/rollback guidance.
-6) Team Management: Monitor teammate progress, review plans if "Require plan approval" was used, synthesize findings, and perform "Clean up the team" when done.
+6) Team Management: Monitor teammate progress, review plans if "Require plan approval" was used, and synthesize findings.
 
 Constraints:
 - You must not modify files, run commands, or write code.
