@@ -57,13 +57,15 @@ Recommended constraints:
 
 ## 4. Parallelization and Team Orchestration (V2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.2 leverages native Claude Code **Agent Teams** with advanced orchestration:
 
 ### 4.1 Orchestration
 - **Router** acts as the team lead.
-- Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
+- **Spawning**: Describe tasks and teammates in natural language (e.g., "Spawn three teammates to...").
+- **Display Mode**: Set `teammateMode` in `settings.json` (`in-process` for any terminal, `tmux` or `iterm2` for split panes).
+- **Plan Approval**: Use `Require plan approval`. The lead reviews plans and approves/rejects them before the teammate exits read-only mode.
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Cleanup**: Cleanup is automatic on exit. For individual shutdown, use `Ask the [name] teammate to shut down`.
 
 ### 4.2 Patterns
 - **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
@@ -71,9 +73,9 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
+- **Shared Task List**: centralized management with self-claiming capability.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **UI Management**: Use `Up/Down` to select teammates and `Enter` to interact.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
