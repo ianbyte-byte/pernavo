@@ -20,14 +20,14 @@ Run the comprehensive Swarm workflow for this repository. Break complex tasks in
 User Request
     │
     ▼
-┌─────────────────────────────────────────────────────────────┐
-│ 1. lcc-router (Haiku, Read-Only)                            │
-│    - Context Discovery: Read .claude/docs/claud_platform_menu.md│
-│    - Task Decomposition: Break into subtasks                 │
-│    - Acceptance Criteria: Define done conditions             │
-│    - Risk Assessment: Identify blockers/rollback path        │
-│    - Specialist Selection: Choose next role(s)               │
-└─────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│ 1. lcc-router (Haiku, Read-Only)                             │
+│    - Context Discovery: Read .claude/docs/claud_platform_menu.md │
+│    - Task Decomposition: Break into shared task list          │
+│    - Acceptance Criteria: Define done conditions              │
+│    - Team Spawning: Propose teammates if parallel work helps  │
+│    - Plan Approval: Review teammate plans autonomously        │
+└──────────────────────────────────────────────────────────────┘
     │
     ├───────────────────────┬───────────────────────┐
     │                       │                       │
@@ -84,9 +84,12 @@ User Request
 
 For complex tasks, the Router will propose an **Agent Team**:
 1. **Enable Teams**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
-2. **Shared Task List**: Lead manages tasks; teammates claim and complete.
-3. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
-4. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
+2. **Spawning**: Lead spawns named teammates for specific roles/tasks.
+3. **Shared Task List**: Lead manages tasks; teammates claim and complete.
+4. **Plan Approval**: Use `Require plan approval` for complex/risky tasks.
+5. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
+6. **Display**: Choose between `in-process` and `split panes`.
+7. **Cleanup**: Automatic upon session exit.
 
 ## Handoff Envelope Schema (Enhanced)
 
