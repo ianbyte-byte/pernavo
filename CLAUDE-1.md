@@ -48,7 +48,10 @@ Agent teams allow parallel execution and decentralized coordination.
 - **Communication**:
   - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
   - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+- **Cleanup**: Teammates are cleaned up automatically when the session ends. You can still ask a teammate to shut down by name.
+- **Display Modes**:
+  - **In-process** (default): Teammates run in the main terminal. Use arrows and Enter to interact.
+  - **Split panes**: Requires tmux or iTerm2. Each teammate gets its own pane.
 - **Parallel patterns**:
   - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
