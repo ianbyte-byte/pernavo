@@ -43,12 +43,15 @@ Agent teams allow parallel execution and decentralized coordination.
 - **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
 - **Teammates**: Independent agents with their own context windows.
 - **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
-- **UI Shortcuts**: Use `Shift+Down` to cycle through teammates, `Ctrl+T` to toggle the task list, `Enter` to view a teammate's session, and `Escape` to interrupt.
+- **Display Modes**:
+  - `in-process` (default): Teammates run in the agent panel below the prompt. Use **Up/Down arrows** to select, **Enter** to view, **Ctrl+T** to toggle the task list, and **Escape** to interrupt.
+  - `auto/tmux/iterm2`: Enable split panes via `teammateMode` in `settings.json` (requires `tmux` or `iterm2`).
 - **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
 - **Communication**:
   - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
   - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+- **Automatic Cleanup**: Shared team directories and configurations are cleaned up automatically when the session exits. No manual cleanup tool is required.
+- **Token Usage**: Each teammate runs in its own context window; token usage scales linearly with the number of active teammates.
 - **Parallel patterns**:
   - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
