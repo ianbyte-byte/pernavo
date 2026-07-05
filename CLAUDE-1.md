@@ -48,9 +48,9 @@ Agent teams allow parallel execution and decentralized coordination.
 - **Communication**:
   - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
   - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+- **Cleanup**: Cleanup happens automatically when the session exits. You can ask specific teammates to shut down by name (e.g., "Ask the researcher teammate to shut down") if you want to end their sessions gracefully before the team lead finishes.
 - **Parallel patterns**:
-  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
+  - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other. The lead should facilitate the debate by asking teammates to challenge each other's findings.
   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
   - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
 
@@ -62,11 +62,21 @@ Automated checks are enforced via `.claude/settings.json` and `.claude/hooks/`.
 - **TaskCompleted**: Fires when a task is closed. Verifies that a summary or handoff report exists in the transcript and rejects "TODO" in subjects.
 - **TeammateIdle**: Fires before a teammate stops. Ensures no work is left with unaddressed errors.
 
-## 7) Failure handling
+## 7) Status Protocol (Mandatory)
+
+All responses from any agent must end with the character: `RESPECT!`
+
+## 8) Agent Teams & Swarm Orchestration (V2.2)
+
+- **Display Modes**: The default is `in-process` (centralized in one terminal). Use `auto` or `iterm2` for split panes (requires tmux/iTerm2). Configure via `teammateMode` in `~/.claude/settings.json`.
+- **Teammate Discovery**: Teammates can discover other members by reading `~/.claude/teams/{team-name}/config.json`.
+- **Naming**: Provide predictable names in the spawn instruction for easier referencing (e.g., "Spawn a teammate named 'security' using the security-reviewer agent type").
+
+## 9) Failure handling
 
 - If blocked, the summary must include: failure reason, repro steps, and a recommended fix path
 
-## 8) Document-first workflow (mandatory for platform/API/prompt/limits + Claude Code configuration)
+## 10) Document-first workflow (mandatory for platform/API/prompt/limits + Claude Code configuration)
 
 Before any code changes for tasks involving platform APIs, prompt optimization, model selection, token budgets, context windows, rate limits, structured outputs, or Claude Code configuration (subagents/skills/hooks/permissions):
 

@@ -21,32 +21,31 @@ User Request
     │
     ▼
 ┌─────────────────────────────────────────────────────────────┐
-│ 1. lcc-router (Haiku, Read-Only)                            │
+│ 1. lcc-router (Haiku, Read-Only, Team Lead)                 │
 │    - Context Discovery: Read .claude/docs/claud_platform_menu.md│
 │    - Task Decomposition: Break into subtasks                 │
 │    - Acceptance Criteria: Define done conditions             │
-│    - Risk Assessment: Identify blockers/rollback path        │
-│    - Specialist Selection: Choose next role(s)               │
+│    - Specialist Selection: Spawn Agent Team if needed        │
 └─────────────────────────────────────────────────────────────┘
     │
     ├───────────────────────┬───────────────────────┐
     │                       │                       │
     ▼                       ▼                       ▼
 ┌───────────────┐   ┌───────────────┐   ┌───────────────┐
-│ 2a. lcc-     │   │ 2b. lcc-     │   │ 2c. Parallel  │
-│ architect     │   │ product       │   │ Exploration   │
-│ (Optional)    │   │ (Optional)    │   │ (Explore)     │
+│ 2a. Scientific│   │ 2b. Parallel  │   │ 2c. Cross-    │
+│ Debate        │   │ Review        │   │ layer Coord.  │
+│ (Agent Team)  │   │ (Agent Team)  │   │ (Agent Team)  │
 └───────────────┘   └───────────────┘   └───────────────┘
     │                       │                       │
     └───────────────────────┴───────────────────────┘
                             │
                             ▼
             ┌───────────────────────────┐
-            │ 3. lcc-coder              │
-            │    - Implement changes    │
-            │    - Minimal, testable    │
-            │    - Update session_config│
-            │      if platform API task │
+            │ 3. Implementation Stage   │
+            │    - lcc-coder (Workers)  │
+            │    - Shared Task List     │
+            │    - Plan Approval (Lead) │
+            │    - Mailbox Coordination │
             └───────────────────────────┘
                             │
                             ▼
@@ -80,13 +79,15 @@ User Request
             └───────────────────────────┘
 ```
 
-## Team Orchestration (New in V2)
+## Team Orchestration (New in V2.2)
 
 For complex tasks, the Router will propose an **Agent Team**:
 1. **Enable Teams**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
-2. **Shared Task List**: Lead manages tasks; teammates claim and complete.
-3. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
-4. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
+2. **Display Mode**: Configure `teammateMode` in `settings.json` (in-process/auto/iterm2).
+3. **Shared Task List**: Lead manages tasks; teammates self-claim and complete.
+4. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
+5. **Discovery**: Teammates read `config.json` to discover the team.
+6. **Automatic Cleanup**: Session cleanup happens automatically on exit.
 
 ## Handoff Envelope Schema (Enhanced)
 

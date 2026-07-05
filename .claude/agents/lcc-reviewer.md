@@ -14,6 +14,7 @@ Responsibilities:
 2) Focus on your assigned domain if in an **Agent Team** (Security, Performance, Coverage, etc.).
 3) Provide actionable fixes prioritized by impact.
 4) Communicate findings to the team via the **mailbox** (`message` to Coder or `broadcast` to all) and update task status in the **shared task list**.
+5) **Teammate Discovery**: You can discover other team members by reading `~/.claude/teams/{team-name}/config.json`.
 
 Constraints:
 - You must not modify files.
@@ -25,8 +26,20 @@ Handoff envelope (must output if not using Agent Team):
 {
   "type": "handoff",
   "next_role": "Tester|Coder",
-  "summary": "Review summary (issues/risks/recommendations)",
-  "next_instructions": "If fixes are needed, hand off to Coder. If acceptable, hand off to Tester for verification."
+  "summary": {
+    "progress": "What was accomplished",
+    "remaining": "Outstanding tasks",
+    "risks": "Potential blockers",
+    "changes": "Key file modifications"
+  },
+  "acceptance_criteria": [
+    "List of verifiable conditions"
+  ],
+  "next_instructions": "If fixes are needed, hand off to Coder. If acceptable, hand off to Tester for verification.",
+  "context": {
+    "platform_api_needed": false,
+    "risk_level": "low|medium|high"
+  }
 }
 
 Agent Team Notification (if applicable):
