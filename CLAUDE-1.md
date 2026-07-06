@@ -38,21 +38,31 @@ Each handoff must include a JSON object in the output:
 
 ## 5) Agent teams (Experimental)
 
-Agent teams allow parallel execution and decentralized coordination.
+Agent teams allow parallel execution and decentralized coordination (as of v2.1.178+).
 
 - **Team lead**: The main agent session. Responsible for spawning the team, approving plans, and final synthesis.
-- **Teammates**: Independent agents with their own context windows.
+- **Teammates**: Independent agents with their own context windows. They do not inherit the lead's history but load project context (CLAUDE.md, MCP, skills).
+- **Spawning**: Describe the task and teammates in natural language (e.g., "Spawn three teammates..."). Claude spawns them based on instructions. No explicit `TeamCreate` tool is used.
+- **Discovery**: Teammates can discover each other by reading `~/.claude/teams/{team-name}/config.json`.
 - **Shared task list**: Use it to assign and track work. Teammates can self-claim tasks. Aim for 5-6 tasks per teammate to maximize productivity.
-- **UI Shortcuts**: Use `Shift+Down` to cycle through teammates, `Ctrl+T` to toggle the task list, `Enter` to view a teammate's session, and `Escape` to interrupt.
-- **Plan Approval**: For complex or risky tasks (e.g., refactors), the lead should spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously.
+- **UI Shortcuts (In-Process)**:
+  - `Up/Down`: Cycle through teammates in the agent panel.
+  - `Enter`: View a teammate's session and message them directly.
+  - `Escape`: Interrupt the selected teammate's turn.
+  - `Ctrl+T`: Toggle the shared task list.
+- **Plan Approval**: For complex/risky tasks, spawn teammates with `Require plan approval before they make any changes`. The lead reviews and approves/rejects plans autonomously in read-only plan mode.
 - **Communication**:
-  - `message <teammate>`: Send a direct message to a specific teammate (e.g., Coder to Reviewer).
-  - `broadcast <message>`: Send to all teammates (use sparingly).
-- **Cleanup**: Once the task is complete, the lead must shut down all teammates and then run `Clean up the team` to remove shared resources.
+  - `message <teammate>`: Send a direct message to a specific teammate by name.
+  - `broadcast <message>`: Send to all teammates.
+- **Cleanup**: Happens automatically when the session exits. To gracefully end a teammate early, use "Ask the [name] teammate to shut down". `TeamDelete` and manual cleanup tools are deprecated.
 - **Parallel patterns**:
   - **Scientific Debate**: Spawn 5+ teammates to investigate competing hypotheses and actively disprove each other.
   - **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage).
   - **Cross-layer coordination**: Separate teammates for frontend, backend, and testing.
+- **Best Practices**:
+  - Team size: 3-5 teammates usually provides the best balance.
+  - Task size: Break work into self-contained units that produce clear deliverables.
+  - Context: Provide task-specific details in the spawn prompt.
 
 ## 6) Hooks and quality gates
 

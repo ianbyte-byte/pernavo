@@ -57,27 +57,29 @@ Recommended constraints:
 
 ## 4. Parallelization and Team Orchestration (V2)
 
-V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
+V2.1 leverages native Claude Code **Agent Teams** (v2.1.178+) for decentralized coordination:
 
 ### 4.1 Orchestration
-- **Router** acts as the team lead.
-- Use `Create an agent team...` prompts to parallelize work.
-- **Plan Approval**: Use `Require plan approval` for complex tasks. The lead reviews and approves/rejects plans before implementation begins.
-- **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
+- **Router** acts as the team lead, spawning teammates via natural language instructions.
+- **Subagent Definitions**: Reference subagent types (e.g., `lcc-coder`) when spawning teammates to reuse role definitions.
+- **Plan Approval**: Use `Require plan approval` for complex tasks. Teammates work in read-only plan mode until the lead approves.
+- **Teammate Discovery**: Agents read `~/.claude/teams/{team-name}/config.json` to find other members.
+- **Sizing**: 3-5 teammates with 5-6 tasks each is recommended.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
+- **Scientific Debate**: 5+ teammates investigating competing hypotheses and "disproving each other's theories."
 - **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
 - **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
 
 ### 4.3 Coordination
-- **Shared Task List**: decentralized task tracking.
-- **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Shared Task List**: All agents can see status and self-claim unassigned, unblocked tasks.
+- **Mailbox**: Direct peer-to-peer messaging via `message <name>` and `broadcast`.
+- **Cleanup**: Automatic upon session exit. Explicitly shut down teammates via "Ask [name] to shut down" if needed early. Manual cleanup tools are deprecated.
 
 ### 4.4 Automated Quality Gates
-- `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.
-- `TeammateIdle` hook ensures teammates don't go idle with unaddressed errors.
+- `TaskCompleted` hook: Rejects if no handoff/summary/LGTM is in the transcript.
+- `TeammateIdle` hook: Rejects if "error" exists without "fixed/resolved/workaround".
+- `TaskCreated` hook: Rejects short subjects or "TODO".
 
 ## 5. Testing guidance
 

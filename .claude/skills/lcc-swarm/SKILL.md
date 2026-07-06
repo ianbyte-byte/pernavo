@@ -80,25 +80,27 @@ User Request
             └───────────────────────────┘
 ```
 
-## Team Orchestration (New in V2)
+## Team Orchestration (V2.1)
 
 For complex tasks, the Router will propose an **Agent Team**:
 1. **Enable Teams**: Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
-2. **Shared Task List**: Lead manages tasks; teammates claim and complete.
-3. **Mailbox**: Teammates use `message` and `broadcast` to coordinate.
-4. **Hooks**: Automated validation via `lcc-quality-gate.sh`.
+2. **Spawning**: Lead spawns teammates via natural language prompts (e.g., "Spawn 3 teammates using the lcc-coder agent type...").
+3. **Discovery**: Teammates read `~/.claude/teams/{team-name}/config.json` to find members.
+4. **Shared Task List**: Lead manages tasks; teammates self-claim and complete.
+5. **Mailbox**: Peer-to-peer coordination via `message <name>` and `broadcast`.
+6. **Cleanup**: Automatic upon session exit. Individual shutdown via "Ask [name] to shut down".
 
-## Handoff Envelope Schema (Enhanced)
+## Handoff Envelope Schema (V2.2 Enhanced)
 
 ```json
 {
   "type": "handoff",
   "next_role": "Router|Coder|Reviewer|Tester|Architect|AiNativeArchitect|Product|SecurityReviewer|Debugger|Refactorer|PerformanceOptimizer|SqlOptimizer|DocsWriter|ReleaseManager|IncidentTriage|DependencyUpgrader|GitWorktreeManager|Simplifier",
   "summary": {
-    "progress": "What was accomplished",
-    "remaining": "Outstanding tasks",
-    "risks": "Potential blockers",
-    "changes": "Key file modifications (if any)"
+    "progress": "What was accomplished (string)",
+    "remaining": "Outstanding tasks (string)",
+    "risks": "Potential blockers (string)",
+    "changes": "Key file modifications (string)"
   },
   "acceptance_criteria": [
     "List of verifiable conditions for completion"
