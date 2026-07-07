@@ -1,4 +1,4 @@
-# Claude Agent Swarm Guide v2.1
+# Claude Agent Swarm Guide v2.2
 
 ## 1. Definition
 
@@ -32,7 +32,7 @@ The Python package provides a small CLI to validate workflow artifacts:
 - `chung-swarm session-config validate`: validate `.claude/session_config.json`
 - `chung-swarm handoff validate`: validate a handoff envelope pasted from output
 
-### 2.3 Running with Claude Code (project configuration)
+### 2.4 Running with Claude Code (project configuration)
 
 This repo includes Claude Code project configuration for running the swarm directly:
 - `.claude/agents/`: project subagents (YAML frontmatter + system prompt)
@@ -66,14 +66,14 @@ V2.1 leverages native Claude Code **Agent Teams** with advanced orchestration:
 - **Task Sizing**: Aim for 5-6 tasks per teammate to maximize productivity.
 
 ### 4.2 Patterns
-- **Scientific Debate**: 5+ teammates investigating competing hypotheses and challenging each other.
-- **Parallel Review**: Specialists for Security, Performance, and Test Coverage.
-- **Cross-layer coordination**: Frontend, Backend, and Tests specialists working in parallel.
+- **Scientific Debate**: 5+ teammates investigating competing hypotheses and actively "disprove each other's theories" to find the root cause.
+- **Parallel Review**: Assign reviewers with distinct lenses (Security, Performance, Test Coverage) to ensure thorough coverage.
+- **Cross-layer coordination**: Separate teammates for frontend, backend, and testing, each owning their respective layer.
 
 ### 4.3 Coordination
 - **Shared Task List**: decentralized task tracking.
 - **Mailbox**: inter-agent messaging via `message <teammate>` (direct) and `broadcast` (team-wide).
-- **Cleanup**: The lead must shut down teammates and run `Clean up the team` after completion.
+- **Cleanup**: Cleanup happens automatically when the session exits. To shut down a specific teammate early, use: `Ask the [name] teammate to shut down`.
 
 ### 4.4 Automated Quality Gates
 - `TaskCompleted` hook validates that a handoff report or summary exists in the transcript.

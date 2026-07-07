@@ -3,6 +3,7 @@
     "menu_file": ".claude/docs/claud_platform_menu.md",
     "relevant_specs": [
       ".claude/docs/claude_code/SUBAGENTS.md",
+      "https://code.claude.com/docs/en/agent-teams",
       "https://code.claude.com/docs/en/sub-agents",
       "https://code.claude.com/docs/en/permissions",
       "https://platform.claude.com/docs/en/build-with-claude/structured-outputs",
