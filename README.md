@@ -17,6 +17,7 @@ npx skills add https://github.com/tuloong/loongclaude --all
 ## Included skills
 
 - `review-mr`
+- `codebase-slimming`
 - `gpt55-fusion`
 - `unknowns-field-guide`
 - `coding-task-controller`
