@@ -1,927 +1,250 @@
 ---
 name: codebase-slimming
-description: Structured workflow for reducing duplicated, bloated, AI-generated, temporary-patch, or dangerous code without changing behavior. Use when the user asks to slim a codebase, reduce effective code lines, replace dangerous implementations, remove duplicate logic, or create a staged behavior-preserving cleanup plan with baselines, QA checks, suitability decisions, progress tracking, and rollback criteria.
+description: >
+  对代码库进行安全瘦身和可维护性治理。先建立测试、业务行为和数据行为基线，
+  再通过试点模块验证方法，逐步合并重复实现、替换危险代码、移除无效兼容逻辑。
+  禁止代码高尔夫、删除有价值注释、盲目全量重写和单纯以代码行数驱动重构。
+  Use when the user asks to slim a codebase, reduce duplication, replace dangerous
+  implementations, remove dead code, or run staged behavior-preserving cleanup.
 ---
 
 # Codebase Slimming
 
-在功能行为完全不变的前提下，对代码库进行结构化瘦身，减少重复实现、临时补丁、危险抽象、自制框架和不可维护代码。
+在**外部行为、业务规则、接口契约、数据兼容性不变**的前提下，减少重复实现、临时补丁、无效兼容分支、自制基础设施、失控抽象、无法验证的危险代码、AI 堆积冗余，以及已确认无调用/无业务价值的死代码。
 
-本 Skill 不追求“看起来行数更少”，而是追求：
+目标不是“把代码写短”，而是让代码更容易理解、验证、修改、定位问题，且更不容易重新膨胀。
 
-1. 行为可验证。
-2. 结构更清晰。
-3. 重复逻辑更少。
-4. 模块边界更稳定。
-5. 后续 AI / 人工继续开发时不容易重新失控。
+## 指标优先级
 
-## Core Principles
+1. 行为保持不变  
+2. 风险降低  
+3. 重复减少  
+4. 复杂度下降  
+5. 模块边界改善  
+6. 可测试性提高  
+7. 生产代码规模下降（辅助指标）
 
-### 先建立测试和行为基线，再改代码
+补充测试、边界适配器、明确类型或错误处理导致行数暂时增加是允许的。必须分别统计生产 / 测试 / 生成 / 第三方代码。不得用测试膨胀掩盖生产膨胀，也不得为减总行数删测试。
 
-禁止在没有行为基线的情况下直接重构。
+## Non-negotiable Rules
 
-重构前必须先完成：
+1. 无行为基线，不修改核心代码。  
+2. 不删除有价值注释，不靠压缩格式/合并行/晦涩语法制造缩减。  
+3. 不进行一次性全库重写。  
+4. 每个修改批次必须可验证、可回滚。  
+5. 测试或验收失败时，不得扩大修改范围。  
+6. 不把多个业务差异塞进万能函数；不为少量重复引入更重耦合。  
+7. 不在瘦身中顺便改需求；不把现有缺陷包装为“行为变化”。  
+8. 删除代码前必须提供无行为损失证据。  
+9. Agent 不得单独决定架构级替换；最终工程决策必须人工审核。  
 
-- 页面 / 接口 / 命令 / 定时任务 / 后台任务清单。
-- 关键业务流程清单。
-- 现有自动化测试结果。
-- 缺失测试的补充方案。
-- 可人工验收的 QA 检查清单。
-- 当前代码行数、重复逻辑、复杂模块、危险实现的基线统计。
+其余章节只引用本表，不再重复展开。
 
-如果没有测试，必须先补行为保护，而不是直接瘦身。
+## 禁止代码高尔夫
 
-### 先初步分析，不适合就终止
+禁止：删注释/删测试、合并不相关文件、单行压缩、晦涩运算符、过度链式、反射藏逻辑、字符串驱动代替类型、布尔参数万能方法、配置/元编程黑盒、巨型类、用复杂抽象替换少量稳定可读重复。
 
-必须先做初步评估。如果判断项目无法有效改善，必须直接终止评估，并说明原因。
+**瘦身后必须比瘦身前更容易阅读。**
 
-常见终止条件：
+## 不应立即合并的重复
 
-- 项目无法正常构建或运行，且短时间内无法恢复。
-- 关键业务行为无人能解释，也没有可验证数据。
-- 没有测试、没有验收清单、没有接口样例，且无法补齐。
-- 项目本身规模很小，瘦身收益低于风险。
-- 主要问题不是代码冗余，而是需求不清、数据错误、架构方向错误或业务模型错误。
-- 用户只要求压缩行数，不接受测试、基线和分阶段验证。
-- 需要大范围重写核心业务，但没有足够业务上下文。
+表面相似 ≠ 应合并。默认保留，直到理解业务差异：
 
-终止时必须输出：
+- 变化方向不同，或来自不同领域  
+- 合并会引入跨模块依赖或大量开关参数  
+- 无法准确命名新抽象  
+- 差异历史原因未理解  
+- 重复小且稳定，抽象成本 > 重复成本  
+- 合并后更难测，或故障面扩大  
 
-```text
-评估结论：不建议继续代码瘦身
-主要原因：
-1. ...
-2. ...
-3. ...
+不要机械执行“三次重复就抽象”。
 
-可替代建议：
-1. ...
-2. ...
-```
-
-### 适合重构时，必须明确承诺缩减目标
-
-如果项目适合重构，必须给出明确、可度量的代码缩减目标。
-
-目标格式：
-
-```text
-在功能完全不变、测试和验收清单全部通过的前提下，
-将有效代码行数从 X 行缩减到 Y 行，
-预计缩减 Z%。
-```
-
-注意：
-
-- 目标必须基于初步分析后的证据。
-- 不允许在未分析前随意承诺比例。
-- 不允许只为了达到目标而删除注释、压缩格式、合并无关逻辑。
-- 不允许为了减少行数牺牲可读性、可测试性和模块边界。
-
-### 禁止代码高尔夫式压缩
-
-严禁通过以下方式完成瘦身目标：
-
-- 删除有价值注释。
-- 把多行清晰逻辑压缩成一行。
-- 使用晦涩语法、炫技写法、过度链式调用。
-- 为了减少文件数而合并无关模块。
-- 为了减少行数而牺牲命名清晰度。
-- 把显式业务规则隐藏到复杂表达式中。
-- 用反射、动态调用、字符串拼接等方式绕开类型检查。
-- 把重复代码改成更难理解的万能函数。
-- 将业务差异强行抽象成难以维护的配置黑盒。
-
-瘦身后的代码必须比原代码更容易阅读，而不是更难。
-
-### 逐步替换危险实现
-
-不要一次性推倒重来。优先采用“包围、验证、替换、删除”的方式：
-
-1. 找到危险实现。
-2. 提取其真实行为。
-3. 建立测试或验收用例。
-4. 用清晰实现替换。
-5. 对比旧行为。
-6. 删除旧实现。
-7. 更新进度记录和防回归规则。
-
-危险实现包括：
-
-- 重复复制的业务逻辑。
-- 多套日期 / 金额 / 税率 / 状态转换规则。
-- 自制框架。
-- 临时补丁堆叠。
-- 无边界的工具类。
-- 大型 God Class / God Service。
-- 跨模块直接访问内部数据。
-- 隐式副作用。
-- 魔法字符串和魔法状态码。
-- 无测试保护的核心流程。
-- AI 生成但无人审查的代码。
-
-## Dedicated Progress Folder
-
-所有瘦身过程必须放入独立目录管理。
-
-默认目录：
+## 工作目录
 
 ```text
 .codebase-slimming/
+├── README.md
+├── assessment.md      # 适用性、风险、区间/正式目标
+├── baseline.md
+├── plan.md            # 试点 + 模块计划
+├── progress.md        # 追加执行记录
+├── qa-checklist.md
+├── final-report.md
+├── evidence/          # build, tests, api, database, metrics, screenshots
+├── modules/           # 大项目按模块拆分时使用
+└── guardrails/
 ```
 
-目录结构：
+不要创建无内容价值的文档。中小项目可合并文件；大项目可按模块扩展。  
+模板见 [references/](references/)。
+
+## 规模分级
+
+| Mode | 生产代码 | 文档 | 范围 |
+|------|----------|------|------|
+| **small** | < 30k | minimal | 可全库扫描 |
+| **medium** | 30k–200k | standard | 模块分批 + 必须试点 |
+| **large** | > 200k | strict | 试点领域优先；禁止过早承诺全库精确比例 |
+
+规模只是参考，还需看业务复杂度和外部依赖。
+
+## 流程
 
 ```text
-.codebase-slimming/
-  00-intake.md
-  01-initial-assessment.md
-  02-behavior-baseline.md
-  03-code-metrics.md
-  04-suitability-decision.md
-  05-reduction-target.md
-  06-refactor-plan.md
-  07-progress-log.md
-  08-risk-register.md
-  09-qa-checklist.md
-  10-regression-report.md
-  11-final-report.md
-
-  baselines/
-    build-result.txt
-    test-result.txt
-    api-samples/
-    page-snapshots/
-    command-outputs/
-    database-snapshots/
-    scc-before.json
-    scc-after.json
-
-  decisions/
-    ADR-0001.md
-    ADR-0002.md
-
-  guardrails/
-    CLAUDE.md
-    AGENTS.md
-    lint-rules.md
-    ci-checks.md
-    code-review-checklist.md
-
-  modules/
-    module-name-001.md
-    module-name-002.md
+Scan → Decide → Baseline → Pilot → Refactor → Guard
 ```
 
-禁止把进度记录散落在聊天、临时文件或代码注释中。
+---
 
-## Workflow
+### 1. Scan（只读）
 
-### Phase 0: Intake
+**禁止改生产代码。** 允许读代码、构建、测试、静态分析、统计、搜重复、看依赖与历史，并写入 `.codebase-slimming/`。
 
-先记录项目基本信息。
+检查：
 
-输出到：
+- **健康度**：可构建/可运行/有无稳定测试/启动部署方式  
+- **可验证性**：接口样例、人工验收路径、数据对比、外部依赖可模拟  
+- **问题形态**：重复、God Class、超长方法、无效兜底、死代码、兼容层、自制框架、跨模块泄漏、AI 堆积  
+- **风险**：DB/API/外部系统、并发事务、权限、性能敏感、无人理解的历史逻辑  
+
+统计优先用 `scc`（或同类），区分生产/测试/生成/第三方；排除 `node_modules`、`dist`、`bin`、`obj`、生成物等。证据放入 `evidence/metrics/`。
+
+**完成标准：** 有规模与问题清单，且未改生产代码。
+
+---
+
+### 2. Decide
+
+三选一：`CONTINUE` | `PILOT_ONLY` | `STOP`
+
+| 结论 | 何时 |
+|------|------|
+| **CONTINUE** | 可构建（或低成本恢复）、行为可验证、问题可模块化、收益 > 风险、团队接受基线优先与小批次 |
+| **PILOT_ONLY** | 规模大、测试不足但可补、历史复杂、全库收益难估、多外部依赖、审核机制未建立 |
+| **STOP** | 无法建基线、规则无人确认、真问题是需求/数据/架构方向、收益低、只能靠高尔夫达标、要求跳过测试、即将下线、无法验证 DB/外部行为 |
+
+`STOP` 时输出原因与替代方案，**不得**为完成任务强行继续。
+
+**两级目标：**
+
+- 评估阶段：仅给**区间**（如生产代码预计 −20%～35%），附依据（重复占比、兼容层、死代码候选等）  
+- 试点通过后：再给**正式组合目标**（见 Pilot）  
+
+写入 `assessment.md`（模板：[assessment-template.md](references/assessment-template.md)）。
+
+**完成标准：** 明确 CONTINUE / PILOT_ONLY / STOP；非 STOP 时有区间目标与依据。
+
+---
+
+### 3. Baseline
+
+无基线不改核心代码。基线可来自：自动化/集成测试、接口样例、页面清单、CLI 输出、DB 前后对比、日志、已知场景、人工验收。覆盖不足时先补最小特征测试与验收清单。
+
+写入 `baseline.md`、`qa-checklist.md`、`evidence/`（模板：[baseline-template.md](references/baseline-template.md)）。
+
+至少覆盖：构建、测试、关键 API、关键 UI/流程、数据行为、外部系统、**已知缺陷**（`PRESERVE_TEMPORARILY` / `FIX_SEPARATELY` / `UNCONFIRMED`）。不要在瘦身中偷偷修业务 bug。
+
+**完成标准：** 关键路径可重复验证；证据可定位。
+
+---
+
+### 4. Pilot（全库前必做）
+
+选中等复杂度、边界清晰、有重复、有一定测试或易补测、**非**支付/权限/结算/高并发/无人理解核心的模块。
+
+步骤：描述行为 → 补最小测试 → 改前指标 → 识别问题 → 小批次替换 → 测试/QA → 可读性人工审 → 改后指标 → 决定扩大/调整/终止。
+
+**通过：** 构建与测试通过；行为/数据未变；无新跨模块依赖；可读性改善；重复或复杂度实际下降；可独立回滚；收益达预估合理范围。  
+
+**失败：** 行为难确认、测不住差异、可读性变差、分支爆炸、回归频繁、收益远低于预估等 → 调整目标或终止，**禁止扩大范围**。
+
+试点通过后设正式**组合目标**示例：
 
 ```text
-.codebase-slimming/00-intake.md
+- 生产代码减少不少于 25%
+- 重复实现减少不少于 60%
+- 超大类减少不少于 50%
+- 高复杂度方法减少不少于 50%
+- 核心路径具备自动化测试或明确 QA 基线
+- 不新增跨模块反向依赖
 ```
 
-必须包含：
+可含行数目标，但不得只有行数目标。写入 `plan.md`。
 
-```markdown
-# Intake
+**完成标准：** 试点通过/失败有记录；通过后才有正式目标。
 
-## Repository
+---
 
-- Name:
-- Path:
-- Main language:
-- Framework:
-- Runtime:
-- Database:
-- Build command:
-- Test command:
-- Start command:
+### 5. Refactor
 
-## Business Scope
-
-- Main product:
-- Core users:
-- Core workflows:
-- Critical modules:
-
-## User Goal
-
-- Why slimming is needed:
-- Current pain:
-- Expected outcome:
-
-## Hard Constraints
-
-- Must not change:
-- Must preserve:
-- External integrations:
-- Database compatibility:
-- API compatibility:
-- UI compatibility:
-```
-
-### Phase 1: Initial Assessment
-
-先分析，不直接修改代码。
-
-输出到：
+标准链路：
 
 ```text
-.codebase-slimming/01-initial-assessment.md
+识别 → 理解 → 包围 → 替换 → 对比 → 切换 → 验证 → 删除 → 记录
 ```
 
-必须检查：
+**优先级：** 低风险高收益（死代码、完全相同的复制粘贴）→ 中风险结构（重复校验/状态机、God Service）→ 高风险核心（事务/并发/财务/权限/外部幂等，需更强证据与人工审）。
 
-- 项目是否能构建。
-- 项目是否能运行。
-- 测试是否存在。
-- 核心入口是否清晰。
-- 模块边界是否清晰。
-- 是否存在明显重复实现。
-- 是否存在 AI 代码膨胀痕迹。
-- 是否存在高风险业务逻辑。
-- 是否存在不可替换的历史兼容逻辑。
-- 是否有足够样例可以建立行为基线。
+合并重复前必须确认：行为真相同？差异是业务还是偶然？依赖方向？可命名？会否开关参数爆炸？故障面？更易测？答不上来就不合并。
 
-建议使用的分析维度：
+自制框架仅在无独特业务能力、成熟库可覆盖、可测可回滚可渐进时替换。局部重写须行为完整描述、边界清晰、可并行对比、**已获人工批准**。
 
-```text
-1. 构建健康度
-2. 测试健康度
-3. 代码重复度
-4. 模块边界
-5. 业务规则显式程度
-6. 危险实现数量
-7. 可验证性
-8. 瘦身收益
-9. 重构风险
-10. 是否适合继续
-```
+每批至少：构建、单测、集成测、模块 QA、API/数据检查、静态分析/依赖方向（按项目能力）、可读性审查。回归则停扩、定位批次、修复或回滚。
 
-### Phase 2: Code Metrics Baseline
+追加 `progress.md`（模板：[progress-template.md](references/progress-template.md)）。  
+回归检查见 [regression-template.md](references/regression-template.md)。
 
-使用工具统计有效代码行数。默认推荐使用 `scc`。
+**回滚/暂停触发：** 构建/测试非预期失败；行为/API/DB/幂等/事务/权限变化；错误被吞；可观测性下降；更难读；条件分支爆炸；不合理跨模块依赖；性能明显下降；无法证明删除无行为损失。
 
-输出到：
+**完成标准：** 约定范围内批次均 PASS；进度与证据完整。
 
-```text
-.codebase-slimming/03-code-metrics.md
-.codebase-slimming/baselines/scc-before.json
-```
+---
 
-统计口径：
+### 6. Guard
 
-- 只统计有效代码行。
-- 不把删除注释作为瘦身成果。
-- 不把空行变化作为瘦身成果。
-- 不把格式压缩作为瘦身成果。
+防止再膨胀。写入 `guardrails/`，并同步到 `CLAUDE.md` / `AGENTS.md` / CI / lint / PR 模板 / 评审清单 / 架构测试（按项目）。模板：[guardrails-template.md](references/guardrails-template.md)。
 
-记录格式：
+必须：新增工具/日期/金额/状态/校验/客户端/DAO 等前先搜索已有实现；AI 改码前说明复用与新抽象/新依赖，附测试与行为证据；逐步加构建/测试/重复/复杂度/依赖方向等 CI，避免过度严格。
 
-```markdown
-# Code Metrics Baseline
+**完成标准：** 护栏落地且不阻断正常开发。
 
-## Tool
+---
 
-- Tool: scc
-- Date:
-- Command:
-
-## Before
-
-| Language | Files | Code Lines | Comment Lines | Blank Lines |
-|---|---:|---:|---:|---:|
-| C# | | | | |
-| TypeScript | | | | |
-| SQL | | | | |
-| Total | | | | |
-
-## Excluded Paths
-
-- bin/
-- obj/
-- node_modules/
-- dist/
-- build/
-- generated/
-- migrations/only-if-generated
-```
-
-### Phase 3: Behavior Baseline
-
-正式修改代码前，必须建立行为基线。
-
-输出到：
-
-```text
-.codebase-slimming/02-behavior-baseline.md
-.codebase-slimming/09-qa-checklist.md
-```
-
-行为基线至少包括：
-
-```markdown
-# Behavior Baseline
-
-## Build Baseline
-
-- Build command:
-- Result:
-- Errors:
-- Warnings:
-
-## Test Baseline
-
-- Test command:
-- Passed:
-- Failed:
-- Skipped:
-
-## API Baseline
-
-| API | Method | Input Sample | Expected Output | Status |
-|---|---|---|---|---|
-
-## UI Baseline
-
-| Page | Main Behavior | Verification Method | Status |
-|---|---|---|---|
-
-## Business Workflow Baseline
-
-| Workflow | Steps | Expected Result | Verification Method |
-|---|---|---|---|
-
-## Data Baseline
-
-| Scenario | Input Data | Expected Data Change | Verification |
-|---|---|---|---|
-
-## Known Existing Bugs
-
-| Bug | Existing Behavior | Must Preserve? | Notes |
-|---|---|---|---|
-```
-
-原则：
-
-- 已知旧 bug 要记录清楚。
-- 不要把旧 bug 当作重构引入的问题。
-- 但也不要在瘦身中顺手修业务 bug，除非用户明确要求。
-- 代码瘦身默认目标是行为不变。
-
-### Phase 4: Suitability Decision
-
-完成初步分析后，必须做继续 / 终止决策。
-
-输出到：
-
-```text
-.codebase-slimming/04-suitability-decision.md
-```
-
-模板：
-
-```markdown
-# Suitability Decision
-
-## Decision
-
-继续 / 终止
-
-## Summary
-
-一句话说明是否适合代码瘦身。
-
-## Evidence
-
-| Evidence | Observation | Impact |
-|---|---|---|
-
-## Main Risks
-
-| Risk | Severity | Mitigation |
-|---|---|---|
-
-## Final Judgment
-
-如果继续：
-
-本项目适合进行代码库瘦身，因为：
-1. ...
-2. ...
-3. ...
-
-如果终止：
-
-本项目不适合继续代码库瘦身，因为：
-1. ...
-2. ...
-3. ...
-
-建议改为：
-1. ...
-2. ...
-```
-
-### Phase 5: Reduction Target
-
-只有在判断适合继续后，才能设置缩减目标。
-
-输出到：
-
-```text
-.codebase-slimming/05-reduction-target.md
-```
-
-模板：
-
-```markdown
-# Reduction Target
-
-## Baseline
-
-- Current effective code lines:
-- Measurement tool:
-- Measurement date:
-
-## Target
-
-在功能完全不变、测试和 QA 检查清单全部通过的前提下，
-将有效代码行数从 `X` 行缩减到 `Y` 行，
-目标缩减 `Z%`。
-
-## Scope Included
-
-- Module A
-- Module B
-- Module C
-
-## Scope Excluded
-
-- Generated code
-- Third-party code
-- Migrations
-- Historical archive
-- Vendor directory
-
-## Non-Negotiable Rules
-
-1. 不删除有价值注释来制造缩减。
-2. 不使用代码高尔夫式压缩。
-3. 不降低可读性。
-4. 不改变外部 API 行为。
-5. 不改变数据库兼容性。
-6. 不改变用户可见行为。
-7. 不绕过测试。
-8. 不隐藏业务规则。
-```
-
-### Phase 6: Refactor Plan
-
-输出到：
-
-```text
-.codebase-slimming/06-refactor-plan.md
-```
-
-重构计划必须按模块拆分，不允许一次性大爆炸修改。
-
-模板：
-
-```markdown
-# Refactor Plan
-
-## Strategy
-
-采用分阶段、可回滚、行为保持的瘦身方式。
-
-## Module Plan
-
-| Order | Module | Problem | Action | Expected Reduction | Risk | Baseline Required |
-|---:|---|---|---|---:|---|---|
-| 1 | | | | | | |
-| 2 | | | | | | |
-
-## Refactor Patterns
-
-### Merge Duplicate Logic
-
-适用于：
-
-- 多套日期格式化。
-- 多套金额计算。
-- 多套状态转换。
-- 多套 API 参数组装。
-- 多套校验逻辑。
-
-要求：
-
-- 先列出所有重复实现。
-- 对比行为差异。
-- 抽出统一实现。
-- 为差异保留明确配置或策略。
-- 删除旧实现。
-
-### Replace Homegrown Framework
-
-适用于：
-
-- 自制路由。
-- 自制依赖注入。
-- 自制状态管理。
-- 自制日期 / 金额 / 权限 / 校验框架。
-
-要求：
-
-- 先确认自制框架的真实行为。
-- 只替换无业务差异的部分。
-- 对历史兼容行为建立测试。
-- 禁止为了“用库”而引入更复杂依赖。
-
-### Extract Actual Behavior Then Rewrite
-
-适用于：
-
-- 已经不可维护的模块。
-- 大量补丁叠加的逻辑。
-- 无法安全局部修改的危险实现。
-
-要求：
-
-- 先提炼行为。
-- 写行为测试。
-- 新实现并行验证。
-- 通过后替换入口。
-- 最后删除旧实现。
-```
-
-### Phase 7: Progress Management
-
-每一次瘦身修改都必须记录进度。
-
-输出到：
-
-```text
-.codebase-slimming/07-progress-log.md
-```
-
-模板：
-
-```markdown
-# Progress Log
-
-## Entry Template
-
-### YYYY-MM-DD / Step N
-
-## Target
-
-本次处理的模块：
-
-## Before
-
-- Files:
-- Effective code lines:
-- Main problems:
-
-## Action
-
-- 合并了：
-- 删除了：
-- 替换了：
-- 保留了：
-
-## After
-
-- Files:
-- Effective code lines:
-- Reduction:
-- Tests:
-
-## Behavior Verification
-
-- Build:
-- Unit tests:
-- Integration tests:
-- Manual QA:
-- API checks:
-
-## Risk Notes
-
-- Risk:
-- Mitigation:
-
-## Decision
-
-继续 / 回滚 / 暂停
-```
-
-### Phase 8: Regression Check
-
-每个阶段结束后必须做回归检查。
-
-输出到：
-
-```text
-.codebase-slimming/10-regression-report.md
-```
-
-必须检查：
-
-- 构建是否通过。
-- 自动化测试是否通过。
-- 关键页面是否正常。
-- 核心接口是否兼容。
-- 数据库读写是否兼容。
-- 外部系统调用是否兼容。
-- 日志是否仍可追踪。
-- 错误处理是否没有被吞掉。
-- 性能是否没有明显退化。
-- 删除的代码是否确实无引用、无行为损失。
-
-模板：
-
-```markdown
-# Regression Report
-
-## Summary
-
-- Date:
-- Commit:
-- Result:
-
-## Checks
-
-| Check | Result | Evidence |
-|---|---|---|
-| Build | | |
-| Unit Tests | | |
-| Integration Tests | | |
-| API Compatibility | | |
-| UI Behavior | | |
-| Database Compatibility | | |
-| External Integrations | | |
-| Logs / Observability | | |
-| Performance Smoke Test | | |
-
-## Failed Checks
-
-| Check | Failure | Fix / Decision |
-|---|---|---|
-
-## Conclusion
-
-通过 / 不通过 / 需要回滚
-```
-
-### Phase 9: Engineering Guardrails
-
-瘦身完成后，必须添加防止代码重新膨胀的工程护栏。
-
-输出到：
-
-```text
-.codebase-slimming/guardrails/
-```
-
-至少包括：
-
-```text
-CLAUDE.md
-AGENTS.md
-lint-rules.md
-ci-checks.md
-code-review-checklist.md
-```
-
-护栏必须覆盖：
-
-- 禁止重复实现已有逻辑。
-- 新增功能前必须搜索已有模块。
-- 新增工具函数前必须证明没有现成实现。
-- 禁止无测试修改核心业务。
-- 禁止绕开模块边界。
-- 禁止为局部修复引入全局副作用。
-- 禁止 AI 在没有人工确认的情况下重写核心模块。
-- 每次 AI 修改后必须运行构建、测试和关键检查。
-- 大型改动必须拆成小 PR / 小提交。
-- 删除代码必须说明行为等价证据。
-
-## Required Output Format
-
-每次执行本 Skill，必须按以下顺序输出：
+## 阶段输出（每次执行）
 
 ```markdown
 # 代码库瘦身执行报告
 
 ## 1. 当前阶段
-
-Intake / Initial Assessment / Baseline / Suitability Decision / Refactor / Regression / Final
+Scan / Decide / Baseline / Pilot / Refactor / Guard
 
 ## 2. 本次结论
-
-继续 / 终止 / 暂停 / 回滚
+CONTINUE / PILOT_ONLY / STOP / PASS / ROLLBACK / PAUSE
 
 ## 3. 关键发现
-
 1. ...
-2. ...
-3. ...
 
 ## 4. 行为基线状态
+Build / Tests / API / UI / Data
 
-- Build:
-- Tests:
-- API:
-- UI:
-- Data:
-
-## 5. 代码规模状态
-
-- Before:
-- Current:
-- Target:
-- Reduction:
+## 5. 指标（生产 vs 测试分开）
+Before / Current / Range-or-Target / Notes
 
 ## 6. 风险
-
 | Risk | Severity | Mitigation |
-|---|---|---|
 
 ## 7. 下一步
-
 1. ...
-2. ...
-3. ...
 ```
 
-## Final Report
+## 最终报告
 
-完成后输出：
+写入 `final-report.md`。结论：`COMPLETED` / `PARTIAL` / `STOPPED`。
 
-```text
-.codebase-slimming/11-final-report.md
-```
+表格至少含：生产/测试行数、重复、超大类、高复杂度方法、无测试核心路径；行为验证（Build/单测/集成/API/UI/DB/外部/性能）；替换的危险实现；未完成项；护栏；剩余风险。
 
-模板：
+**COMPLETED 条件（同时满足）：** 约定范围完成；构建与测试/QA 通过；API 与 DB 兼容；正式目标达成或偏差可解释；无高尔夫、未删测试/有价值注释、未引入更危险通用抽象；护栏落地；人工审核通过。
 
-```markdown
-# Final Codebase Slimming Report
+## 一句话规则
 
-## Summary
-
-在功能行为保持不变的前提下，完成代码库瘦身。
-
-## Target vs Actual
-
-| Metric | Before | Target | Actual |
-|---|---:|---:|---:|
-| Effective code lines | | | |
-| Files | | | |
-| Duplicate implementations | | | |
-| Dangerous modules | | | |
-
-## Reduction Result
-
-- Target reduction:
-- Actual reduction:
-- Completion ratio:
-
-## Behavior Verification
-
-| Check | Result |
-|---|---|
-| Build | |
-| Unit Tests | |
-| Integration Tests | |
-| QA Checklist | |
-| API Compatibility | |
-| UI Compatibility | |
-| Database Compatibility | |
-
-## Major Changes
-
-1. ...
-2. ...
-3. ...
-
-## Removed / Replaced Dangerous Implementations
-
-| Old Implementation | New Implementation | Reason |
-|---|---|---|
-
-## Guardrails Added
-
-1. CLAUDE.md
-2. AGENTS.md
-3. Lint rules
-4. CI checks
-5. Code review checklist
-
-## Remaining Risks
-
-| Risk | Recommendation |
-|---|---|
-
-## Maintenance Recommendations
-
-1. 新增功能前先搜索已有实现。
-2. 每次 AI 修改必须附带测试或验收证据。
-3. 每周检查重复逻辑和无用代码。
-4. 每个核心模块必须有明确负责人或边界说明。
-5. 禁止让 Agent 单独决定架构级变更。
-```
-
-## Decision Rules
-
-### Continue
-
-满足以下条件时继续：
-
-- 项目可以构建或可快速恢复构建。
-- 核心行为可以被测试或人工验收。
-- 重复逻辑明显。
-- 危险实现可以逐步替换。
-- 用户接受行为基线优先。
-- 用户接受不使用代码高尔夫式压缩。
-- 预估收益明显高于风险。
-
-### Stop
-
-满足以下条件时停止：
-
-- 无法建立行为基线。
-- 无法确认核心业务规则。
-- 缩减目标只能靠删除注释或压缩格式完成。
-- 重构风险高于收益。
-- 用户要求跳过测试直接删代码。
-- 项目真正问题不是代码膨胀。
-- 代码已经足够小，瘦身没有实际价值。
-
-### Roll Back
-
-满足以下条件时回滚：
-
-- 构建失败且无法快速修复。
-- 测试出现非预期回归。
-- 核心业务流程行为变化。
-- API 兼容性被破坏。
-- 数据库读写行为变化。
-- 新实现比旧实现更难理解。
-- 抽象过度，导致维护成本上升。
-
-## Agent Behavior Rules
-
-AI 可以做：
-
-- 搜索重复代码。
-- 生成统计报告。
-- 整理行为清单。
-- 建议重构方案。
-- 编写测试。
-- 提交小范围重构补丁。
-- 更新进度文件。
-- 运行构建和测试。
-- 生成最终报告。
-
-AI 不可以做：
-
-- 在无基线情况下直接大规模删除代码。
-- 单独决定核心架构替换。
-- 隐藏行为差异。
-- 为达成行数目标牺牲可读性。
-- 删除注释制造成果。
-- 把代码压缩成难读形式。
-- 一次性重写大模块。
-- 忽略测试失败。
-- 把已知回归标记为成功。
-
-最终决策必须由工程师确认，Agent 没有最终投票权。
-
-## Quality Bar
-
-瘦身后的代码必须满足：
-
-1. 更少重复。
-2. 更少危险实现。
-3. 更清晰命名。
-4. 更明确模块边界。
-5. 更容易测试。
-6. 更容易调试。
-7. 更容易继续开发。
-8. 行为与原系统一致。
-9. 代码行数真实减少。
-10. 没有代码高尔夫式压缩。
-
-## One-Sentence Rule
-
-代码库瘦身不是把代码写短，而是在行为可验证的前提下，把重复、危险、失控的实现替换成更少、更清晰、更可维护的结构。
+> 代码库瘦身不是把代码压缩得更短，而是在行为可验证的前提下，逐步移除重复、危险和失控的实现，使系统更小、更清晰、更容易长期维护。
