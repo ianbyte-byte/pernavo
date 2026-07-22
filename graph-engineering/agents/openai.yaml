@@ -1,0 +1,4 @@
+interface:
+  display_name: "Graph Engineering"
+  short_description: "Design explicit multi-agent workflows"
+  default_prompt: "Use $graph-engineering to decide whether this task needs a loop, graph, or degraded workflow, then execute the lightest reliable topology."

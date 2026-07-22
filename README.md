@@ -21,3 +21,4 @@ npx skills add https://github.com/tuloong/loongclaude --all
 - `gpt55-fusion`
 - `unknowns-field-guide`
 - `coding-task-controller`
+- `graph-engineering`
