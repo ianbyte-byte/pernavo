@@ -1,0 +1,5 @@
+row_id=waiting
+selected_source=/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/waiting-generated.png
+invocation=image_gen__imagegen built-in mode with reference-01.jpg, reference-02.jpg, reference-03.jpg, layout-guides/waiting.png (layout-only), and canonical-base.png
+binary_observable=PNG RGB 2172x724; six equal 362px-wide frame slots; flat pure-green corner pixels
+visual_qa=Six separated, centered, unclipped full-body poses; stable warm-brown kitten identity with white sailor dress, pale lemon bands, navy rosette, and both attached long copper twin-tail tufts in every frame; expectant approval/help/user-input gestures visibly distinct from idle and review; patient connected loop with open paws, hopeful clasped paws, palm-up ask, lean, and blink variations; no text, UI, punctuation, symbols, shadows, detached effects, or guide marks.

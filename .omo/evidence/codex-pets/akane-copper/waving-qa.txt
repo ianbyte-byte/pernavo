@@ -1,0 +1,5 @@
+scenario=waving row generation
+invocation=built-in imagegen with reference-01.jpg, reference-02.jpg, references/layout-guides/waving.png, and references/canonical-base.png attached in that order; prompt=prompts/rows/waving.md
+binary_observable=sips reports pixelWidth=2172 and pixelHeight=724 for waving-generated.png; four visually separated complete full-body poses are present left-to-right; paw-only gesture progresses down, raised, tilted, and returning; sha256=3946aa5a12b121ee0ae9c3d5c966437fc38b1b144810b37a597475bf6644907b
+artifact=/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/akane-copper/waving-generated.png
+qa=stable copper fox identity and baseline across 4 frames; clean green chroma field; no wave marks/lines/sparkles/shadows/detached effects/guide marks; no clipping or overlap

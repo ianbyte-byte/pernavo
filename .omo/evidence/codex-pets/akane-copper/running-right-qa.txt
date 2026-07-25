@@ -1,0 +1,5 @@
+scenario=running-right row generation
+invocation=built-in imagegen with reference-01.jpg, reference-02.jpg, references/layout-guides/running-right.png, and references/canonical-base.png attached in that order
+binary_observable=sips reports pixelWidth=2172 and pixelHeight=724 for selected-output.png; sha256=e5907017cb72dc123b3f9b42b3fff82d2f49a65bfab000a063fd874106d87bac; visual inspection confirms 8 separated frame silhouettes across the horizontal strip
+artifact=/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/akane-copper/selected-output.png
+qa=8 complete right-facing running frames; stable identity and baseline; alternating gait; flat pure green background; no clipping, guides, shadows, speed lines, dust, or detached effects

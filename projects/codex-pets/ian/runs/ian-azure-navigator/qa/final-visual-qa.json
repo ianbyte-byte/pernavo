@@ -1,0 +1,19 @@
+{
+  "reviewer": "independent-final-gate",
+  "pass": true,
+  "blockers": [],
+  "nonBlockingWarnings": [
+    "Blind review warnings are limited to non-cardinal review pairs; hard cardinal gates passed.",
+    "Continuity diagnostics report tiny natural negative-space holes and one wraparound pixel-diff outlier that are not visible defects."
+  ],
+  "evidence": [
+    "qa/contact-sheet-extended.png",
+    "qa/look-directions.png",
+    "final/validation-extended.json",
+    "qa/direction-blind-validation.json",
+    "qa/direction-visual-qa.json",
+    "qa/look-continuity.json",
+    "qa/chroma-despill-extended.json",
+    "qa/review.json"
+  ]
+}

@@ -1,0 +1,980 @@
+{
+  "ok": false,
+  "frames_root": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto",
+  "states": [
+    "idle",
+    "running-right",
+    "running-left",
+    "waving",
+    "jumping",
+    "failed",
+    "waiting",
+    "running",
+    "review"
+  ],
+  "errors": [
+    "idle used extraction method slots; regenerate the row or inspect slot slicing",
+    "jumping used extraction method slots; regenerate the row or inspect slot slicing"
+  ],
+  "warnings": [],
+  "rows": [
+    {
+      "state": "idle",
+      "expected_frames": 6,
+      "actual_frames": 6,
+      "extraction_method": "slots",
+      "ok": false,
+      "errors": [
+        "idle used extraction method slots; regenerate the row or inspect slot slicing"
+      ],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/idle/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 22203,
+          "bbox": [
+            16,
+            5,
+            176,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 406
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/idle/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 23744,
+          "bbox": [
+            8,
+            5,
+            183,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 446
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/idle/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 23557,
+          "bbox": [
+            9,
+            5,
+            183,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 422
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/idle/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 23764,
+          "bbox": [
+            8,
+            5,
+            183,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 432
+        },
+        {
+          "index": 4,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/idle/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 23912,
+          "bbox": [
+            8,
+            5,
+            184,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 432
+        },
+        {
+          "index": 5,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/idle/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 22155,
+          "bbox": [
+            17,
+            5,
+            175,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 422
+        }
+      ]
+    },
+    {
+      "state": "running-right",
+      "expected_frames": 8,
+      "actual_frames": 8,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/running-right/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 22204,
+          "bbox": [
+            11,
+            5,
+            180,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 489
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/running-right/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 21350,
+          "bbox": [
+            11,
+            5,
+            181,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 580
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/running-right/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 19997,
+          "bbox": [
+            12,
+            5,
+            180,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 418
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/running-right/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 21661,
+          "bbox": [
+            9,
+            5,
+            182,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 523
+        },
+        {
+          "index": 4,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/running-right/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 21233,
+          "bbox": [
+            10,
+            5,
+            181,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 474
+        },
+        {
+          "index": 5,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/running-right/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 20400,
+          "bbox": [
+            11,
+            5,
+            181,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 514
+        },
+        {
+          "index": 6,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/running-right/06.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 19754,
+          "bbox": [
+            15,
+            5,
+            176,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 443
+        },
+        {
+          "index": 7,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/running-right/07.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 21522,
+          "bbox": [
+            12,
+            5,
+            179,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 537
+        }
+      ]
+    },
+    {
+      "state": "running-left",
+      "expected_frames": 8,
+      "actual_frames": 8,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/running-left/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 22474,
+          "bbox": [
+            5,
+            5,
+            187,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 525
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/running-left/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 21216,
+          "bbox": [
+            13,
+            5,
+            179,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 564
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/running-left/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 19745,
+          "bbox": [
+            14,
+            5,
+            177,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 406
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/running-left/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 21587,
+          "bbox": [
+            10,
+            5,
+            182,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 521
+        },
+        {
+          "index": 4,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/running-left/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 21233,
+          "bbox": [
+            10,
+            5,
+            181,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 474
+        },
+        {
+          "index": 5,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/running-left/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 20400,
+          "bbox": [
+            11,
+            5,
+            181,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 514
+        },
+        {
+          "index": 6,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/running-left/06.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 19754,
+          "bbox": [
+            15,
+            5,
+            176,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 443
+        },
+        {
+          "index": 7,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/running-left/07.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 21542,
+          "bbox": [
+            13,
+            5,
+            178,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 510
+        }
+      ]
+    },
+    {
+      "state": "waving",
+      "expected_frames": 4,
+      "actual_frames": 4,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/waving/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 23902,
+          "bbox": [
+            6,
+            5,
+            186,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 303
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/waving/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 23962,
+          "bbox": [
+            7,
+            5,
+            185,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 292
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/waving/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 22639,
+          "bbox": [
+            5,
+            6,
+            187,
+            202
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 264
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/waving/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 23866,
+          "bbox": [
+            6,
+            5,
+            185,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 282
+        }
+      ]
+    },
+    {
+      "state": "jumping",
+      "expected_frames": 5,
+      "actual_frames": 5,
+      "extraction_method": "slots",
+      "ok": false,
+      "errors": [
+        "jumping used extraction method slots; regenerate the row or inspect slot slicing"
+      ],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/jumping/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 21091,
+          "bbox": [
+            5,
+            23,
+            187,
+            185
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 309
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/jumping/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 22339,
+          "bbox": [
+            5,
+            6,
+            187,
+            201
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 357
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/jumping/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 23882,
+          "bbox": [
+            5,
+            6,
+            187,
+            202
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 332
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/jumping/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 23041,
+          "bbox": [
+            5,
+            6,
+            187,
+            201
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 361
+        },
+        {
+          "index": 4,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/jumping/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 23623,
+          "bbox": [
+            10,
+            5,
+            182,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 321
+        }
+      ]
+    },
+    {
+      "state": "failed",
+      "expected_frames": 8,
+      "actual_frames": 8,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/failed/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 20591,
+          "bbox": [
+            29,
+            5,
+            162,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 264
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/failed/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 25859,
+          "bbox": [
+            18,
+            5,
+            173,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 329
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/failed/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 25713,
+          "bbox": [
+            18,
+            5,
+            174,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 376
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/failed/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 27889,
+          "bbox": [
+            5,
+            5,
+            187,
+            202
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 424
+        },
+        {
+          "index": 4,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/failed/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 27479,
+          "bbox": [
+            13,
+            5,
+            178,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 342
+        },
+        {
+          "index": 5,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/failed/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 29801,
+          "bbox": [
+            5,
+            5,
+            187,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 394
+        },
+        {
+          "index": 6,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/failed/06.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 17220,
+          "bbox": [
+            5,
+            44,
+            187,
+            163
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 201
+        },
+        {
+          "index": 7,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/failed/07.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 15469,
+          "bbox": [
+            5,
+            48,
+            187,
+            159
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 224
+        }
+      ]
+    },
+    {
+      "state": "waiting",
+      "expected_frames": 6,
+      "actual_frames": 6,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/waiting/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 22021,
+          "bbox": [
+            15,
+            5,
+            177,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 331
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/waiting/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 21026,
+          "bbox": [
+            23,
+            5,
+            169,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 319
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/waiting/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 21550,
+          "bbox": [
+            23,
+            5,
+            169,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 302
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/waiting/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 21688,
+          "bbox": [
+            23,
+            5,
+            168,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 333
+        },
+        {
+          "index": 4,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/waiting/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 21477,
+          "bbox": [
+            23,
+            5,
+            169,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 343
+        },
+        {
+          "index": 5,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/waiting/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 23006,
+          "bbox": [
+            13,
+            5,
+            179,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 364
+        }
+      ]
+    },
+    {
+      "state": "running",
+      "expected_frames": 6,
+      "actual_frames": 6,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/running/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 22339,
+          "bbox": [
+            16,
+            5,
+            175,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 351
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/running/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 21551,
+          "bbox": [
+            24,
+            5,
+            167,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 343
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/running/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 21278,
+          "bbox": [
+            27,
+            5,
+            165,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 301
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/running/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 20292,
+          "bbox": [
+            29,
+            5,
+            163,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 314
+        },
+        {
+          "index": 4,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/running/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 20353,
+          "bbox": [
+            30,
+            5,
+            162,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 314
+        },
+        {
+          "index": 5,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/running/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 21458,
+          "bbox": [
+            23,
+            5,
+            168,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 322
+        }
+      ]
+    },
+    {
+      "state": "review",
+      "expected_frames": 6,
+      "actual_frames": 6,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/review/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 23503,
+          "bbox": [
+            5,
+            5,
+            186,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 553
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/review/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 21592,
+          "bbox": [
+            18,
+            5,
+            174,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 493
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/review/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 23484,
+          "bbox": [
+            8,
+            5,
+            184,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 561
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/review/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 21587,
+          "bbox": [
+            18,
+            5,
+            174,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 511
+        },
+        {
+          "index": 4,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/review/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 21861,
+          "bbox": [
+            15,
+            5,
+            176,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 516
+        },
+        {
+          "index": 5,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/frames-auto/review/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 23111,
+          "bbox": [
+            5,
+            5,
+            186,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 510
+        }
+      ]
+    }
+  ]
+}

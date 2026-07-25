@@ -1,0 +1,15 @@
+{
+  "ok": true,
+  "reviewed_by": "independent visual QA worker",
+  "directions": [
+    {"direction":"000","verdict":"pass","expected":"up","observed":"up","reason":"pupils high with lifted brows and raised chin"},
+    {"direction":"022.5","verdict":"pass","expected":"up-right","observed":"up-right","reason":"nose and pupils shift right and up"},
+    {"direction":"045","verdict":"pass","expected":"up-right","observed":"up-right","reason":"three-quarter right with elevated gaze"},
+    {"direction":"067.5","verdict":"pass","expected":"up-right","observed":"up-right","reason":"near-profile right with upward cue"},
+    {"direction":"090","verdict":"pass","expected":"right","observed":"right","reason":"unambiguous screen-right profile"},
+    {"direction":"112.5","verdict":"pass","expected":"down-right","observed":"down-right","reason":"right profile with lowered eyes and beginning chin tuck"},
+    {"direction":"135","verdict":"pass","expected":"down-right","observed":"down-right","reason":"head and gaze continue down-right"},
+    {"direction":"157.5","verdict":"pass","expected":"down-right","observed":"down-right","reason":"strong down-right gaze with stable registration"}
+  ],
+  "continuity": {"verdict":"pass","reason":"eight non-empty cells, stable identity and baseline, no crop, overlap, reversal, or snap"}
+}

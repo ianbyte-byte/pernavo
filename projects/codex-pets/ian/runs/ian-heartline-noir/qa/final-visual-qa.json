@@ -1,0 +1,18 @@
+{
+  "reviewer": "independent-final-gate",
+  "pass": true,
+  "blockers": [],
+  "nonBlockingWarnings": [
+    "Blind review warnings are limited to ambiguous non-cardinal vertical samples; hard cardinal gates passed."
+  ],
+  "evidence": [
+    "qa/contact-sheet-extended.png",
+    "qa/look-directions.png",
+    "final/validation-extended.json",
+    "qa/direction-blind-validation.json",
+    "qa/direction-visual-qa.json",
+    "qa/look-continuity.json",
+    "qa/chroma-despill-extended.json",
+    "qa/review.json"
+  ]
+}

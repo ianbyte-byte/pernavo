@@ -1,0 +1,12 @@
+look-row-10 QA
+==============
+source: /Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/ao-denim-usagi/look-row-10-generated.png
+source_observable: non-empty PNG, 2172x724 RGB; flat pure-green background; eight complete separated pose groups visible left-to-right.
+source_sha256: 521b5fb996f3047c7a0e41bc7a1d8dc2d1cfc1a729e3b746111f9b55e99bc086
+order: 180, 202.5, 225, 247.5, 270, 292.5, 315, 337.5
+visual_review: pass — identity, denim/copper palette, cap, ears, face construction, scale, planted feet/lower torso, and baseline remain coherent; gaze travels continuously from down/back through screen-left profile to the final near-up-left step; no overlap, outer-edge crop, labels, guides, shadows, detached effects, or whole-sprite rotation observed.
+
+deterministic_invocation: uv run --with pillow --python /Users/chung/.local/share/uv/python/cpython-3.12-macos-aarch64-none/bin/python3.12 /Users/chung/.codex/skills/hatch-pet/scripts/assemble_extended_atlas.py --base-atlas final/spritesheet.webp --registered-row-9 qa/look-row-9-registered.png --row-9-registration qa/look-row-9-registration.json --look-row-10 look-row-10-generated.png --neutral-cell frames/idle/00.png --chroma-key #00FF00 --chroma-threshold 96 --output /private/tmp/ao-row10-qa.bCnGLr/spritesheet-extended.png --webp-output /private/tmp/ao-row10-qa.bCnGLr/spritesheet-extended.webp --manifest-output /private/tmp/ao-row10-qa.bCnGLr/spritesheet-extended.json
+deterministic_observable: exit 0; wrote spritesheet-extended.png, spritesheet-extended.webp, and spritesheet-extended.json; manifest reports 8x11 layout, 16 look directions, and row 10 mapped to columns 0-7 (180 through 337.5).
+deterministic_artifact: /private/tmp/ao-row10-qa.bCnGLr/spritesheet-extended.json
+qa_note: pass — generated source and deterministic extended-atlas registration/edge path both succeed; source is ready for parent copy into decoded/look-row-10.png.

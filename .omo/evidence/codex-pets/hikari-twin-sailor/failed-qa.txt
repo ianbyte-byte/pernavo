@@ -1,0 +1,5 @@
+scenario=failed row generation
+invocation=built-in imagegen with reference-01.jpg, reference-02.jpg, reference-03.jpg, references/layout-guides/failed.png (layout only), and references/canonical-base.png attached in that order; prompt=prompts/rows/failed.md; retry not used because first call succeeded
+binary_observable=sips reports pixelWidth=2172 and pixelHeight=724 for failed-generated.png; file reports 8-bit/color RGB PNG; sha256=f03a8cbd0ebc9984fc32c7bab6cf214cd8f1f9622c7a5b6fbcd45218f1ee7912
+artifact=/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/failed-generated.png
+qa=high-detail visual inspection shows exactly 8 left-to-right full-body poses, one centered pose per slot with clear separation and no clipping; stable warm-brown twin-sailor kitten identity, copper ribbon-tuft ponytails, white sailor dress, pale lemon trim, navy rosette; clear slumped/dejected failure reaction with sad or closed eyes, drooping limbs, lowered body; flat chroma green only; no red X, floating symbols, detached smoke/stars/tears, shadows, guide marks, text, borders, or stray disconnected effects

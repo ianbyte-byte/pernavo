@@ -1,0 +1,150 @@
+{
+  "ok": false,
+  "frames_root": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/failed/frames",
+  "states": [
+    "failed"
+  ],
+  "errors": [
+    "failed frame 03 is empty or too sparse (2 pixels)"
+  ],
+  "warnings": [
+    "failed frame 03 is much smaller than the row median (2 vs 23640)"
+  ],
+  "rows": [
+    {
+      "state": "failed",
+      "expected_frames": 8,
+      "actual_frames": 8,
+      "extraction_method": "components",
+      "ok": false,
+      "errors": [
+        "failed frame 03 is empty or too sparse (2 pixels)"
+      ],
+      "warnings": [
+        "failed frame 03 is much smaller than the row median (2 vs 23640)"
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/failed/frames/failed/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 24109,
+          "bbox": [
+            22,
+            5,
+            170,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 490
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/failed/frames/failed/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 26740,
+          "bbox": [
+            5,
+            13,
+            187,
+            195
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 453
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/failed/frames/failed/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 23171,
+          "bbox": [
+            26,
+            5,
+            165,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 402
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/failed/frames/failed/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 2,
+          "bbox": [
+            95,
+            103,
+            97,
+            104
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 2
+        },
+        {
+          "index": 4,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/failed/frames/failed/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 25792,
+          "bbox": [
+            5,
+            17,
+            187,
+            191
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 484
+        },
+        {
+          "index": 5,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/failed/frames/failed/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 23002,
+          "bbox": [
+            25,
+            5,
+            167,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 401
+        },
+        {
+          "index": 6,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/failed/frames/failed/06.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 13624,
+          "bbox": [
+            5,
+            55,
+            187,
+            152
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 137
+        },
+        {
+          "index": 7,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/failed/frames/failed/07.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 24157,
+          "bbox": [
+            18,
+            5,
+            174,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 472
+        }
+      ]
+    }
+  ]
+}

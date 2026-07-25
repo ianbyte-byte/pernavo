@@ -1,0 +1,5 @@
+Scenario: built-in image generation for hatch-pet look row 9.
+Invocation: image_gen__imagegen with prompts/rows/look-row-9.md-derived prompt and exactly four references: references/layout-guides/look-row-9.png, references/canonical-base.png, qa/contact-sheet.png, decoded/look-anchors-approved.png.
+Binary observable: generated PNG copied byte-for-byte to decoded/look-row-9.png and look-row-9-generated.png (SHA-256 18fcee976fe76442edbf17a91fe78dc4def7487e481dc13aeaf4ab37f28398e7); ffprobe reports codec=png, width=2172, height=724, pix_fmt=rgb24.
+Visual QA: normal-size inspection shows eight separated full-body fox poses in order 000, 022.5, 045, 067.5, 090, 112.5, 135, 157.5 on a flat green background; no overlap, clipping, labels, guides, shadows, or detached effects observed. Eyes/head turn progressively toward screen-right and the last pose flows toward down-right/180.
+Artifacts: decoded/look-row-9.png; look-row-9-generated.png.

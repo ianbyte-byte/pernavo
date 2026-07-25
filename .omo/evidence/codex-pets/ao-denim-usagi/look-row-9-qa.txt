@@ -1,0 +1,20 @@
+look-row-9 QA note
+==================
+
+Selected source: look-row-9-generated.png
+Generation: built-in image_gen, second (single allowed retry) synthesis after the first result showed rear-view drift in the 112.5/135/157.5 poses.
+Source capture: /Users/chung/.codex/generated_images/019f97f8-7f44-7740-93d6-174de8825cdc/exec-008ccd1a-be7d-4c05-88b0-bbd9393777b2.png
+
+Binary checks
+-------------
+- `sips -g pixelWidth -g pixelHeight -g format -g hasAlpha look-row-9-generated.png` -> 2172 x 724, PNG, RGB/no alpha.
+- `file look-row-9-generated.png` -> PNG image data, 2172 x 724, 8-bit/color RGB, non-interlaced.
+
+Visual checks on the saved source
+----------------------------------
+- Exactly eight complete separated pose groups are visible, ordered 000, 022.5, 045, 067.5, 090, 112.5, 135, 157.5 from left to right.
+- Flat pure-green chroma surrounds the pets; no labels, guides, shadows, glows, scenery, detached effects, or whole-sprite rotation are visible.
+- Neighboring groups have clear chroma-only gaps; no overlap or merged foreground.
+- First and last foreground remain inset from the outer canvas edges; no clipping.
+- Feet/lower torso and baseline remain registered across the row; cap, overalls, copper forelock, palette, and scale remain coherent.
+- Right-half look arc is continuous: right-facing cardinal at 090, then visible front/down-tilted faces through 112.5/135/157.5 (no rear-view drift), flowing toward approved 180 down.

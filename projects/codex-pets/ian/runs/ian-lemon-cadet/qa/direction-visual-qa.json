@@ -1,0 +1,13 @@
+{
+  "reviewer": "independent-manual-qa",
+  "surface": "draft-look-directions.png and draft-look-continuity.json",
+  "pass": true,
+  "directionErrors": [],
+  "continuityConcerns": [
+    "157.5 to 180 and 337.5 to 000 are metric outliers, but no visually material scale or baseline jump was found."
+  ],
+  "artifactConcerns": [
+    "Visible chroma fringe is pre-despill and non-blocking."
+  ],
+  "notes": "Cardinals and clockwise intermediates are correct. Identity and pose remain coherent; the warnings reflect hair and head pixel changes rather than visible discontinuities."
+}

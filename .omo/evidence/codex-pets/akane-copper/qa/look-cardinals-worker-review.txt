@@ -1,0 +1,9 @@
+selected_source=/Users/chung/.codex/generated_images/019f97fd-afe8-7af1-b927-b1600301d671/exec-85af12aa-7106-4ecb-a732-f541983132fc.png
+job_id=look-cardinals
+visual_review=pass
+000: frontal face; both pupils high in the eye whites; nose/muzzle lifted toward the top edge.
+090: clear viewer-right yaw; nose tip and pupils are on the screen-right side of head center.
+180: face remains visible and frontal; both pupils low; nose/muzzle points toward the bottom edge.
+270: clear viewer-left yaw; nose tip and pupils are on the screen-left side of head center.
+identity=boots, lower dress baseline, silver heart, navy bow, curled tail attachment, scale, and copper-fox palette remain stable.
+invariants=flat green background; four separated slots; no text, labels, degree marks, arrows, guides, shadows, detached effects, fragments, or chroma-key-colored pet pixels.

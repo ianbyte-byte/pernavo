@@ -1,0 +1,6 @@
+row_id=waiting
+selected_source=/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/ao-denim-usagi/waiting-generated.png
+decoded_output=/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/ao-denim-usagi/decoded/waiting.png
+invocation=image_gen__imagegen built-in mode with reference-01.jpg, reference-02.png, layout-guides/waiting.png (layout-only), and canonical-base.png
+binary_observable=PNG RGB 2172x724; six equal 362px-wide frame slots
+visual_qa=Six separated, centered, unclipped full-body poses; same white bunny with copper-orange forelock/ear tips, backward navy cap, navy denim overalls, white puff sleeves, and light-blue cuff; patient approval/help/user-input gestures are visibly distinct from idle/review; flat pure-green chroma; no text, UI, punctuation, symbols, shadows, detached effects, or guide marks.

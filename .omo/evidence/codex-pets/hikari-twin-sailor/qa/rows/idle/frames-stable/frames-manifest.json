@@ -1,0 +1,26 @@
+{
+  "ok": true,
+  "chroma_key": {
+    "hex": "#00FF00",
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "threshold": 96.0
+  },
+  "rows": [
+    {
+      "state": "idle",
+      "frames": [
+        "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/idle/frames-stable/idle/00.png",
+        "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/idle/frames-stable/idle/01.png",
+        "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/idle/frames-stable/idle/02.png",
+        "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/idle/frames-stable/idle/03.png",
+        "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/idle/frames-stable/idle/04.png",
+        "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/idle/frames-stable/idle/05.png"
+      ],
+      "method": "stable-slots"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "verifiedAt": "2026-07-25T11:31:27Z",
+  "referenceIntegrity": "pass",
+  "yamlParse": "pass",
+  "pets": [
+    {
+      "id": "ian-azure-navigator",
+      "kind": "person",
+      "spriteVersionNumber": 2,
+      "dimensions": "1536x2288",
+      "atlasSha256": "cfaa4e8ca4159b51480a212be4cb231b102af90b360655c7db3c0a7f8cf3a5fb",
+      "repositoryValidation": "pass",
+      "blindHardGates": "pass",
+      "independentFinalQa": "pass",
+      "installedValidation": "pass",
+      "repositoryInstallHashMatch": true
+    },
+    {
+      "id": "ian-heartline-noir",
+      "kind": "person",
+      "spriteVersionNumber": 2,
+      "dimensions": "1536x2288",
+      "atlasSha256": "a275782c3aa3e99804516f1020832be7a969d0fc6a3a252fa2d853bf73449022",
+      "repositoryValidation": "pass",
+      "blindHardGates": "pass",
+      "independentFinalQa": "pass",
+      "installedValidation": "pass",
+      "repositoryInstallHashMatch": true
+    },
+    {
+      "id": "ian-lemon-cadet",
+      "kind": "person",
+      "spriteVersionNumber": 2,
+      "dimensions": "1536x2288",
+      "atlasSha256": "24abea89638e27a60de87e2a7fcc7260e22cc8bd8cfcbd5ae1470b384f7cc149",
+      "repositoryValidation": "pass",
+      "blindHardGates": "pass",
+      "independentFinalQa": "pass",
+      "installedValidation": "pass",
+      "repositoryInstallHashMatch": true
+    }
+  ]
+}

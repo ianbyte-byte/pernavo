@@ -1,0 +1,152 @@
+{
+  "ok": false,
+  "frames_root": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-azure-navigator/qa/rows/running-right/frames-stable",
+  "states": [
+    "running-right"
+  ],
+  "errors": [
+    "running-right frame 03 is empty or too sparse (16 pixels)"
+  ],
+  "warnings": [
+    "running-right used extraction method stable-slots; confirm motion playback remains stable and unclipped",
+    "running-right frame 03 is much smaller than the row median (16 vs 9406)"
+  ],
+  "rows": [
+    {
+      "state": "running-right",
+      "expected_frames": 8,
+      "actual_frames": 8,
+      "extraction_method": "stable-slots",
+      "ok": false,
+      "errors": [
+        "running-right frame 03 is empty or too sparse (16 pixels)"
+      ],
+      "warnings": [
+        "running-right used extraction method stable-slots; confirm motion playback remains stable and unclipped",
+        "running-right frame 03 is much smaller than the row median (16 vs 9406)"
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-azure-navigator/qa/rows/running-right/frames-stable/running-right/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 10595,
+          "bbox": [
+            36,
+            9,
+            156,
+            198
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 241
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-azure-navigator/qa/rows/running-right/frames-stable/running-right/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 9279,
+          "bbox": [
+            47,
+            11,
+            145,
+            196
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 197
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-azure-navigator/qa/rows/running-right/frames-stable/running-right/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 10265,
+          "bbox": [
+            34,
+            10,
+            158,
+            197
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 248
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-azure-navigator/qa/rows/running-right/frames-stable/running-right/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 16,
+          "bbox": [
+            92,
+            88,
+            99,
+            95
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 0
+        },
+        {
+          "index": 4,
+          "file": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-azure-navigator/qa/rows/running-right/frames-stable/running-right/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 8826,
+          "bbox": [
+            50,
+            13,
+            142,
+            197
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 217
+        },
+        {
+          "index": 5,
+          "file": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-azure-navigator/qa/rows/running-right/frames-stable/running-right/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 9533,
+          "bbox": [
+            35,
+            11,
+            156,
+            189
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 197
+        },
+        {
+          "index": 6,
+          "file": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-azure-navigator/qa/rows/running-right/frames-stable/running-right/06.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 8557,
+          "bbox": [
+            49,
+            13,
+            142,
+            196
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 206
+        },
+        {
+          "index": 7,
+          "file": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-azure-navigator/qa/rows/running-right/frames-stable/running-right/07.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 17943,
+          "bbox": [
+            5,
+            13,
+            187,
+            197
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 389
+        }
+      ]
+    }
+  ]
+}

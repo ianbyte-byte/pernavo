@@ -1,0 +1,5 @@
+scenario=review row generation
+invocation=built-in imagegen with reference-01.jpg, reference-02.jpg, references/layout-guides/review.png (layout only), and references/canonical-base.png attached; prompt=prompts/rows/review.md; no retry required
+binary_observable=sips reports pixelWidth=2172 and pixelHeight=724; file reports 8-bit/color RGB PNG; sha256=cd6487bcb013b25471110eec9836fbdd9ca26a2fb9b0706572220f926dd1b686
+artifact=/Users/chung/.codex/generated_images/019f97f3-ba5a-7280-8ae4-e3952ebe150d/exec-0b7a658c-8d31-4c18-8534-058f4a4c99e0.png
+qa=exactly 6 visually separated, unclipped full-body poses left-to-right; stable copper-red fox identity, face, dress panels, heart charm, bow, tail, and baseline; focused review shown by lean, blinks/narrowed eyes, head tilt, and paw positions, distinct from waiting and running; flat pure green chroma field; no new props, papers, magnifier, code, UI, punctuation, symbols, shadows, effects, guides, overlap, or clipping

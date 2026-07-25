@@ -1,0 +1,15 @@
+{
+  "ok": false,
+  "reviewed_by": "independent visual QA worker",
+  "failure": "registered 000 cell is empty except for a two-pixel stray",
+  "directions": {
+    "000": {"verdict": "fail", "observed": "missing", "reason": "no visible face or head"},
+    "022.5": {"verdict": "pass", "observed": "up-right", "reason": "slight right yaw with raised gaze"},
+    "045": {"verdict": "pass", "observed": "up-right", "reason": "three-quarter right with raised gaze"},
+    "067.5": {"verdict": "pass", "observed": "up-right", "reason": "near-profile right with upward cue"},
+    "090": {"verdict": "pass", "observed": "right", "reason": "unambiguous right profile"},
+    "112.5": {"verdict": "pass", "observed": "down-right", "reason": "right profile begins chin tuck"},
+    "135": {"verdict": "pass", "observed": "down-right", "reason": "right-lowered gaze and tucked chin"},
+    "157.5": {"verdict": "pass", "observed": "down-right", "reason": "strong down-right gaze with stable baseline"}
+  }
+}

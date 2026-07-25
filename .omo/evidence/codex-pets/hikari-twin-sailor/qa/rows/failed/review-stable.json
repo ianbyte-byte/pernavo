@@ -1,0 +1,152 @@
+{
+  "ok": false,
+  "frames_root": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/failed/frames-stable",
+  "states": [
+    "failed"
+  ],
+  "errors": [
+    "failed frame 03 is empty or too sparse (4 pixels)"
+  ],
+  "warnings": [
+    "failed used extraction method stable-slots; confirm motion playback remains stable and unclipped",
+    "failed frame 03 is much smaller than the row median (4 vs 9868)"
+  ],
+  "rows": [
+    {
+      "state": "failed",
+      "expected_frames": 8,
+      "actual_frames": 8,
+      "extraction_method": "stable-slots",
+      "ok": false,
+      "errors": [
+        "failed frame 03 is empty or too sparse (4 pixels)"
+      ],
+      "warnings": [
+        "failed used extraction method stable-slots; confirm motion playback remains stable and unclipped",
+        "failed frame 03 is much smaller than the row median (4 vs 9868)"
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/failed/frames-stable/failed/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 10222,
+          "bbox": [
+            46,
+            39,
+            146,
+            171
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 128
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/failed/frames-stable/failed/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7399,
+          "bbox": [
+            47,
+            73,
+            145,
+            172
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 86
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/failed/frames-stable/failed/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 10607,
+          "bbox": [
+            47,
+            36,
+            145,
+            172
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 107
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/failed/frames-stable/failed/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 4,
+          "bbox": [
+            93,
+            97,
+            99,
+            98
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 2
+        },
+        {
+          "index": 4,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/failed/frames-stable/failed/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7468,
+          "bbox": [
+            46,
+            75,
+            146,
+            172
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 80
+        },
+        {
+          "index": 5,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/failed/frames-stable/failed/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 10190,
+          "bbox": [
+            47,
+            37,
+            145,
+            172
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 99
+        },
+        {
+          "index": 6,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/failed/frames-stable/failed/06.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 13400,
+          "bbox": [
+            5,
+            72,
+            187,
+            172
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 135
+        },
+        {
+          "index": 7,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/failed/frames-stable/failed/07.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 9545,
+          "bbox": [
+            45,
+            44,
+            147,
+            172
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 109
+        }
+      ]
+    }
+  ]
+}
