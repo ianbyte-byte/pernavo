@@ -25,3 +25,4 @@ npx skills add https://github.com/tuloong/loongclaude --all
 - `coding-task-controller`
 - `graph-engineering`
 - `pplx-cli`
+- `exa-search`
