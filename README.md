@@ -22,3 +22,4 @@ npx skills add https://github.com/tuloong/loongclaude --all
 - `unknowns-field-guide`
 - `coding-task-controller`
 - `graph-engineering`
+- `pplx-cli`
