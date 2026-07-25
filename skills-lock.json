@@ -4,7 +4,7 @@
     "codebase-slimming": {
       "source": "tuloong/loongclaude",
       "sourceType": "github",
-      "skillPath": "codebase-slimming/SKILL.md",
+      "skillPath": "skills/codebase-slimming/SKILL.md",
       "computedHash": "8c3f90891c893abf795353c0062146549449029b106bda2602e87db7ba19c7d1"
     }
   }
