@@ -1,0 +1,72 @@
+version: "1.0"
+subject:
+  canonical_name: "KARINA"
+  group: "aespa"
+  adult: true
+  official_source_ids: [S1, S2, S3]
+
+evidence_boundary:
+  verified_facts:
+    - "KARINA is the stage name used by official aespa profiles."
+    - "Official profile birth date: 2000-04-11."
+    - "aespa's official concept connects human performers and virtual counterparts."
+    - "SM described KARINA's Next Level teaser mood as futuristic."
+  visual_observations:
+    - "Editorial sources repeatedly frame her stage presence as intense, controlled, sleek, or futuristic."
+    - "Neutral dark tailoring and metallic/structured stage materials recur across editorial coverage."
+    - "Long dark hair is adopted as a stable project cue, not asserted as a permanent official trait."
+  design_inferences:
+    - "Use a modest unbranded black-and-silver stage outfit readable at 192x208."
+    - "Translate public stage/offstage contrast into focused versus warm animation states."
+    - "Keep gaze mechanics human: eyes and eyelids lead, then restrained head/neck follow-through."
+
+canonical_visual:
+  type: "adult realistic human performer"
+  rendering: "realistic portrait photography blended with cinematic character rendering"
+  proportions: "natural adult full-body, head-to-body ratio not shorter than about 1:5"
+  hair: "natural black to very dark brown, long, center or slight off-center part"
+  face: "natural adult anatomy, cool stage makeup, clear eyeliner, low-saturation lips, real skin texture"
+  outfit: "unbranded fitted black short stage jacket, black trousers, narrow silver trim, black ankle boots"
+  accent_colors: ["cool silver", "small ice-blue accent"]
+  expression_baseline: "calm, confident, focused"
+
+state_translation:
+  warm: [idle, waiting, waving]
+  focused: [running-right, running-left, running, review]
+  restrained_emotion: [failed]
+  physical: [jumping]
+
+identity_lock:
+  - face
+  - apparent_age
+  - body_proportions
+  - hair_color
+  - hairstyle
+  - outfit_cut
+  - shoes
+  - makeup
+  - materials
+  - palette
+
+forbidden:
+  - animalization
+  - cat_ears_or_tail
+  - mascot
+  - anime
+  - chibi
+  - pixel_art
+  - doll_or_toy
+  - robot_body
+  - face_swap_collage
+  - third_party_photo_fragments
+  - text_or_logo
+  - specific_brand_outfit_copy
+  - revealing_or_transparent_clothing
+  - scenery_or_floor
+  - cast_shadow_or_glow
+  - detached_effects
+
+source_ids: [S1, S2, S3, S4, S5, S6, S7, S8, S9]
+disclaimer: >-
+  Unofficial, non-commercial fan-made original generated artwork. It is not endorsed by
+  KARINA, aespa, SM Entertainment, or any related brand.

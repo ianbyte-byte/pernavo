@@ -1,0 +1,7 @@
+{
+  "decision": "accept",
+  "severity": "minor",
+  "failed_checks": ["337.5 horizontal cue classified ambiguous by strict majority"],
+  "evidence": "Both cardinal hard gates passed unanimously, direction-blind-validation.json is ok, and the labeled clockwise loop confirms 337.5 remains in the up-left quadrant without reversal.",
+  "reviewed_by": "parent"
+}

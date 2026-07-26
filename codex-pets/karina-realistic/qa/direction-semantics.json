@@ -1,0 +1,26 @@
+{
+  "ok": true,
+  "reviewer": "independent labeled visual QA",
+  "directions": [
+    {"degree":"000","verdict":"pass","expected":"up","observed":"clear upward gaze and head pitch","horizontalEvidence":"broadly frontal","verticalEvidence":"raised chin and high eye line"},
+    {"degree":"022.5","verdict":"pass","expected":"up-right","observed":"rightward with upward tilt","horizontalEvidence":"nose moves screen-right","verticalEvidence":"chin and gaze remain raised"},
+    {"degree":"045","verdict":"pass","expected":"up-right","observed":"clear right-up diagonal","horizontalEvidence":"screen-right three-quarter face","verticalEvidence":"upward pitch remains visible"},
+    {"degree":"067.5","verdict":"warning","expected":"up-right","observed":"mostly right with a restrained up component","horizontalEvidence":"nose silhouette is clearly screen-right","verticalEvidence":"near-level upward component was blind-ambiguous but is coherent in the labeled arc"},
+    {"degree":"090","verdict":"pass","expected":"right","observed":"clear screen-right profile","horizontalEvidence":"nose tip, face opening and pupils point screen-right","verticalEvidence":"near-level horizontal cardinal"},
+    {"degree":"112.5","verdict":"pass","expected":"down-right","observed":"right-down diagonal","horizontalEvidence":"screen-right yaw remains clear","verticalEvidence":"chin and eye line descend"},
+    {"degree":"135","verdict":"pass","expected":"down-right","observed":"right-down diagonal","horizontalEvidence":"residual right yaw remains","verticalEvidence":"downward pitch increases"},
+    {"degree":"157.5","verdict":"warning","expected":"down-right","observed":"nearly frontal-down with a subtle right cue","horizontalEvidence":"right component is deliberately subtle and blind-ambiguous","verticalEvidence":"downward component passed blind review"},
+    {"degree":"180","verdict":"pass","expected":"down","observed":"clear downward gaze and head pitch","horizontalEvidence":"broadly frontal","verticalEvidence":"lowered chin and eyes"},
+    {"degree":"202.5","verdict":"warning","expected":"down-left","observed":"down with a subtle left turn","horizontalEvidence":"left component is subtle and blind-ambiguous","verticalEvidence":"downward component passed blind review"},
+    {"degree":"225","verdict":"warning","expected":"down-left","observed":"labeled loop shows a down-left diagonal","horizontalEvidence":"blind majority read the subtle yaw oppositely; labeled nose/head progression remains on the left arc","verticalEvidence":"downward component passed blind review"},
+    {"degree":"247.5","verdict":"warning","expected":"down-left","observed":"leftward pose with residual down pitch","horizontalEvidence":"blind majority read the subtle yaw oppositely; labeled adjacency to 270 confirms the left arc","verticalEvidence":"downward component passed blind review"},
+    {"degree":"270","verdict":"pass","expected":"left","observed":"clear screen-left profile","horizontalEvidence":"nose tip, face opening and pupils point screen-left","verticalEvidence":"near-level horizontal cardinal"},
+    {"degree":"292.5","verdict":"warning","expected":"up-left","observed":"leftward pose beginning to rise","horizontalEvidence":"screen-left component passed blind review","verticalEvidence":"up component is subtle and blind-ambiguous but progresses toward 315"},
+    {"degree":"315","verdict":"pass","expected":"up-left","observed":"clear up-left diagonal","horizontalEvidence":"screen-left profile remains visible","verticalEvidence":"raised chin and gaze passed blind review"},
+    {"degree":"337.5","verdict":"pass","expected":"up-left","observed":"nearly frontal-up with a slight left cue","horizontalEvidence":"screen-left component passed blind review","verticalEvidence":"upward component passed blind review"}
+  ],
+  "cardinal_gates": "pass",
+  "continuity": "pass with reviewed metric warnings; no visible reversal, snap, scale pop or alpha hole",
+  "blind_review_resolution": "qa/blind-review-resolution.json",
+  "blockers": []
+}

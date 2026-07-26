@@ -1,0 +1,107 @@
+{
+  "researchDate": "2026-07-26",
+  "minimumSourcesSatisfied": true,
+  "officialSourceCount": 3,
+  "sources": [
+    {
+      "id": "S1",
+      "title": "aespa Japan Official Website: PROFILE",
+      "publisher": "SM Entertainment",
+      "publishedDate": null,
+      "accessedDate": "2026-07-26",
+      "url": "https://aespa-official.jp/",
+      "type": "official",
+      "supports": ["canonical stage name", "birth date", "aespa avatar and SYNK concept"]
+    },
+    {
+      "id": "S2",
+      "title": "aespa official website",
+      "publisher": "SM Entertainment",
+      "publishedDate": null,
+      "accessedDate": "2026-07-26",
+      "url": "https://aespa.com/",
+      "type": "official",
+      "supports": ["official group source anchor"]
+    },
+    {
+      "id": "S3",
+      "title": "‘컴백’ 에스파, 카리나 티저 이미지 공개 화제!",
+      "publisher": "SM Entertainment Newsroom",
+      "publishedDate": "2021-05-07",
+      "accessedDate": "2026-07-26",
+      "url": "https://www.smentertainment.com/newsroom/%EC%BB%B4%EB%B0%B1-%EC%97%90%EC%8A%A4%ED%8C%8C-%EC%B9%B4%EB%A6%AC%EB%82%98-%ED%8B%B0%EC%A0%80-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EA%B3%B5%EA%B0%9C-%ED%99%94%EC%A0%9C/",
+      "type": "official",
+      "supports": ["KARINA membership", "official futuristic Next Level visual concept"]
+    },
+    {
+      "id": "S4",
+      "title": "Karina Is aespa's Intense, Attentive Leader",
+      "publisher": "PAPER Magazine",
+      "publishedDate": null,
+      "publicationDateNote": "Exact date is not exposed on the current page; article content dates it to the late-2022 cover cycle.",
+      "accessedDate": "2026-07-26",
+      "url": "https://www.papermag.com/aespa-karina-cover",
+      "type": "editorial-interview",
+      "supports": ["controlled intense stage persona", "soft careful warmth", "attentive and reliable public persona"]
+    },
+    {
+      "id": "S5",
+      "title": "Aespa’s Karina Marked Her First Couture Week In Style",
+      "publisher": "British Vogue",
+      "author": "Christian Allaire",
+      "publishedDate": "2023-07-05",
+      "accessedDate": "2026-07-26",
+      "url": "https://www.vogue.co.uk/gallery/karina-aespa-thom-browne-couture-show-style",
+      "type": "editorial-interview",
+      "supports": ["sleek structured neutral tailoring", "relaxed styling preference", "composed but candid persona"]
+    },
+    {
+      "id": "S6",
+      "title": "HER SCENT / KARINA 카리나",
+      "publisher": "Allure Korea",
+      "author": "허윤선",
+      "publishedDate": "2022-04-25",
+      "accessedDate": "2026-07-26",
+      "url": "https://www.allurekorea.com/2022/04/25/her-scent-2/",
+      "type": "editorial-interview",
+      "supports": ["strong warrior-like concepts", "natural and approachable contrast", "precision and persistence cues"]
+    },
+    {
+      "id": "S7",
+      "title": "How K-Pop Group aespa Is Making the Metaverse Their Home",
+      "publisher": "TIME",
+      "publishedDate": "2022-05-11",
+      "accessedDate": "2026-07-26",
+      "url": "https://time.com/6174945/aespa-2/",
+      "type": "reputable-media",
+      "supports": ["human performer and virtual-avatar contrast", "metaverse stage context"]
+    },
+    {
+      "id": "S8",
+      "title": "Billboard interview with aespa on Coachella debut released",
+      "publisher": "Korea JoongAng Daily",
+      "author": "Lee Jae-lim",
+      "publishedDate": "2022-04-21",
+      "accessedDate": "2026-07-26",
+      "url": "https://www.koreajoongangdaily.com/entertainment/billboard-interview-with-aespa-on-coachella-debut-released/10658545",
+      "type": "reputable-media",
+      "supports": ["disciplined preparation", "candid performance nerves"]
+    },
+    {
+      "id": "S9",
+      "title": "Phong cách thời trang độc đáo và biến hóa đa dạng của ‘nữ thần AI’ Karina (aespa)",
+      "publisher": "ELLE Vietnam",
+      "author": "ELLE Fashion Team",
+      "publishedDate": "2024-02-29",
+      "accessedDate": "2026-07-26",
+      "url": "https://www.elle.vn/sao-style/phong-cach-thoi-trang-doc-dao-va-bien-hoa-da-dang-cua-nu-than-ai-karina-aespa/",
+      "type": "editorial-visual-observation",
+      "supports": ["avant-garde futuristic stage styling", "black and metallic material cues"]
+    }
+  ],
+  "assetPolicy": {
+    "downloadedSourceImages": false,
+    "repositoryContainsThirdPartyPhotos": false,
+    "generatedAssetsMustBeOriginal": true
+  }
+}

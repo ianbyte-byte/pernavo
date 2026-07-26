@@ -1,0 +1,10 @@
+{
+  "decision": "accept",
+  "severity": "minor",
+  "failed_checks": [
+    "337.5, 315, and 292.5 horizontal components were misclassified in the blind majority",
+    "112.5 vertical component was classified ambiguous"
+  ],
+  "evidence": "The 000/180 and 090/270 cardinal hard gates passed after the row-9 repair. The labeled ordered loop remains monotonic and the blind validation result is ok; the disputed cells are intermediate directions whose subtle components are advisory under the acceptance policy.",
+  "reviewed_by": "parent"
+}

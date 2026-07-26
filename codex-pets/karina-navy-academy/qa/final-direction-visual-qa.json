@@ -1,0 +1,6 @@
+{
+  "verdict": "PASS",
+  "reviewer": "independent-read-only-agent",
+  "findings": "All sixteen clockwise directions and all cardinal hard gates pass. Adult identity, original rolled white shirt and navy stage outfit, bare head, scale, and baseline remain continuous without clipping, reversal, or outfit drift.",
+  "continuity_warning_disposition": "Warnings at 157.5-to-180, 247.5-to-270, 292.5-to-315, and 337.5-to-000 are accepted pose-angle, cardinal-profile, and loop-seam silhouette changes with no visible snap."
+}
