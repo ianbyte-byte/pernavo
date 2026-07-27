@@ -1,0 +1,9 @@
+{
+  "id": "ian-heartline-noir-photoreal-v2",
+  "displayName": "Ian · Heartline Noir v2",
+  "description": "Photoreal human stage companion of Ian in black, ivory, and silver-heart styling.",
+  "spritesheetPath": "spritesheet-extended.pre-despill.webp",
+  "spriteVersionNumber": 2,
+  "kind": "person",
+  "draftStatus": "pre-despill; not installed; root-owned final despill and final QA pending"
+}

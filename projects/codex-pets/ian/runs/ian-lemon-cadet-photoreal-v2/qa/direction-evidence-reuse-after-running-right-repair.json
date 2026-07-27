@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "repair_scope": "ian-lemon-cadet running-right row only",
+  "previous_pre_despill_atlas_sha256": "e7f83cb482533b88c5d11e7d35547be0c2d4fd98b9dda76abc0018eedf41d28e",
+  "repaired_pre_despill_atlas_sha256": "df0b9f0051efdc9ea555b8a9f1b365cff2daf7b582c002ecae36698b098dd0b7",
+  "look_row_sources": {
+    "row_9": {
+      "path": "sources/look-row-9-v2-raw.png",
+      "sha256": "cd423ea98cece58d6807dd398315b84ca7851aebbe968d236c71cc9ed38bfcff"
+    },
+    "row_10": {
+      "path": "sources/look-row-10-v2-raw.png",
+      "sha256": "be01461662feacbcdf8bf4fc86dad3c7e4c2710f07adc4bcb8d5a0fcce28bad6"
+    }
+  },
+  "direction_sheet_proof": {
+    "rejected_round_1_path": "qa/final-visual-round-1-failed/look-directions.rejected.png",
+    "repaired_final_path": "qa/look-directions.png",
+    "sha256": "a269c483380a07c64f58605c2ae36dc828dc4208fc597fd5c9b383f8fa497bf6",
+    "pixel_identical": true
+  },
+  "reused_evidence": {
+    "blind_validation": "qa/direction-blind-validation-r2.pre-despill.json",
+    "visual_arbitration": "qa/direction-visual-arbitration-r2.pre-despill.json",
+    "rationale": "The repair changed only standard row 1. The complete final direction QA sheet is byte-identical to the rejected round-1 final direction sheet, so prior blind cardinal results remain applicable."
+  },
+  "decision": "PASS_REUSE_AUTHORIZED"
+}

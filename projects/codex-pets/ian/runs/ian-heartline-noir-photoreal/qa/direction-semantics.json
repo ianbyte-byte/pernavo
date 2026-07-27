@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "pet_id": "ian-heartline-noir",
+  "surface": "qa/look-directions.png",
+  "pass": true,
+  "directions": [
+    {"direction":"000","pass":true,"expected":"up","observed":"front-facing head and eyes elevated","reason":"Independent labeled visual QA confirms the cardinal direction with the body anchored."},
+    {"direction":"022.5","pass":true,"expected":"up-right","observed":"slight screen-right turn with elevated gaze","reason":"The first clockwise intermediate remains in the expected upper-right quadrant."},
+    {"direction":"045","pass":true,"expected":"up-right","observed":"clear screen-right and upward head direction","reason":"The diagonal is visually distinct and ordered between 022.5 and 067.5."},
+    {"direction":"067.5","pass":true,"expected":"up-right","observed":"near-right head direction retaining an upward cue","reason":"The final upper-right intermediate leads coherently into 090."},
+    {"direction":"090","pass":true,"expected":"screen-right","observed":"unmistakable screen-right profile cue","reason":"The blind horizontal hard gate and labeled visual QA both pass."},
+    {"direction":"112.5","pass":true,"expected":"down-right","observed":"screen-right head direction with a slight downward cue","reason":"The first lower-right intermediate follows 090 without reversal."},
+    {"direction":"135","pass":true,"expected":"down-right","observed":"clear screen-right and downward head direction","reason":"The diagonal remains visually ordered within the lower-right quadrant."},
+    {"direction":"157.5","pass":true,"expected":"down-right","observed":"near-down head direction retaining a screen-right cue","reason":"Labeled visual QA confirms the final lower-right step before 180."},
+    {"direction":"180","pass":true,"expected":"down","observed":"front-facing head and eyes lowered","reason":"The blind vertical hard gate and labeled visual QA both pass."},
+    {"direction":"202.5","pass":true,"expected":"down-left","observed":"slight screen-left turn with lowered gaze","reason":"The first lower-left intermediate follows 180 without reversal."},
+    {"direction":"225","pass":true,"expected":"down-left","observed":"clear screen-left and downward head direction","reason":"The diagonal is visually distinct and ordered within the lower-left quadrant."},
+    {"direction":"247.5","pass":true,"expected":"down-left","observed":"near-left head direction retaining a downward cue","reason":"Labeled visual QA confirms the final lower-left step before 270."},
+    {"direction":"270","pass":true,"expected":"screen-left","observed":"unmistakable screen-left profile cue","reason":"The blind horizontal hard gate and labeled visual QA both pass."},
+    {"direction":"292.5","pass":true,"expected":"up-left","observed":"screen-left head direction with a slight upward cue","reason":"The first upper-left intermediate follows 270 without reversal."},
+    {"direction":"315","pass":true,"expected":"up-left","observed":"clear screen-left and upward head direction","reason":"The diagonal remains visually ordered within the upper-left quadrant."},
+    {"direction":"337.5","pass":true,"expected":"up-left","observed":"near-up head direction retaining a screen-left cue","reason":"Labeled visual QA confirms the final upper-left step into the cyclic 000 transition."}
+  ]
+}

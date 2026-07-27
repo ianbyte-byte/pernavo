@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "pet_id": "ian-lemon-cadet",
+  "round": 2,
+  "verdict": "PASS",
+  "confidence": "high",
+  "atlas_sha256": "a9abfa5e7a5eb426dde85adb15928ce3235de00c03e70ca3081122336db4dcb2",
+  "previous_round": {
+    "verdict": "REVISE_3_OF_3",
+    "archive": "final-visual-round-1-failed/consensus.json",
+    "rejected_atlas_sha256": "dad7a6a83a0c193f91e2753864bad9a6dafc84d39dee60a68b998660ed5b512b",
+    "installed": false
+  },
+  "reviewers": [
+    {
+      "reviewer": "final_visual_qa_1",
+      "verdict": "PASS",
+      "confidence": "high"
+    },
+    {
+      "reviewer": "final_visual_qa_2",
+      "verdict": "PASS",
+      "confidence": "high"
+    },
+    {
+      "reviewer": "final_visual_qa_3",
+      "verdict": "PASS",
+      "confidence": "high"
+    }
+  ],
+  "gates": {
+    "human_photoreal_only": "pass",
+    "age_appropriate_nonsexualized": "pass",
+    "identity_consistency": "pass_with_style_variation",
+    "state_semantics": "pass",
+    "anatomy_and_edges": "pass",
+    "running_right_components": "pass",
+    "strict_atlas_validation": "pass",
+    "direction_hard_gates": "pass"
+  },
+  "blockers": [],
+  "warnings": [
+    "Two opaque chroma-key pixels are counted in r1c7, below the validator threshold; the validator emits no warning and no artifact is visible at 192x208.",
+    "Twin-tail and cream-yellow styling are intentional silhouette changes; facial proportions remain compatible with the shared identity."
+  ],
+  "evidence": {
+    "identity_master": "../../ian-identity-master-v2/references/identity-master.png",
+    "canonical_base": "../references/canonical-base.png",
+    "contact_sheet": "contact-sheet-extended.png",
+    "direction_sheet": "look-directions.png",
+    "validation": "../final/validation-extended.json",
+    "despill": "chroma-despill-extended.json",
+    "frame_review": "review.json",
+    "running_right_review": "running-right-finalqa-review.json",
+    "component_check": "running-right-detached-components.json",
+    "direction_reuse": "direction-evidence-reuse-after-running-right-repair.json",
+    "blind_validation": "direction-blind-validation.pre-despill.json"
+  },
+  "note": "Visual likeness assessment only; this does not claim biometric or pixel-perfect identity."
+}

@@ -1,0 +1,973 @@
+{
+  "ok": true,
+  "frames_root": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames",
+  "states": [
+    "idle",
+    "running-right",
+    "running-left",
+    "waving",
+    "jumping",
+    "failed",
+    "waiting",
+    "running",
+    "review"
+  ],
+  "errors": [],
+  "warnings": [],
+  "rows": [
+    {
+      "state": "idle",
+      "expected_frames": 6,
+      "actual_frames": 6,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/idle/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6842,
+          "bbox": [
+            70,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 62
+        },
+        {
+          "index": 1,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/idle/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6734,
+          "bbox": [
+            71,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 48
+        },
+        {
+          "index": 2,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/idle/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6861,
+          "bbox": [
+            70,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 61
+        },
+        {
+          "index": 3,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/idle/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6770,
+          "bbox": [
+            71,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 55
+        },
+        {
+          "index": 4,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/idle/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6797,
+          "bbox": [
+            70,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 62
+        },
+        {
+          "index": 5,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/idle/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6824,
+          "bbox": [
+            71,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 46
+        }
+      ]
+    },
+    {
+      "state": "running-right",
+      "expected_frames": 8,
+      "actual_frames": 8,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/running-right/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7538,
+          "bbox": [
+            60,
+            5,
+            132,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 193
+        },
+        {
+          "index": 1,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/running-right/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7393,
+          "bbox": [
+            59,
+            5,
+            132,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 222
+        },
+        {
+          "index": 2,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/running-right/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7395,
+          "bbox": [
+            58,
+            5,
+            134,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 202
+        },
+        {
+          "index": 3,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/running-right/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7571,
+          "bbox": [
+            53,
+            5,
+            138,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 175
+        },
+        {
+          "index": 4,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/running-right/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7562,
+          "bbox": [
+            52,
+            5,
+            139,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 196
+        },
+        {
+          "index": 5,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/running-right/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7610,
+          "bbox": [
+            59,
+            5,
+            132,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 182
+        },
+        {
+          "index": 6,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/running-right/06.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7441,
+          "bbox": [
+            54,
+            5,
+            138,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 198
+        },
+        {
+          "index": 7,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/running-right/07.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7380,
+          "bbox": [
+            55,
+            5,
+            136,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 171
+        }
+      ]
+    },
+    {
+      "state": "running-left",
+      "expected_frames": 8,
+      "actual_frames": 8,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/running-left/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7817,
+          "bbox": [
+            47,
+            5,
+            144,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 209
+        },
+        {
+          "index": 1,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/running-left/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7494,
+          "bbox": [
+            53,
+            5,
+            138,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 231
+        },
+        {
+          "index": 2,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/running-left/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7574,
+          "bbox": [
+            52,
+            5,
+            139,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 241
+        },
+        {
+          "index": 3,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/running-left/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7681,
+          "bbox": [
+            43,
+            5,
+            149,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 248
+        },
+        {
+          "index": 4,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/running-left/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7616,
+          "bbox": [
+            51,
+            5,
+            140,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 265
+        },
+        {
+          "index": 5,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/running-left/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7611,
+          "bbox": [
+            54,
+            5,
+            137,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 230
+        },
+        {
+          "index": 6,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/running-left/06.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7647,
+          "bbox": [
+            47,
+            5,
+            145,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 227
+        },
+        {
+          "index": 7,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/running-left/07.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7573,
+          "bbox": [
+            43,
+            5,
+            149,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 255
+        }
+      ]
+    },
+    {
+      "state": "waving",
+      "expected_frames": 4,
+      "actual_frames": 4,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/waving/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6860,
+          "bbox": [
+            70,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 59
+        },
+        {
+          "index": 1,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/waving/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7033,
+          "bbox": [
+            65,
+            5,
+            127,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 58
+        },
+        {
+          "index": 2,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/waving/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7138,
+          "bbox": [
+            65,
+            5,
+            126,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 75
+        },
+        {
+          "index": 3,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/waving/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7130,
+          "bbox": [
+            67,
+            5,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 68
+        }
+      ]
+    },
+    {
+      "state": "jumping",
+      "expected_frames": 5,
+      "actual_frames": 5,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/jumping/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 9268,
+          "bbox": [
+            43,
+            5,
+            149,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 181
+        },
+        {
+          "index": 1,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/jumping/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 10516,
+          "bbox": [
+            33,
+            5,
+            159,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 219
+        },
+        {
+          "index": 2,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/jumping/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 11482,
+          "bbox": [
+            44,
+            5,
+            148,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 252
+        },
+        {
+          "index": 3,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/jumping/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 8964,
+          "bbox": [
+            40,
+            5,
+            151,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 173
+        },
+        {
+          "index": 4,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/jumping/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 8597,
+          "bbox": [
+            53,
+            5,
+            139,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 149
+        }
+      ]
+    },
+    {
+      "state": "failed",
+      "expected_frames": 8,
+      "actual_frames": 8,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/failed/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6653,
+          "bbox": [
+            71,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 71
+        },
+        {
+          "index": 1,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/failed/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6701,
+          "bbox": [
+            70,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 79
+        },
+        {
+          "index": 2,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/failed/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6746,
+          "bbox": [
+            70,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 75
+        },
+        {
+          "index": 3,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/failed/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6598,
+          "bbox": [
+            71,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 51
+        },
+        {
+          "index": 4,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/failed/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6516,
+          "bbox": [
+            72,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 68
+        },
+        {
+          "index": 5,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/failed/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6701,
+          "bbox": [
+            71,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 75
+        },
+        {
+          "index": 6,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/failed/06.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6654,
+          "bbox": [
+            71,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 59
+        },
+        {
+          "index": 7,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/failed/07.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6499,
+          "bbox": [
+            71,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 69
+        }
+      ]
+    },
+    {
+      "state": "waiting",
+      "expected_frames": 6,
+      "actual_frames": 6,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/waiting/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6733,
+          "bbox": [
+            71,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 87
+        },
+        {
+          "index": 1,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/waiting/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6722,
+          "bbox": [
+            71,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 87
+        },
+        {
+          "index": 2,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/waiting/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7068,
+          "bbox": [
+            52,
+            5,
+            139,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 76
+        },
+        {
+          "index": 3,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/waiting/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6561,
+          "bbox": [
+            72,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 86
+        },
+        {
+          "index": 4,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/waiting/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6569,
+          "bbox": [
+            72,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 85
+        },
+        {
+          "index": 5,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/waiting/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7312,
+          "bbox": [
+            53,
+            5,
+            138,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 86
+        }
+      ]
+    },
+    {
+      "state": "running",
+      "expected_frames": 6,
+      "actual_frames": 6,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/running/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6507,
+          "bbox": [
+            72,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 73
+        },
+        {
+          "index": 1,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/running/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6450,
+          "bbox": [
+            72,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 62
+        },
+        {
+          "index": 2,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/running/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6472,
+          "bbox": [
+            72,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 59
+        },
+        {
+          "index": 3,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/running/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6598,
+          "bbox": [
+            71,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 70
+        },
+        {
+          "index": 4,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/running/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6580,
+          "bbox": [
+            72,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 72
+        },
+        {
+          "index": 5,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/running/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6460,
+          "bbox": [
+            72,
+            5,
+            119,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 59
+        }
+      ]
+    },
+    {
+      "state": "review",
+      "expected_frames": 6,
+      "actual_frames": 6,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/review/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6588,
+          "bbox": [
+            70,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 88
+        },
+        {
+          "index": 1,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/review/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6485,
+          "bbox": [
+            72,
+            5,
+            119,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 54
+        },
+        {
+          "index": 2,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/review/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6464,
+          "bbox": [
+            71,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 57
+        },
+        {
+          "index": 3,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/review/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6752,
+          "bbox": [
+            71,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 51
+        },
+        {
+          "index": 4,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/review/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6553,
+          "bbox": [
+            71,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 64
+        },
+        {
+          "index": 5,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/azure/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal-v2/frames/review/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6489,
+          "bbox": [
+            72,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 64
+        }
+      ]
+    }
+  ]
+}

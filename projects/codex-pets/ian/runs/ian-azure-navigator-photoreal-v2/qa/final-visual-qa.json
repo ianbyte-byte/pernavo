@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "pet_id": "ian-azure-navigator",
+  "round": 1,
+  "verdict": "PASS",
+  "confidence": "high",
+  "atlas_sha256": "6e801634eacbcc234bb5d5ee0ae12862939030d4693d8fe6269a68e5b4f43f92",
+  "reviewers": [
+    {
+      "reviewer": "final_visual_qa_1",
+      "verdict": "PASS",
+      "confidence": "high"
+    },
+    {
+      "reviewer": "final_visual_qa_2",
+      "verdict": "PASS",
+      "confidence": "high"
+    },
+    {
+      "reviewer": "final_visual_qa_3",
+      "verdict": "PASS",
+      "confidence": "high"
+    }
+  ],
+  "gates": {
+    "human_photoreal_only": "pass",
+    "age_appropriate_nonsexualized": "pass",
+    "identity_consistency": "pass_with_style_variation",
+    "state_semantics": "pass",
+    "anatomy_and_edges": "pass",
+    "strict_atlas_validation": "pass",
+    "direction_hard_gates": "pass"
+  },
+  "blockers": [],
+  "warnings": [
+    "Fine oblique look directions retain non-blocking thumbnail-scale ambiguity; hard cardinals and the labeled clockwise loop pass.",
+    "Hair color, cap, and navy costume are intentional style changes; facial geometry remains compatible with the shared identity."
+  ],
+  "evidence": {
+    "identity_master": "../../ian-identity-master-v2/references/identity-master.png",
+    "canonical_base": "../references/canonical-base.png",
+    "contact_sheet": "contact-sheet-extended.png",
+    "direction_sheet": "look-directions.png",
+    "validation": "../final/validation-extended.json",
+    "despill": "chroma-despill-extended.json",
+    "blind_validation": "direction-blind-validation.pre-despill.json",
+    "direction_arbitration": "direction-visual-arbitration-r2.pre-despill.json"
+  },
+  "note": "Visual likeness assessment only; this does not claim biometric or pixel-perfect identity."
+}

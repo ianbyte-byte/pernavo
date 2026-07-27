@@ -1,0 +1,142 @@
+{
+  "ok": true,
+  "frames_root": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-heartline-noir-photoreal/frames",
+  "states": [
+    "failed"
+  ],
+  "errors": [],
+  "warnings": [],
+  "rows": [
+    {
+      "state": "failed",
+      "expected_frames": 8,
+      "actual_frames": 8,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-heartline-noir-photoreal/frames/failed/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6466,
+          "bbox": [
+            70,
+            5,
+            122,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 152
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-heartline-noir-photoreal/frames/failed/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6606,
+          "bbox": [
+            69,
+            5,
+            122,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 152
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-heartline-noir-photoreal/frames/failed/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6556,
+          "bbox": [
+            69,
+            5,
+            122,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 164
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-heartline-noir-photoreal/frames/failed/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6476,
+          "bbox": [
+            70,
+            5,
+            122,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 177
+        },
+        {
+          "index": 4,
+          "file": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-heartline-noir-photoreal/frames/failed/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6462,
+          "bbox": [
+            70,
+            5,
+            122,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 130
+        },
+        {
+          "index": 5,
+          "file": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-heartline-noir-photoreal/frames/failed/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6506,
+          "bbox": [
+            70,
+            5,
+            122,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 153
+        },
+        {
+          "index": 6,
+          "file": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-heartline-noir-photoreal/frames/failed/06.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6500,
+          "bbox": [
+            70,
+            5,
+            122,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 151
+        },
+        {
+          "index": 7,
+          "file": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-heartline-noir-photoreal/frames/failed/07.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6469,
+          "bbox": [
+            70,
+            5,
+            122,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 176
+        }
+      ]
+    }
+  ]
+}

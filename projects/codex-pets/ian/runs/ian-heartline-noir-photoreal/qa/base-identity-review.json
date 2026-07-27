@@ -1,0 +1,28 @@
+{
+  "pet_id": "ian-heartline-noir",
+  "pass": true,
+  "reviewed_surface": "decoded/base.png",
+  "identity_evidence": [
+    "references/reference-01.jpg",
+    "references/reference-02.jpg",
+    "references/reference-03.jpg"
+  ],
+  "outfit_evidence": [
+    "references/reference-04.jpg",
+    "references/reference-05.jpg"
+  ],
+  "checks": {
+    "photoreal_real_human": true,
+    "ian_face_geometry_preserved": true,
+    "natural_human_proportions": true,
+    "complete_head_to_toe_body": true,
+    "age_appropriate_nonsexualized": true,
+    "no_cartoon_anime_chibi_toy_or_abstract_style": true,
+    "no_animal_anatomy_or_copied_character_art": true,
+    "flat_chroma_background": true
+  },
+  "notes": [
+    "Video frames determine facial geometry; the black-and-ivory photos determine the stage outfit and copper bun styling.",
+    "The supplied videos do not prove a standing full-body profile; lower-body presentation follows the supplied stage photos."
+  ]
+}

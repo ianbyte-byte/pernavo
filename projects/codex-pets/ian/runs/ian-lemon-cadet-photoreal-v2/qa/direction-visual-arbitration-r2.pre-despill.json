@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "pet": "ian-lemon-cadet",
+  "decision": "PASS",
+  "atlas_sha256": "e7f83cb482533b88c5d11e7d35547be0c2d4fd98b9dda76abc0018eedf41d28e",
+  "blind_validation": "direction-blind-validation-r2.pre-despill.json",
+  "hard_gates_pass": true,
+  "continuity_ok": true,
+  "warning_disposition": "accepted_review_only",
+  "findings": [
+    "The labeled 000→090→180→270→000 loop is visually coherent and preserves clockwise head-direction progression.",
+    "Hard cardinals are explicit: 000 up, 090 screen-right, 180 down, 270 screen-left.",
+    "Blind warnings are limited to the near-down 157.5/202.5 transition and fine oblique vertical components; no hard cardinal reversal remains."
+  ]
+}

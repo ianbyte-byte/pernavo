@@ -1,7 +1,8 @@
-schema_version: 1
+schema_version: 2
 project: ian_codex_pets
-research_date: "2026-07-25"
-character_policy: human_only
+research_date: "2026-07-26"
+visual_revision: photoreal_identity_v2
+character_policy: human_photoreal_only
 
 verified_profile:
   stage_name: IAN
@@ -21,24 +22,82 @@ fact_boundaries:
   palette_note: "All palettes below come from the supplied reference photos, not official member colors."
 
 shared_character_lock: |-
-  Create one complete, age-appropriate and nonsexualized teenage human idol avatar.
-  She is fully human, with ordinary human ears, two human arms, clearly formed
-  human hands and fingers, two human legs and human footwear. Preserve warm
-  copper-auburn hair, bright dark eyes, a softly rounded face, expressive brows,
-  subtle rosy cheeks and an unusually readable range of facial expressions.
-  Her personality is emotionally perceptive, people-loving, positive, playful,
-  fan-minded and hardworking for the stage. Let a trace of pre-camera nerves
-  become focused enjoyment and confident warmth. Never add animal anatomy.
+  Create one complete, age-appropriate and nonsexualized photoreal human likeness
+  of IAN. Preserve the same real-person identity across every pet and animation:
+  softly tapered oval face, smooth broad forehead, softly arched brows, almond
+  dark eyes, narrow straight nose bridge with a rounded tip, defined cupid's bow,
+  fuller lower lip and a small rounded chin. Use natural human head-to-body
+  proportions, realistic anatomy, skin, hair strands, fabric and footwear. The
+  supplied video frames are the primary face-geometry evidence; stage photos are
+  the primary outfit, hairstyle-color and available full-silhouette evidence.
+  Keep her fully human, with ordinary human ears, two human arms, clearly formed
+  hands and fingers, two human legs and human footwear. Never add animal anatomy.
+
+identity_reference_policy:
+  primary_face_anchor: ian_face_front_neutral
+  supporting_face_views: [ian_face_three_quarter, ian_face_detail]
+  upper_body_anchor: ian_upper_body_front
+  evidence_limits: |-
+    Neither supplied video contains a true side profile or standing full-body
+    view. Do not claim those views as observed. Use the multi-view video frames
+    for facial geometry and visible upper-body proportions; use the supplied
+    stage photos for outfit construction and the available full-silhouette cues.
+    The videos contain warm white balance and visible beauty smoothing, so do not
+    copy their skin color, gloss or smoothing as literal anatomy.
 
 shared_avoid:
   - animal or animal-human hybrid
   - animal ears, tail, paws, muzzle, whiskers, claws, wings or horns
   - mascot animal, plush animal or anthropomorphic object
   - sexualized or age-inappropriate styling
-  - photoreal portrait or exact photo reconstruction
+  - cartoon, anime, manga, illustration, cel shading or painterly rendering
+  - chibi, super-deformed, oversized head or toy-like body proportions
+  - vinyl toy, figurine, doll, sticker, mascot, waxy skin or plastic materials
+  - generic idol face, beautified face drift or identity changes between frames
+  - fabricated profile evidence or invented claims about unseen lower-body proportions
   - readable text, labels, logos, watermarks or copied character branding
   - scenery, floor, cast shadow, glow, aura or detached effects
   - malformed hands, extra fingers, extra limbs, hidden feet or cropped body
+
+video_sources:
+  ian_video_01:
+    path: references/video/ian-video-01.mp4
+    sha256: 674d18fa9a9693f87e025419b555abb0e16888958eb036f7d7a055fea517b582
+    duration_seconds: 6.186667
+    dimensions: 2160x3798
+    role: "high-resolution face, three-quarter view and seated upper-body geometry"
+  ian_video_02:
+    path: references/video/ian-video-02.mp4
+    sha256: 9981938b75788d7543db5cb9310b6a382536c59496af14fa99e9f039c7bb75ee
+    duration_seconds: 8.533333
+    dimensions: 1080x1440
+    role: "stable neutral frontal face anchor"
+
+identity_reference_catalog:
+  ian_face_front_neutral:
+    path: references/video-frames/ian-video-02-t01.25.jpg
+    source: ian_video_02
+    timestamp_seconds: 1.25
+    sha256: 481937f9ba1d01dd8c0e49935094023ba7ad43a241b07e6afc358035bc36c4e5
+    use: "primary neutral frontal identity and facial-spacing anchor"
+  ian_upper_body_front:
+    path: references/video-frames/ian-video-01-t00.80.jpg
+    source: ian_video_01
+    timestamp_seconds: 0.80
+    sha256: 201c323fe48f38ea5fae4c21533783b7264818cc8190301795b5858823629b63
+    use: "centered frontal head, neck, shoulder, arm and visible torso proportions"
+  ian_face_three_quarter:
+    path: references/video-frames/ian-video-01-t01.68.jpg
+    source: ian_video_01
+    timestamp_seconds: 1.68
+    sha256: 112ba934585f624816280e88f4e6f6e432b42c21d8617d7cb6159d3b7f40a844
+    use: "clean three-quarter facial geometry and cheek/jaw continuity"
+  ian_face_detail:
+    path: references/video-frames/ian-video-01-t04.50.jpg
+    source: ian_video_01
+    timestamp_seconds: 4.50
+    sha256: 476324117df662d324e8b99d83426b59ce39e5466e772a6827a69aa66060962e
+    use: "close facial landmarks; geometry only, not literal filter texture"
 
 reference_catalog:
   ian_01:
@@ -50,7 +109,7 @@ reference_catalog:
     path: references/ian-02-heartline-noir.jpg
     sha256: 06b0da1f7ec4f5a8bf2ee3aa2b0d3db200bc81c5e149f3c05003bb3c20ea0393
     use: "copper-red hair, silver heart cue and black-and-ivory palette"
-    avoid: "photoreal reconstruction and exact branded jewelry"
+    avoid: "photo background and exact branded jewelry"
   ian_03:
     path: references/ian-03-white-stage-accessory.png
     sha256: 6560e153d7dd3798dfecf4954af3d844055b904ed9088ce1f5591f6578271e56
@@ -92,21 +151,24 @@ pets:
   - pet_id: ian-azure-navigator
     display_name: "Ian · Azure Navigator"
     status: installed
-    style_preset: 3d-toy
-    references: [ian_04, ian_05]
-    description: "A warm, expressive human navigator in navy sailor styling."
+    style_preset: auto
+    identity_references: [ian_face_front_neutral, ian_upper_body_front, ian_face_three_quarter, ian_face_detail]
+    outfit_references: [ian_04, ian_05]
+    generation_references: [ian_face_front_neutral, ian_face_three_quarter, ian_face_detail, ian_04, ian_05]
+    description: "A high-fidelity photoreal human likeness of Ian in navy sailor styling."
     pet_notes: |-
-      Create a compact full-body human Codex Pet called Azure Navigator.
-      Give her warm copper-auburn waist-length human hair, a softly rounded
-      face, bright dark eyes, human hands and compact navy ankle boots. Her
-      outfit uses a broad navy-and-white sailor collar, sky-blue satin bow,
-      one original silver heart ornament, structured dark-denim pinafore and
-      a small tilted navy sailor cap. Render her as a premium soft-vinyl 3D
-      collectible with an oversized expressive head, compact body, smooth
-      materials and details readable in a 192x208 cell. Keep every accessory
-      attached and show one centered head-to-toe human character on a flat
-      removable chroma-key background.
+      Create a photoreal miniature full-body human Codex Pet called Azure
+      Navigator, preserving Ian's real facial identity from the four video
+      anchors. Use natural human proportions, realistic skin and individual
+      hair strands, with copper-auburn waist-length stage hair. Her outfit uses
+      a broad navy-and-white sailor collar, sky-blue satin bow, one original
+      silver heart ornament, structured dark-denim pinafore and a small tilted
+      navy sailor cap. Render real fabric weave, stitching and compact navy
+      ankle boots. Keep every accessory attached and show one centered,
+      head-to-toe real human on a flat removable chroma-key background.
     identity_anchors:
+      - Ian's stable real facial geometry from the primary video frames
+      - natural human head-to-body proportions with no caricature
       - long copper-auburn hair
       - tilted navy sailor cap
       - broad sailor collar and sky-blue bow
@@ -120,21 +182,25 @@ pets:
   - pet_id: ian-heartline-noir
     display_name: "Ian · Heartline Noir"
     status: installed
-    style_preset: sticker
-    references: [ian_01, ian_02]
-    description: "An elegant human stage character built around black, ivory and a silver heart cue."
+    style_preset: auto
+    identity_references: [ian_face_front_neutral, ian_upper_body_front, ian_face_three_quarter, ian_face_detail]
+    outfit_references: [ian_01, ian_02]
+    generation_references: [ian_face_front_neutral, ian_face_three_quarter, ian_face_detail, ian_01, ian_02]
+    description: "A high-fidelity photoreal human likeness of Ian in black, ivory and silver stage styling."
     pet_notes: |-
-      Create a compact full-body human Codex Pet called Heartline Noir.
-      Give her copper-red hair in a high braided bun with soft side bangs and
-      one narrow black ribbon attached behind the hair. Use large dark eyes,
-      a poised smile, clear human hands and black ankle boots. Dress her in a
-      modest graphic black-and-ivory asymmetric stage outfit with one ivory
-      shoulder panel, fitted black bodice, wide ivory belt and one original
-      embossed silver heart ornament. Render as a premium illustrated sticker
-      with crisp outlines, clean cel shading, oversized expressive head and
-      compact whole-body proportions. Place one complete centered human on a
-      flat removable chroma-key background.
+      Create a photoreal miniature full-body human Codex Pet called Heartline
+      Noir, preserving Ian's real facial identity from the four video anchors.
+      Use natural human proportions, realistic skin and copper-red hair in a
+      high braided bun with soft side bangs and one narrow black ribbon attached
+      behind the hair. Dress her in a modest black-and-ivory asymmetric stage
+      outfit with one ivory shoulder panel, fitted black bodice, wide ivory belt
+      and one original embossed silver heart ornament. Render true fabric,
+      metal and black ankle boots with no drawn outlines or cel shading. Place
+      one complete centered, head-to-toe real human on a flat removable
+      chroma-key background.
     identity_anchors:
+      - Ian's stable real facial geometry from the primary video frames
+      - natural human head-to-body proportions with no caricature
       - high braided bun and attached black ribbon
       - black-and-ivory asymmetric shoulder panel
       - original silver heart ornament
@@ -148,21 +214,26 @@ pets:
   - pet_id: ian-lemon-cadet
     display_name: "Ian · Lemon Cadet"
     status: installed
-    style_preset: painterly
-    references: [ian_03, ian_06, ian_07]
-    description: "A lively human cadet with copper twin-tails and cream-yellow sailor styling."
+    style_preset: auto
+    identity_references: [ian_face_front_neutral, ian_upper_body_front, ian_face_three_quarter, ian_face_detail]
+    outfit_references: [ian_03, ian_06, ian_07]
+    generation_references: [ian_face_front_neutral, ian_face_three_quarter, ian_face_detail, ian_06, ian_07]
+    description: "A high-fidelity photoreal human likeness of Ian with copper twin-tails and cream-yellow sailor styling."
     pet_notes: |-
-      Create a compact full-body human Codex Pet called Lemon Cadet. She has
-      long copper-auburn human twin ponytails, center-parted bangs, lively dark
-      eyes, rosy cheeks, visible human hands and cream ankle boots. The twin
-      ponytails are ordinary human hair and never animal ears or tails. Dress
-      her in a modest cream-white sailor uniform with pale lemon piping,
-      structured square collar, short yellow waist bands and compact pleated
-      skirt. Attach one navy fabric rosette with an original abstract silver
-      heart center and no animal illustration. Render as a polished painterly
-      anime-game sprite with clean edges, compact body and large readable
-      costume shapes on a flat removable chroma-key background.
+      Create a photoreal miniature full-body human Codex Pet called Lemon Cadet,
+      preserving Ian's real facial identity from the four video anchors. Use
+      natural human proportions, realistic skin and long copper-auburn human
+      twin ponytails with center-parted bangs. The ponytails are ordinary human
+      hair and never animal ears or tails. Dress her in a modest cream-white
+      sailor uniform with pale lemon piping, structured square collar, short
+      yellow waist bands and compact pleated skirt. Attach one navy fabric
+      rosette with an original abstract silver heart center and no animal
+      illustration. Render realistic fabric, hair and cream ankle boots with no
+      anime, painterly or cel-shaded treatment. Show one complete centered,
+      head-to-toe real human on a flat removable chroma-key background.
     identity_anchors:
+      - Ian's stable real facial geometry from the primary video frames
+      - natural human head-to-body proportions with no caricature
       - long high human twin ponytails
       - cream-white and pale-lemon sailor uniform
       - navy rosette with original abstract heart center
@@ -173,7 +244,7 @@ pets:
       human hair ties and lag smoothly; they must never behave like animal
       appendages. Preserve facial proportions and use no whole-body rotation.
 
-deliveries:
+legacy_cartoon_deliveries:
   ian-azure-navigator:
     run_dir: runs/ian-azure-navigator
     pet_manifest: runs/ian-azure-navigator/final/pet.json
@@ -198,6 +269,58 @@ deliveries:
     validation: runs/ian-lemon-cadet/final/validation-extended.json
     final_qa: runs/ian-lemon-cadet/qa/final-visual-qa.json
     installed_path: /Users/chung/.codex/pets/ian-lemon-cadet
+
+photoreal_deliveries:
+  ian-azure-navigator:
+    status: installed
+    run_dir: runs/ian-azure-navigator-photoreal-v2
+    canonical_base: runs/ian-azure-navigator-photoreal-v2/references/canonical-base.png
+    canonical_sha256: c511bc17b5edef9c520d5dff467d137634ec75ce4c579224c2157ca7228001e8
+    pet_manifest: runs/ian-azure-navigator-photoreal-v2/final/pet.json
+    atlas: runs/ian-azure-navigator-photoreal-v2/final/spritesheet-extended.webp
+    atlas_sha256: 6e801634eacbcc234bb5d5ee0ae12862939030d4693d8fe6269a68e5b4f43f92
+    contact_sheet: runs/ian-azure-navigator-photoreal-v2/qa/contact-sheet-extended.png
+    direction_sheet: runs/ian-azure-navigator-photoreal-v2/qa/look-directions.png
+    validation: runs/ian-azure-navigator-photoreal-v2/final/validation-extended.json
+    blind_validation: runs/ian-azure-navigator-photoreal-v2/qa/direction-blind-validation.pre-despill.json
+    final_qa: runs/ian-azure-navigator-photoreal-v2/qa/final-visual-qa.json
+    installed_path: /Users/chung/.codex/pets/ian-azure-navigator
+    installed_atlas: /Users/chung/.codex/pets/ian-azure-navigator/spritesheet.webp
+    repository_install_hash_match: true
+  ian-heartline-noir:
+    status: installed
+    run_dir: runs/ian-heartline-noir-photoreal-v2
+    canonical_base: runs/ian-heartline-noir-photoreal-v2/references/canonical-base.png
+    canonical_sha256: 89e35769b9d578937acd6232d17352624e322144b0bc391f078678836d119120
+    pet_manifest: runs/ian-heartline-noir-photoreal-v2/final/pet.json
+    atlas: runs/ian-heartline-noir-photoreal-v2/final/spritesheet-extended.webp
+    atlas_sha256: 683e9053856eb58e3496c5e3183aa70d57f0121ba9b9eed885b1ec4405579f30
+    contact_sheet: runs/ian-heartline-noir-photoreal-v2/qa/contact-sheet-extended.png
+    direction_sheet: runs/ian-heartline-noir-photoreal-v2/qa/look-directions.png
+    validation: runs/ian-heartline-noir-photoreal-v2/final/validation-extended.json
+    blind_validation: runs/ian-heartline-noir-photoreal-v2/qa/direction-blind-validation.pre-despill.json
+    final_qa: runs/ian-heartline-noir-photoreal-v2/qa/final-visual-qa.json
+    installed_path: /Users/chung/.codex/pets/ian-heartline-noir
+    installed_atlas: /Users/chung/.codex/pets/ian-heartline-noir/spritesheet.webp
+    repository_install_hash_match: true
+  ian-lemon-cadet:
+    status: installed
+    run_dir: runs/ian-lemon-cadet-photoreal-v2
+    canonical_base: runs/ian-lemon-cadet-photoreal-v2/references/canonical-base.png
+    canonical_sha256: 4d01ef964b8a603726efee7f1780b2f5b6faa9116a99b2b073cb817eae87ae3a
+    pet_manifest: runs/ian-lemon-cadet-photoreal-v2/final/pet.json
+    atlas: runs/ian-lemon-cadet-photoreal-v2/final/spritesheet-extended.webp
+    atlas_sha256: a9abfa5e7a5eb426dde85adb15928ce3235de00c03e70ca3081122336db4dcb2
+    contact_sheet: runs/ian-lemon-cadet-photoreal-v2/qa/contact-sheet-extended.png
+    direction_sheet: runs/ian-lemon-cadet-photoreal-v2/qa/look-directions.png
+    validation: runs/ian-lemon-cadet-photoreal-v2/final/validation-extended.json
+    blind_validation: runs/ian-lemon-cadet-photoreal-v2/qa/direction-blind-validation.pre-despill.json
+    direction_evidence_reuse: runs/ian-lemon-cadet-photoreal-v2/qa/direction-evidence-reuse-after-running-right-repair.json
+    final_qa: runs/ian-lemon-cadet-photoreal-v2/qa/final-visual-qa.json
+    rejected_round_1: runs/ian-lemon-cadet-photoreal-v2/qa/final-visual-round-1-failed/consensus.json
+    installed_path: /Users/chung/.codex/pets/ian-lemon-cadet
+    installed_atlas: /Users/chung/.codex/pets/ian-lemon-cadet/spritesheet.webp
+    repository_install_hash_match: true
 
 sources:
   - https://cdn2.smentertainment.com/wp-content/uploads/2025/02/4Q24_ScriptENG_CEO-Message_20250210_vF-1.pdf

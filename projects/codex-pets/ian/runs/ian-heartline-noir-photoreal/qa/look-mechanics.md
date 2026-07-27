@@ -1,0 +1,3 @@
+# Heartline Noir look mechanics
+
+Keep Ian fully photoreal and anatomically human. Anchor both boots and the lower torso. Eyes, eyelids and brows initiate direction, followed by a small head, neck and shoulder turn. The braided bun remains stable while its attached black ribbon lags continuously. Preserve the same skull, facial spacing, natural head-to-body proportions, asymmetric ivory shoulder band, viewer-right white upper-arm flower-and-ribbon tie, wide ivory belt and attached silver heart. Never rotate the whole body, use pupil-only direction, mirror asymmetric details, or introduce illustration, anime, chibi, toy, doll, sticker, painted or cel-shaded rendering.

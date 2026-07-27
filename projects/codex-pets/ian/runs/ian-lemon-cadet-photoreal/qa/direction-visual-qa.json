@@ -1,0 +1,14 @@
+{
+  "pass": true,
+  "surface": "qa/look-directions.pre-despill.png",
+  "directionErrors": [],
+  "continuityConcerns": [
+    "337.5→000 has a 6.52px center shift and 1.18 area ratio; the visible difference is the expected profile-to-frontal twin-ponytail and shoulder silhouette change without baseline, scale, or identity break."
+  ],
+  "materialRepairsRequired": [],
+  "artifactConcerns": [
+    "Expected pre-despill chroma fringe; non-blocking.",
+    "No alpha holes detected."
+  ],
+  "notes": "Independent visual QA confirmed all 16 clockwise direction semantics; no whole-row regeneration is required."
+}

@@ -1,0 +1,25 @@
+{
+  "stage": "pre-despill-handoff",
+  "spriteVersionNumber": 2,
+  "kind": "person",
+  "generated_rows": 11,
+  "all_required_row_identity_inputs": true,
+  "atlas_png": "projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/final/spritesheet-extended.pre-despill.png",
+  "atlas_sha256": "df0b9f0051efdc9ea555b8a9f1b365cff2daf7b582c002ecae36698b098dd0b7",
+  "manifest": "projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/final/spritesheet-extended.json",
+  "structural_validation": "projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/final/validation-extended.pre-despill.json",
+  "standard_row_review": "projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/qa/review-mixed.json",
+  "contact_sheet": "projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/qa/contact-sheet-extended.pre-despill.png",
+  "direction_sheet": "projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/qa/look-directions.pre-despill.png",
+  "continuity": "projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/qa/look-continuity.pre-despill.json",
+  "running_right_final_qa": "projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/qa/running-right-finalqa-review.json",
+  "running_right_detached_component_check": "projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/qa/running-right-detached-components.json",
+  "despill_status": "not run; root agent owns the single final invocation",
+  "blind_review_status": "not run",
+  "final_visual_qa_status": "not claimed",
+  "open_risks": [
+    "continuity report requires review for local outliers at 157.5->180 and 337.5->000",
+    "pre-despill validation permits expected blue chroma-edge fringe; final root-owned despill remains required",
+    "running-right was regenerated and uses component extraction; its source component check has no detached component at or above 32 pixels"
+  ]
+}

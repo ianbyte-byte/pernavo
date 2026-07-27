@@ -1,0 +1,21 @@
+{
+  "decision": "pass",
+  "majority": "2 PASS, 1 REVISE",
+  "candidate_sha256": "c511bc17b5edef9c520d5dff467d137634ec75ce4c579224c2157ca7228001e8",
+  "reviewer_confidence": ["medium", "medium", "high"],
+  "accepted_features": [
+    "long oval face and broad forehead remain close to the accepted master",
+    "almond eye direction, brow axis and spacing remain recognizable",
+    "straight nose, rounded tip and lip relationship remain recognizable",
+    "viewer-left under-eye mole is retained",
+    "complete age-appropriate photoreal human with no cartoon, animal, text or extra person"
+  ],
+  "non_blocking_warnings": [
+    "middle and lower face remain slightly narrower than the master",
+    "chin can read slightly sharper at full-body scale",
+    "future rows must not enlarge the eyes, thin the lips or further narrow the jaw"
+  ],
+  "animation_authorized": true,
+  "review_policy": "three isolated read-only reviewers; majority PASS required",
+  "limitations": "Visual consistency decision only; not biometric or pixel-level verification."
+}

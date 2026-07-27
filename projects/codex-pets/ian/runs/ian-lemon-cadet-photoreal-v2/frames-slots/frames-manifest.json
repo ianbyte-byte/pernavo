@@ -1,0 +1,125 @@
+{
+  "ok": true,
+  "chroma_key": {
+    "hex": "#0000FF",
+    "rgb": [
+      0,
+      0,
+      255
+    ],
+    "threshold": 96.0
+  },
+  "rows": [
+    {
+      "state": "idle",
+      "frames": [
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/idle/00.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/idle/01.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/idle/02.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/idle/03.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/idle/04.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/idle/05.png"
+      ],
+      "method": "slots"
+    },
+    {
+      "state": "running-right",
+      "frames": [
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/running-right/00.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/running-right/01.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/running-right/02.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/running-right/03.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/running-right/04.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/running-right/05.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/running-right/06.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/running-right/07.png"
+      ],
+      "method": "slots"
+    },
+    {
+      "state": "running-left",
+      "frames": [
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/running-left/00.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/running-left/01.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/running-left/02.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/running-left/03.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/running-left/04.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/running-left/05.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/running-left/06.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/running-left/07.png"
+      ],
+      "method": "slots"
+    },
+    {
+      "state": "waving",
+      "frames": [
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/waving/00.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/waving/01.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/waving/02.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/waving/03.png"
+      ],
+      "method": "slots"
+    },
+    {
+      "state": "jumping",
+      "frames": [
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/jumping/00.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/jumping/01.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/jumping/02.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/jumping/03.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/jumping/04.png"
+      ],
+      "method": "slots"
+    },
+    {
+      "state": "failed",
+      "frames": [
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/failed/00.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/failed/01.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/failed/02.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/failed/03.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/failed/04.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/failed/05.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/failed/06.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/failed/07.png"
+      ],
+      "method": "slots"
+    },
+    {
+      "state": "waiting",
+      "frames": [
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/waiting/00.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/waiting/01.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/waiting/02.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/waiting/03.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/waiting/04.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/waiting/05.png"
+      ],
+      "method": "slots"
+    },
+    {
+      "state": "running",
+      "frames": [
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/running/00.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/running/01.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/running/02.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/running/03.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/running/04.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/running/05.png"
+      ],
+      "method": "slots"
+    },
+    {
+      "state": "review",
+      "frames": [
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/review/00.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/review/01.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/review/02.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/review/03.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/review/04.png",
+        "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-slots/review/05.png"
+      ],
+      "method": "slots"
+    }
+  ]
+}

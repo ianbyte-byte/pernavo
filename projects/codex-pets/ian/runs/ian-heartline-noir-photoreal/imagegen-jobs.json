@@ -1,0 +1,856 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-07-26T06:03:31.466717+00:00",
+  "run_dir": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-heartline-noir-photoreal",
+  "primary_generation_skill": "$imagegen",
+  "jobs": [
+    {
+      "id": "base",
+      "kind": "base-pet",
+      "status": "completed",
+      "prompt_file": "prompts/base-pet.md",
+      "input_images": [
+        {
+          "path": "references/reference-01.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-02.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-03.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-04.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-05.jpg",
+          "role": "pet reference"
+        }
+      ],
+      "output_path": "decoded/base.png",
+      "selected_source": "decoded/base.png",
+      "sha256": "0fb3fe7af5451fa4415b45b135bdab3b1530c2747eb2951a18f7aedbc360792d",
+      "qa_note": "Accepted photoreal full-body real human with stable Ian facial identity, natural anatomy, complete Heartline Noir outfit, original silver-heart ornament, and flat green chroma background.",
+      "depends_on": [],
+      "generation_skill": "$imagegen",
+      "requires_grounded_generation": true,
+      "allow_prompt_only_generation": false
+    },
+    {
+      "id": "idle",
+      "kind": "row-strip",
+      "status": "completed",
+      "prompt_file": "prompts/rows/idle.md",
+      "retry_prompt_file": "prompts/row-retries/idle.md",
+      "input_images": [
+        {
+          "path": "references/reference-01.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-02.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-03.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-04.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-05.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/layout-guides/idle.png",
+          "role": "layout guide for 6 frame slots; use for spacing only, do not copy guide lines"
+        },
+        {
+          "path": "references/canonical-base.png",
+          "role": "canonical identity reference"
+        }
+      ],
+      "output_path": "decoded/idle.png",
+      "selected_source": "decoded/idle.png",
+      "sha256": "8da9f5efbe9a428bca531ab3fdfbe37f8d3dc60449a3041709ccc4c17be76ab8",
+      "qa_note": "Accepted: six separated photoreal full-body frames, stable Ian identity and baseline, subtle breathing/blink/head-bob loop, flat green background; component extraction and deterministic frame inspection pass with no warnings.",
+      "depends_on": [
+        "base"
+      ],
+      "generation_skill": "$imagegen",
+      "requires_grounded_generation": true,
+      "allow_prompt_only_generation": false,
+      "identity_reference_paths": [
+        "references/canonical-base.png"
+      ],
+      "parallelizable_after": [
+        "base"
+      ],
+      "derivation_policy": {
+        "may_derive": false,
+        "reason": "no deterministic derivation is configured for this state"
+      },
+      "mirror_policy": {}
+    },
+    {
+      "id": "running-right",
+      "kind": "row-strip",
+      "status": "completed",
+      "prompt_file": "prompts/rows/running-right.md",
+      "retry_prompt_file": "prompts/row-retries/running-right.md",
+      "input_images": [
+        {
+          "path": "references/reference-01.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-02.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-03.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-04.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-05.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/layout-guides/running-right.png",
+          "role": "layout guide for 8 frame slots; use for spacing only, do not copy guide lines"
+        },
+        {
+          "path": "references/canonical-base.png",
+          "role": "canonical identity reference"
+        }
+      ],
+      "output_path": "decoded/running-right.png",
+      "selected_source": "decoded/running-right.png",
+      "sha256": "c970eacf10ebd45cf9784f2ecd10bbe5f00953d0822bb20b4bd9b965c9d47856",
+      "qa_note": "Accepted: eight separated photoreal full-body frames facing screen-right with coherent alternating gait, stable identity/scale, flat green background; component extraction and deterministic frame inspection pass with no warnings.",
+      "depends_on": [
+        "base"
+      ],
+      "generation_skill": "$imagegen",
+      "requires_grounded_generation": true,
+      "allow_prompt_only_generation": false,
+      "identity_reference_paths": [
+        "references/canonical-base.png"
+      ],
+      "parallelizable_after": [
+        "base"
+      ],
+      "derivation_policy": {
+        "may_derive": false,
+        "reason": "no deterministic derivation is configured for this state"
+      },
+      "mirror_policy": {}
+    },
+    {
+      "id": "running-left",
+      "kind": "row-strip",
+      "status": "completed",
+      "prompt_file": "prompts/rows/running-left.md",
+      "retry_prompt_file": "prompts/row-retries/running-left.md",
+      "input_images": [
+        {
+          "path": "references/reference-01.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-02.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-03.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-04.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-05.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/layout-guides/running-left.png",
+          "role": "layout guide for 8 frame slots; use for spacing only, do not copy guide lines"
+        },
+        {
+          "path": "references/canonical-base.png",
+          "role": "canonical identity reference"
+        },
+        {
+          "path": "decoded/running-right.png",
+          "role": "rightward gait reference for leftward row decision"
+        }
+      ],
+      "output_path": "decoded/running-left.png",
+      "selected_source": "decoded/running-left.png",
+      "sha256": "55025705aa3ca8e1c90a3a9f64d7804cfda99558f8d11a21864275c25d5d5a43",
+      "qa_note": "Accepted: eight separated photoreal full-body frames facing screen-left with coherent gait; asymmetric ivory panel, heart and ribbon stay on canonical sides; component extraction and deterministic inspection pass with no warnings.",
+      "depends_on": [
+        "base",
+        "running-right"
+      ],
+      "generation_skill": "$imagegen",
+      "requires_grounded_generation": true,
+      "allow_prompt_only_generation": false,
+      "identity_reference_paths": [
+        "references/canonical-base.png"
+      ],
+      "parallelizable_after": [
+        "base",
+        "running-right"
+      ],
+      "derivation_policy": {
+        "may_derive": true,
+        "may_derive_from": "running-right",
+        "derivation": "framewise-horizontal-mirror-preserving-order",
+        "requires_explicit_approval": true,
+        "fallback_generation_skill": "$imagegen"
+      },
+      "mirror_policy": {
+        "may_derive": true,
+        "may_derive_from": "running-right",
+        "derivation": "framewise-horizontal-mirror-preserving-order",
+        "requires_explicit_approval": true,
+        "fallback_generation_skill": "$imagegen"
+      }
+    },
+    {
+      "id": "waving",
+      "kind": "row-strip",
+      "status": "completed",
+      "prompt_file": "prompts/rows/waving.md",
+      "retry_prompt_file": "prompts/row-retries/waving.md",
+      "input_images": [
+        {
+          "path": "references/reference-01.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-02.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-03.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-04.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-05.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/layout-guides/waving.png",
+          "role": "layout guide for 4 frame slots; use for spacing only, do not copy guide lines"
+        },
+        {
+          "path": "references/canonical-base.png",
+          "role": "canonical identity reference"
+        }
+      ],
+      "output_path": "decoded/waving.png",
+      "selected_source": "decoded/waving.png",
+      "sha256": "c6793f9b3aa080bb09e40c91af6f467b8493ab833427fe29bc263103bffb9b38",
+      "qa_note": "Accepted: four complete photoreal frames with a readable open human-hand wave, correct fingers, stable Ian identity/outfit/baseline, and flat green background; extraction and deterministic inspection pass without warnings.",
+      "depends_on": [
+        "base"
+      ],
+      "generation_skill": "$imagegen",
+      "requires_grounded_generation": true,
+      "allow_prompt_only_generation": false,
+      "identity_reference_paths": [
+        "references/canonical-base.png"
+      ],
+      "parallelizable_after": [
+        "base"
+      ],
+      "derivation_policy": {
+        "may_derive": false,
+        "reason": "state requires its own generated animation semantics"
+      },
+      "mirror_policy": {}
+    },
+    {
+      "id": "jumping",
+      "kind": "row-strip",
+      "status": "completed",
+      "prompt_file": "prompts/rows/jumping.md",
+      "retry_prompt_file": "prompts/row-retries/jumping.md",
+      "input_images": [
+        {
+          "path": "references/reference-01.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-02.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-03.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-04.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-05.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/layout-guides/jumping.png",
+          "role": "layout guide for 5 frame slots; use for spacing only, do not copy guide lines"
+        },
+        {
+          "path": "references/canonical-base.png",
+          "role": "canonical identity reference"
+        }
+      ],
+      "output_path": "decoded/jumping.png",
+      "selected_source": "decoded/jumping.png",
+      "sha256": "557d44c5690536d4a061fdcde9a720a368c0b95c6067d69f3522058b5cd6aab1",
+      "qa_note": "Accepted: five complete photoreal frames forming crouch/rise/apex/descent/settle, stable identity/asymmetry/registration and flat green background; extraction and inspection pass without warnings.",
+      "depends_on": [
+        "base"
+      ],
+      "generation_skill": "$imagegen",
+      "requires_grounded_generation": true,
+      "allow_prompt_only_generation": false,
+      "identity_reference_paths": [
+        "references/canonical-base.png"
+      ],
+      "parallelizable_after": [
+        "base"
+      ],
+      "derivation_policy": {
+        "may_derive": false,
+        "reason": "state requires its own generated animation semantics"
+      },
+      "mirror_policy": {}
+    },
+    {
+      "id": "failed",
+      "kind": "row-strip",
+      "status": "completed",
+      "prompt_file": "prompts/rows/failed.md",
+      "retry_prompt_file": "prompts/row-retries/failed.md",
+      "input_images": [
+        {
+          "path": "references/reference-01.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-02.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-03.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-04.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-05.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/layout-guides/failed.png",
+          "role": "layout guide for 8 frame slots; use for spacing only, do not copy guide lines"
+        },
+        {
+          "path": "references/canonical-base.png",
+          "role": "canonical identity reference"
+        }
+      ],
+      "output_path": "decoded/failed.png",
+      "selected_source": "decoded/failed.png",
+      "sha256": "340ea574b913fcfbbf28a73be06d6a24bab4840267a82211846250230c531c33",
+      "qa_note": "Accepted after artifact/accessory repair: eight complete photoreal disappointment-to-recovery frames retain the white upper-arm flower-and-ribbon tie, black bun ribbon and silver heart in every slot, with no foreign blue pixels; extraction and inspection pass without warnings.",
+      "depends_on": [
+        "base"
+      ],
+      "generation_skill": "$imagegen",
+      "requires_grounded_generation": true,
+      "allow_prompt_only_generation": false,
+      "identity_reference_paths": [
+        "references/canonical-base.png"
+      ],
+      "parallelizable_after": [
+        "base"
+      ],
+      "derivation_policy": {
+        "may_derive": false,
+        "reason": "state requires its own generated animation semantics"
+      },
+      "mirror_policy": {}
+    },
+    {
+      "id": "waiting",
+      "kind": "row-strip",
+      "status": "completed",
+      "prompt_file": "prompts/rows/waiting.md",
+      "retry_prompt_file": "prompts/row-retries/waiting.md",
+      "input_images": [
+        {
+          "path": "references/reference-01.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-02.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-03.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-04.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-05.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/layout-guides/waiting.png",
+          "role": "layout guide for 6 frame slots; use for spacing only, do not copy guide lines"
+        },
+        {
+          "path": "references/canonical-base.png",
+          "role": "canonical identity reference"
+        }
+      ],
+      "output_path": "decoded/waiting.png",
+      "selected_source": "decoded/waiting.png",
+      "sha256": "72afd0ae3c95bcdc838926164103244bc08e9b30f9f8720f779d95cf787d0ad3",
+      "qa_note": "Accepted: six complete photoreal waiting frames use attentive approval/input postures while preserving Ian identity, silver heart, asymmetric ivory shoulder band, viewer-right upper-arm flower/ribbon and black bun ribbon; no artifacts, and extraction inspection passes without warnings.",
+      "depends_on": [
+        "base"
+      ],
+      "generation_skill": "$imagegen",
+      "requires_grounded_generation": true,
+      "allow_prompt_only_generation": false,
+      "identity_reference_paths": [
+        "references/canonical-base.png"
+      ],
+      "parallelizable_after": [
+        "base"
+      ],
+      "derivation_policy": {
+        "may_derive": false,
+        "reason": "state requires its own generated animation semantics"
+      },
+      "mirror_policy": {}
+    },
+    {
+      "id": "running",
+      "kind": "row-strip",
+      "status": "completed",
+      "prompt_file": "prompts/rows/running.md",
+      "retry_prompt_file": "prompts/row-retries/running.md",
+      "input_images": [
+        {
+          "path": "references/reference-01.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-02.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-03.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-04.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-05.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/layout-guides/running.png",
+          "role": "layout guide for 6 frame slots; use for spacing only, do not copy guide lines"
+        },
+        {
+          "path": "references/canonical-base.png",
+          "role": "canonical identity reference"
+        }
+      ],
+      "output_path": "decoded/running.png",
+      "selected_source": "decoded/running.png",
+      "sha256": "07262d9ce934acc530319151bf91f8a8f0ed99367bec56a207ebbd61e4cc2182",
+      "qa_note": "Accepted: six complete frontal photoreal task-processing frames use focused gaze and restrained hand motion with planted boots, while retaining all asymmetric Heartline attachments; extraction and inspection pass without warnings.",
+      "depends_on": [
+        "base"
+      ],
+      "generation_skill": "$imagegen",
+      "requires_grounded_generation": true,
+      "allow_prompt_only_generation": false,
+      "identity_reference_paths": [
+        "references/canonical-base.png"
+      ],
+      "parallelizable_after": [
+        "base"
+      ],
+      "derivation_policy": {
+        "may_derive": false,
+        "reason": "state requires its own generated animation semantics"
+      },
+      "mirror_policy": {}
+    },
+    {
+      "id": "review",
+      "kind": "row-strip",
+      "status": "completed",
+      "prompt_file": "prompts/rows/review.md",
+      "retry_prompt_file": "prompts/row-retries/review.md",
+      "input_images": [
+        {
+          "path": "references/reference-01.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-02.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-03.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-04.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-05.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/layout-guides/review.png",
+          "role": "layout guide for 6 frame slots; use for spacing only, do not copy guide lines"
+        },
+        {
+          "path": "references/canonical-base.png",
+          "role": "canonical identity reference"
+        }
+      ],
+      "output_path": "decoded/review.png",
+      "selected_source": "decoded/review.png",
+      "sha256": "3bb327ae7af06be964dc2fd85b453881fc35c6d210f3b2f44d39d798ee6b218c",
+      "qa_note": "Accepted: six complete frontal photoreal review frames use analytical gaze, restrained head tilts and thoughtful hand positions while preserving every Heartline asymmetric attachment; extraction and inspection pass without warnings.",
+      "depends_on": [
+        "base"
+      ],
+      "generation_skill": "$imagegen",
+      "requires_grounded_generation": true,
+      "allow_prompt_only_generation": false,
+      "identity_reference_paths": [
+        "references/canonical-base.png"
+      ],
+      "parallelizable_after": [
+        "base"
+      ],
+      "derivation_policy": {
+        "may_derive": false,
+        "reason": "state requires its own generated animation semantics"
+      },
+      "mirror_policy": {}
+    },
+    {
+      "id": "look-cardinals",
+      "kind": "look-cardinal-strip",
+      "status": "completed",
+      "prompt_file": "prompts/look-cardinals.md",
+      "repair_prompt_files": {
+        "000": "prompts/look-anchor-repairs/000.md",
+        "090": "prompts/look-anchor-repairs/090.md",
+        "180": "prompts/look-anchor-repairs/180.md",
+        "270": "prompts/look-anchor-repairs/270.md"
+      },
+      "input_images": [
+        {
+          "path": "references/reference-01.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-02.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-03.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-04.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-05.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/layout-guides/look-cardinals.png",
+          "role": "layout guide for four cardinal slots; use for spacing only, do not copy guide lines"
+        },
+        {
+          "path": "references/canonical-base.png",
+          "role": "canonical identity reference"
+        },
+        {
+          "path": "qa/contact-sheet.png",
+          "role": "approved standard-row identity, scale, and baseline reference"
+        }
+      ],
+      "output_path": "decoded/look-cardinals.png",
+      "selected_source": "decoded/look-cardinals.png",
+      "sha256": "0fe4afe6cc8a4dc4e0bbc85126cab5de565f16823a0b5a62fe9cc3f114c85187",
+      "approved_strip_sha256": "69ce23a2bea8a73dc80bdc8df61dd869aa3baf8fbda867c432d02c3885c8fbdf",
+      "qa_note": "Accepted after a screen-coordinate repair: exactly four complete photoreal anchors read UP, viewer SCREEN-RIGHT, DOWN, viewer SCREEN-LEFT; extraction validates all four, and Heartline asymmetry remains attached and unmirrored.",
+      "rejected_attempts": [
+        {
+          "source": "exec-2c28e0ae-4cc1-4eaa-ba4a-f8f6b2e6536b.png",
+          "reason": "090 and 270 both faced viewer screen-left; independent side-by-side crops contradicted the initial self-review."
+        }
+      ],
+      "extracted_output_paths": [
+        "decoded/look-anchors/000.png",
+        "decoded/look-anchors/090.png",
+        "decoded/look-anchors/180.png",
+        "decoded/look-anchors/270.png"
+      ],
+      "approved_strip_path": "decoded/look-anchors-approved.png",
+      "depends_on": [
+        "idle",
+        "running-right",
+        "running-left",
+        "waving",
+        "jumping",
+        "failed",
+        "waiting",
+        "running",
+        "review"
+      ],
+      "generation_skill": "$imagegen",
+      "requires_grounded_generation": true,
+      "allow_prompt_only_generation": false,
+      "identity_reference_paths": [
+        "references/canonical-base.png"
+      ],
+      "look_mechanics_file": "qa/look-mechanics.md",
+      "directions": [
+        "000",
+        "090",
+        "180",
+        "270"
+      ],
+      "packaging_eligible": false,
+      "parallelizable_after": [
+        "idle",
+        "running-right",
+        "running-left",
+        "waving",
+        "jumping",
+        "failed",
+        "waiting",
+        "running",
+        "review"
+      ],
+      "derivation_policy": {
+        "may_derive": false,
+        "reason": "cardinal directions require grounded pet-specific generation"
+      }
+    },
+    {
+      "id": "look-row-9",
+      "kind": "look-row-strip",
+      "status": "completed",
+      "prompt_file": "prompts/rows/look-row-9.md",
+      "retry_prompt_file": "prompts/row-retries/look-row-9.md",
+      "input_images": [
+        {
+          "path": "references/reference-01.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-02.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-03.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-04.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-05.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/layout-guides/look-row-9.png",
+          "role": "layout guide for 8 direction slots; use for spacing only, do not copy guide lines"
+        },
+        {
+          "path": "references/canonical-base.png",
+          "role": "canonical identity reference"
+        },
+        {
+          "path": "qa/contact-sheet.png",
+          "role": "approved standard-row identity, scale, and baseline reference"
+        },
+        {
+          "path": "decoded/look-anchors-approved.png",
+          "role": "approved cardinal reference strip in order 000 up, 090 screen-right, 180 down, 270 screen-left; interpolate intermediate directions evenly"
+        }
+      ],
+      "output_path": "decoded/look-row-9.png",
+      "selected_source": "decoded/look-row-9.png",
+      "sha256": "67feee637254259c197bfeccbfda4b0294aaf260af4d0e9d3a8b12a44ee01af9",
+      "qa_note": "Accepted after coherent whole-row regeneration: exactly eight separated poses progress monotonically from 000 up through 090 screen-right to 157.5 down-right; identity, frontal body registration, outfit attachments, scale, feet, and baseline remain stable.",
+      "rejected_attempts": [
+        {
+          "source": "exec-e153df4c-48c1-4487-a880-6df4624670dc.png",
+          "sha256": "b4f29cce193de9f3b6db6129256e121df97b8fedade2e59b8df9aa70c6cae80d",
+          "reason": "Slots 112.5, 135, and 157.5 remained nearly horizontal screen-right instead of progressing down-right; the complete eight-pose strip was regenerated coherently, with no individual-cell patching."
+        }
+      ],
+      "depends_on": [
+        "look-cardinals"
+      ],
+      "generation_skill": "$imagegen",
+      "requires_grounded_generation": true,
+      "allow_prompt_only_generation": false,
+      "identity_reference_paths": [
+        "references/canonical-base.png"
+      ],
+      "look_mechanics_file": "qa/look-mechanics.md",
+      "directions": [
+        "000",
+        "022.5",
+        "045",
+        "067.5",
+        "090",
+        "112.5",
+        "135",
+        "157.5"
+      ],
+      "parallelizable_after": [
+        "look-cardinals"
+      ],
+      "derivation_policy": {
+        "may_derive": false,
+        "reason": "look directions require grounded pet-specific generation"
+      },
+      "coherent_synthesis_required": true,
+      "individual_cell_packaging_allowed": false,
+      "packaging_eligible": true
+    },
+    {
+      "id": "look-row-10",
+      "kind": "look-row-strip",
+      "status": "completed",
+      "prompt_file": "prompts/rows/look-row-10.md",
+      "retry_prompt_file": "prompts/row-retries/look-row-10.md",
+      "input_images": [
+        {
+          "path": "references/reference-01.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-02.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-03.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-04.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/reference-05.jpg",
+          "role": "pet reference"
+        },
+        {
+          "path": "references/layout-guides/look-row-10.png",
+          "role": "layout guide for 8 direction slots; use for spacing only, do not copy guide lines"
+        },
+        {
+          "path": "references/canonical-base.png",
+          "role": "canonical identity reference"
+        },
+        {
+          "path": "qa/contact-sheet.png",
+          "role": "approved standard-row identity, scale, and baseline reference"
+        },
+        {
+          "path": "decoded/look-anchors-approved.png",
+          "role": "approved cardinal reference strip in order 000 up, 090 screen-right, 180 down, 270 screen-left; interpolate intermediate directions evenly"
+        },
+        {
+          "path": "decoded/look-row-9.png",
+          "role": "completed first half of the clockwise look loop for row 10 continuity"
+        }
+      ],
+      "output_path": "decoded/look-row-10.png",
+      "selected_source": "decoded/look-row-10.png",
+      "sha256": "cdffd9a503e2084cee74075d7bdfc84b1ecc745b3a24eeccef44734bf652c755",
+      "qa_note": "Accepted after independent strict per-slot QA: exactly eight separated poses progress from 180 down through the screen-left lower arc, 270 screen-left, and the screen-left upper arc to 337.5; frontal body and boots, baseline, identity, silver heart, ivory band, white arm flower, and black ribbon remain stable and unmirrored.",
+      "depends_on": [
+        "look-cardinals",
+        "look-row-9"
+      ],
+      "generation_skill": "$imagegen",
+      "requires_grounded_generation": true,
+      "allow_prompt_only_generation": false,
+      "identity_reference_paths": [
+        "references/canonical-base.png"
+      ],
+      "look_mechanics_file": "qa/look-mechanics.md",
+      "directions": [
+        "180",
+        "202.5",
+        "225",
+        "247.5",
+        "270",
+        "292.5",
+        "315",
+        "337.5"
+      ],
+      "parallelizable_after": [
+        "look-cardinals",
+        "look-row-9"
+      ],
+      "derivation_policy": {
+        "may_derive": false,
+        "reason": "look directions require grounded pet-specific generation"
+      },
+      "coherent_synthesis_required": true,
+      "individual_cell_packaging_allowed": false,
+      "packaging_eligible": true
+    }
+  ]
+}

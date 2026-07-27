@@ -1,0 +1,15 @@
+{
+  "pass": true,
+  "surface": "qa/look-directions.pre-despill.png",
+  "directionErrors": [],
+  "continuityConcerns": [
+    "157.5→180 is the expected down-right to down head transition.",
+    "337.5→000 has a 10px center shift and 1.16 area ratio, but the visible change is pose and silhouette rather than baseline, scale, or identity drift."
+  ],
+  "materialRepairsRequired": [],
+  "artifactConcerns": [
+    "Expected pre-despill chroma fringe; non-blocking.",
+    "No alpha holes detected."
+  ],
+  "notes": "Independent visual QA confirmed all 16 clockwise direction semantics; no whole-row regeneration is required."
+}

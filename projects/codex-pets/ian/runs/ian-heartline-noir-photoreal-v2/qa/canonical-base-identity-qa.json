@@ -1,0 +1,20 @@
+{
+  "decision": "fail",
+  "majority": "2 FAIL, 1 PASS",
+  "same_person_confidence": "low",
+  "matched_features": [
+    "full-body human composition",
+    "partial straight-nose and lip-volume resemblance"
+  ],
+  "blocking_repairs": [
+    "rebuild the whole face from the accepted master and video anchors",
+    "restore narrower almond eyes, the lower brow axis and natural eye spacing",
+    "restore nose length, nose-tip volume, nose-to-lip spacing and lower-face length",
+    "broaden and round the jaw and chin",
+    "restore the under-eye mole to the accepted side and position",
+    "increase outfit coverage while preserving the black, ivory, silver-heart stage concept"
+  ],
+  "style_gate": "revise",
+  "animation_authorized": false,
+  "review_policy": "three isolated read-only visual reviewers; majority decision"
+}

@@ -1,0 +1,13 @@
+{
+  "source": "sources/running-right-v2-raw.png",
+  "source_sha256": "3cbc07455dd2a4720d80e0f4686d3f5e894c98399ccccd3251199f346fc0963b",
+  "chroma_key": "#0000FF",
+  "component_detection": "connected components after chroma removal, with eight largest pose components as frame seeds",
+  "main_pose_component_count": 8,
+  "main_pose_component_areas": [49184, 47432, 46175, 46919, 45430, 43205, 46637, 45495],
+  "detached_component_threshold_pixels": 32,
+  "detached_components_at_or_above_threshold": [],
+  "largest_non_pose_component_pixels": 21,
+  "result": "pass",
+  "note": "No detached component at or above the original final-QA blocker threshold remains. Tiny antialias islands below 32 pixels are excluded by deterministic component extraction and do not form limbs, shoes, or pose groups."
+}

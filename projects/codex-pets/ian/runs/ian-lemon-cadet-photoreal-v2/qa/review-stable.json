@@ -1,0 +1,1007 @@
+{
+  "ok": false,
+  "frames_root": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable",
+  "states": [
+    "idle",
+    "running-right",
+    "running-left",
+    "waving",
+    "jumping",
+    "failed",
+    "waiting",
+    "running",
+    "review"
+  ],
+  "errors": [
+    "running-right frame 02 is empty or too sparse (4 pixels)"
+  ],
+  "warnings": [
+    "idle used extraction method stable-slots; confirm motion playback remains stable and unclipped",
+    "running-right used extraction method stable-slots; confirm motion playback remains stable and unclipped",
+    "running-right frame 02 is much smaller than the row median (4 vs 6259)",
+    "running-left used extraction method stable-slots; confirm motion playback remains stable and unclipped",
+    "waving used extraction method stable-slots; confirm motion playback remains stable and unclipped",
+    "jumping used extraction method stable-slots; confirm motion playback remains stable and unclipped",
+    "failed used extraction method stable-slots; confirm motion playback remains stable and unclipped",
+    "waiting used extraction method stable-slots; confirm motion playback remains stable and unclipped",
+    "running used extraction method stable-slots; confirm motion playback remains stable and unclipped",
+    "review used extraction method stable-slots; confirm motion playback remains stable and unclipped"
+  ],
+  "rows": [
+    {
+      "state": "idle",
+      "expected_frames": 6,
+      "actual_frames": 6,
+      "extraction_method": "stable-slots",
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "idle used extraction method stable-slots; confirm motion playback remains stable and unclipped"
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/idle/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7148,
+          "bbox": [
+            68,
+            5,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 58
+        },
+        {
+          "index": 1,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/idle/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7042,
+          "bbox": [
+            68,
+            5,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 61
+        },
+        {
+          "index": 2,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/idle/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7016,
+          "bbox": [
+            68,
+            7,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 62
+        },
+        {
+          "index": 3,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/idle/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7055,
+          "bbox": [
+            68,
+            5,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 55
+        },
+        {
+          "index": 4,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/idle/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7040,
+          "bbox": [
+            68,
+            5,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 62
+        },
+        {
+          "index": 5,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/idle/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7035,
+          "bbox": [
+            68,
+            6,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 59
+        }
+      ]
+    },
+    {
+      "state": "running-right",
+      "expected_frames": 8,
+      "actual_frames": 8,
+      "extraction_method": "stable-slots",
+      "ok": false,
+      "errors": [
+        "running-right frame 02 is empty or too sparse (4 pixels)"
+      ],
+      "warnings": [
+        "running-right used extraction method stable-slots; confirm motion playback remains stable and unclipped",
+        "running-right frame 02 is much smaller than the row median (4 vs 6259)"
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/running-right/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6959,
+          "bbox": [
+            60,
+            5,
+            131,
+            202
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 79
+        },
+        {
+          "index": 1,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/running-right/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6676,
+          "bbox": [
+            64,
+            5,
+            127,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 66
+        },
+        {
+          "index": 2,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/running-right/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 4,
+          "bbox": [
+            94,
+            38,
+            96,
+            40
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 0
+        },
+        {
+          "index": 3,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/running-right/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6271,
+          "bbox": [
+            57,
+            8,
+            134,
+            200
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 65
+        },
+        {
+          "index": 4,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/running-right/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6117,
+          "bbox": [
+            56,
+            9,
+            135,
+            199
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 71
+        },
+        {
+          "index": 5,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/running-right/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6242,
+          "bbox": [
+            57,
+            9,
+            134,
+            199
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 54
+        },
+        {
+          "index": 6,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/running-right/06.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6247,
+          "bbox": [
+            56,
+            10,
+            135,
+            199
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 60
+        },
+        {
+          "index": 7,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/running-right/07.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6717,
+          "bbox": [
+            60,
+            10,
+            130,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 87
+        }
+      ]
+    },
+    {
+      "state": "running-left",
+      "expected_frames": 8,
+      "actual_frames": 8,
+      "extraction_method": "stable-slots",
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "running-left used extraction method stable-slots; confirm motion playback remains stable and unclipped"
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/running-left/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7433,
+          "bbox": [
+            52,
+            5,
+            139,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 115
+        },
+        {
+          "index": 1,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/running-left/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7400,
+          "bbox": [
+            52,
+            6,
+            140,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 111
+        },
+        {
+          "index": 2,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/running-left/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7255,
+          "bbox": [
+            52,
+            5,
+            140,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 120
+        },
+        {
+          "index": 3,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/running-left/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7364,
+          "bbox": [
+            54,
+            5,
+            137,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 88
+        },
+        {
+          "index": 4,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/running-left/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7430,
+          "bbox": [
+            52,
+            5,
+            140,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 118
+        },
+        {
+          "index": 5,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/running-left/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7393,
+          "bbox": [
+            53,
+            6,
+            139,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 107
+        },
+        {
+          "index": 6,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/running-left/06.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7001,
+          "bbox": [
+            55,
+            5,
+            136,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 107
+        },
+        {
+          "index": 7,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/running-left/07.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7434,
+          "bbox": [
+            53,
+            5,
+            139,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 106
+        }
+      ]
+    },
+    {
+      "state": "waving",
+      "expected_frames": 4,
+      "actual_frames": 4,
+      "extraction_method": "stable-slots",
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "waving used extraction method stable-slots; confirm motion playback remains stable and unclipped"
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/waving/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7271,
+          "bbox": [
+            62,
+            5,
+            130,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 69
+        },
+        {
+          "index": 1,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/waving/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7270,
+          "bbox": [
+            63,
+            5,
+            129,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 73
+        },
+        {
+          "index": 2,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/waving/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7503,
+          "bbox": [
+            58,
+            5,
+            134,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 90
+        },
+        {
+          "index": 3,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/waving/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7186,
+          "bbox": [
+            66,
+            5,
+            125,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 62
+        }
+      ]
+    },
+    {
+      "state": "jumping",
+      "expected_frames": 5,
+      "actual_frames": 5,
+      "extraction_method": "stable-slots",
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "jumping used extraction method stable-slots; confirm motion playback remains stable and unclipped"
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/jumping/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 5582,
+          "bbox": [
+            67,
+            49,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 48
+        },
+        {
+          "index": 1,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/jumping/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 5917,
+          "bbox": [
+            66,
+            15,
+            126,
+            173
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 29
+        },
+        {
+          "index": 2,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/jumping/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6047,
+          "bbox": [
+            66,
+            5,
+            126,
+            166
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 52
+        },
+        {
+          "index": 3,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/jumping/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6026,
+          "bbox": [
+            67,
+            22,
+            125,
+            188
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 56
+        },
+        {
+          "index": 4,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/jumping/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 5578,
+          "bbox": [
+            67,
+            50,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 60
+        }
+      ]
+    },
+    {
+      "state": "failed",
+      "expected_frames": 8,
+      "actual_frames": 8,
+      "extraction_method": "stable-slots",
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "failed used extraction method stable-slots; confirm motion playback remains stable and unclipped"
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/failed/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6939,
+          "bbox": [
+            68,
+            5,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 51
+        },
+        {
+          "index": 1,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/failed/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7013,
+          "bbox": [
+            68,
+            5,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 74
+        },
+        {
+          "index": 2,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/failed/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7111,
+          "bbox": [
+            68,
+            5,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 53
+        },
+        {
+          "index": 3,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/failed/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6765,
+          "bbox": [
+            68,
+            5,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 67
+        },
+        {
+          "index": 4,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/failed/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6873,
+          "bbox": [
+            68,
+            5,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 63
+        },
+        {
+          "index": 5,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/failed/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6910,
+          "bbox": [
+            68,
+            5,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 62
+        },
+        {
+          "index": 6,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/failed/06.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6962,
+          "bbox": [
+            68,
+            5,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 63
+        },
+        {
+          "index": 7,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/failed/07.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6891,
+          "bbox": [
+            68,
+            5,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 62
+        }
+      ]
+    },
+    {
+      "state": "waiting",
+      "expected_frames": 6,
+      "actual_frames": 6,
+      "extraction_method": "stable-slots",
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "waiting used extraction method stable-slots; confirm motion playback remains stable and unclipped"
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/waiting/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6924,
+          "bbox": [
+            65,
+            5,
+            126,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 63
+        },
+        {
+          "index": 1,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/waiting/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6842,
+          "bbox": [
+            67,
+            5,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 60
+        },
+        {
+          "index": 2,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/waiting/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6606,
+          "bbox": [
+            68,
+            5,
+            123,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 64
+        },
+        {
+          "index": 3,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/waiting/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6644,
+          "bbox": [
+            67,
+            5,
+            123,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 62
+        },
+        {
+          "index": 4,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/waiting/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7042,
+          "bbox": [
+            62,
+            5,
+            129,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 68
+        },
+        {
+          "index": 5,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/waiting/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6819,
+          "bbox": [
+            67,
+            5,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 56
+        }
+      ]
+    },
+    {
+      "state": "running",
+      "expected_frames": 6,
+      "actual_frames": 6,
+      "extraction_method": "stable-slots",
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "running used extraction method stable-slots; confirm motion playback remains stable and unclipped"
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/running/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6792,
+          "bbox": [
+            68,
+            5,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 48
+        },
+        {
+          "index": 1,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/running/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6823,
+          "bbox": [
+            68,
+            5,
+            124,
+            202
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 45
+        },
+        {
+          "index": 2,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/running/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6539,
+          "bbox": [
+            68,
+            5,
+            124,
+            202
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 34
+        },
+        {
+          "index": 3,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/running/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6682,
+          "bbox": [
+            68,
+            6,
+            124,
+            202
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 51
+        },
+        {
+          "index": 4,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/running/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6790,
+          "bbox": [
+            68,
+            5,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 46
+        },
+        {
+          "index": 5,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/running/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6596,
+          "bbox": [
+            68,
+            5,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 42
+        }
+      ]
+    },
+    {
+      "state": "review",
+      "expected_frames": 6,
+      "actual_frames": 6,
+      "extraction_method": "stable-slots",
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "review used extraction method stable-slots; confirm motion playback remains stable and unclipped"
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/review/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7219,
+          "bbox": [
+            67,
+            5,
+            125,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 83
+        },
+        {
+          "index": 1,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/review/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6828,
+          "bbox": [
+            67,
+            6,
+            125,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 57
+        },
+        {
+          "index": 2,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/review/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7084,
+          "bbox": [
+            67,
+            6,
+            125,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 74
+        },
+        {
+          "index": 3,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/review/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6650,
+          "bbox": [
+            67,
+            7,
+            125,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 56
+        },
+        {
+          "index": 4,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/review/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6733,
+          "bbox": [
+            68,
+            6,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 70
+        },
+        {
+          "index": 5,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/lemon/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal-v2/frames-stable/review/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6381,
+          "bbox": [
+            67,
+            10,
+            125,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 42
+        }
+      ]
+    }
+  ]
+}

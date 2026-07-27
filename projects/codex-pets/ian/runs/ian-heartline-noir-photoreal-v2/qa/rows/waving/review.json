@@ -1,0 +1,82 @@
+{
+  "ok": true,
+  "frames_root": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/heartline/projects/codex-pets/ian/runs/ian-heartline-noir-photoreal-v2/qa/rows/waving/frames",
+  "states": [
+    "waving"
+  ],
+  "errors": [],
+  "warnings": [],
+  "rows": [
+    {
+      "state": "waving",
+      "expected_frames": 4,
+      "actual_frames": 4,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/heartline/projects/codex-pets/ian/runs/ian-heartline-noir-photoreal-v2/qa/rows/waving/frames/waving/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6581,
+          "bbox": [
+            68,
+            5,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 76
+        },
+        {
+          "index": 1,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/heartline/projects/codex-pets/ian/runs/ian-heartline-noir-photoreal-v2/qa/rows/waving/frames/waving/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6734,
+          "bbox": [
+            67,
+            5,
+            125,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 63
+        },
+        {
+          "index": 2,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/heartline/projects/codex-pets/ian/runs/ian-heartline-noir-photoreal-v2/qa/rows/waving/frames/waving/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6528,
+          "bbox": [
+            68,
+            5,
+            123,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 95
+        },
+        {
+          "index": 3,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/heartline/projects/codex-pets/ian/runs/ian-heartline-noir-photoreal-v2/qa/rows/waving/frames/waving/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6512,
+          "bbox": [
+            71,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 87
+        }
+      ]
+    }
+  ]
+}
