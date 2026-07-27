@@ -1,4 +1,4 @@
 interface:
-  display_name: "Graph Engineering"
-  short_description: "Design explicit multi-agent workflows"
-  default_prompt: "Use $graph-engineering to decide whether this task needs a loop, graph, or degraded workflow, then execute the lightest reliable topology."
+  display_name: "Graph Engineering Work System"
+  short_description: "Build auditable AI programming work systems"
+  default_prompt: "Use $graph-engineering to turn this task into the lightest reliable work system, choose a loop, graph, or degraded path, and execute it to verified completion."

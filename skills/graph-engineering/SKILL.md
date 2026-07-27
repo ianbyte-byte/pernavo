@@ -1,11 +1,25 @@
 ---
 name: graph-engineering
-description: Design and execute explicit graph-shaped agent workflows with specialized nodes, bounded routing, fan-out/fan-in, clean handoffs, single-writer ownership, and independent verification. Use when the user asks for Graph Engineering, agent graphs, multi-agent orchestration, parallel specialist work, author-review separation, or auditable routing, or when no more specific workflow skill owns the orchestration and the task genuinely needs independent contexts, different tools or permissions, parallel discovery, conditional branches, or a bounded repair loop. Let an explicitly named or more task-specific workflow skill own its prescribed topology, using this skill only for justified surrounding stages. Do not use for trivial work or a single well-scoped discover-execute-verify loop.
+description: Design and execute explicit, auditable AI programming work systems as the lightest justified loop or graph, with specialized nodes, bounded routing, fan-out/fan-in, clean handoffs, single-writer ownership, and independent verification. Use when the user asks for Graph Engineering, an AI programming work system or AI 编程工作系统, agent graphs, multi-agent orchestration, parallel specialist work, author-review separation, or auditable routing, or when no more specific workflow skill owns the orchestration and the task genuinely needs independent contexts, different tools or permissions, parallel discovery, conditional branches, or a bounded repair loop. Let an explicitly named or more task-specific workflow skill own its prescribed topology, using this skill only for justified surrounding stages. Do not use for trivial work or a single well-scoped discover-execute-verify loop.
 ---
 
-# Graph Engineering
+# Graph Engineering Work System
 
-Compose reliable agent loops into the lightest explicit graph that the work justifies. Treat roles, edges, state, ownership, and exit tests as contracts rather than as an excuse to spawn more agents.
+Turn AI programming from an improvised conversation into the lightest reliable work system the task justifies. Compose reliable agent loops into an explicit graph only when the work needs one. Treat the system as contracts, not as an excuse to spawn more agents.
+
+## Model the work system
+
+At any scale, define the same system contract: objective, success bar, nodes, edges, state, ownership, and limits. Then require verification and exit evidence from the real artifact or runtime surface. Section 2 defines the contract in detail; scale its ceremony to the task's risk.
+
+Use this canonical lifecycle as the default shape:
+
+```text
+intake -> discover -> decide -> execute -> verify
+                                             ├─pass─> finish
+                                             └─fail─> repair -> verify
+```
+
+Keep it as one loop unless isolated specialists, real parallelism, permission boundaries, conditional routing, or independent judgment materially improve the result.
 
 ## Preserve these invariants
 
@@ -24,6 +38,8 @@ Treat this skill as a topology layer, not as a replacement for domain, safety, o
 2. Follow safety, compliance, and domain-governance skills that define mandatory gates.
 3. Follow the most task-specific workflow skill that owns the requested operation.
 4. Use this skill to connect otherwise unowned stages and decide whether they need a loop, graph, or degraded path.
+
+Think of the complete work system as a stack: governance selects the risk path, this skill selects and routes the topology, task-specific skills own domain execution, and fresh verification supplies the exit evidence. Keep those responsibilities separate instead of building one monolithic workflow skill.
 
 When `coding-task-controller` is active, let it choose the coding risk path, required discovery, and validation gates. Represent those phases as separate nodes only when this skill's graph test is satisfied.
 
