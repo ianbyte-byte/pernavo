@@ -9,8 +9,7 @@ description: >
   or asks "which skill should I use". Trigger phrases: "工作系统", "工程实践",
   "engineering workflow", "which process", "工程工作系统", "how to improve our
   engineering", "development process", "release process", "architecture decision",
-  "incident response", "continuous improvement", "DORA metrics", "工程编排".
-version: 1.0.0
+  "incident response", "continuous improvement", "DORA metrics", "跨工程领域编排".
 ---
 
 # Engineering Work System
