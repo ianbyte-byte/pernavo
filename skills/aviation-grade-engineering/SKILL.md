@@ -10,7 +10,6 @@ description: >
   "减少线上事故", "SRE 实践", "可观测性", "韧性设计", "质量门禁", "blameless postmortem",
   "error budget", "reliability engineering", "defense in depth", "how to make software
   more reliable", "aviation-grade engineering".
-version: 1.0.0
 ---
 
 # Aviation-Grade Engineering

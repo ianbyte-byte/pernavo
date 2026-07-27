@@ -23,7 +23,7 @@ npx skills add https://github.com/tuloong/loongclaude --all
 - `gpt55-fusion`
 - `unknowns-field-guide`
 - `coding-task-controller`
-- `graph-engineering` — build auditable AI programming work systems with explicit topology, ownership, routing, and verification
+- `graph-engineering` — design auditable agent execution topologies with explicit routing, ownership, and verification
 - `pplx-cli`
 - `exa-search`
 - `aviation-grade-engineering` — apply aviation-grade engineering rigor: risk-driven lifecycle, multi-layer test defense, SRE observability, resilience patterns, CI/CD quality gates, and blameless postmortems
