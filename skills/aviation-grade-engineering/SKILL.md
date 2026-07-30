@@ -1,15 +1,12 @@
 ---
 name: aviation-grade-engineering
 description: >
-  Apply aviation-grade engineering rigor to software projects — risk-driven lifecycle,
-  multi-layer test defense, SRE observability, resilience patterns, CI/CD quality gates,
-  and blameless postmortems. Use when the user asks about software reliability, production
-  stability, reducing incidents, building resilient systems, applying aviation engineering
-  practices to software, setting up SLOs/error budgets, improving test strategy, or
-  establishing engineering quality standards. Trigger phrases: "航空级可靠性", "提升系统可靠性",
-  "减少线上事故", "SRE 实践", "可观测性", "韧性设计", "质量门禁", "blameless postmortem",
-  "error budget", "reliability engineering", "defense in depth", "how to make software
-  more reliable", "aviation-grade engineering".
+  Design systemic software reliability with risk-driven assurance, SLOs and error budgets,
+  observability, resilience patterns such as retries and circuit breakers, layered test and
+  CI gates, and blameless postmortems. Use for reliability programs, production stability,
+  incident reduction, 航空级可靠性, SRE, 可观测性, 韧性设计, or 质量门禁. Do not trigger for an
+  ordinary feature or bug fix, one diff review, or production-code implementation unless
+  reliability engineering is the primary task.
 ---
 
 # Aviation-Grade Engineering

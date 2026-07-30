@@ -1,6 +1,11 @@
 ---
 name: gpt55-fusion
-description: Run the user's optional GPT-5.5 Fusion workflow in Codex using two independent GPT-5.5 analysis agents plus a GPT-5.5 judge/reconciler. Use when the user asks for gpt55-fusion, GPT-5.5 Fusion, model partner, dual-model or two-lane analysis, A/B agent analysis, judge reconciliation, or wants a high-stakes architecture, debugging, refactor, research, or decision task reviewed by two independent GPT-5.5 perspectives before a final recommendation.
+description: >
+  Run the opt-in GPT-5.5 Fusion workflow with two independent GPT-5.5 analyses and a GPT-5.5
+  judge. Use only when the user explicitly asks for gpt55-fusion, GPT-5.5 Fusion, model partner,
+  two GPT-5.5 lanes, A/B analysis, or judge reconciliation. Do not trigger merely because a task
+  is high-stakes, and do not replace review-mr or graph-engineering unless Fusion is explicitly
+  requested.
 ---
 
 # GPT-5.5 Fusion

@@ -1,15 +1,12 @@
 ---
 name: engineering-work-system
 description: >
-  Top-level orchestrator for the engineering work system — routes to the right
-  sub-skill based on task type: reliability engineering, code review, architecture
-  decisions, release management, incident response, continuous improvement, or
-  codebase health. Use when the user asks about engineering practices, wants to
-  improve their development workflow, needs to pick the right engineering process,
-  or asks "which skill should I use". Trigger phrases: "工作系统", "工程实践",
-  "engineering workflow", "which process", "工程工作系统", "how to improve our
-  engineering", "development process", "release process", "architecture decision",
-  "incident response", "continuous improvement", "DORA metrics", "跨工程领域编排".
+  Route or assess work across multiple engineering domains and choose specialist Skills.
+  Use only when the user asks which process or Skill to use, wants a cross-domain engineering
+  workflow or health assessment, or needs architecture, release, incident, DORA, and
+  continuous-improvement orchestration. Prefer the direct specialist for a clear reliability,
+  review, slimming, discovery, production-coding, or agent-topology task. Do not trigger for
+  ordinary implementation.
 ---
 
 # Engineering Work System
@@ -44,6 +41,7 @@ description: >
 | **代码库治理** | 减少重复、代码瘦身、可维护性提升 | [codebase-slimming](../codebase-slimming/SKILL.md) | Primary |
 | **编码前风险发现** | 非平凡任务实施前的 unknowns 发现、风险评估 | [unknowns-field-guide](../unknowns-field-guide/SKILL.md) | Primary |
 | **任务治理** | 编码任务分级、流程合规、风险路由 | [coding-task-controller](../coding-task-controller/SKILL.md) | Primary |
+| **生产编码** | 将功能、修复、重构或 AI 生成代码落入真实生产系统 | [develop-production-code](../develop-production-code/SKILL.md) | Primary |
 | **多 Agent 编排** | 需要并行专家协作、审计路由、复杂工作流 | [graph-engineering](../graph-engineering/SKILL.md) | Primary |
 | **架构决策** | 技术选型、系统设计、ADR、权衡分析 | 内置（见 Architecture Decision 子流程） | Primary |
 | **发布管理** | CI/CD 优化、发布策略、回滚、feature flags | 内置（见 Release Ops 子流程） | Primary |
@@ -64,9 +62,9 @@ description: >
 **单一维度**：直接调用对应子 skill，不做额外干预。
 
 **跨维度**：确定执行顺序和依赖关系。常见组合：
-- 新功能开发：`unknowns-field-guide` → `aviation-grade-engineering`（测试策略）→ 编码 → `review-mr`
+- 新功能开发：`unknowns-field-guide` → `develop-production-code` → `review-mr`；仅在可靠性工程属于任务范围时加入 `aviation-grade-engineering`
 - 事故响应：`aviation-grade-engineering`（postmortem）→ `continuous improvement`（流程改进）
-- 代码库重构：`codebase-slimming` → `review-mr` → `aviation-grade-engineering`（回归测试验证）
+- 代码库重构：`codebase-slimming` → `review-mr`；仅在系统性可靠性或测试策略升级属于任务范围时加入 `aviation-grade-engineering`
 - 架构升级：`architecture decision` → `unknowns-field-guide` → `graph-engineering`（并行实施）
 
 **评估型**：执行下面的工程健康度检查。
@@ -236,4 +234,5 @@ Proposed / Accepted / Deprecated / Superseded
 - [codebase-slimming](../codebase-slimming/SKILL.md) — 代码库治理
 - [unknowns-field-guide](../unknowns-field-guide/SKILL.md) — 编码前风险发现
 - [coding-task-controller](../coding-task-controller/SKILL.md) — 任务治理
+- [develop-production-code](../develop-production-code/SKILL.md) — 生产编码与证据边界
 - [graph-engineering](../graph-engineering/SKILL.md) — 多 Agent 编排

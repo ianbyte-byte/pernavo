@@ -1,11 +1,18 @@
 ---
 name: exa-search
-description: "Call Exa's Search API via cURL for live web search and known-URL content extraction. Default: type auto + highlights for token-efficient agent retrieval; optional /contents, deep search, and outputSchema synthesis."
-when_to_use: "Any request like: search the web for X, find recent news or docs, grounded research with citations, fetch clean content for known URLs, structured web enrichment, use Exa, EXA_API_KEY, or prefer neural web search over a browser."
-argument-hint: "[search query or URL]"
+description: >
+  Use Exa's Search API via cURL for token-efficient neural web search, highlights, known-URL
+  extraction, deep search, or structured outputSchema enrichment. Trigger when the user asks
+  for Exa or exa-search, EXA_API_KEY, neural search highlights, outputSchema, or Exa-based
+  grounded research. Do not trigger for generic web search when native web tools suffice, or
+  when Perplexity or pplx is requested.
 ---
 
 # exa-search — Exa web search via cURL
+
+Use Exa only when the request selects Exa or needs its provider-specific search and extraction
+features. Prefer native web tools for unqualified web requests, and use `pplx-cli` when the user
+selects Perplexity.
 
 ## Canonical reference
 

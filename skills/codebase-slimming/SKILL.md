@@ -1,11 +1,11 @@
 ---
 name: codebase-slimming
 description: >
-  对代码库进行安全瘦身和可维护性治理。先建立测试、业务行为和数据行为基线，
-  再通过试点模块验证方法，逐步合并重复实现、替换危险代码、移除无效兼容逻辑。
-  禁止代码高尔夫、删除有价值注释、盲目全量重写和单纯以代码行数驱动重构。
-  Use when the user asks to slim a codebase, reduce duplication, replace dangerous
-  implementations, remove dead code, or run staged behavior-preserving cleanup.
+  Safely slim and decouple an existing codebase through a baseline, bounded pilot, and small
+  behavior-preserving batches. Use for 代码库瘦身, 去重, 解耦, dead or compatibility code
+  removal, dangerous implementation replacement, or staged maintainability cleanup. Do not
+  trigger for feature delivery, one bug fix, performance-only optimization, code golf, or
+  MR/PR-only review.
 ---
 
 # Codebase Slimming
