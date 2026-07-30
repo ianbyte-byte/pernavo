@@ -1,6 +1,11 @@
 ---
 name: coding-task-controller
-description: Top-level governance controller for AI coding tasks. Use as a boot rule, session policy, or compliance audit when a coding assistant must route non-trivial work through unknowns-field-guide before implementation, scale the workflow to task risk, require deep_path for risky domains, and prevent blind coding, silent scope expansion, or unverified completion.
+description: >
+  Govern every non-trivial AI coding change by selecting the fast, default, or deep unknowns
+  path and enforcing discovery, do-not-do scope, planning, validation, and completion evidence.
+  Also use for coding boot rules, session policy, deep_path enforcement, or compliance audits.
+  This skill governs; unknowns-field-guide performs discovery and the task-specific skill
+  implements. Do not use for trivial edits or non-coding requests.
 ---
 
 # Coding Task Controller

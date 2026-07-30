@@ -9,9 +9,10 @@
 │   └── 否 → 继续判断
 ├── 涉及代码变更？
 │   ├── 是 → 变更规模？
-│   │   ├── 小改动（单文件） → review-mr
-│   │   ├── 中等改动（跨模块） → unknowns-field-guide → 编码 → review-mr
-│   │   └── 大改动（架构级） → architecture decision → unknowns-field-guide → graph-engineering
+│   │   ├── 纯文案/注释等平凡改动 → 聚焦修改与验证
+│   │   ├── 一般生产改动 → coding-task-controller → unknowns-field-guide → develop-production-code → review-mr
+│   │   └── 架构级改动 → architecture decision → coding-task-controller → unknowns-field-guide → develop-production-code
+│   │       └── 仅在确需独立上下文或条件路由时加入 graph-engineering
 │   └── 否 → 继续判断
 ├── 涉及系统可靠性？
 │   ├── 是 → aviation-grade-engineering
@@ -32,8 +33,8 @@
 ### 模式 1: 新功能开发
 ```
 需求分析 → unknowns-field-guide（风险扫描）
-        → aviation-grade-engineering（测试策略）
-        → 编码实施
+        → develop-production-code（编码与证据边界）
+        → aviation-grade-engineering（仅当系统性可靠性属于范围）
         → review-mr（代码审查）
         → Release Ops（发布）
 ```
@@ -49,17 +50,18 @@
 ### 模式 3: 代码库重构
 ```
 评估 → codebase-slimming（识别重复/死代码）
-    → aviation-grade-engineering（确保测试覆盖）
     → 分阶段重构
     → review-mr（每阶段审查）
+    → aviation-grade-engineering（仅当可靠性或测试策略升级属于范围）
     → 回归验证
 ```
 
 ### 模式 4: 架构升级
 ```
 架构决策（ADR）→ unknowns-field-guide（风险扫描）
-              → graph-engineering（并行实施编排）
-              → aviation-grade-engineering（韧性验证）
+              → develop-production-code（生产实现）
+              → graph-engineering（仅在需要并行或条件路由时）
+              → aviation-grade-engineering（仅在需要韧性验证时）
               → Release Ops（安全发布）
 ```
 
@@ -78,7 +80,7 @@
 
 | 风险等级 | 路由调整 |
 |----------|----------|
-| **Low** | 直接编码 → review-mr |
-| **Medium** | + unknowns-field-guide（快速扫描） |
-| **High** | + unknowns-field-guide（deep path）+ aviation-grade-engineering（完整测试策略） |
-| **Critical** | + 所有相关子 skill + 架构决策 ADR + graph-engineering 编排 |
+| **Low** | 平凡改动走聚焦修改与验证；非平凡改动仍由 controller 分级 |
+| **Medium** | coding-task-controller + unknowns-field-guide（default）+ 对应实施 Skill |
+| **High** | coding-task-controller + unknowns-field-guide（deep path）+ 对应实施/领域 Skill |
+| **Critical** | 在 High 基础上加入 ADR；仅按实际需要加入可靠性或 graph 编排，不强制加载所有 Skill |

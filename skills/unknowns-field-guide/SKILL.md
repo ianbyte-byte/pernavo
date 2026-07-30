@@ -1,6 +1,13 @@
 ---
 name: unknowns-field-guide
-description: Discover unknowns before changing code on non-trivial coding tasks. Use when modifying existing code, business logic, state, history, data, money, inventory, invoicing, contracts, integrations, batch SQL, scheduled jobs, customer-visible artifacts, or any task where hidden assumptions could change the correct implementation. Provides fast_path/default/deep_path routing, blindspot scanning, reverse interviewing only when needed, implementation planning, execution notes, and post-implementation review.
+description: >
+  Discover hidden constraints before any non-trivial code change. Use for explicit blindspot
+  or unknown discovery, first investigation or tracing, facts versus assumptions,
+  fast/default/deep paths, and risky money, data, permissions, integrations, SQL, scheduled,
+  or stateful work. The coding-task-controller selects risk; this Skill owns discovery before
+  task-specific implementation. A dedicated planning Skill owns a plan-only request unless the
+  user explicitly asks for this discovery workflow. Exclude MR-only or post-change review,
+  production-acceptance policy, and unrelated explanation.
 ---
 
 # Unknowns Field Guide
@@ -38,6 +45,10 @@ Use this skill to scale discovery to the task's risk. It should prevent blind im
 Use `deep_path` if any are true: amounts, taxes, inventory, invoicing, receipts, write-offs, contracts, external API push/re-push/status callback/third-party sync, batch SQL repair/deletes/schema changes on real data, scheduled tasks, idempotency, repeated execution, state machine transitions, permissions, historical data repair, customer-visible documents or reports.
 
 If unsure after inspecting the seam, use `deep_path`. If the user explicitly says "先分析", "先定位问题", or "不要改", stop after the analysis or plan artifact.
+
+For a plan-only request, let the dedicated planning Skill own the task. Compose this Skill only
+when the user explicitly requests blindspot or unknown discovery, or when work proceeds toward
+implementation and the discovery gate becomes mandatory.
 
 ## Quality gates
 

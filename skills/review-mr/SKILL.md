@@ -1,6 +1,11 @@
 ---
 name: review-mr
-description: Use this skill when the user wants an immediate multi-agent code review of current uncommitted changes, staged changes, or a feature branch diff against main. Triggers on phrases like "review my changes", "review mr", "review pr", "审查我的改动", "提交前自查", "跑一遍 multi-agent review", "code review by multiple agents", or "/review-mr". The core value is launching multiple specialist reviewers in parallel before committing or opening a PR.
+description: >
+  Review current uncommitted, staged, or branch-versus-base Git diffs with parallel specialists
+  and consolidated P1, P2, and P3 findings. Use for review MR, PR, or diff, review my changes,
+  审查改动, 提交前自查, multi-agent code review, or /review-mr. Review only: do not trigger for
+  implementation, generic code explanation, whole-codebase cleanup, or a named gpt55-fusion
+  topology.
 ---
 
 # Review MR

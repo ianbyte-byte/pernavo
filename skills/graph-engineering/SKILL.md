@@ -1,6 +1,12 @@
 ---
 name: graph-engineering
-description: Design and execute explicit graph-shaped agent workflows with specialized nodes, bounded routing, fan-out/fan-in, clean handoffs, single-writer ownership, and independent verification. Use when the user asks for Graph Engineering, agent graphs, multi-agent orchestration, parallel specialist work, author-review separation, or auditable routing, or when no more specific workflow skill owns the orchestration and the task genuinely needs independent contexts, different tools or permissions, parallel discovery, conditional branches, or a bounded repair loop. Let an explicitly named or more task-specific workflow skill own its prescribed topology, using this skill only for justified surrounding stages. Do not use for trivial work or a single well-scoped discover-execute-verify loop.
+description: >
+  Design graph-shaped agent workflows with bounded routing, fan-out and fan-in, single-writer
+  ownership, clean handoffs, and independent verification. Use for explicit Graph Engineering,
+  agent graphs or topology, or otherwise-unowned independent contexts, parallel discovery,
+  author-verifier separation, permission boundaries, or conditional repair routes. Named and
+  task-specific workflows such as gpt55-fusion and review-mr take precedence. Do not use for
+  ordinary coding, MR review, trivial work, or one well-scoped loop.
 ---
 
 # Graph Engineering Topology

@@ -1,11 +1,16 @@
 ---
 name: pplx-cli
-description: "Install and use Perplexity's pplx CLI for live web search and page-content fetch from the terminal. Use to search the web, look up current information or news, fetch a URL's content as text, or install and authenticate the pplx command."
-when_to_use: "Any request like: search the web for X, find the latest news about X, look up current events, use Perplexity to search, search with pplx, install the pplx CLI, set up the Perplexity CLI, fetch this URL, get the content of this page, read this webpage, restrict a web search to certain domains or dates."
-argument-hint: "[search query or URL]"
+description: >
+  Install, authenticate, or use Perplexity's pplx CLI for terminal web search and page-content
+  fetch. Trigger only when the user asks for Perplexity or pplx, its CLI, authentication or
+  flags, or explicitly prefers Perplexity terminal search or fetch. Do not trigger for generic
+  web search, Exa requests, or page reading that native web tools already handle.
 ---
 
 # pplx - Perplexity's web search and content-fetch CLI
+
+Use this Skill only for provider-specific Perplexity or `pplx` work. Prefer native web tools for
+unqualified web requests, and use `exa-search` when the user selects Exa.
 
 ## What this skill does
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Develop Production Code"
+  short_description: "Build AI-assisted production code with risk-based evidence"
+  default_prompt: "Use $develop-production-code to implement this production change with risk-tiered review, independent validation, and explicit evidence boundaries."
