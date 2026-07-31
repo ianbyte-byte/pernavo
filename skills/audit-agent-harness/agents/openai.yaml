@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audit Agent Harness"
+  short_description: "Measure which agent customizations still earn their cost"
+  default_prompt: "Use $audit-agent-harness to run a reversible ablation audit of this agent setup and recommend what to keep, compress, or retire."

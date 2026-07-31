@@ -7,6 +7,9 @@
 ├── 明确提到某个子 skill 的领域？
 │   ├── 是 → 直接路由到该 skill
 │   └── 否 → 继续判断
+├── 涉及 Agent Harness 复核？
+│   ├── 是 → audit-agent-harness
+│   └── 否 → 继续判断
 ├── 涉及代码变更？
 │   ├── 是 → 变更规模？
 │   │   ├── 纯文案/注释等平凡改动 → 聚焦修改与验证
@@ -73,6 +76,16 @@
 → 制定改进计划
 → 定期复查
 ```
+
+### 模式 6: Agent Harness 消融
+```
+只读盘点 → audit-agent-harness（固定任务集 + 单单元 A/B）
+        → 人工决策门
+        → 获批后单项修改
+        → review-mr（仅当形成实际 diff）
+```
+
+安全、权限、合规和秘密处理控制默认保留；代码去重仍路由到 `codebase-slimming`。
 
 ## Risk-Based Routing Modifiers
 
