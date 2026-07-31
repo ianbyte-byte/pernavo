@@ -1,0 +1,4 @@
+interface:
+  display_name: "Verify Change Evidence"
+  short_description: "Independently verify completed change behavior"
+  default_prompt: "Use $verify-change-evidence to independently verify completed change behavior."
