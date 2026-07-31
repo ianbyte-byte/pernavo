@@ -5,8 +5,8 @@ description: >
   Use only when the user asks which process or Skill to use, wants a cross-domain engineering
   workflow or health assessment, or needs architecture, release, incident, DORA, and
   continuous-improvement orchestration. Prefer the direct specialist for a clear reliability,
-  review, slimming, discovery, production-coding, or agent-topology task. Do not trigger for
-  ordinary implementation.
+  review, codebase-slimming, agent-harness audit, discovery, production-coding, or agent-topology
+  task. Do not trigger for ordinary implementation.
 ---
 
 # Engineering Work System
@@ -39,6 +39,7 @@ description: >
 | **可靠性工程** | 提升系统可靠性、SRE、可观测性、韧性设计、测试策略 | [aviation-grade-engineering](../aviation-grade-engineering/SKILL.md) | Primary |
 | **代码审查** | MR/PR 审查、代码质量检查、安全审查 | [review-mr](../review-mr/SKILL.md) | Primary |
 | **代码库治理** | 减少重复、代码瘦身、可维护性提升 | [codebase-slimming](../codebase-slimming/SKILL.md) | Primary |
+| **Agent Harness 治理** | 模型升级后审计 CLAUDE.md、AGENTS.md、Skills、Hooks、prompts 或插件配置的边际价值 | [audit-agent-harness](../audit-agent-harness/SKILL.md) | Primary |
 | **编码前风险发现** | 非平凡任务实施前的 unknowns 发现、风险评估 | [unknowns-field-guide](../unknowns-field-guide/SKILL.md) | Primary |
 | **任务治理** | 编码任务分级、流程合规、风险路由 | [coding-task-controller](../coding-task-controller/SKILL.md) | Primary |
 | **生产编码** | 将功能、修复、重构或 AI 生成代码落入真实生产系统 | [develop-production-code](../develop-production-code/SKILL.md) | Primary |
@@ -65,6 +66,7 @@ description: >
 - 新功能开发：`unknowns-field-guide` → `develop-production-code` → `review-mr`；仅在可靠性工程属于任务范围时加入 `aviation-grade-engineering`
 - 事故响应：`aviation-grade-engineering`（postmortem）→ `continuous improvement`（流程改进）
 - 代码库重构：`codebase-slimming` → `review-mr`；仅在系统性可靠性或测试策略升级属于任务范围时加入 `aviation-grade-engineering`
+- Agent Harness 复核：`audit-agent-harness`；只有获批变更产生实际 diff 后才加入 `review-mr`
 - 架构升级：`architecture decision` → `unknowns-field-guide` → `graph-engineering`（并行实施）
 
 **评估型**：执行下面的工程健康度检查。
@@ -232,6 +234,7 @@ Proposed / Accepted / Deprecated / Superseded
 - [aviation-grade-engineering](../aviation-grade-engineering/SKILL.md) — 可靠性工程
 - [review-mr](../review-mr/SKILL.md) — 代码审查
 - [codebase-slimming](../codebase-slimming/SKILL.md) — 代码库治理
+- [audit-agent-harness](../audit-agent-harness/SKILL.md) — Agent 指令、Skills、Hooks 与 Harness 的可逆消融审计
 - [unknowns-field-guide](../unknowns-field-guide/SKILL.md) — 编码前风险发现
 - [coding-task-controller](../coding-task-controller/SKILL.md) — 任务治理
 - [develop-production-code](../develop-production-code/SKILL.md) — 生产编码与证据边界

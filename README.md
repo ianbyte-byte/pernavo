@@ -30,6 +30,7 @@ npx skills add . --global --agent codex --skill '*' --yes --copy
 
 - `review-mr`
 - `codebase-slimming`
+- `audit-agent-harness` — run reversible ablation audits on CLAUDE.md, AGENTS.md, Skills, Hooks, prompts, and other agent customizations without disabling safety controls
 - `gpt55-fusion`
 - `unknowns-field-guide`
 - `coding-task-controller`

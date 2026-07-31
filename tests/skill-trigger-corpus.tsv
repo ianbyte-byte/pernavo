@@ -1,4 +1,7 @@
 id	subject	expected	forbidden	prompt
+aah_positive	audit-agent-harness	audit-agent-harness	codebase-slimming	After upgrading the coding model, inventory CLAUDE.md, AGENTS.md, Skills, and Hooks and run a reversible one-unit-at-a-time ablation against fixed tasks. Do not delete or disable safety controls.
+aah_negative	audit-agent-harness	codebase-slimming	audit-agent-harness	Remove dead production adapters and duplicated validators in behavior-preserving batches. The agent configuration, prompts, Skills, and Hooks are out of scope.
+aah_collision	audit-agent-harness	audit-agent-harness,engineering-work-system	codebase-slimming	Assess our cross-domain engineering system and include a reversible measurement of whether agent rules, Skills, and Hooks became stale after the model upgrade; route each area before recommending changes.
 age_positive	aviation-grade-engineering	aviation-grade-engineering	engineering-work-system	Our API has cascading dependency failures. Define SLO burn-rate alerts, circuit breakers, retry limits, observability, and a blameless incident loop. Do not make network calls.
 age_negative	aviation-grade-engineering	coding-task-controller,unknowns-field-guide,develop-production-code	aviation-grade-engineering	Fix one production API null-check bug with focused tests and rollback notes; this is not a reliability-program redesign.
 age_collision	aviation-grade-engineering	aviation-grade-engineering,engineering-work-system	-	Design a cross-team engineering improvement program covering SLOs, incident learning, release rollback, and DORA metrics.
