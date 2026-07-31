@@ -5,11 +5,11 @@ validation_repo_root="$(cd "$(dirname "$0")/.." && pwd)"
 validation_skill_root="$validation_repo_root/skills"
 validation_corpus="$validation_repo_root/tests/skill-trigger-corpus.tsv"
 validation_summarizer="$validation_repo_root/scripts/summarize-skill-trigger-results.py"
-validation_cli_output="$(mktemp "${TMPDIR:-/tmp}/loongclaude-skills-list.XXXXXX")"
+validation_cli_output="$(mktemp "${TMPDIR:-/tmp}/pernavo-skills-list.XXXXXX")"
 
 cleanup_validation_output() {
   case "$validation_cli_output" in
-    "${TMPDIR:-/tmp}"/loongclaude-skills-list.*)
+    "${TMPDIR:-/tmp}"/pernavo-skills-list.*)
       rm -f -- "$validation_cli_output"
       ;;
     *)
@@ -19,14 +19,18 @@ cleanup_validation_output() {
 }
 trap cleanup_validation_output EXIT
 
-validation_validator="${LOONGCLAUDE_SKILL_VALIDATOR:-}"
+validation_validator="${PERNAVO_SKILL_VALIDATOR:-}"
+if [[ -z "$validation_validator" ]]; then
+  validation_legacy_validator="${LOONGCLAUDE_SKILL_VALIDATOR:-}"
+  validation_validator="$validation_legacy_validator"
+fi
 if [[ -z "$validation_validator" ]]; then
   validation_codex_root="${CODEX_HOME:-${HOME}/.codex}"
   validation_validator="$validation_codex_root/skills/.system/skill-creator/scripts/quick_validate.py"
 fi
 if [[ ! -f "$validation_validator" ]]; then
   printf 'quick_validate.py not found: %s\n' "$validation_validator" >&2
-  printf 'Set LOONGCLAUDE_SKILL_VALIDATOR to its absolute path.\n' >&2
+  printf 'Set PERNAVO_SKILL_VALIDATOR to its absolute path.\n' >&2
   exit 1
 fi
 
@@ -89,8 +93,14 @@ skill_names.each do |name|
 end
 
 lock_path = repo_root.join("skills-lock.json")
-if lock_path.exist? && File.read(lock_path).include?("tuloong/loongclaude")
-  abort("skills-lock.json self-references tuloong/loongclaude")
+if lock_path.exist?
+  lock_text = File.read(lock_path)
+  legacy_lock_sources = ["tuloong/loongclaude"]
+  self_reference_sources = ["tuloong/pernavo"] + legacy_lock_sources
+  lock_source = self_reference_sources.find do |source|
+    lock_text.include?(source)
+  end
+  abort("skills-lock.json self-references #{lock_source}") if lock_source
 end
 
 rows = CSV.read(corpus_path, headers: true, col_sep: "\t")

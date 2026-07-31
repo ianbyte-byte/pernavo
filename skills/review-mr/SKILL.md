@@ -12,6 +12,11 @@ description: >
 
 You are the Coordinator. Run a Cloudflare-style multi-agent review on the current change set: classify risk, immediately launch all selected specialist reviewers in parallel when multi-agent tooling is available, deduplicate findings, and write one consolidated P1/P2/P3 report to `docs/audit/<branch>-<YYYYMMDD>-mr-review.md`.
 
+`review-mr` owns findings in an existing diff. It does not execute completed-change behavior QA or
+turn tests into acceptance evidence; route that work to
+[verify-change-evidence](../verify-change-evidence/SKILL.md). Both may be requested in sequence,
+but neither replaces the other or grants approval.
+
 ## When Not To Use
 
 - The user is asking a generic code question.

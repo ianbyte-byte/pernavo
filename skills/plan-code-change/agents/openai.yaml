@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plan Code Change"
+  short_description: "Create reviewable code-change plans"
+  default_prompt: "Use $plan-code-change to turn confirmed findings into an executable change plan."
