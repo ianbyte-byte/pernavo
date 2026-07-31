@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "memory": {
+    "path": "memory.jsonl",
+    "scopes": ["repository", "operator"]
+  },
+  "routes": [
+    {
+      "id": "documentation.inspect",
+      "priority": 100,
+      "when": {"kind": "documentation.inspect"},
+      "requires": ["canonical_config_read"]
+    },
+    {
+      "id": "memory.search",
+      "priority": 90,
+      "when": {"kind": "memory.search"},
+      "requires": ["canonical_memory_read"]
+    }
+  ]
+}

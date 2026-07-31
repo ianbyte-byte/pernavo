@@ -1,0 +1,2 @@
+{"id":"harness-contract","text":"Canonical configuration and canonical JSONL memory are read-only Phase 1 inputs.","scope":"repository","sensitivity":"normal"}
+{"id":"runtime-boundary","text":"Static routing does not establish runtime hook, authentication, tool, or model availability.","scope":"repository","sensitivity":"normal"}
