@@ -4,14 +4,18 @@ description: >
   Design graph-shaped agent workflows with bounded routing, fan-out and fan-in, single-writer
   ownership, clean handoffs, and independent verification. Use for explicit Graph Engineering,
   agent graphs or topology, or otherwise-unowned independent contexts, parallel discovery,
-  author-verifier separation, permission boundaries, or conditional repair routes. Named and
-  task-specific workflows such as gpt55-fusion and review-mr take precedence. Do not use for
-  ordinary coding, MR review, trivial work, or one well-scoped loop.
+  author-verifier separation, permission boundaries, or conditional repair routes. It also realizes
+  an automatic cost-aware topology for a retained normal change when the controller records a
+  preflight signal and separate discovery or verification context has measurable benefit. Named and
+  task-specific workflows such as gpt55-fusion and review-mr take precedence. Do not use for MR
+  review, trivial work, or ordinary coding with no preflight signal or topology benefit.
 ---
 
 # Graph Engineering Topology
 
-Design the lightest reliable execution topology the task justifies. Compose reliable agent loops into an explicit graph only when the work needs one. Treat the topology as contracts, not as an excuse to spawn more agents.
+Design the lightest reliable execution topology the task justifies. Compose reliable agent loops into an explicit graph only when the work needs one. Treat the topology as contracts, not as an excuse to spawn more agents. Use the abstract capability tiers and limits in
+[references/cost-aware-routing.md](references/cost-aware-routing.md) whenever cost, automatic
+subagent routing, reuse, or external advice is in scope.
 
 ## Model the execution topology
 
@@ -47,7 +51,12 @@ Treat this skill as a topology layer, not as a replacement for domain, safety, o
 
 In a complete engineering work system, governance selects the risk path, this skill owns only execution topology and routing, task-specific skills own domain execution, and fresh verification supplies the exit evidence. Keep those responsibilities separate instead of building one monolithic workflow skill.
 
-When `coding-task-controller` is active, let it choose the coding risk path, required discovery, and validation gates. Represent those phases as separate nodes only when this skill's graph test is satisfied.
+When `coding-task-controller` is active, let it choose the coding risk path, required discovery,
+planning, and validation gates. For a retained `default` change with a recorded preflight signal,
+this skill may realize the automatic standard topology: necessary cheap read-only discovery, the
+required planning owner when a material plan is needed, one writer, and an independent verifier.
+Use separate graph nodes only when this skill's graph test is satisfied; otherwise keep that route
+as the explicitly labeled sequential topology.
 
 When a specific orchestration skill such as `review-mr` or `gpt55-fusion` matches, use its prescribed reviewers, agents, and routing. Do not wrap it in duplicate reviewers or judges. Add upstream discovery or downstream delivery nodes only when the task requires them and the specific skill does not already own them.
 
@@ -55,12 +64,15 @@ If two skills appear to own the same node, prefer the more specific skill and ke
 
 ## 1. Decide whether a graph earns its cost
 
-Start with one loop. Promote the task to a graph only when at least one graph capability materially improves the outcome:
+Start with one loop. Promote the task to a graph only when at least one measurable graph capability
+materially improves the outcome:
 
-- Distinct specialties need separate contexts, tools, models, or permissions.
-- Independent work can fan out in parallel and later fan in through a defined merge.
-- Author and verifier must be separated to avoid self-approval.
-- Conditional routing, a human gate, or an auditable repair path must be explicit.
+- Two bounded questions have independent inputs and neither needs the other's result before it can
+  return evidence.
+- Distinct specialties demonstrably need separate contexts, tools, models, or permissions.
+- An independent verifier is required by risk or acceptance criteria, rather than a duplicate
+  reviewer of the same surface.
+- A conditional route, a human gate, or an auditable repair path must be explicit.
 
 Keep a loop when one owner can perform the work sequentially, the context remains clean, and no independent branch changes the decision. A sequence of boxes is not automatically a graph.
 
@@ -104,25 +116,31 @@ Use planning or task-tracking tools when available. Keep graph nodes atomic and 
 
 Inspect the current agent catalog and tools before choosing implementations. Treat `explorer`, `writer`, and `verifier` as role labels, not guaranteed tool or agent names.
 
-- Choose the lightest capable role allowed by local routing rules.
+- Choose the cheapest role that can reliably satisfy the node's acceptance evidence; escalate for
+  demonstrated complexity or a failed lower tier, not for role labels alone.
 - Use read-only nodes for discovery, alternatives, risk analysis, and review.
-- Use one write-capable node for implementation in a shared working tree.
+- Use one writer whose permissions, repository familiarity, and implementation capability match the
+  approved change; use one write-capable node for a shared working tree.
 - Use independent worktrees when the graph truly requires parallel writes.
 - Keep two opinion nodes independent. Do not give either the other's conclusion before fan-in.
-- Use a separate adjudicator only when conflicting evidence cannot be resolved directly by the root agent.
+- Use a separate adjudicator only when a decision-changing disagreement cannot be resolved directly
+  by the root agent.
 
 If child-agent support is unavailable, run the task as a single loop or a clearly labeled degraded sequential workflow. Do not claim independent contexts or fan-out that did not occur.
 
 ## 4. Execute and route by evidence
 
-1. Start independent read-only nodes in parallel when their outputs do not depend on each other.
+1. Start at most two independent read-only nodes in parallel, only when their outputs do not depend
+   on each other. Partition their questions and cancel any branch that becomes idle or unnecessary.
 2. Give every node the objective, allowed scope, forbidden scope, expected output, required evidence, and exact stop condition.
 3. Wait for the required branches, then inspect their raw evidence before synthesizing. Resolve contradictions instead of averaging them.
 4. Send the writer only the approved decision, relevant evidence, scope, ownership, and acceptance checks.
 5. Inspect the resulting artifact or diff in the root context before verification.
 6. Send the verifier the artifact, user-visible acceptance criteria, and applicable validation surface. Keep the verifier read-only.
 7. Route a failure back to the owning writer as a minimal failure packet: reproduction, expected result, observed result, relevant artifact, and required check.
-8. Re-run only the affected validation after a repair. Use a declared retry cap, defaulting to two repair rounds when no stronger local rule exists.
+8. Re-run only the affected validation after a repair. Use a declared retry cap, defaulting to two
+   repair rounds when no stronger local rule exists. Each retry needs a new, evidence-backed
+   hypothesis; do not retry a deterministic environment, permission, or dependency failure.
 9. Escalate to the user only when the next route requires new authority, a destructive action, sensitive disclosure, or a product decision that evidence cannot resolve.
 
 Do not restart the whole graph when one node fails. Resume from the latest valid state unless upstream evidence is stale or invalidated.
@@ -140,6 +158,8 @@ Inputs and evidence:
 Decision or artifact:
 Validation already run:
 Open risks or contradictions:
+Reason code and planned limits (tokens, wall time, tool calls):
+Observed spend or elapsed use:
 Next route and stop condition:
 ```
 
@@ -164,6 +184,7 @@ Stop immediately when the success bar is satisfied and no requested work remains
 ```text
 Topology: loop | graph | degraded
 Path executed: node -> node -> node
+Reason code and planned versus observed budget:
 Result: observable outcome
 Validation: commands, checks, or reviewer evidence
 Unverified: checks not run and why

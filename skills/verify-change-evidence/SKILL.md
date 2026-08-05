@@ -15,10 +15,10 @@ the diff for findings, approve the change, deploy it, or infer production behavi
 
 ## Receive a testable handoff
 
-Collect the requested behavior, changed seams, risk and rollback constraints, acceptance checks,
-known assumptions, author-run evidence, target environment, and any required manual scenario. If
-the behavior cannot be tested from this material, name the missing prerequisite rather than filling
-it with a guess.
+Collect the requested behavior, changed seams, active context, data and state ownership, risk and
+rollback constraints, acceptance checks, known assumptions, author-run evidence, target environment,
+and any required manual scenario. If the behavior cannot be tested from this material, name the
+missing prerequisite rather than filling it with a guess.
 
 ## Verify behavior
 
@@ -26,8 +26,9 @@ it with a guess.
    than the changed implementation alone.
 2. Run the narrowest relevant checks first, then the authorized integration, host/runtime, or manual
    surface needed for the claim.
-3. Exercise success, failure, and changed edge behavior where the risk warrants it. Record a skipped
-   layer and reason instead of treating it as passed.
+3. Exercise success, failure, recovery, and changed edge behavior where the risk warrants it. Cover
+   both one-record and batch flow contracts when either can differ. Record a skipped layer and
+   reason instead of treating it as passed.
 4. Preserve commands, target/environment identity without secrets, exit status, timestamps when
    useful, concise results, and artifact paths or hashes.
 5. Stop at the highest surface actually observed. Local tests, roll-backed database checks, staging,
@@ -46,6 +47,7 @@ test pass; return a failed or blocked result to the implementation owner.
 - Requested behavior:
 - Changed seams under test:
 - Target/environment:
+- Active context and lifecycle ownership:
 - Highest observed layer:
 
 ## Checks executed
@@ -54,7 +56,8 @@ test pass; return a failed or blocked result to the implementation owner.
 
 ## Observed behavior
 - Success path:
-- Failure or edge path:
+- Failure, recovery, or edge path:
+- Single-record and batch behavior:
 
 ## Unverified layers and limits
 - <layer>: <why unrun or unavailable>
