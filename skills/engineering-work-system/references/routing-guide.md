@@ -1,6 +1,8 @@
 # Routing Decision Guide
 
 Use this guide only for cross-domain routing. A focused request should load its specialist directly.
+For normal retained changes, compose lifecycle governance with the cost-aware topology automatically;
+do not require the user to authorize each ordinary internal handoff.
 
 ## Lifecycle composition
 
@@ -15,11 +17,27 @@ Each arrow is a handoff, not one owner doing all work. Stop at the user-authoriz
 verification returns to implementation; a missing fact returns to discovery; a requested diff
 finding goes to review. Neither verification nor review grants release or production authority.
 
+## Automatic normal-change composition
+
+`coding-task-controller` selects the risk path and authority boundary. `graph-engineering` then
+selects an economy, standard, or deep topology using its deterministic reason codes. For the usual
+standard case, run only necessary cheap read-only discovery, then one writer and an independent
+verifier. For deep work, use at most two non-overlapping read-only investigations, one writer, and
+one verifier; add a review only when independently required. This is routing composition, not new
+ownership: discovery, planning, implementation, verification, and review retain their focused
+owners.
+
+Do not prompt the user between those ordinary handoffs. Pause for a P0 decision without a safe
+default, new authority, sensitive disclosure, or destructive operation. When child agents are
+unavailable, use the authorized sequential fallback and label it `degraded-sequential`. See
+[cost-aware routing](../../graph-engineering/references/cost-aware-routing.md) for limits,
+packets, retry, reuse, privacy, and stop gates.
+
 ## Common compositions
 
 | Request | Ordered route |
 |---------|---------------|
-| Normal existing-code change | controller → discovery → plan → implementation → verification; add review only when requested |
+| Normal existing-code change | controller → necessary cheap discovery → `plan-code-change` for a material plan (root context permitted) → one writer → independent verification; add review only when requested |
 | High-risk money/data/state change | controller (deep) → discovery → plan → implementation → verification → review → human/release gate |
 | Discovery-only question | discovery only |
 | Plan-only request after facts are known | plan only |

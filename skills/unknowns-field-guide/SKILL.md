@@ -1,11 +1,11 @@
 ---
 name: unknowns-field-guide
 description: >
-  Discovers pre-change facts, unknowns, assumptions, constraints, and evidence around a named
-  code or runtime seam. Use for blindspot passes, reverse interviews, first investigation, tracing,
-  or risky money, data, permissions, integration, SQL, scheduled, or stateful work. Excludes
-  change-plan authorship, implementation notes, production-code changes, post-change QA, diff
-  review, approval, and deployment claims.
+  Discovers pre-change active context, facts, unknowns, assumptions, constraints, and evidence
+  around a named code or runtime seam. Use for blindspot passes, reverse interviews, first
+  investigation, tracing, or risky data, permission, integration, scheduled, or stateful work.
+  Excludes change-plan authorship, implementation notes, production-code changes, post-change QA,
+  diff review, approval, and deployment claims.
 ---
 
 # Unknowns Field Guide
@@ -19,6 +19,9 @@ behavior.
 - Start from the named file, method, endpoint, SQL, field, payload, log line, or issue.
 - Inspect code, configuration, tests, schemas, logs, source records, or authorized runtime state
   before treating a claim as fact.
+- Identify the active context: checked-out revision, configuration and feature state, selected
+  environment or tenant boundary, relevant actor, and live dependency or job ownership. Mark each
+  unavailable context item as unconfirmed rather than substituting a nearby environment.
 - Separate inspected facts, assumptions, unconfirmed questions, and evidence pointers.
 - Ask the user only for a P0 decision that local evidence cannot cheaply answer and has no safe
   default. Never turn a guess into an answer.
@@ -28,16 +31,18 @@ behavior.
 ## Perform the discovery pass
 
 1. Restate the requested outcome and named seam without proposing a change.
-2. Run a blindspot pass across state transitions, historical compatibility, retries and idempotency,
-   transaction and concurrency boundaries, permissions, external consumers, observability, and
-   rollback constraints as relevant.
-3. Classify each item as Known Known, Known Unknown, Unknown Known, or Unknown Unknown; give each
+2. Trace the data and state lifecycle as relevant: creation or import, ownership, transition,
+   persistence, retries, failure recording, recovery or compensation, consumption, and retention.
+   Cover both one-record and batch behavior where either exists.
+3. Run a blindspot pass across historical compatibility, transaction and concurrency boundaries,
+   permissions, external consumers, observability, and rollback constraints as relevant.
+4. Classify each item as Known Known, Known Unknown, Unknown Known, or Unknown Unknown; give each
    an evidence pointer or reason it remains unconfirmed.
-4. Rank risks P0/P1/P2. P0 means the unanswered item can materially change behavior or data safety.
-5. Use a reverse interview only for remaining decision-changing gaps; provide a safe default and
+5. Rank risks P0/P1/P2. P0 means the unanswered item can materially change behavior or data safety.
+6. Use a reverse interview only for remaining decision-changing gaps; provide a safe default and
    concrete risk whenever one exists.
-6. End with a discovery handoff: confirmed facts, assumptions/defaults, unresolved blockers,
-   do-not-do constraints found, and evidence locations.
+7. End with a discovery handoff: active context, lifecycle facts, assumptions/defaults, unresolved
+   blockers, do-not-do constraints found, and evidence locations.
 
 Use [REFERENCE.md](REFERENCE.md) for the blindspot and reverse-interview templates.
 

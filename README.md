@@ -6,34 +6,40 @@ Repository web page: [https://github.com/tuloong/pernavo](https://github.com/tul
 
 Skill sources live under `skills/<name>/SKILL.md`.
 
-## For Humans
+For end-to-end workflow and trigger experiments, including the boundary between static,
+installed, loaded, executed, and target-observed evidence, read
+[End-to-End Skill Workflow and Trigger Experiments](docs/skill-workflow-and-trigger-experiments.md).
 
-**Strongly recommended: let an AI agent install this for you.** The agent should read the complete
-guide before changing any Skill, Harness, or memory configuration.
+For a source-backed, vendor-neutral policy for bounded cost-aware multi-agent routing, read
+[Cost-Aware Multi-Agent Orchestration](docs/reference/cost-aware-multi-agent-orchestration.md).
+
+## Install with an AI agent
 
 Paste this prompt into Codex, Claude Code, Cursor, or another coding agent:
 
 ```text
-Install and configure Pernavo by following the complete instructions here:
+请为我安装 Pernavo 的完整 Skills 系统。完整执行手册：
 https://raw.githubusercontent.com/tuloong/pernavo/refs/heads/main/AI_INSTALL.md
 
-Read the entire guide before acting. If the URL is unavailable or the repository does not expose
-the 14 Skills declared by the guide, stop and report that the requested version is not published.
-Do not fall back to older README installation commands.
+默认参数：官方 GitHub 来源、当前用户、Codex、global、全部 14 个 Skills、从固定 SHA
+checkout 执行 copy；远程 URL 只用于发现和 clone，不直接用于安装。
+开始前必须读取全文、重新检查 skills CLI 的 version/help、确认授权、精确核对远程 --list
+和 JSON 同名冲突；不要盲跑，不要使用 --all 或 remove --all。只安装 absent 项，安装后完成
+固定 SHA 记录、JSON diff、新会话代表性 smoke（正向/负向/碰撞）、报告和定向回滚记录。
+若远程 --list 不是精确 14 项，停止并说明该版本尚未发布；未运行完整 42-case corpus 时，
+不得声称全部 14 项的 runtime activation 已验证。
 ```
 
-## For LLM Agents
-
-Fetch the complete guide and follow it step by step:
+The complete procedure is [AI_INSTALL.md](AI_INSTALL.md). An AI may fetch the published guide with:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/tuloong/pernavo/refs/heads/main/AI_INSTALL.md
 ```
 
-This command only prints the guide; never pipe it into a shell. A non-zero exit or empty response is
-a stop condition. The guide owns authorization, conflict detection, verification, and rollback.
-
-Local checkout readers may open [AI_INSTALL.md](AI_INSTALL.md) directly.
+This only prints Markdown; never pipe it into a shell. The remote URL is for discovery and cloning,
+not direct installation or installed-revision proof. If its `--list` output is not the exact 14-name
+set in the guide, stop and report that the documented version is not published. Do not claim that
+local uncommitted work is available remotely.
 
 ## Read-only local harness inspection
 
@@ -49,31 +55,15 @@ Relative memory paths resolve from the configuration file, not the current direc
 
 This proves deterministic local routing simulation and data integrity only. It does not prove that any model or harness invoked a skill or tool. `MEMORY.md` is a future human-readable projection, not authoritative storage in Phase 1.
 
-## List skills
+Do not copy a bare install command from this README. The guide requires authorization, current CLI
+help, an exact remote list, a fixed-SHA checkout, before/after JSON snapshots, conflict
+classification, and a new-session runtime check. It also explains the boundary between installing
+workflow policy and proving host subagents, model routing, Hooks, MCP, permissions, or Harness.
 
-```bash
-npx skills add https://github.com/tuloong/pernavo --list
-```
-
-## Install all skills for the current user's Codex
-
-```bash
-npx skills add https://github.com/tuloong/pernavo \
-  --global --agent codex --skill '*' --yes --copy
-```
-
-Installing to every supported agent requires separate, explicit authorization; see
-[AI_INSTALL.md](AI_INSTALL.md).
-
-Do not project-install this package into its own checkout: that creates tracked or local
-`.agents/skills` copies which can become stale and compete with the source under `skills/`.
-Use the regression command below while developing. After validation and the conflict/snapshot gates
-in [AI_INSTALL.md](AI_INSTALL.md), deliberately refresh a user-level Codex installation from the
-current checkout when runtime testing needs it:
+Repository maintainers can validate the source without installing it:
 
 ```bash
 ./scripts/validate-skills.sh
-npx skills add . --global --agent codex --skill '*' --yes --copy
 ```
 
 ## Included skills

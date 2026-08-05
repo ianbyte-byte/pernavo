@@ -27,16 +27,31 @@ their discovery, plan, implementation, verification, review, or release authorit
 | Agent-harness audit | `audit-agent-harness` |
 | Agent execution topology | `graph-engineering` |
 
-For a normal code change, route only the phases requested or required by risk:
+For a normal code change, automatically compose the controller's risk/authority choice with the
+topology layer; do not make the user advance phase by phase. The controller selects `fast`,
+`default`, `deep`, or analysis-only. `graph-engineering` realizes the selected cost-aware topology
+without taking ownership from lifecycle specialists:
 
 ```text
-coding-task-controller → unknowns-field-guide → plan-code-change
-→ develop-production-code → verify-change-evidence → review-mr
+fast:    controller → one accountable implementation owner → proportionate check
+default: controller → necessary cheap read-only discovery → one writer → independent verifier
+deep:    controller → at most two partitioned read-only investigations → one writer
+         → independent verifier → one required review or release gate
 ```
 
-Use a phase only when its input exists. `review-mr` is optional unless a diff review is requested;
-verification and diff review are distinct independent surfaces. Add reliability, topology, security,
-or domain overlays only when their own triggers are present.
+Use a phase only when its input exists. A material plan is always owned by `plan-code-change`; it
+may run in the root context to avoid an unnecessary child startup, but the writer does not prepare
+or own it. `review-mr` is optional unless requested or required; verification and diff review are
+distinct independent surfaces. Add reliability, topology, security, or domain overlays only when
+their own triggers are present.
+
+The default topology is one cheap read-only discovery only for material preflight signals, then one
+writer and one independent verifier. Deep work may use no more than two non-overlapping read-only
+investigations in parallel. `graph-engineering` owns its reason codes, budgets, child/fallback,
+reuse, retry, and stop policy in [cost-aware routing](../graph-engineering/references/cost-aware-routing.md);
+this skill does not duplicate those controls. Pause only for a P0 decision with no safe default, new
+authority, sensitive disclosure, or destructive operation. If child support is unavailable, report
+`degraded-sequential` and continue only with the authorized sequential route.
 
 ## Assess cross-domain health
 

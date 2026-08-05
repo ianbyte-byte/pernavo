@@ -16,17 +16,19 @@ into deployment proof.
 
 ## Receive the approved handoff
 
-Require a plan that names the observable outcome, changed seam, constraints, do-not-do scope,
-assumptions, rollback or recovery, validation requests, and human-review points. If a material fact
-or P0 decision is missing, return it to [unknowns-field-guide](../unknowns-field-guide/SKILL.md) or
+Require a plan that names the active context, observable outcome, changed seam, constraints,
+do-not-do scope, assumptions, rollback or recovery, validation requests, and human-review points.
+If a material fact or P0 decision is missing, return it to
+[unknowns-field-guide](../unknowns-field-guide/SKILL.md) or
 [plan-code-change](../plan-code-change/SKILL.md); do not silently expand the task.
 
 ## Preserve the implementation contract
 
 - Keep the accountable engineer responsible for requirements, design boundaries, failure behavior,
   and the correctness of the retained code.
-- Understand inputs, state transitions, side effects, dependencies, and rollback path before
-  editing the relevant seam.
+- Understand inputs, data and state ownership, single-record and batch transitions, side effects,
+  dependencies, failure handling, recovery behavior, and rollback path before editing the relevant
+  seam.
 - Treat tests, coverage, complexity limits, linters, and deterministic checkers as evidence, not
   proof that the requirement or oracle is correct.
 - Preserve unrelated dirty work and repository conventions. Do not make irreversible operations,
@@ -55,9 +57,10 @@ qualified human review and separately derived acceptance criteria for R3.
 1. Edit only the approved seams in reviewable slices.
 2. Re-read the final diff and changed contracts; avoid speculative abstractions, silent fallbacks,
    and compatibility shims for unshipped shapes.
-3. Add focused author checks or verification artifacts where they exercise the changed contract.
-   Prefer independent expected values, fixtures, properties, differential checks, fault injection,
-   or trusted source records when the implementation and test could share one misunderstanding.
+3. Add focused author checks or verification artifacts where they exercise the changed contract,
+   including relevant success, failure, retry, recovery, and single/batch paths. Prefer independent
+   expected values, fixtures, properties, differential checks, fault injection, or trusted source
+   records when the implementation and test could share one misunderstanding.
 4. Record only checks actually run, their commands, targets, results, and artifact locations. Name
    failures, skips, and unverified layers.
 
@@ -70,9 +73,10 @@ Provide this author packet to
 Requested outcome and approved plan:
 Changed scope / do-not-do scope:
 Risk tier, artifact classes, and critical invariants:
+Active context and lifecycle/ownership assumptions:
 Author checks actually run with commands, targets, and results:
 Known failures, skipped checks, and proof boundary:
-Rollback or recovery status:
+Failure, recovery, and rollback status:
 Required runtime/manual scenarios and human-review points:
 ```
 
