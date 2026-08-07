@@ -23,6 +23,7 @@ their discovery, plan, implementation, verification, review, or release authorit
 | Independent completed-change behavior evidence | `verify-change-evidence` |
 | Diff or MR findings | `review-mr` |
 | Existing SonarQube quality gate, measures, and issues | `sonarqube-review` |
+| Formal report structure and purpose-based file-format routing | `report-writer` |
 | Reliability, SLO, resilience, incident learning | `aviation-grade-engineering` |
 | Behavior-preserving cleanup | `codebase-slimming` |
 | Repository capability baseline and next foundation increment | `project-capability-engineering` |

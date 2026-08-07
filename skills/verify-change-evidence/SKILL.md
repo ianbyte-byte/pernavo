@@ -34,6 +34,13 @@ missing prerequisite rather than filling it with a guess.
 5. Stop at the highest surface actually observed. Local tests, roll-backed database checks, staging,
    and production are different proof layers.
 
+For HTTP API verification, inventory every applicable case and give each an executed, passed,
+failed, blocked, skipped, or not-applicable state. Preserve sanitized request/response events and
+artifacts as required by [report-writer's HTTP API test module](../report-writer/references/http-api-test.md)
+and [log evidence module](../report-writer/references/log-evidence.md). Do not put reusable
+credentials on command lines or in logs. A formal report request hands this evidence to
+[report-writer](../report-writer/SKILL.md); verification retains ownership of cases and assertions.
+
 For a defect reproduction, first demonstrate the pre-fix failure when practical and safe, then run
 the completed change through the same observable scenario. Do not modify product code to make the
 test pass; return a failed or blocked result to the implementation owner.

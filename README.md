@@ -125,6 +125,7 @@ evidence remain separate states.
 - `pplx-cli`
 - `project-capability-engineering` — assess greenfield, existing, and legacy repository capabilities and select one evidence-based, reversible foundation increment
 - `repository-knowledge-gardening` — inventory repository knowledge, detect documentation drift, and select one verifiable gardening increment without inferring unobserved behavior
+- `report-writer` — turn supplied facts and evidence into a formal report and select Markdown, spreadsheet, PDF, HTML, Word, or slides from its intended use
 - `review-mr` — produce findings on an existing diff; separate from behavior verification
 - `sonarqube-review` — inspect an existing SonarQube project's quality gate, measures, and issues through exposed MCP tools or a bundled read-only API client
 - `unknowns-field-guide` — discover pre-change facts, blindspots, assumptions, and evidence gaps
