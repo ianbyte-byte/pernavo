@@ -24,8 +24,9 @@ https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/main/AI_INSTAL
 默认参数：官方 GitHub 来源、当前用户、Codex、global、全部 16 个 Skills、从固定 SHA
 checkout 执行 copy；远程 URL 只用于发现和 clone，不直接用于安装。
 开始前必须读取全文、重新检查 skills CLI 的 version/help、确认授权、精确核对远程 --list
-和 JSON 同名冲突；不要盲跑，不要使用 --all 或 remove --all。只安装 absent 项，安装后完成
-固定 SHA 记录、JSON diff、新会话代表性 smoke（正向/负向/碰撞）、报告和定向回滚记录。
+和 JSON 同名冲突；不要盲跑，不要使用 --all 或 remove --all。冲突默认按方案 A 处理：仅在旧
+来源和固定 revision 可精确恢复时定向替换；否则停止。安装后完成固定 SHA 记录、JSON diff、
+新会话代表性 smoke（正向/负向/碰撞）、报告和定向回滚记录。
 若远程 --list 不是精确 16 项，停止并说明该版本尚未发布；未运行完整 48-case corpus 时，
 不得声称全部 16 项的 runtime activation 已验证。
 ```
