@@ -12,7 +12,9 @@ Codex；范围为 global；目标为手册列出的全部 16 个 Skills；安装
 
 开始前必须读取完整手册，重新检查 skills CLI 的 version/help，确认写入授权，精确核对远程
 --list 的 16 项，并用 JSON 快照检查同名冲突。不要直接盲跑安装命令，不要使用 --all，
-不要使用 remove --all。若远程 --list 不是精确 16 项，停止并说明该版本尚未发布。
+不要使用 remove --all。遇到来源不同的同名项时，默认采用方案 A：保存可精确恢复的旧登记后，
+仅按名称定向移除冲突项，再从固定 SHA checkout 重装；旧来源、revision 或影响范围无法可靠
+恢复时必须停止。若远程 --list 不是精确 16 项，停止并说明该版本尚未发布。
 安装后按手册完成 JSON diff、新会话触发验证、报告和可定向回滚记录。
 ```
 
@@ -33,10 +35,10 @@ Codex；范围为 global；目标为手册列出的全部 16 个 Skills；安装
 | 4 | 固定来源 | 安全临时目录中 clone，记录 full HEAD SHA，detach、校验 16 项 |
 | 5 | 保存全局及 Codex JSON 快照 | 安装前状态可恢复、可比较 |
 | 6 | 分类同名项 | 每项是 `absent`、`same-source` 或 `conflict` |
-| 7 | 只从固定 checkout 安装 `absent` | `same-source` 不触碰；任何 `conflict` 都停止 |
-| 8 | 安装后 JSON diff | 只新增获授权的 absent 项，无意外 Agent 或范围 |
+| 7 | 处理并安装 | `same-source` 不触碰；安装 `absent`；`conflict` 默认按方案 A 定向替换 |
+| 8 | 安装后 JSON diff | absent 正确新增、conflict 正确换源，无意外 Agent 或范围 |
 | 9 | 新会话验证 | 3 个代表性 smoke，或完整 48-case corpus |
-| 10 | 报告与回滚 | 区分证据层级，只为本次新增登记给出定向回滚 |
+| 10 | 报告与回滚 | 区分新增与替换，分别给出定向删除和旧来源恢复步骤 |
 
 ## 安全契约与系统边界
 
@@ -48,7 +50,8 @@ Codex；范围为 global；目标为手册列出的全部 16 个 Skills；安装
    启动文件、静默安装系统依赖或运行 `skills remove --all`。
 3. 不在 Pernavo 自己的 checkout 中做项目级自安装；那会创建 `.agents/skills` 副本并与
    `skills/` 源竞争。
-4. 只安装 `absent`；`same-source` 保持不变；`conflict` 必须停止并请用户决定。
+4. `absent` 直接安装，`same-source` 保持不变；`conflict` 默认采用方案 A，在旧来源、固定
+   revision、影响 Agent 和恢复命令均已记录后定向替换。任一恢复条件不完整时停止，不得覆盖。
 5. 安装 16 个 Skills 会提供成本感知的自动工作流政策，包括 controller、work-system 和
    graph 路由规则。它不会安装或证明宿主的子 Agent 目录、模型路由、Hook、MCP、权限、
    Harness 或记忆写入器。
@@ -182,18 +185,39 @@ npx --yes skills ls --global --agent codex --json > "$PERNAVO_INSTALL_TMP/pernav
 
 - `absent`：Codex 中无同名登记，且其他全局登记没有不明同名来源；可安装。
 - `same-source`：已来自同一个官方仓库；本次不触碰、不重装、不隐式更新。
-- `conflict`：来自其他来源，或来源无法可靠判断；停止并报告。
+- `conflict`：来自其他来源，或来源无法可靠判断；进入下方方案 A 的替换安全门，不能直接覆盖。
 
-如果旧来源显示 `tuloong/loongclaude`，只有能证明它与官方仓库是同一 repository 时才可视为
-`same-source`，否则是 `conflict`。混合状态下只把 `absent` 名称放进安装命令。
+如果旧来源显示 `tuloong/pernavo`、`tuloong/loongclaude` 或其他 fork/mirror，只有能证明它与
+官方仓库是同一 repository 时才可视为 `same-source`，否则是 `conflict`。不得因为仓库名称相似、
+内容相同或来源是 fork/mirror，就跳过冲突处理。
 
-安装前必须同时保存：16 项分类、原始 JSON、已授权目标，以及“安装后 Codex 名称集合减安装前
-Codex 名称集合”的回滚计算规则。不得根据请求列表猜测新增项。
+安装前必须同时保存：16 项分类、原始 JSON、已授权目标、“安装后 Codex 名称集合减安装前 Codex
+名称集合”的新增项回滚计算规则，以及每个替换项的旧来源、固定 revision、Agent、scope 和恢复
+命令。不得根据请求列表猜测新增项或替换项。
+
+### 默认冲突策略：方案 A（受控替换）
+
+存在 `conflict` 时默认执行方案 A，不再仅因“来源不同”要求用户在 A/B/C 中再次选择：
+
+1. 把冲突项进一步标为 `replaceable` 或 `blocked`。
+2. 只有旧登记的来源 repository、可取得的固定 full commit SHA、目标 Agent、scope、路径和精确
+   恢复命令均已记录，才可标为 `replaceable`。
+3. 仅按字面名称、目标 Agent 和 global scope 定向移除 `replaceable` 冲突项；不得使用通配符、
+   `remove --all`、递归目录删除或扩大到其他 Agent。
+4. 移除后立即重读 JSON，证明只有预期冲突登记消失，再从本次固定 checkout 安装这些名称。
+5. 来源不明、旧 revision 无法固定、CLI 无法隔离 Agent、无法枚举影响范围或无法写出精确恢复
+   命令的冲突项一律标为 `blocked`，停止写入并报告 `rollback blocked`。
+
+方案 A 只授权替换本手册请求的 16 个同名 Skill 登记，不授权删除其他 Skill、配置、Hook、MCP、
+Harness、记忆、目录或系统依赖。用户明确要求保留旧来源或接受混合来源时，才可偏离方案 A，且
+必须在报告中记录覆盖本默认值的授权。
 
 ## 3. 安装
 
-只有 16 项全部是 `absent` 时，才可使用星号选择全部 Skills。安装源必须是已经 detach、记录
-full SHA 并校验通过的 `$PERNAVO_CHECKOUT`，不能是 `$PERNAVO_REMOTE`：
+只有写入前 16 项全部是 `absent` 时，才可使用星号选择全部 Skills。这里的“全部 absent”可以是
+原本全部 absent，也可以是方案 A 已定向移除全部 replaceable conflict 并完成移除后 JSON 校验的
+结果。安装源必须是已经 detach、记录 full SHA 并校验通过的 `$PERNAVO_CHECKOUT`，不能是
+`$PERNAVO_REMOTE`：
 
 ```bash
 npx --yes skills add "$PERNAVO_CHECKOUT" \
@@ -204,19 +228,21 @@ npx --yes skills add "$PERNAVO_CHECKOUT" \
   --copy
 ```
 
-存在任何 `same-source` 时，必须把所有 `absent` 名称逐个写出；下面仅示范命令形状：
+存在任何 `same-source` 时，必须把所有原始 `absent` 名称和方案 A 已移除的 `replaceable conflict`
+名称逐个写出；下面仅示范命令形状：
 
 ```text
 npx --yes skills add "$PERNAVO_CHECKOUT" \
   --global \
   --agent codex \
-  --skill ABSENT_NAME_1 ABSENT_NAME_2 \
+  --skill ABSENT_OR_REPLACED_NAME_1 ABSENT_OR_REPLACED_NAME_2 \
   --yes \
   --copy
 ```
 
-若没有 `absent`，报告已存在且不做写入。只有用户明确授权所有支持的 Agent 时才可使用
-`--agent '*'`。任何情况下都不使用 `--all` 作为默认安装方式。
+上例不可原样执行。如果只有 `same-source`、没有 `absent` 或 `replaceable conflict`，报告已存在且
+不做写入。只有用户明确授权所有支持的 Agent 时才可使用 `--agent '*'`。任何情况下都不使用
+`--all` 作为默认安装方式。
 
 ## 4. 安装后 diff 与新会话验证
 
@@ -232,8 +258,9 @@ npx --yes skills ls --global --json > "$PERNAVO_INSTALL_TMP/pernavo-after-global
 npx --yes skills ls --global --agent codex --json > "$PERNAVO_INSTALL_TMP/pernavo-after-codex.json"
 ```
 
-对 before/after JSON 做结构化比较并确认：请求的 absent 项各出现一次、scope 为 global、来源
-一致、没有写入未授权 Agent、same-source 项未改变。checkout 内不得新增项目级
+对 before/after JSON 做结构化比较并确认：请求的 absent 项各新增一次；方案 A 替换项名称和
+Agent 不变、来源已从记录的旧来源变为本次官方固定 checkout；scope 为 global；没有写入未授权
+Agent；same-source 项未改变。checkout 内不得新增项目级
 `.agents/skills/<name>` 副本。非零退出、部分安装或意外 diff 均进入停止/回滚流程。
 
 随后重启目标宿主或开启确定会重新扫描 Skills 的新会话。从
@@ -280,19 +307,21 @@ npx --yes skills update --global --yes \
 
 ## 6. 定向回滚
 
-回滚集合只能是 `after Codex registrations - before Codex registrations`。把实际新增名称逐个写成
-字面量：
+回滚必须把“新增登记”和“替换登记”分开处理。新增集合只能是
+`after Codex registrations - before Codex registrations`；把实际新增名称逐个写成字面量：
 
 ```text
 npx --yes skills remove NEW_NAME_1 NEW_NAME_2 --global --agent codex --yes
 ```
 
-上例不可原样执行。不得移除安装前已存在的 same-source 项，不得使用通配符或
-`remove --all`。多 Agent 安装要按每个 Agent 的快照差集分别移除，随后重新读取 JSON，证明只
-删除本次新增登记。
+上例不可原样执行。不得移除安装前已存在的 same-source 项，不得使用通配符或 `remove --all`。
+多 Agent 安装要按每个 Agent 的快照差集分别移除，随后重新读取 JSON，证明只删除本次新增登记。
 
-更新或获准替换的旧版本不是“新增登记”；只有预先记录旧来源和固定 revision，才能按该来源
-恢复。缺少恢复来源、revision 或影响范围时报告 `rollback blocked`，不得假称已回滚。
+方案 A 替换的旧登记不是“新增登记”，名称集合差集无法识别它。回滚每个替换项时必须先按名称和
+Agent 定向移除本次官方登记，再从安装前记录的旧 repository 和固定 full commit SHA 恢复相同
+Agent 与 scope，并用 JSON 与 before 快照比较。缺少恢复来源、revision、影响范围或精确恢复命令
+时，在替换前就必须报告 `rollback blocked` 并停止，不得假称可回滚或用旧来源最新分支代替旧
+revision。
 
 ## 7. Harness 检查（可选、独立授权）
 
@@ -317,13 +346,15 @@ python3 scripts/agentctl.py memory search --config harness/examples/agentctl.jso
 - 授权、来源身份、目标、范围或 revision 不清楚；
 - 当前 CLI 帮助与命令不兼容，或必需工具缺失；
 - 远程/本地 `--list` 不是精确 16 项；
-- 存在 conflict，或 same-source/absent 无法可靠区分；
+- conflict 无法标为 `replaceable`，或 same-source/absent 无法可靠区分；
+- 方案 A 缺少旧 repository、固定 revision、影响 Agent/scope、精确恢复命令或移除后 JSON 证明；
 - 默认官方 checkout 校验失败；已有本地开发 checkout 仅在可信验证器缺失时可降级为 `partial`；
 - 安装失败、部分成功、after diff 异常或无法计算精确新增集合；
 - 继续操作需要覆盖、广泛删除、修改权限或系统依赖；
 - 用户要求保证运行时触发，但宿主没有可观察证据。
 
-部分安装失败时，只对 before/after 差集中的字面名称定向回滚。
+部分安装失败时，对 before/after 差集中的新增名称定向移除；对已经替换的名称按替换台账恢复旧
+来源。任一恢复前提缺失时停止并报告实际状态，不得继续扩大删除范围。
 
 ## 9. 安装报告模板
 
@@ -340,6 +371,9 @@ Requested 16 names or authorized subset:
 Remote/local --list exact-set result:
 Before global and Codex JSON snapshot paths:
 Per-name classification: absent | same-source | conflict
+Conflict disposition: replaceable | blocked
+Replacement ledger: name, agent, scope, old repository, old full SHA, restore command
+Directed removal command and post-removal JSON result:
 Install/update command and exit status:
 After global and Codex JSON snapshot paths:
 Structured before/after diff and newly created registrations:
@@ -352,10 +386,11 @@ Per-case target-observed evidence:
 External environment-observed evidence, or not observed:
 Harness checks, if separately requested:
 Exact rollback command for only newly created registrations:
+Exact rollback sequence for replaced registrations:
 Unverified layers and remaining decisions:
 Final evidence level: source-valid | installed | loaded | executed | target-observed | environment-observed
 Final status: complete | partial | blocked
 ```
 
-只有获授权的 absent 项完成安装、after diff 已核对、失败项已处理且未验证边界明确列出时，安装
-代理才可结束任务。
+只有获授权的 absent 项完成安装、方案 A 的 replaceable conflict 已正确换源、after diff 已核对、
+回滚步骤可执行、失败项已处理且未验证边界明确列出时，安装代理才可结束任务。
