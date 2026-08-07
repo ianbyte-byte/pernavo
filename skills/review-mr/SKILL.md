@@ -5,7 +5,8 @@ description: >
   and consolidated P1, P2, and P3 findings. Use for review MR, PR, or diff, review my changes,
   审查改动, 提交前自查, multi-agent code review, or /review-mr. Review only: do not trigger for
   implementation, generic code explanation, whole-codebase cleanup, or a named gpt55-fusion
-  topology.
+  topology. When the user explicitly requests SonarQube evidence, compose with sonarqube-review;
+  do not emulate SonarQube through a generic reviewer.
 ---
 
 # Review MR
@@ -16,6 +17,11 @@ You are the Coordinator. Run a Cloudflare-style multi-agent review on the curren
 turn tests into acceptance evidence; route that work to
 [verify-change-evidence](../verify-change-evidence/SKILL.md). Both may be requested in sequence,
 but neither replaces the other or grants approval.
+
+When SonarQube evidence is explicitly requested, route that evidence collection to
+[sonarqube-review](../sonarqube-review/SKILL.md) and keep its quality-gate and issue results in a
+separate report section. Do not block the rest of the diff review merely because SonarQube is
+unconfigured; mark only that evidence source unavailable or partial.
 
 ## When Not To Use
 
