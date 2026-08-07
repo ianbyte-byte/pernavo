@@ -1,6 +1,7 @@
 import importlib.util
 import io
 import json
+import os
 import tempfile
 import unittest
 from contextlib import redirect_stdout
@@ -120,6 +121,56 @@ class TestRun(QualityEvidenceCase):
                 )
         self.assertEqual(2, exit_code)
         self.assertEqual("network_gate", result["error"]["code"])
+
+    def test_sonarqube_environment_maps_local_service_without_recording_token(self):
+        arguments = type(
+            "Arguments",
+            (),
+            {"sonarqube_url": "http://localhost:9000", "sonarqube_token_env": "LOCAL_SONAR_TOKEN"},
+        )()
+        with mock.patch.dict(os.environ, {"LOCAL_SONAR_TOKEN": "top-secret-token"}, clear=False):
+            environment, metadata = quality_evidence.tool_environment("sonarqube", arguments)
+        self.assertEqual("http://localhost:9000", environment["SONAR_HOST_URL"])
+        self.assertEqual("top-secret-token", environment["SONAR_TOKEN"])
+        self.assertNotIn("top-secret-token", json.dumps(metadata))
+        self.assertTrue(next(item for item in metadata if item["name"] == "SONAR_TOKEN")["present"])
+
+    def test_real_sonarqube_run_requires_token_before_writing_evidence(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            target = root / "target"
+            target.mkdir()
+            (target / "sonar-project.properties").write_text("sonar.projectKey=sample\n", encoding="utf-8")
+            scanner = self.make_executable(root, "sonar-scanner", "")
+            evidence = root / "evidence"
+            clean_environment = dict(os.environ)
+            clean_environment.pop("MISSING_SONAR_TOKEN", None)
+            with mock.patch.dict(os.environ, clean_environment, clear=True):
+                with mock.patch.object(
+                    quality_evidence.shutil,
+                    "which",
+                    side_effect=lambda name: str(scanner) if name == "sonar-scanner" else None,
+                ):
+                    exit_code, result = self.run_cli(
+                        [
+                            "run",
+                            "--target",
+                            str(target),
+                            "--evidence-dir",
+                            str(evidence),
+                            "--tool",
+                            "sonarqube",
+                            "--sonarqube-url",
+                            "http://localhost:9000",
+                            "--sonarqube-token-env",
+                            "MISSING_SONAR_TOKEN",
+                            "--allow-network",
+                            "--allow-worktree-writes",
+                        ]
+                    )
+        self.assertEqual(2, exit_code)
+        self.assertEqual("missing_secret", result["error"]["code"])
+        self.assertFalse(evidence.exists())
 
     def test_coverlet_uses_mtp_command_only_when_the_project_declares_it(self):
         with tempfile.TemporaryDirectory() as directory:

@@ -116,6 +116,11 @@ Scan → Decide → Baseline → Pilot → Refactor → Guard
 Dependency-Check。静态发现只能生成候选，
 不得单独授权删除。
 
+SonarQube 集成同时支持 Scanner CLI 和 MCP。Skill 应按
+[external-evidence-toolchain.md](references/external-evidence-toolchain.md) 调用随附的
+`scripts/quality_evidence.py` 与 `scripts/sonarqube_local.py`；不得把 MCP 配置存在、镜像存在或
+容器运行误报成当前 Agent 会话已经发现并调用了质量工具。
+
 **完成标准：** 有规模与问题清单，且未改生产代码。
 
 ---
