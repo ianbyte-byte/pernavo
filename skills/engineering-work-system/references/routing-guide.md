@@ -42,7 +42,9 @@ packets, retry, reuse, privacy, and stop gates.
 | Discovery-only question | discovery only |
 | Plan-only request after facts are known | plan only |
 | Completed-change acceptance evidence | verification only; return failures to implementation |
-| Existing-diff findings | review only; add verification only when behavior evidence is also requested |
+| Existing-diff findings | `review-mr` with automatic `sonarqube-review` preflight (unavailable results stay labeled evidence); add verification only when behavior evidence is also requested; hand formal report packaging to `report-writer` when a report artifact is required |
+| Existing SonarQube project quality evidence | `sonarqube-review` only; do not install scanners or run a new analysis implicitly |
+| Formal report from already-collected evidence | `report-writer`; keep finding ownership with the upstream specialist |
 | Behavior-preserving cleanup | codebase-slimming → verification as needed → review |
 | Reliability improvement | aviation-grade-engineering; add lifecycle owners only for an actual code change |
 | Repository capability assessment | project-capability-engineering; route a selected increment through lifecycle owners only when implementation is authorized |

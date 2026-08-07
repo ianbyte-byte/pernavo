@@ -21,14 +21,14 @@ Paste this prompt into Codex, Claude Code, Cursor, or another coding agent:
 请为我安装 Pernavo 的完整 Skills 系统。完整执行手册：
 https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/main/AI_INSTALL.md
 
-默认参数：官方 GitHub 来源、当前用户、Codex、global、全部 16 个 Skills、从固定 SHA
+默认参数：官方 GitHub 来源、当前用户、Codex、global、全部 18 个 Skills、从固定 SHA
 checkout 执行 copy；远程 URL 只用于发现和 clone，不直接用于安装。
 开始前必须读取全文、重新检查 skills CLI 的 version/help、确认授权、精确核对远程 --list
 和 JSON 同名冲突；不要盲跑，不要使用 --all 或 remove --all。冲突默认按方案 A 处理：仅在旧
 来源和固定 revision 可精确恢复时定向替换；否则停止。安装后完成固定 SHA 记录、JSON diff、
 新会话代表性 smoke（正向/负向/碰撞）、报告和定向回滚记录。
-若远程 --list 不是精确 16 项，停止并说明该版本尚未发布；未运行完整 48-case corpus 时，
-不得声称全部 16 项的 runtime activation 已验证。
+若远程 --list 不是精确 18 项，停止并说明该版本尚未发布；未运行完整 54-case corpus 时，
+不得声称全部 18 项的 runtime activation 已验证。
 ```
 
 The complete procedure is [AI_INSTALL.md](AI_INSTALL.md). An AI may fetch the published guide with:
@@ -38,7 +38,7 @@ curl -fsSL https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/mai
 ```
 
 This only prints Markdown; never pipe it into a shell. The remote URL is for discovery and cloning,
-not direct installation or installed-revision proof. If its `--list` output is not the exact 16-name
+not direct installation or installed-revision proof. If its `--list` output is not the exact 18-name
 set in the guide, stop and report that the documented version is not published. Do not claim that
 local uncommitted work is available remotely.
 
@@ -114,19 +114,19 @@ evidence remain separate states.
 
 - `audit-agent-harness` — run reversible ablation audits on CLAUDE.md, AGENTS.md, Skills, Hooks, prompts, and other agent customizations without disabling safety controls
 - `aviation-grade-engineering` — apply aviation-grade engineering rigor: risk-driven lifecycle, multi-layer test defense, SRE observability, resilience patterns, CI/CD quality gates, and blameless postmortems
-- `codebase-slimming`
+- `codebase-slimming` — slim and decouple an existing codebase with a baseline, bounded pilot, and behavior-preserving batches
 - `coding-task-controller` — govern risk-path selection and phase handoffs without owning delivery work
 - `develop-production-code` — implement the smallest retained production change and hand off author evidence
 - `engineering-work-system` — cross-domain workflow router and engineering-health assessor; focused tasks go directly to their specialist Skill
-- `exa-search`
-- `gpt55-fusion`
+- `exa-search` — token-efficient Exa Search API workflows for neural web search, highlights, known-URL extraction, and structured enrichment
+- `gpt55-fusion` — opt-in GPT-5.5 Fusion with two independent analyses and a judge when the user explicitly requests it
 - `graph-engineering` — design auditable agent execution topologies with explicit routing, ownership, and verification
 - `plan-code-change` — turn confirmed discovery into an executable, reviewable change plan
-- `pplx-cli`
+- `pplx-cli` — install, authenticate, or use Perplexity's `pplx` CLI for terminal web search and page fetch when the user asks for Perplexity
 - `project-capability-engineering` — assess greenfield, existing, and legacy repository capabilities and select one evidence-based, reversible foundation increment
 - `repository-knowledge-gardening` — inventory repository knowledge, detect documentation drift, and select one verifiable gardening increment without inferring unobserved behavior
 - `report-writer` — turn supplied facts and evidence into a formal report and select Markdown, spreadsheet, PDF, HTML, Word, or slides from its intended use
-- `review-mr` — produce findings on an existing diff; separate from behavior verification
-- `sonarqube-review` — inspect an existing SonarQube project's quality gate, measures, and issues through exposed MCP tools or a bundled read-only API client
+- `review-mr` — produce findings on an existing diff with mandatory SonarQube evidence routing; separate from behavior verification
+- `sonarqube-review` — mandatory read-only SonarQube quality-gate/measures/issues channel during code review through exposed MCP tools or a bundled API client; unavailable results stay labeled evidence
 - `unknowns-field-guide` — discover pre-change facts, blindspots, assumptions, and evidence gaps
 - `verify-change-evidence` — independently observe completed-change behavior and report proof boundaries
