@@ -16,6 +16,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
+from urllib.parse import urlparse
 
 
 SCHEMA_VERSION = 1
@@ -298,6 +299,33 @@ def validate_run(
     return executables
 
 
+def validate_http_url(value: str, label: str) -> str:
+    parsed = urlparse(value)
+    if parsed.scheme not in ("http", "https") or not parsed.hostname or parsed.username or parsed.password:
+        raise EvidenceError("invalid_url", label + " must be an HTTP(S) URL without embedded credentials")
+    return value.rstrip("/")
+
+
+def tool_environment(tool: str, arguments: argparse.Namespace) -> Tuple[Optional[Dict[str, str]], List[Dict[str, Any]]]:
+    if tool != "sonarqube":
+        return None, []
+    environment = dict(os.environ)
+    metadata: List[Dict[str, Any]] = []
+    url = arguments.sonarqube_url or environment.get("SONARQUBE_URL") or environment.get("SONAR_HOST_URL")
+    if url:
+        url = validate_http_url(url, "SonarQube URL")
+        environment["SONAR_HOST_URL"] = url
+        metadata.append({"name": "SONAR_HOST_URL", "source": "argument-or-environment", "value": url, "secret": False})
+    token_source = arguments.sonarqube_token_env
+    if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", token_source):
+        raise EvidenceError("invalid_environment", "SonarQube token environment variable name is invalid")
+    token = environment.get(token_source)
+    if token:
+        environment["SONAR_TOKEN"] = token
+    metadata.append({"name": "SONAR_TOKEN", "source_env": token_source, "present": bool(token), "secret": True})
+    return environment, metadata
+
+
 def read_json(path: Path) -> Optional[Any]:
     try:
         if path.stat().st_size > MAX_METRICS_BYTES:
@@ -466,7 +494,15 @@ def probe_version(executable: str, target: Path) -> Dict[str, Any]:
         return {"command": command, "return_code": None, "output": str(error), "launch_failed": True}
 
 
-def run_tool(tool: str, command: Sequence[str], target: Path, evidence_dir: Path, timeout: int) -> Dict[str, Any]:
+def run_tool(
+    tool: str,
+    command: Sequence[str],
+    target: Path,
+    evidence_dir: Path,
+    timeout: int,
+    environment: Optional[Mapping[str, str]] = None,
+    environment_metadata: Optional[Sequence[Mapping[str, Any]]] = None,
+) -> Dict[str, Any]:
     stdout_path = evidence_dir / (tool + ".stdout")
     stderr_path = evidence_dir / (tool + ".stderr")
     version_probe = probe_version(command[0], target)
@@ -476,7 +512,14 @@ def run_tool(tool: str, command: Sequence[str], target: Path, evidence_dir: Path
     with stdout_path.open("wb") as stdout, stderr_path.open("wb") as stderr:
         try:
             process = subprocess.run(
-                list(command), cwd=str(target), stdin=subprocess.DEVNULL, stdout=stdout, stderr=stderr, check=False, timeout=timeout
+                list(command),
+                cwd=str(target),
+                env=dict(environment) if environment is not None else None,
+                stdin=subprocess.DEVNULL,
+                stdout=stdout,
+                stderr=stderr,
+                check=False,
+                timeout=timeout,
             )
             return_code = process.returncode
         except subprocess.TimeoutExpired:
@@ -490,6 +533,7 @@ def run_tool(tool: str, command: Sequence[str], target: Path, evidence_dir: Path
     return {
         "name": tool,
         "command": list(command),
+        "environment": list(environment_metadata or ()),
         "version_probe": version_probe,
         "started_at": started_at,
         "finished_at": utc_now(),
@@ -518,6 +562,7 @@ def run_command(arguments: argparse.Namespace) -> Tuple[int, Dict[str, Any]]:
     commands = {
         tool: command_for(tool, executables[tool], target, evidence_dir, signals) for tool in selected
     }
+    environments = {tool: tool_environment(tool, arguments) for tool in selected}
     if arguments.dry_run:
         return 0, {
             "schema_version": SCHEMA_VERSION,
@@ -526,12 +571,39 @@ def run_command(arguments: argparse.Namespace) -> Tuple[int, Dict[str, Any]]:
             "dry_run": True,
             "target": str(target),
             "evidence_dir": str(evidence_dir),
-            "tools": [{"name": tool, "command": commands[tool], "required_gates": list(gates(tool))} for tool in selected],
+            "tools": [
+                {
+                    "name": tool,
+                    "command": commands[tool],
+                    "environment": environments[tool][1],
+                    "required_gates": list(gates(tool)),
+                }
+                for tool in selected
+            ],
             "proof_boundary": "commands planned only; no analyzer was executed and no evidence directory was written",
         }
+    if "sonarqube" in selected and not any(
+        item.get("name") == "SONAR_TOKEN" and item.get("present")
+        for item in environments["sonarqube"][1]
+    ):
+        raise EvidenceError(
+            "missing_secret",
+            "SonarQube scan requires a token in " + arguments.sonarqube_token_env,
+        )
     ensure_empty_output(evidence_dir)
     evidence_dir.mkdir(parents=True, exist_ok=True)
-    results = [run_tool(tool, commands[tool], target, evidence_dir, arguments.timeout) for tool in selected]
+    results = [
+        run_tool(
+            tool,
+            commands[tool],
+            target,
+            evidence_dir,
+            arguments.timeout,
+            environments[tool][0],
+            environments[tool][1],
+        )
+        for tool in selected
+    ]
     manifest: Dict[str, Any] = {
         "schema_version": SCHEMA_VERSION,
         "command": "run",
@@ -608,6 +680,12 @@ def parser() -> argparse.ArgumentParser:
     run.add_argument("--timeout", type=int, default=900)
     run.add_argument("--allow-network", action="store_true")
     run.add_argument("--allow-worktree-writes", action="store_true")
+    run.add_argument("--sonarqube-url", help="SonarQube Server base URL; mapped to SONAR_HOST_URL")
+    run.add_argument(
+        "--sonarqube-token-env",
+        default="SONARQUBE_TOKEN",
+        help="environment variable containing the token; its value is never recorded",
+    )
     run.add_argument("--dry-run", action="store_true")
     run.add_argument("--json", action="store_true", help="accepted for a stable machine-readable interface")
     compare = commands.add_parser("compare", help="compare normalized metrics from two manifests")

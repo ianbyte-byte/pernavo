@@ -76,6 +76,84 @@ The two .NET analyzer adapters answer different questions:
 Generated reports under the tool-specific evidence directory are recorded with relative paths,
 byte sizes, and SHA-256 hashes. This applies to Roslyn, Coverlet, and Dependency-Check artifacts.
 
+## SonarQube CLI and MCP for Skills
+
+Treat SonarQube CLI and MCP as two views of the same external quality source:
+
+- SonarScanner CLI submits a repository analysis and produces the auditable scan execution record.
+- SonarQube MCP lets a Skill query issues, analysis results, and quality gates already exposed by the
+  configured server. MCP availability does not replace the scanner run or prove that a current
+  branch was analyzed.
+
+### Scanner CLI
+
+Map the MCP-style `SONARQUBE_TOKEN` environment variable into the scanner without putting its value
+in the command or manifest:
+
+```bash
+export SONARQUBE_TOKEN='<USER token>'
+
+python3 scripts/quality_evidence.py run \
+  --target /absolute/project \
+  --evidence-dir /absolute/project/.codebase-slimming/evidence/sonar-001 \
+  --tool sonarqube \
+  --sonarqube-url http://localhost:9000 \
+  --sonarqube-token-env SONARQUBE_TOKEN \
+  --allow-network \
+  --allow-worktree-writes \
+  --json
+```
+
+The child process receives `SONAR_HOST_URL` and `SONAR_TOKEN`. Evidence records the non-secret URL,
+the source environment-variable name, and whether a token was present; it never records the token.
+A real scan refuses to start when the selected token environment variable is absent. `--dry-run`
+reports the missing prerequisite without requiring or exposing a credential.
+
+### MCP configuration reference
+
+Use the companion helper to produce a configuration proposal for the Skill host:
+
+```bash
+python3 scripts/sonarqube_local.py mcp-config \
+  --client codex \
+  --url http://localhost:9000 \
+  --project-key my-project \
+  --workspace /absolute/project \
+  --image sonarsource/sonarqube-mcp:<pinned-version> \
+  --json
+```
+
+The helper does not write `~/.codex/config.toml`, start Docker, pull an image, or persist a token.
+It emits a stdio configuration with:
+
+- `SONARQUBE_READ_ONLY=true`;
+- `analysis,issues,quality-gates` toolsets;
+- a read-only `/app/mcp-workspace` mount;
+- host `SONARQUBE_TOKEN` forwarding by variable name only;
+- `localhost` rewritten to `host.docker.internal` for container-to-host access;
+- an explicit warning when the image tag is not pinned.
+
+An optional readiness probe checks only local service identity and connectivity:
+
+```bash
+python3 scripts/sonarqube_local.py probe \
+  --url http://localhost:9000 \
+  --allow-network \
+  --json
+```
+
+Do not collapse the following evidence states:
+
+1. **Installed:** scanner executable or MCP image exists.
+2. **Configured:** URL, USER token, project key, and host configuration are present.
+3. **Running:** SonarQube and any MCP process are alive.
+4. **Authenticated:** the configured USER token is accepted by SonarQube.
+5. **Host-exposed:** the active Agent session can discover SonarQube MCP tools.
+6. **Observed:** the intended scanner run or MCP quality query actually completed against the target
+   project and branch.
+
+A running container alone proves only level 3. A generated config proves only a plan for level 2.
+
 ## Tools that stay project-owned
 
 NDepend and ArchUnit or NetArchTest are valuable architecture gates, but they are not safe universal

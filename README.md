@@ -91,6 +91,24 @@ worktree-writing adapters require opt-in gates. See the
 for execution examples, NDepend/ArchUnit integration guidance, and the evidence ladder required
 before deleting a candidate.
 
+For a local SonarQube Server, Skills can use SonarScanner through `quality_evidence.py` or generate a
+secret-free, read-only MCP configuration proposal through `sonarqube_local.py`:
+
+```bash
+python3 skills/codebase-slimming/scripts/sonarqube_local.py \
+  mcp-config \
+  --client codex \
+  --url http://localhost:9000 \
+  --project-key my-project \
+  --workspace /absolute/project \
+  --image sonarsource/sonarqube-mcp:<pinned-version> \
+  --json
+```
+
+The helper never writes host configuration, pulls or starts a container, or persists the required
+`SONARQUBE_TOKEN`. Configuration, running-container, host tool discovery, and completed quality-query
+evidence remain separate states.
+
 ## Included skills
 
 - `audit-agent-harness` — run reversible ablation audits on CLAUDE.md, AGENTS.md, Skills, Hooks, prompts, and other agent customizations without disabling safety controls
