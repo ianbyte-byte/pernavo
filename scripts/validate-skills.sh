@@ -95,8 +95,8 @@ end
 lock_path = repo_root.join("skills-lock.json")
 if lock_path.exist?
   lock_text = File.read(lock_path)
-  legacy_lock_sources = ["tuloong/loongclaude"]
-  self_reference_sources = ["tuloong/pernavo"] + legacy_lock_sources
+  legacy_lock_sources = ["tuloong/pernavo", "tuloong/loongclaude"]
+  self_reference_sources = ["ianbyte-byte/pernavo"] + legacy_lock_sources
   lock_source = self_reference_sources.find do |source|
     lock_text.include?(source)
   end

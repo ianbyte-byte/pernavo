@@ -45,6 +45,8 @@ packets, retry, reuse, privacy, and stop gates.
 | Existing-diff findings | review only; add verification only when behavior evidence is also requested |
 | Behavior-preserving cleanup | codebase-slimming → verification as needed → review |
 | Reliability improvement | aviation-grade-engineering; add lifecycle owners only for an actual code change |
+| Repository capability assessment | project-capability-engineering; route a selected increment through lifecycle owners only when implementation is authorized |
+| Repository knowledge gardening | repository-knowledge-gardening; add lifecycle owners only for authorized documentation edits or automation |
 | Agent-harness audit | audit-agent-harness; add review only after an actual diff exists |
 
 ## Cross-domain advisory playbooks
@@ -64,4 +66,6 @@ observed behavior; the user, CI, or external release gate owns deployment and pr
 
 Use incident observations, DORA signals, and engineering-health scores to identify a focused
 owner and measurable follow-up. Route reliability to aviation-grade-engineering, code health to
-codebase-slimming, and actual code changes through the lifecycle above.
+codebase-slimming, repository-wide foundation gaps to project-capability-engineering, documentation
+knowledge drift to repository-knowledge-gardening, and actual retained changes through the lifecycle
+above.

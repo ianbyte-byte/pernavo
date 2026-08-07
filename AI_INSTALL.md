@@ -4,15 +4,15 @@
 
 ```text
 请为我安装 Pernavo 的完整 Skills 系统。完整执行手册：
-https://raw.githubusercontent.com/tuloong/pernavo/refs/heads/main/AI_INSTALL.md
+https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/main/AI_INSTALL.md
 
-默认参数：来源使用官方 GitHub 仓库 https://github.com/tuloong/pernavo；安装给当前用户的
-Codex；范围为 global；目标为手册列出的全部 14 个 Skills；安装方式为固定 SHA checkout
+默认参数：来源使用官方 GitHub 仓库 https://github.com/ianbyte-byte/pernavo；安装给当前用户的
+Codex；范围为 global；目标为手册列出的全部 16 个 Skills；安装方式为固定 SHA checkout
 中的 copy。远程 URL 只用于发现和 clone，不直接作为安装源。
 
 开始前必须读取完整手册，重新检查 skills CLI 的 version/help，确认写入授权，精确核对远程
---list 的 14 项，并用 JSON 快照检查同名冲突。不要直接盲跑安装命令，不要使用 --all，
-不要使用 remove --all。若远程 --list 不是精确 14 项，停止并说明该版本尚未发布。
+--list 的 16 项，并用 JSON 快照检查同名冲突。不要直接盲跑安装命令，不要使用 --all，
+不要使用 remove --all。若远程 --list 不是精确 16 项，停止并说明该版本尚未发布。
 安装后按手册完成 JSON diff、新会话触发验证、报告和可定向回滚记录。
 ```
 
@@ -27,15 +27,15 @@ Codex；范围为 global；目标为手册列出的全部 14 个 Skills；安装
 
 | 顺序 | 操作 | 通过条件 |
 |---|---|---|
-| 1 | 确认写入授权 | 当前用户、Codex、global、官方来源、14 项、copy 均获授权 |
+| 1 | 确认写入授权 | 当前用户、Codex、global、官方来源、16 项、copy 均获授权 |
 | 2 | 检查 CLI | version 和 help 可用，参数与本手册兼容 |
-| 3 | 远程 `--list` | 名称集合精确等于下方 14 项；远程 URL 仅用于发现 |
-| 4 | 固定来源 | 安全临时目录中 clone，记录 full HEAD SHA，detach、校验 14 项 |
+| 3 | 远程 `--list` | 名称集合精确等于下方 16 项；远程 URL 仅用于发现 |
+| 4 | 固定来源 | 安全临时目录中 clone，记录 full HEAD SHA，detach、校验 16 项 |
 | 5 | 保存全局及 Codex JSON 快照 | 安装前状态可恢复、可比较 |
 | 6 | 分类同名项 | 每项是 `absent`、`same-source` 或 `conflict` |
 | 7 | 只从固定 checkout 安装 `absent` | `same-source` 不触碰；任何 `conflict` 都停止 |
 | 8 | 安装后 JSON diff | 只新增获授权的 absent 项，无意外 Agent 或范围 |
-| 9 | 新会话验证 | 3 个代表性 smoke，或完整 42-case corpus |
+| 9 | 新会话验证 | 3 个代表性 smoke，或完整 48-case corpus |
 | 10 | 报告与回滚 | 区分证据层级，只为本次新增登记给出定向回滚 |
 
 ## 安全契约与系统边界
@@ -49,7 +49,7 @@ Codex；范围为 global；目标为手册列出的全部 14 个 Skills；安装
 3. 不在 Pernavo 自己的 checkout 中做项目级自安装；那会创建 `.agents/skills` 副本并与
    `skills/` 源竞争。
 4. 只安装 `absent`；`same-source` 保持不变；`conflict` 必须停止并请用户决定。
-5. 安装 14 个 Skills 会提供成本感知的自动工作流政策，包括 controller、work-system 和
+5. 安装 16 个 Skills 会提供成本感知的自动工作流政策，包括 controller、work-system 和
    graph 路由规则。它不会安装或证明宿主的子 Agent 目录、模型路由、Hook、MCP、权限、
    Harness 或记忆写入器。
 6. 真正的子 Agent 派生，以及 Skill 是否 `loaded`/`executed`，只能在安装后的宿主新会话中
@@ -69,7 +69,7 @@ Codex；范围为 global；目标为手册列出的全部 14 个 Skills；安装
 结论只能到达实际证据支持的最高层级；无法观察正文加载时应报告
 `installed; runtime activation unverified`。
 
-## 唯一预期的 14 个 Skills
+## 唯一预期的 16 个 Skills
 
 ```text
 audit-agent-harness
@@ -83,6 +83,8 @@ gpt55-fusion
 graph-engineering
 plan-code-change
 pplx-cli
+project-capability-engineering
+repository-knowledge-gardening
 review-mr
 unknowns-field-guide
 verify-change-evidence
@@ -112,11 +114,11 @@ npx --yes skills remove --help
 默认先对官方远程做只读发现：
 
 ```bash
-PERNAVO_REMOTE="https://github.com/tuloong/pernavo"
+PERNAVO_REMOTE="https://github.com/ianbyte-byte/pernavo"
 npx --yes skills add "$PERNAVO_REMOTE" --list
 ```
 
-输出必须精确对应上述 14 个名称。如果不是，停止并说明：远程版本尚未发布或与本手册不一致。
+输出必须精确对应上述 16 个名称。如果不是，停止并说明：远程版本尚未发布或与本手册不一致。
 该 URL 指向可变远程，只能证明发现时的列表，不能作为 installed revision 证据，也不能把当前
 本地 dirty 内容当成远程内容。
 
@@ -143,7 +145,7 @@ npx --yes skills add "$PERNAVO_CHECKOUT" --list
 "$PERNAVO_CHECKOUT/scripts/validate-skills.sh"
 ```
 
-再次确认 checkout 的列表精确为 14 项、校验通过，并在报告中记录完整 SHA。若用户要求指定
+再次确认 checkout 的列表精确为 16 项、校验通过，并在报告中记录完整 SHA。若用户要求指定
 revision，先确认该 full commit SHA 存在，再 detach 到该 SHA 后执行相同校验。不得把 branch、
 tag 或远程 `main` 名称当成安装 revision。
 
@@ -176,7 +178,7 @@ npx --yes skills ls --global --json > "$PERNAVO_INSTALL_TMP/pernavo-before-globa
 npx --yes skills ls --global --agent codex --json > "$PERNAVO_INSTALL_TMP/pernavo-before-codex.json"
 ```
 
-对 14 个请求名称逐项读取 `name`、`path`、`scope`、`source`、`sourceUrl` 和 Agent 登记，并分类：
+对 16 个请求名称逐项读取 `name`、`path`、`scope`、`source`、`sourceUrl` 和 Agent 登记，并分类：
 
 - `absent`：Codex 中无同名登记，且其他全局登记没有不明同名来源；可安装。
 - `same-source`：已来自同一个官方仓库；本次不触碰、不重装、不隐式更新。
@@ -185,12 +187,12 @@ npx --yes skills ls --global --agent codex --json > "$PERNAVO_INSTALL_TMP/pernav
 如果旧来源显示 `tuloong/loongclaude`，只有能证明它与官方仓库是同一 repository 时才可视为
 `same-source`，否则是 `conflict`。混合状态下只把 `absent` 名称放进安装命令。
 
-安装前必须同时保存：14 项分类、原始 JSON、已授权目标，以及“安装后 Codex 名称集合减安装前
+安装前必须同时保存：16 项分类、原始 JSON、已授权目标，以及“安装后 Codex 名称集合减安装前
 Codex 名称集合”的回滚计算规则。不得根据请求列表猜测新增项。
 
 ## 3. 安装
 
-只有 14 项全部是 `absent` 时，才可使用星号选择全部 Skills。安装源必须是已经 detach、记录
+只有 16 项全部是 `absent` 时，才可使用星号选择全部 Skills。安装源必须是已经 detach、记录
 full SHA 并校验通过的 `$PERNAVO_CHECKOUT`，不能是 `$PERNAVO_REMOTE`：
 
 ```bash
@@ -241,10 +243,10 @@ npx --yes skills ls --global --agent codex --json > "$PERNAVO_INSTALL_TMP/pernav
 2. 一个负向请求：不应加载目标 Skill；
 3. 一个相邻责任碰撞请求：所有 expected owners 都应加载，所有 forbidden owners 均不应加载。
 
-这 3 个案例只是代表性 smoke，只验证所选 Skill 的用例合同，不能证明其余 13 项或完整系统
-routing。要验证全部系统 routing，必须在独立新上下文中运行全部 42 个 corpus cases，并逐项
+这 3 个案例只是代表性 smoke，只验证所选 Skill 的用例合同，不能证明其余 15 项或完整系统
+routing。要验证全部系统 routing，必须在独立新上下文中运行全部 48 个 corpus cases，并逐项
 核对完成事件、全部 expected owners 和全部 forbidden owners。完整运行成本较高，可以由用户
-选择跳过；未运行时必须将其余 runtime activation 标为 unverified，不能声称 14 项均已验证。
+选择跳过；未运行时必须将其余 runtime activation 标为 unverified，不能声称 16 项均已验证。
 
 记录宿主/version、会话、安装 SHA、请求、expected/forbidden/实际加载集合、正文加载事件位置，
 以及真实子 Agent/工具是否执行。只有所有 expected owners 齐全且没有 forbidden owner，才达到
@@ -262,14 +264,15 @@ blocked: skills update has no agent scope
 ```
 
 只有全部同名全局登记均来自官方来源，且用户明确授权所有受影响登记一起更新时，才可按字面
-名称更新。例如用户授权完整 14 项时：
+名称更新。例如用户授权完整 16 项时：
 
 ```bash
 npx --yes skills update --global --yes \
   audit-agent-harness aviation-grade-engineering codebase-slimming \
   coding-task-controller develop-production-code engineering-work-system \
   exa-search gpt55-fusion graph-engineering plan-code-change pplx-cli \
-  review-mr unknowns-field-guide verify-change-evidence
+  project-capability-engineering repository-knowledge-gardening review-mr \
+  unknowns-field-guide verify-change-evidence
 ```
 
 授权子集时只能保留该子集。更新前后重复来源检查、`--list` 和 JSON 快照。不得使用无名称的
@@ -313,7 +316,7 @@ python3 scripts/agentctl.py memory search --config harness/examples/agentctl.jso
 
 - 授权、来源身份、目标、范围或 revision 不清楚；
 - 当前 CLI 帮助与命令不兼容，或必需工具缺失；
-- 远程/本地 `--list` 不是精确 14 项；
+- 远程/本地 `--list` 不是精确 16 项；
 - 存在 conflict，或 same-source/absent 无法可靠区分；
 - 默认官方 checkout 校验失败；已有本地开发 checkout 仅在可信验证器缺失时可降级为 `partial`；
 - 安装失败、部分成功、after diff 异常或无法计算精确新增集合；
@@ -333,7 +336,7 @@ Installed content hash/revision evidence:
 Source working-tree state:
 Secure temporary directory and permission check:
 skills CLI version and help checked:
-Requested 14 names or authorized subset:
+Requested 16 names or authorized subset:
 Remote/local --list exact-set result:
 Before global and Codex JSON snapshot paths:
 Per-name classification: absent | same-source | conflict
@@ -343,7 +346,7 @@ Structured before/after diff and newly created registrations:
 Installed names, paths, scopes, sources, and target agents:
 New-session/restart status:
 Representative 3-case smoke: cases, expected/forbidden/actual owners, result
-Full 42-case corpus: result | not run; remaining activation unverified
+Full 48-case corpus: result | not run; remaining activation unverified
 Observed child-agent/tool execution:
 Per-case target-observed evidence:
 External environment-observed evidence, or not observed:
