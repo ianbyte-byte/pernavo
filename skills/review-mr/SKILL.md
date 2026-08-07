@@ -5,8 +5,9 @@ description: >
   and consolidated P1, P2, and P3 findings. Use for review MR, PR, or diff, review my changes,
   审查改动, 提交前自查, multi-agent code review, or /review-mr. Review only: do not trigger for
   implementation, generic code explanation, whole-codebase cleanup, or a named gpt55-fusion
-  topology. When the user explicitly requests SonarQube evidence, compose with sonarqube-review;
-  do not emulate SonarQube through a generic reviewer.
+  topology. Always compose code review with sonarqube-review plus the applicable general and domain
+  review tools; do not wait for the user to name them and do not emulate SonarQube through a generic
+  reviewer.
 ---
 
 # Review MR
@@ -18,10 +19,34 @@ turn tests into acceptance evidence; route that work to
 [verify-change-evidence](../verify-change-evidence/SKILL.md). Both may be requested in sequence,
 but neither replaces the other or grants approval.
 
-When SonarQube evidence is explicitly requested, route that evidence collection to
-[sonarqube-review](../sonarqube-review/SKILL.md) and keep its quality-gate and issue results in a
-separate report section. Do not block the rest of the diff review merely because SonarQube is
-unconfigured; mark only that evidence source unavailable or partial.
+When findings and evidence are ready, route presentation to
+[report-writer](../report-writer/SKILL.md) and use its engineering review module. `review-mr` retains
+finding and severity ownership; `report-writer` owns purpose-based format selection and artifact
+structure.
+
+Before launching specialist reviewers, always route a bounded read-only preflight and evidence
+lookup to [sonarqube-review](../sonarqube-review/SKILL.md), even when no configuration signal is
+initially visible. Keep its quality-gate and issue results in a separate report section. Do not wait
+for the user to request SonarQube explicitly. Do not block the rest of the diff review merely because
+SonarQube is unconfigured, unreachable, unauthenticated, stale, or has no analysis for the current
+branch; mark that evidence source unavailable, partial, or `baseline-only` as appropriate.
+
+## Mandatory review evidence stack
+
+Every review must attempt all applicable evidence channels without waiting for separate user
+prompts:
+
+1. `sonarqube-review` for the existing quality gate, measures, and issues, or a labeled unavailable
+   result when no usable analysis can be reached;
+2. `code-reviewer` for general correctness and maintainability findings;
+3. every domain reviewer selected by the changed paths and risk table below;
+4. existing repository tests, linters, type checks, or other deterministic review tools that are
+   safe and relevant to the changed surface.
+
+Do not install new analyzers or run a new SonarQube scan implicitly. Do not treat one green tool as
+approval. Preserve tool provenance and report SonarQube, specialist findings, and executable checks
+as separate evidence sections. If a channel cannot run, mark it degraded with the reason and
+continue the remaining channels.
 
 ## When Not To Use
 
@@ -46,6 +71,11 @@ Then collect the actual diff:
 - Uncommitted review: `git diff`
 - Staged-only review: `git diff --cached`
 - Branch review: `git diff main...HEAD`; if `main` is missing, use the user's base branch or the best discovered upstream base
+
+In the same bounded input pass, collect existing SonarQube signals: project-key files, presence of
+the documented environment variables without printing values, exposed SonarQube MCP tools, or
+repository instructions that identify the project. Signals accelerate target resolution; their
+absence does not skip `sonarqube-review` and does not justify a global server search.
 
 If there is no diff, stop with `无可审查的变更`.
 
@@ -126,7 +156,11 @@ After all reviewer passes return:
 
 ## Report
 
-Write to `docs/audit/<branch>-<YYYYMMDD>-mr-review.md` using UTC date in the filename and local time in the body. Create `docs/audit/` if needed. If the file exists, append `-<seq>` starting at 2.
+Use `report-writer` to write the consolidated evidence. Default to
+`docs/audit/<branch>-<YYYYMMDD>-mr-review.md` for a repository-native audit trail. When the intended
+use requires a spreadsheet, PDF, HTML, Word, or slides, preserve the same basename with the selected
+extension and use the corresponding artifact Skill. Use UTC date in the filename and local time in
+the body. Create `docs/audit/` if needed. If the file exists, append `-<seq>` starting at 2.
 
 Use this template:
 
@@ -193,6 +227,7 @@ P1: <n>  P2: <n>  P3: <n>
 | Multi-agent tool unavailable | Mark sequential mode; still run every selected reviewer lens |
 | Reviewer returns empty or errors | Mark degraded mode; list missing reviewers in the report; still produce a partial report |
 | `docs/audit/` creation fails | Abort with the OS error |
+| Report writer unavailable | Use the Markdown fallback template, mark presentation degraded, and do not omit the report |
 | Reviewer agent spec missing and no inline fallback applies | Skip that reviewer and mark degraded |
 
 ## Boundaries
