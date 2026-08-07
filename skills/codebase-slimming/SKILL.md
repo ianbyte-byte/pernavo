@@ -120,6 +120,8 @@ SonarQube 集成同时支持 Scanner CLI 和 MCP。Skill 应按
 [external-evidence-toolchain.md](references/external-evidence-toolchain.md) 调用随附的
 `scripts/quality_evidence.py` 与 `scripts/sonarqube_local.py`；不得把 MCP 配置存在、镜像存在或
 容器运行误报成当前 Agent 会话已经发现并调用了质量工具。
+只读查询已有 SonarQube 项目、质量门和问题时，组合使用
+[sonarqube-review](../sonarqube-review/SKILL.md)，不要在瘦身流程中重复实现查询逻辑。
 
 **完成标准：** 有规模与问题清单，且未改生产代码。
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "SonarQube Review"
+  short_description: "Inspect quality gates, measures, and issues safely"
+  default_prompt: "Use $sonarqube-review to inspect this project's existing SonarQube quality gate and issues with a precise evidence boundary."

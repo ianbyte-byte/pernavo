@@ -126,5 +126,6 @@ evidence remain separate states.
 - `project-capability-engineering` — assess greenfield, existing, and legacy repository capabilities and select one evidence-based, reversible foundation increment
 - `repository-knowledge-gardening` — inventory repository knowledge, detect documentation drift, and select one verifiable gardening increment without inferring unobserved behavior
 - `review-mr` — produce findings on an existing diff; separate from behavior verification
+- `sonarqube-review` — inspect an existing SonarQube project's quality gate, measures, and issues through exposed MCP tools or a bundled read-only API client
 - `unknowns-field-guide` — discover pre-change facts, blindspots, assumptions, and evidence gaps
 - `verify-change-evidence` — independently observe completed-change behavior and report proof boundaries
