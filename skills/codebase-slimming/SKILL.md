@@ -109,6 +109,13 @@ Scan → Decide → Baseline → Pilot → Refactor → Guard
 
 统计优先用 `scc`（或同类），区分生产/测试/生成/第三方；排除 `node_modules`、`dist`、`bin`、`obj`、生成物等。证据放入 `evidence/metrics/`。
 
+需要把外部分析器接入 Agent 工作流时，使用
+[external-evidence-toolchain.md](references/external-evidence-toolchain.md) 中的统一证据入口。
+先执行 `inventory` 或 `run --dry-run`，确认适用性、工具可用性、固定命令和副作用门禁；再显式选择
+`scc`、`knip`、`.NET` 包清单/SDK Analyzer/Roslyn Analyzer/Coverlet、SonarQube 或
+Dependency-Check。静态发现只能生成候选，
+不得单独授权删除。
+
 **完成标准：** 有规模与问题清单，且未改生产代码。
 
 ---

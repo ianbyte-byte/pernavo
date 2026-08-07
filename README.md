@@ -2,7 +2,7 @@
 
 Local-first skills, memory, and tool orchestration for AI agents.
 
-Repository web page: [https://github.com/tuloong/pernavo](https://github.com/tuloong/pernavo)
+Repository web page: [https://github.com/ianbyte-byte/pernavo](https://github.com/ianbyte-byte/pernavo)
 
 Skill sources live under `skills/<name>/SKILL.md`.
 
@@ -19,25 +19,25 @@ Paste this prompt into Codex, Claude Code, Cursor, or another coding agent:
 
 ```text
 请为我安装 Pernavo 的完整 Skills 系统。完整执行手册：
-https://raw.githubusercontent.com/tuloong/pernavo/refs/heads/main/AI_INSTALL.md
+https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/main/AI_INSTALL.md
 
-默认参数：官方 GitHub 来源、当前用户、Codex、global、全部 14 个 Skills、从固定 SHA
+默认参数：官方 GitHub 来源、当前用户、Codex、global、全部 16 个 Skills、从固定 SHA
 checkout 执行 copy；远程 URL 只用于发现和 clone，不直接用于安装。
 开始前必须读取全文、重新检查 skills CLI 的 version/help、确认授权、精确核对远程 --list
 和 JSON 同名冲突；不要盲跑，不要使用 --all 或 remove --all。只安装 absent 项，安装后完成
 固定 SHA 记录、JSON diff、新会话代表性 smoke（正向/负向/碰撞）、报告和定向回滚记录。
-若远程 --list 不是精确 14 项，停止并说明该版本尚未发布；未运行完整 42-case corpus 时，
-不得声称全部 14 项的 runtime activation 已验证。
+若远程 --list 不是精确 16 项，停止并说明该版本尚未发布；未运行完整 48-case corpus 时，
+不得声称全部 16 项的 runtime activation 已验证。
 ```
 
 The complete procedure is [AI_INSTALL.md](AI_INSTALL.md). An AI may fetch the published guide with:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/tuloong/pernavo/refs/heads/main/AI_INSTALL.md
+curl -fsSL https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/main/AI_INSTALL.md
 ```
 
 This only prints Markdown; never pipe it into a shell. The remote URL is for discovery and cloning,
-not direct installation or installed-revision proof. If its `--list` output is not the exact 14-name
+not direct installation or installed-revision proof. If its `--list` output is not the exact 16-name
 set in the guide, stop and report that the documented version is not published. Do not claim that
 local uncommitted work is available remotely.
 
@@ -66,6 +66,31 @@ Repository maintainers can validate the source without installing it:
 ./scripts/validate-skills.sh
 ```
 
+## External quality evidence for cleanup agents
+
+`codebase-slimming` includes a standard-library-only tool runner that lets an agent inventory and
+invoke explicitly selected analyzers without installing anything or using a shell:
+
+```bash
+python3 skills/codebase-slimming/scripts/quality_evidence.py inventory --target . --json
+
+python3 skills/codebase-slimming/scripts/quality_evidence.py run \
+  --target . \
+  --evidence-dir .codebase-slimming/evidence/baseline-001 \
+  --tool scc \
+  --dry-run \
+  --json
+```
+
+Built-in adapters cover `scc`, `knip`, .NET package inventory, .NET SDK analyzers, Roslyn analyzers,
+Coverlet collection, SonarScanner, and OWASP Dependency-Check. Real runs capture commands, analyzer version probes, exit status,
+stdout/stderr hashes, normalized metrics where available, and an explicit proof boundary in
+`manifest.json`. Networked or
+worktree-writing adapters require opt-in gates. See the
+[external evidence toolchain](skills/codebase-slimming/references/external-evidence-toolchain.md)
+for execution examples, NDepend/ArchUnit integration guidance, and the evidence ladder required
+before deleting a candidate.
+
 ## Included skills
 
 - `audit-agent-harness` — run reversible ablation audits on CLAUDE.md, AGENTS.md, Skills, Hooks, prompts, and other agent customizations without disabling safety controls
@@ -79,6 +104,8 @@ Repository maintainers can validate the source without installing it:
 - `graph-engineering` — design auditable agent execution topologies with explicit routing, ownership, and verification
 - `plan-code-change` — turn confirmed discovery into an executable, reviewable change plan
 - `pplx-cli`
+- `project-capability-engineering` — assess greenfield, existing, and legacy repository capabilities and select one evidence-based, reversible foundation increment
+- `repository-knowledge-gardening` — inventory repository knowledge, detect documentation drift, and select one verifiable gardening increment without inferring unobserved behavior
 - `review-mr` — produce findings on an existing diff; separate from behavior verification
 - `unknowns-field-guide` — discover pre-change facts, blindspots, assumptions, and evidence gaps
 - `verify-change-evidence` — independently observe completed-change behavior and report proof boundaries

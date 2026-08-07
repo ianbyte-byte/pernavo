@@ -24,6 +24,8 @@ their discovery, plan, implementation, verification, review, or release authorit
 | Diff or MR findings | `review-mr` |
 | Reliability, SLO, resilience, incident learning | `aviation-grade-engineering` |
 | Behavior-preserving cleanup | `codebase-slimming` |
+| Repository capability baseline and next foundation increment | `project-capability-engineering` |
+| Repository knowledge inventory, documentation drift, and gardening | `repository-knowledge-gardening` |
 | Agent-harness audit | `audit-agent-harness` |
 | Agent execution topology | `graph-engineering` |
 
@@ -72,7 +74,7 @@ focused specialist.
   behavior evidence to verification and leave release/production authority to the user, CI, or
   external gate.
 - **Continuous Improvement:** connect incidents, DORA observations, and action items to reliability,
-  code health, or process owners; do not implement the remedies here.
+  code health, repository capability, or process owners; do not implement the remedies here.
 
 Use [references/routing-guide.md](references/routing-guide.md) for composition examples. Return the
 task classification, ordered owners, phase inputs/outputs, and any missing authority or evidence.
