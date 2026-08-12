@@ -34,6 +34,31 @@ deployed target.
    single-record and batch success, failure, and recovery behavior where relevant. Preserve the
    gap between local checks, target-environment observation, and deployment.
 
+## Performance-specific trials
+
+For hidden performance-risk work, keep review and measurement owners separate:
+
+| Request | Owner | Minimum evidence |
+|---|---|---|
+| Find static amplification signals in a change or path | `performance-review` | file/line, amplification variable, impact hypothesis, routed overlay |
+| Establish whether a suspected bottleneck is real | `performance-measurement` | workload, target, revision, time window, p50/p95/p99, resource signals, and cause artifact |
+| Inspect SQL/ORM query shape or execution plans | `database-performance` | generated SQL, request query count, actual plan/runtime stats where authorized |
+| Inspect CPU, allocation, GC, waits, queues, or locks | `runtime-performance` | matching counter/trace/profile event, sample window, runtime and workload |
+| Inspect browser loading, interaction, or layout stability | `web-performance` | field/lab distinction, LCP/INP/CLS p75, long-task/resource evidence |
+| Validate a microbenchmark | `benchmark-performance` | representative input, setup boundary, warmup, measurement, fork/iteration, variance and environment |
+
+The performance evidence helper can create a secret-safe local inventory manifest:
+
+```text
+python3 skills/performance-measurement/scripts/performance_evidence.py inventory --target . --json
+python3 skills/performance-measurement/scripts/performance_evidence.py validate <manifest.json>
+```
+
+This helper does not execute a workload or profiler. A trial that only reads source or a benchmark
+configuration is `unverified`; it cannot be upgraded to `confirmed` without comparable runtime
+observations. The source-backed rules and public URLs are collected in
+[Hidden Performance Public Research](reference/hidden-performance-public-research.md).
+
 ## Summarize runtime observations
 
 Use `scripts/summarize-skill-trigger-results.py` with a corpus, a directory of JSONL trial results,

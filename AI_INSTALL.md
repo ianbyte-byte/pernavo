@@ -7,14 +7,14 @@
 https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/main/AI_INSTALL.md
 
 默认参数：来源使用官方 GitHub 仓库 https://github.com/ianbyte-byte/pernavo；安装给当前用户的
-Codex；范围为 global；目标为手册列出的全部 18 个 Skills；安装方式为固定 SHA checkout
+Codex；范围为 global；目标为手册列出的全部 25 个 Skills；安装方式为固定 SHA checkout
 中的 copy。远程 URL 只用于发现和 clone，不直接作为安装源。
 
 开始前必须读取完整手册，重新检查 skills CLI 的 version/help，确认写入授权，精确核对远程
---list 的 18 项，并用 JSON 快照检查同名冲突。不要直接盲跑安装命令，不要使用 --all，
+--list 的 25 项，并用 JSON 快照检查同名冲突。不要直接盲跑安装命令，不要使用 --all，
 不要使用 remove --all。遇到来源不同的同名项时，默认采用方案 A：保存可精确恢复的旧登记后，
 仅按名称定向移除冲突项，再从固定 SHA checkout 重装；旧来源、revision 或影响范围无法可靠
-恢复时必须停止。若远程 --list 不是精确 18 项，停止并说明该版本尚未发布。
+恢复时必须停止。若远程 --list 不是精确 25 项，停止并说明该版本尚未发布。
 安装后按手册完成 JSON diff、新会话触发验证、报告和可定向回滚记录。
 ```
 
@@ -25,19 +25,22 @@ Codex；范围为 global；目标为手册列出的全部 18 个 Skills；安装
 本文曾用 `skills` CLI 1.5.21 验证。CLI 会变化，每次安装仍必须重新读取当前
 `npx --yes skills --help` 以及相关子命令帮助，并以当次输出为准。
 
+说明：本手册的 25 个 Skills 是当前仓库和远程发布安装集合。名称集合、固定 revision、触发
+语料和验证数字必须保持同步；如果远程 `--list` 不包含本手册的全部 25 项，必须停止。
+
 ## 默认成功路径
 
 | 顺序 | 操作 | 通过条件 |
 |---|---|---|
-| 1 | 确认写入授权 | 当前用户、Codex、global、官方来源、18 项、copy 均获授权 |
+| 1 | 确认写入授权 | 当前用户、Codex、global、官方来源、25 项、copy 均获授权 |
 | 2 | 检查 CLI | version 和 help 可用，参数与本手册兼容 |
-| 3 | 远程 `--list` | 名称集合精确等于下方 18 项；远程 URL 仅用于发现 |
-| 4 | 固定来源 | 安全临时目录中 clone，记录 full HEAD SHA，detach、校验 18 项 |
+| 3 | 远程 `--list` | 名称集合精确等于下方 25 项；远程 URL 仅用于发现 |
+| 4 | 固定来源 | 安全临时目录中 clone，记录 full HEAD SHA，detach、校验 25 项 |
 | 5 | 保存全局及 Codex JSON 快照 | 安装前状态可恢复、可比较 |
 | 6 | 分类同名项 | 每项是 `absent`、`same-source` 或 `conflict` |
 | 7 | 处理并安装 | `same-source` 不触碰；安装 `absent`；`conflict` 默认按方案 A 定向替换 |
 | 8 | 安装后 JSON diff | absent 正确新增、conflict 正确换源，无意外 Agent 或范围 |
-| 9 | 新会话验证 | 3 个代表性 smoke，或完整 54-case corpus |
+| 9 | 新会话验证 | 3 个代表性 smoke，或完整 75-case corpus |
 | 10 | 报告与回滚 | 区分新增与替换，分别给出定向删除和旧来源恢复步骤 |
 
 ## 安全契约与系统边界
@@ -52,7 +55,7 @@ Codex；范围为 global；目标为手册列出的全部 18 个 Skills；安装
    `skills/` 源竞争。
 4. `absent` 直接安装，`same-source` 保持不变；`conflict` 默认采用方案 A，在旧来源、固定
    revision、影响 Agent 和恢复命令均已记录后定向替换。任一恢复条件不完整时停止，不得覆盖。
-5. 安装 18 个 Skills 会提供成本感知的自动工作流政策，包括 controller、work-system 和
+5. 安装 25 个 Skills 会提供成本感知的自动工作流政策，包括 controller、work-system 和
    graph 路由规则。它不会安装或证明宿主的子 Agent 目录、模型路由、Hook、MCP、权限、
    Harness 或记忆写入器。
 6. 真正的子 Agent 派生，以及 Skill 是否 `loaded`/`executed`，只能在安装后的宿主新会话中
@@ -72,27 +75,34 @@ Codex；范围为 global；目标为手册列出的全部 18 个 Skills；安装
 结论只能到达实际证据支持的最高层级；无法观察正文加载时应报告
 `installed; runtime activation unverified`。
 
-## 唯一预期的 18 个 Skills
+## 唯一预期的 25 个 Skills
 
 ```text
 audit-agent-harness
 aviation-grade-engineering
+benchmark-performance
 codebase-slimming
 coding-task-controller
+database-performance
 develop-production-code
 engineering-work-system
 exa-search
 gpt55-fusion
 graph-engineering
+open-code-review
+performance-measurement
+performance-review
 plan-code-change
 pplx-cli
 project-capability-engineering
 repository-knowledge-gardening
 report-writer
 review-mr
+runtime-performance
 sonarqube-review
 unknowns-field-guide
 verify-change-evidence
+web-performance
 ```
 
 比较时按名称集合精确比较：少一项、多一项、重复项或未知项都必须停止。
@@ -123,7 +133,7 @@ PERNAVO_REMOTE="https://github.com/ianbyte-byte/pernavo"
 npx --yes skills add "$PERNAVO_REMOTE" --list
 ```
 
-输出必须精确对应上述 18 个名称。如果不是，停止并说明：远程版本尚未发布或与本手册不一致。
+输出必须精确对应上述 25 个名称。如果不是，停止并说明：远程版本尚未发布或与本手册不一致。
 该 URL 指向可变远程，只能证明发现时的列表，不能作为 installed revision 证据，也不能把当前
 本地 dirty 内容当成远程内容。
 
@@ -150,7 +160,7 @@ npx --yes skills add "$PERNAVO_CHECKOUT" --list
 "$PERNAVO_CHECKOUT/scripts/validate-skills.sh"
 ```
 
-再次确认 checkout 的列表精确为 18 项、校验通过，并在报告中记录完整 SHA。若用户要求指定
+再次确认 checkout 的列表精确为 25 项、校验通过，并在报告中记录完整 SHA。若用户要求指定
 revision，先确认该 full commit SHA 存在，再 detach 到该 SHA 后执行相同校验。不得把 branch、
 tag 或远程 `main` 名称当成安装 revision。
 
@@ -183,7 +193,7 @@ npx --yes skills ls --global --json > "$PERNAVO_INSTALL_TMP/pernavo-before-globa
 npx --yes skills ls --global --agent codex --json > "$PERNAVO_INSTALL_TMP/pernavo-before-codex.json"
 ```
 
-对 18 个请求名称逐项读取 `name`、`path`、`scope`、`source`、`sourceUrl` 和 Agent 登记，并分类：
+对 25 个请求名称逐项读取 `name`、`path`、`scope`、`source`、`sourceUrl` 和 Agent 登记，并分类：
 
 - `absent`：Codex 中无同名登记，且其他全局登记没有不明同名来源；可安装。
 - `same-source`：已来自同一个官方仓库；本次不触碰、不重装、不隐式更新。
@@ -193,7 +203,7 @@ npx --yes skills ls --global --agent codex --json > "$PERNAVO_INSTALL_TMP/pernav
 官方仓库是同一 repository 时才可视为 `same-source`，否则是 `conflict`。不得因为仓库名称相似、
 内容相同或来源是 fork/mirror，就跳过冲突处理。
 
-安装前必须同时保存：18 项分类、原始 JSON、已授权目标、“安装后 Codex 名称集合减安装前 Codex
+安装前必须同时保存：25 项分类、原始 JSON、已授权目标、“安装后 Codex 名称集合减安装前 Codex
 名称集合”的新增项回滚计算规则，以及每个替换项的旧来源、固定 revision、Agent、scope 和恢复
 命令。不得根据请求列表猜测新增项或替换项。
 
@@ -210,13 +220,13 @@ npx --yes skills ls --global --agent codex --json > "$PERNAVO_INSTALL_TMP/pernav
 5. 来源不明、旧 revision 无法固定、CLI 无法隔离 Agent、无法枚举影响范围或无法写出精确恢复
    命令的冲突项一律标为 `blocked`，停止写入并报告 `rollback blocked`。
 
-方案 A 只授权替换本手册请求的 18 个同名 Skill 登记，不授权删除其他 Skill、配置、Hook、MCP、
+方案 A 只授权替换本手册请求的 25 个同名 Skill 登记，不授权删除其他 Skill、配置、Hook、MCP、
 Harness、记忆、目录或系统依赖。用户明确要求保留旧来源或接受混合来源时，才可偏离方案 A，且
 必须在报告中记录覆盖本默认值的授权。
 
 ## 3. 安装
 
-只有写入前 18 项全部是 `absent` 时，才可使用星号选择全部 Skills。这里的“全部 absent”可以是
+只有写入前 25 项全部是 `absent` 时，才可使用星号选择全部 Skills。这里的“全部 absent”可以是
 原本全部 absent，也可以是方案 A 已定向移除全部 replaceable conflict 并完成移除后 JSON 校验的
 结果。安装源必须是已经 detach、记录 full SHA 并校验通过的 `$PERNAVO_CHECKOUT`，不能是
 `$PERNAVO_REMOTE`：
@@ -273,9 +283,9 @@ Agent；same-source 项未改变。checkout 内不得新增项目级
 3. 一个相邻责任碰撞请求：所有 expected owners 都应加载，所有 forbidden owners 均不应加载。
 
 这 3 个案例只是代表性 smoke，只验证所选 Skill 的用例合同，不能证明其余 17 项或完整系统
-routing。要验证全部系统 routing，必须在独立新上下文中运行全部 54 个 corpus cases，并逐项
+routing。要验证全部系统 routing，必须在独立新上下文中运行全部 75 个 corpus cases，并逐项
 核对完成事件、全部 expected owners 和全部 forbidden owners。完整运行成本较高，可以由用户
-选择跳过；未运行时必须将其余 runtime activation 标为 unverified，不能声称 18 项均已验证。
+选择跳过；未运行时必须将其余 runtime activation 标为 unverified，不能声称 25 项均已验证。
 
 记录宿主/version、会话、安装 SHA、请求、expected/forbidden/实际加载集合、正文加载事件位置，
 以及真实子 Agent/工具是否执行。只有所有 expected owners 齐全且没有 forbidden owner，才达到
@@ -293,15 +303,16 @@ blocked: skills update has no agent scope
 ```
 
 只有全部同名全局登记均来自官方来源，且用户明确授权所有受影响登记一起更新时，才可按字面
-名称更新。例如用户授权完整 18 项时：
+名称更新。例如用户授权完整 25 项时：
 
 ```bash
 npx --yes skills update --global --yes \
   audit-agent-harness aviation-grade-engineering codebase-slimming \
   coding-task-controller develop-production-code engineering-work-system \
-  exa-search gpt55-fusion graph-engineering plan-code-change pplx-cli \
-  project-capability-engineering repository-knowledge-gardening report-writer review-mr sonarqube-review \
-  unknowns-field-guide verify-change-evidence
+  exa-search gpt55-fusion graph-engineering open-code-review performance-measurement \
+  performance-review plan-code-change pplx-cli project-capability-engineering \
+  repository-knowledge-gardening report-writer review-mr runtime-performance sonarqube-review \
+  unknowns-field-guide verify-change-evidence web-performance database-performance benchmark-performance
 ```
 
 授权子集时只能保留该子集。更新前后重复来源检查、`--list` 和 JSON 快照。不得使用无名称的
@@ -347,7 +358,7 @@ python3 scripts/agentctl.py memory search --config harness/examples/agentctl.jso
 
 - 授权、来源身份、目标、范围或 revision 不清楚；
 - 当前 CLI 帮助与命令不兼容，或必需工具缺失；
-- 远程/本地 `--list` 不是精确 18 项；
+- 远程/本地 `--list` 不是精确 25 项；
 - conflict 无法标为 `replaceable`，或 same-source/absent 无法可靠区分；
 - 方案 A 缺少旧 repository、固定 revision、影响 Agent/scope、精确恢复命令或移除后 JSON 证明；
 - 默认官方 checkout 校验失败；已有本地开发 checkout 仅在可信验证器缺失时可降级为 `partial`；
@@ -369,7 +380,7 @@ Installed content hash/revision evidence:
 Source working-tree state:
 Secure temporary directory and permission check:
 skills CLI version and help checked:
-Requested 18 names or authorized subset:
+Requested 25 names or authorized subset:
 Remote/local --list exact-set result:
 Before global and Codex JSON snapshot paths:
 Per-name classification: absent | same-source | conflict
@@ -382,7 +393,7 @@ Structured before/after diff and newly created registrations:
 Installed names, paths, scopes, sources, and target agents:
 New-session/restart status:
 Representative 3-case smoke: cases, expected/forbidden/actual owners, result
-Full 54-case corpus: result | not run; remaining activation unverified
+Full 75-case corpus: result | not run; remaining activation unverified
 Observed child-agent/tool execution:
 Per-case target-observed evidence:
 External environment-observed evidence, or not observed:

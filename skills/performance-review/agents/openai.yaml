@@ -1,0 +1,4 @@
+interface:
+  display_name: "Performance Review"
+  short_description: "Find hidden performance risks with evidence"
+  default_prompt: "Use $performance-review to inspect this change for hidden performance risks and require measurable evidence."
