@@ -20,6 +20,9 @@ ews_collision	engineering-work-system	engineering-work-system,coding-task-contro
 exa_positive	exa-search	exa-search	pplx-cli	Use Exa neural search highlights and outputSchema through cURL to design grounded research. Do not execute a network call or expose EXA_API_KEY.
 exa_negative	exa-search	-	exa-search,pplx-cli	Search the web for current official release notes using the native web tool; no provider or CLI preference.
 exa_collision	exa-search	pplx-cli	exa-search	Explain how to use Perplexity pplx CLI to search and fetch a page. Do not execute the network call.
+ocr_positive	open-code-review	open-code-review	review-mr,verify-change-evidence	Use Open Code Review with the ocr CLI to preview and then review the current Git changes, returning line-level findings in agent JSON. Do not apply fixes.
+ocr_negative	open-code-review	-	open-code-review	Review the staged diff with the repository's normal multi-reviewer MR workflow and write its P1/P2/P3 report. Do not use OCR or the ocr CLI.
+ocr_collision	open-code-review	open-code-review,review-mr	verify-change-evidence	Use the ocr CLI to review this branch against main, then route the resulting diff findings to the normal MR report. Do not execute behavior QA or claim acceptance.
 fus_positive	gpt55-fusion	gpt55-fusion	graph-engineering,review-mr	Use GPT-5.5 Fusion: two independent GPT-5.5 analyses followed by a GPT-5.5 judge to reconcile this architecture decision.
 fus_negative	gpt55-fusion	coding-task-controller,unknowns-field-guide,develop-production-code	gpt55-fusion	This payment bug is high-stakes. Use the normal production coding workflow; do not use multiple model lanes or a judge.
 fus_collision	gpt55-fusion	gpt55-fusion	review-mr,graph-engineering	Use GPT-5.5 Fusion with two independent GPT-5.5 perspectives and a judge to assess the current diff; do not add another review topology.

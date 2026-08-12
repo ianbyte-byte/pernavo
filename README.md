@@ -121,6 +121,7 @@ evidence remain separate states.
 - `exa-search` — token-efficient Exa Search API workflows for neural web search, highlights, known-URL extraction, and structured enrichment
 - `gpt55-fusion` — opt-in GPT-5.5 Fusion with two independent analyses and a judge when the user explicitly requests it
 - `graph-engineering` — design auditable agent execution topologies with explicit routing, ownership, and verification
+- `open-code-review` — run Alibaba's Open Code Review agent through the `ocr` CLI for line-level Git review and full-file scans
 - `plan-code-change` — turn confirmed discovery into an executable, reviewable change plan
 - `pplx-cli` — install, authenticate, or use Perplexity's `pplx` CLI for terminal web search and page fetch when the user asks for Perplexity
 - `project-capability-engineering` — assess greenfield, existing, and legacy repository capabilities and select one evidence-based, reversible foundation increment

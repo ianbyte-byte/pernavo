@@ -1,0 +1,4 @@
+interface:
+  display_name: "Open Code Review"
+  short_description: "Run focused AI reviews with the ocr CLI"
+  default_prompt: "Use $open-code-review to review the requested Git changes with line-level findings and explicit evidence boundaries."
