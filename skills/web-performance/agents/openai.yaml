@@ -1,0 +1,4 @@
+interface:
+  display_name: "Web Performance"
+  short_description: "Review frontend speed and UX metrics"
+  default_prompt: "Use $web-performance to review loading, interaction, layout stability, and field performance evidence."

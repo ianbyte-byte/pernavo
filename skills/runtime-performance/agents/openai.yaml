@@ -1,0 +1,4 @@
+interface:
+  display_name: "Runtime Performance"
+  short_description: "Diagnose CPU, memory, waits, and GC"
+  default_prompt: "Use $runtime-performance to inspect runtime hot paths, allocations, waits, queues, and profiler evidence."

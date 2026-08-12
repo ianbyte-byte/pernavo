@@ -1,0 +1,4 @@
+interface:
+  display_name: "Performance Measurement"
+  short_description: "Build a reproducible performance evidence plan"
+  default_prompt: "Use $performance-measurement to design a reproducible workload, measurement window, and evidence pack."

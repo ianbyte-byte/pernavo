@@ -1,0 +1,4 @@
+interface:
+  display_name: "Database Performance"
+  short_description: "Find query and data-access bottlenecks"
+  default_prompt: "Use $database-performance to audit query shape, plans, round trips, and database runtime evidence."

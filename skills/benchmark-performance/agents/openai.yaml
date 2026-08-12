@@ -1,0 +1,4 @@
+interface:
+  display_name: "Benchmark Performance"
+  short_description: "Design reliable performance benchmarks"
+  default_prompt: "Use $benchmark-performance to review or create a benchmark with valid warmup, variance, and workload controls."
