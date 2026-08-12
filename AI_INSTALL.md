@@ -7,8 +7,9 @@
 https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/main/AI_INSTALL.md
 
 默认参数：来源使用官方 GitHub 仓库 https://github.com/ianbyte-byte/pernavo；安装给当前用户的
-Codex；范围为 global；目标为手册列出的全部 25 个 Skills；安装方式为固定 SHA checkout
-中的 copy。远程 URL 只用于发现和 clone，不直接作为安装源。
+**所有支持 global 安装的 agents**；范围为 global；目标为手册列出的全部 25 个 Skills；安装
+方式为固定 SHA checkout 中的 copy。CLI 使用 `--agent '*'`，不是只安装 Codex。远程 URL 只用于
+发现和 clone，不直接作为安装源。
 
 开始前必须读取完整手册，重新检查 skills CLI 的 version/help，确认写入授权，精确核对远程
 --list 的 25 项，并用 JSON 快照检查同名冲突。不要直接盲跑安装命令，不要使用 --all，
@@ -18,8 +19,9 @@ Codex；范围为 global；目标为手册列出的全部 25 个 Skills；安装
 安装后按手册完成 JSON diff、新会话触发验证、报告和可定向回滚记录。
 ```
 
-本手册供 AI 安装代理逐步执行，不是 Shell 脚本。上述默认值只补全用户未指定的参数，不能
-替代授权、全文阅读、冲突检查或逐步验证。若本 Raw URL 不可用、为空或不是本文件，立即停止；
+本手册供 AI 安装代理逐步执行，不是 Shell 脚本。上述默认值只补全用户未指定的参数；安装代理
+不得再次要求用户复述这些默认值，除非用户明确要求缩小或改变目标。默认值不能替代授权、全文
+阅读、冲突检查或逐步验证。若本 Raw URL 不可用、为空或不是本文件，立即停止；
 不得退回 README 中的旧命令，也不得宣称当前本地未提交内容已经发布到远程。
 
 本文曾用 `skills` CLI 1.5.21 验证。CLI 会变化，每次安装仍必须重新读取当前
@@ -28,15 +30,34 @@ Codex；范围为 global；目标为手册列出的全部 25 个 Skills；安装
 说明：本手册的 25 个 Skills 是当前仓库和远程发布安装集合。名称集合、固定 revision、触发
 语料和验证数字必须保持同步；如果远程 `--list` 不包含本手册的全部 25 项，必须停止。
 
+## 默认安装画像
+
+除非用户明确覆盖，所有安装代理必须使用同一组参数：
+
+| 参数 | 默认值 |
+|---|---|
+| 来源 | `https://github.com/ianbyte-byte/pernavo`，固定 full commit SHA |
+| 目标 | 当前用户所有支持 global 安装的 agents |
+| CLI 目标选择 | `--agent '*'`；不要把显示名称（如 `Claude Code`）当作 CLI ID |
+| 范围 | global |
+| 内容 | 下方完整的 25 个 Skills |
+| 复制方式 | `--copy` |
+| 冲突策略 | 方案 A；来源无法恢复时 `blocked` |
+
+`--agent '*'` 表示当前 CLI 支持的全部 agent 目标，不等于“只安装当前会话使用的 agent”。
+不同版本可能枚举不同数量；必须记录当次 CLI 输出中的实际 agent 列表和不支持 global 的目标，
+不能把旧版本的数量写死为成功条件。当前 `skills@1.5.22` 的全局登记显示 66 个常规 agent；
+Eve 和 PromptScript 的 global 安装不受支持，属于已知能力边界，不能通过重试或手工删除绕过。
+
 ## 默认成功路径
 
 | 顺序 | 操作 | 通过条件 |
 |---|---|---|
-| 1 | 确认写入授权 | 当前用户、Codex、global、官方来源、25 项、copy 均获授权 |
+| 1 | 确认写入授权 | 当前用户、所有支持 global 的 agents、官方来源、25 项、copy 均获授权 |
 | 2 | 检查 CLI | version 和 help 可用，参数与本手册兼容 |
 | 3 | 远程 `--list` | 名称集合精确等于下方 25 项；远程 URL 仅用于发现 |
 | 4 | 固定来源 | 安全临时目录中 clone，记录 full HEAD SHA，detach、校验 25 项 |
-| 5 | 保存全局及 Codex JSON 快照 | 安装前状态可恢复、可比较 |
+| 5 | 保存全局 JSON 快照 | 快照包含每个登记的 agents、scope、path 和 source，可恢复、可比较 |
 | 6 | 分类同名项 | 每项是 `absent`、`same-source` 或 `conflict` |
 | 7 | 处理并安装 | `same-source` 不触碰；安装 `absent`；`conflict` 默认按方案 A 定向替换 |
 | 8 | 安装后 JSON diff | absent 正确新增、conflict 正确换源，无意外 Agent 或范围 |
@@ -48,7 +69,8 @@ Codex；范围为 global；目标为手册列出的全部 25 个 Skills；安装
 安装代理必须遵守：
 
 1. 写入前确认用户授权的来源、当前系统用户、目标 Agent、范围、名称集合和 copy/symlink
-   方式。默认只写当前用户的 Codex global Skills。
+   方式。默认写入当前用户所有支持 global 安装的 agents；用 `--agent '*'` 交给当前 CLI
+   枚举目标，不要只写 Codex。
 2. 保留既有 Skills、配置、记忆、目录和未提交工作。不得通配删除、递归清理、修改 Shell
    启动文件、静默安装系统依赖或运行 `skills remove --all`。
 3. 不在 Pernavo 自己的 checkout 中做项目级自安装；那会创建 `.agents/skills` 副本并与
@@ -61,12 +83,29 @@ Codex；范围为 global；目标为手册列出的全部 25 个 Skills；安装
 6. 真正的子 Agent 派生，以及 Skill 是否 `loaded`/`executed`，只能在安装后的宿主新会话中
    观察；命令成功、目录存在或模型自述均不是运行时证明。
 
+### Agent 目标与实际落盘
+
+`skills ls --global --json` 的一个登记可能包含多个 `agents`，这只能证明 CLI 的全局登记；
+安装后还要按登记中的 `path` 检查 `SKILL.md` 实际存在，并按 agent 目录抽样或逐项检查文件。
+报告至少区分以下状态：
+
+| 状态 | 判定 |
+|---|---|
+| `registered` | JSON 登记包含名称和目标 agent |
+| `materialized` | 登记的 `path/SKILL.md` 存在，且 SHA-256 与固定 checkout 对应文件一致 |
+| `shared-registration` | 多个 agents 共享同一全局 path；不重复声称创建了多份独立副本 |
+| `unsupported-global` | CLI 明确拒绝该 agent 的 global 安装，例如 Eve、PromptScript |
+| `blocked-source` | 已有同名登记的 `source/sourceUrl` 缺失或 revision 无法固定，不能覆盖 |
+
+目标 agent 的实际显示名和 CLI ID 可能不同。命令参数使用 CLI 支持的 ID 或 `'*'`；报告同时
+记录 JSON 中的显示名。不要把目录“看起来存在”、命令退出 0 或模型自述当成正文已加载证据。
+
 ### 证据层级
 
 | 层级 | 可接受证据 | 不能证明 |
 |---|---|---|
 | `source-valid` | 固定 checkout 校验通过，或远程 `--list` 精确列出预期集合 | 已写入目标 Agent |
-| `installed` | 安装后 global/Codex JSON 快照显示正确名称、范围和来源 | 新会话已加载正文 |
+| `installed` | 安装后 global JSON 快照显示正确名称、范围、来源和 agent 登记 | 新会话已加载正文 |
 | `loaded` | 宿主 trace、日志或等价事件显示对应 `SKILL.md` 正文被加载 | Skill 内工具实际执行 |
 | `executed` | 目标工具、子 Agent、Hook、MCP 或 Harness 确有执行结果 | 外部目标状态已改变 |
 | `target-observed` | 用例要求的 expected owners 全部加载，且 forbidden owners 均未加载 | 交付、部署或外部环境行为正确 |
@@ -188,14 +227,14 @@ test -n "$PERNAVO_INSTALL_TMP"
 test -d "$PERNAVO_INSTALL_TMP"
 test ! -L "$PERNAVO_INSTALL_TMP"
 test ! -e "$PERNAVO_INSTALL_TMP/pernavo-before-global.json"
-test ! -e "$PERNAVO_INSTALL_TMP/pernavo-before-codex.json"
+test ! -e "$PERNAVO_INSTALL_TMP/pernavo-before-agents.json"
 npx --yes skills ls --global --json > "$PERNAVO_INSTALL_TMP/pernavo-before-global.json"
-npx --yes skills ls --global --agent codex --json > "$PERNAVO_INSTALL_TMP/pernavo-before-codex.json"
+npx --yes skills ls --global --agent '*' --json > "$PERNAVO_INSTALL_TMP/pernavo-before-agents.json"
 ```
 
-对 25 个请求名称逐项读取 `name`、`path`、`scope`、`source`、`sourceUrl` 和 Agent 登记，并分类：
+对 25 个请求名称逐项读取 `name`、`path`、`scope`、`source`、`sourceUrl` 和所有 Agent 登记，并分类：
 
-- `absent`：Codex 中无同名登记，且其他全局登记没有不明同名来源；可安装。
+- `absent`：全局 JSON 中无同名登记，且没有不明同名来源；可安装。
 - `same-source`：已来自同一个官方仓库；本次不触碰、不重装、不隐式更新。
 - `conflict`：来自其他来源，或来源无法可靠判断；进入下方方案 A 的替换安全门，不能直接覆盖。
 
@@ -203,8 +242,8 @@ npx --yes skills ls --global --agent codex --json > "$PERNAVO_INSTALL_TMP/pernav
 官方仓库是同一 repository 时才可视为 `same-source`，否则是 `conflict`。不得因为仓库名称相似、
 内容相同或来源是 fork/mirror，就跳过冲突处理。
 
-安装前必须同时保存：25 项分类、原始 JSON、已授权目标、“安装后 Codex 名称集合减安装前 Codex
-名称集合”的新增项回滚计算规则，以及每个替换项的旧来源、固定 revision、Agent、scope 和恢复
+安装前必须同时保存：25 项分类、原始 JSON、已授权目标、“安装后全局名称集合减安装前全局名称
+集合”的新增项回滚计算规则，以及每个替换项的旧来源、固定 revision、Agent、scope 和恢复
 命令。不得根据请求列表猜测新增项或替换项。
 
 ### 默认冲突策略：方案 A（受控替换）
@@ -234,7 +273,7 @@ Harness、记忆、目录或系统依赖。用户明确要求保留旧来源或�
 ```bash
 npx --yes skills add "$PERNAVO_CHECKOUT" \
   --global \
-  --agent codex \
+  --agent '*' \
   --skill '*' \
   --yes \
   --copy
@@ -246,15 +285,15 @@ npx --yes skills add "$PERNAVO_CHECKOUT" \
 ```text
 npx --yes skills add "$PERNAVO_CHECKOUT" \
   --global \
-  --agent codex \
+  --agent '*' \
   --skill ABSENT_OR_REPLACED_NAME_1 ABSENT_OR_REPLACED_NAME_2 \
   --yes \
   --copy
 ```
 
 上例不可原样执行。如果只有 `same-source`、没有 `absent` 或 `replaceable conflict`，报告已存在且
-不做写入。只有用户明确授权所有支持的 Agent 时才可使用 `--agent '*'`。任何情况下都不使用
-`--all` 作为默认安装方式。
+不做写入。`--agent '*'` 是本手册的默认目标选择；只有用户明确要求缩小目标时才改成具体 CLI
+agent ID。任何情况下都不使用 `--all` 作为默认安装方式。
 
 ## 4. 安装后 diff 与新会话验证
 
@@ -265,14 +304,15 @@ test -n "$PERNAVO_INSTALL_TMP"
 test -d "$PERNAVO_INSTALL_TMP"
 test ! -L "$PERNAVO_INSTALL_TMP"
 test ! -e "$PERNAVO_INSTALL_TMP/pernavo-after-global.json"
-test ! -e "$PERNAVO_INSTALL_TMP/pernavo-after-codex.json"
+test ! -e "$PERNAVO_INSTALL_TMP/pernavo-after-agents.json"
 npx --yes skills ls --global --json > "$PERNAVO_INSTALL_TMP/pernavo-after-global.json"
-npx --yes skills ls --global --agent codex --json > "$PERNAVO_INSTALL_TMP/pernavo-after-codex.json"
+npx --yes skills ls --global --agent '*' --json > "$PERNAVO_INSTALL_TMP/pernavo-after-agents.json"
 ```
 
 对 before/after JSON 做结构化比较并确认：请求的 absent 项各新增一次；方案 A 替换项名称和
-Agent 不变、来源已从记录的旧来源变为本次官方固定 checkout；scope 为 global；没有写入未授权
-Agent；same-source 项未改变。checkout 内不得新增项目级
+目标 Agent 集合不变、来源已从记录的旧来源变为本次官方固定 checkout；scope 为 global；没有写入
+未授权 Agent；same-source 项未改变。对每个请求项检查 `path/SKILL.md` 存在，并对固定 checkout
+与落盘文件计算 SHA-256；记录共享 path 与不支持 global 的目标。checkout 内不得新增项目级
 `.agents/skills/<name>` 副本。非零退出、部分安装或意外 diff 均进入停止/回滚流程。
 
 随后重启目标宿主或开启确定会重新扫描 Skills 的新会话。从
@@ -282,7 +322,7 @@ Agent；same-source 项未改变。checkout 内不得新增项目级
 2. 一个负向请求：不应加载目标 Skill；
 3. 一个相邻责任碰撞请求：所有 expected owners 都应加载，所有 forbidden owners 均不应加载。
 
-这 3 个案例只是代表性 smoke，只验证所选 Skill 的用例合同，不能证明其余 17 项或完整系统
+这 3 个案例只是代表性 smoke，只验证所选 Skill 的用例合同，不能证明其余 24 项或完整系统
 routing。要验证全部系统 routing，必须在独立新上下文中运行全部 75 个 corpus cases，并逐项
 核对完成事件、全部 expected owners 和全部 forbidden owners。完整运行成本较高，可以由用户
 选择跳过；未运行时必须将其余 runtime activation 标为 unverified，不能声称 25 项均已验证。
@@ -295,7 +335,7 @@ routing。要验证全部系统 routing，必须在独立新上下文中运行�
 
 ## 5. 更新：默认失败关闭
 
-CLI 1.5.21 的 `update` 没有 Agent scope。用户只授权 Codex、来源是本地 checkout、要求固定
+CLI 1.5.21 的 `update` 没有 Agent scope。用户只授权单个 agent、来源是本地 checkout、要求固定
 revision，或无法枚举所有受影响的全局登记时，停止并报告：
 
 ```text
@@ -321,14 +361,17 @@ npx --yes skills update --global --yes \
 ## 6. 定向回滚
 
 回滚必须把“新增登记”和“替换登记”分开处理。新增集合只能是
-`after Codex registrations - before Codex registrations`；把实际新增名称逐个写成字面量：
+`after global registrations - before global registrations`；多 agent 安装时按 `name + agent`
+登记对计算差集，把实际新增名称逐个写成字面量：
 
 ```text
-npx --yes skills remove NEW_NAME_1 NEW_NAME_2 --global --agent codex --yes
+npx --yes skills remove NEW_NAME_1 NEW_NAME_2 --global --agent '*' --yes
 ```
 
-上例不可原样执行。不得移除安装前已存在的 same-source 项，不得使用通配符或 `remove --all`。
-多 Agent 安装要按每个 Agent 的快照差集分别移除，随后重新读取 JSON，证明只删除本次新增登记。
+上例不可原样执行。不得移除安装前已存在的 same-source 项，不得使用 `--skill '*'` 或
+`remove --all`；`--agent '*'` 仅表示本手册默认的全部支持目标。
+多 Agent 安装要按 JSON 中每个 `name + agent` 的快照差集分别确认，随后重新读取 JSON，证明只删除
+本次新增登记；共享 path 只能在所有本次新增 agent 登记均已移除后再判断是否仍被其他 agent 使用。
 
 方案 A 替换的旧登记不是“新增登记”，名称集合差集无法识别它。回滚每个替换项时必须先按名称和
 Agent 定向移除本次官方登记，再从安装前记录的旧 repository 和固定 full commit SHA 恢复相同
@@ -372,7 +415,10 @@ python3 scripts/agentctl.py memory search --config harness/examples/agentctl.jso
 ## 9. 安装报告模板
 
 ```text
-Authorized user / agent / scope / mode:
+Authorized user / target agents / scope / mode:
+CLI agent selector and version:
+CLI-enumerated supported agents:
+CLI-rejected or unsupported global agents:
 Discovery remote URL and --list result:
 Fixed checkout path:
 Verified full commit SHA:
@@ -382,15 +428,16 @@ Secure temporary directory and permission check:
 skills CLI version and help checked:
 Requested 25 names or authorized subset:
 Remote/local --list exact-set result:
-Before global and Codex JSON snapshot paths:
+Before global and all-agent JSON snapshot paths:
 Per-name classification: absent | same-source | conflict
 Conflict disposition: replaceable | blocked
 Replacement ledger: name, agent, scope, old repository, old full SHA, restore command
 Directed removal command and post-removal JSON result:
 Install/update command and exit status:
-After global and Codex JSON snapshot paths:
+After global and all-agent JSON snapshot paths:
 Structured before/after diff and newly created registrations:
-Installed names, paths, scopes, sources, and target agents:
+Installed names, paths, scopes, sources, target agents, materialized SHA-256:
+Agent status: registered | materialized | shared-registration | unsupported-global | blocked-source
 New-session/restart status:
 Representative 3-case smoke: cases, expected/forbidden/actual owners, result
 Full 75-case corpus: result | not run; remaining activation unverified
@@ -398,7 +445,7 @@ Observed child-agent/tool execution:
 Per-case target-observed evidence:
 External environment-observed evidence, or not observed:
 Harness checks, if separately requested:
-Exact rollback command for only newly created registrations:
+Exact rollback command for only newly created name+agent registrations:
 Exact rollback sequence for replaced registrations:
 Unverified layers and remaining decisions:
 Final evidence level: source-valid | installed | loaded | executed | target-observed | environment-observed
