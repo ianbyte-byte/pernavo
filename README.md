@@ -24,8 +24,9 @@ Paste this prompt into Codex, Claude Code, Cursor, or another coding agent:
 请为我安装 Pernavo 的完整 Skills 系统。完整执行手册：
 https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/main/AI_INSTALL.md
 
-默认参数：官方 GitHub 来源、当前用户、Codex、global、全部 25 个 Skills、从固定 SHA
-checkout 执行 copy；远程 URL 只用于发现和 clone，不直接用于安装。
+默认参数：官方 GitHub 来源、当前用户、所有支持 global 安装的 agents、全部 25 个 Skills、
+从固定 SHA checkout 执行 copy；使用 `--agent '*'`，不要只安装 Codex。远程 URL 只用于发现和
+clone，不直接用于安装。
 开始前必须读取全文、重新检查 skills CLI 的 version/help、确认授权、精确核对远程 --list
 和 JSON 同名冲突；不要盲跑，不要使用 --all 或 remove --all。冲突默认按方案 A 处理：仅在旧
 来源和固定 revision 可精确恢复时定向替换；否则停止。安装后完成固定 SHA 记录、JSON diff、
