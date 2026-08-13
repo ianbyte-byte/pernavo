@@ -24,18 +24,18 @@ Paste this prompt into Codex, Claude Code, Cursor, or another coding agent:
 请为我安装 Pernavo 的完整 Skills 系统。完整执行手册：
 https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/main/AI_INSTALL.md
 
-默认参数：官方 GitHub 来源、当前用户、所有支持 global 安装的 agents、全部 25 个 Skills、
+默认参数：官方 GitHub 来源、当前用户、所有支持 global 安装的 agents、全部 26 个 Skills、
 从固定 SHA checkout 执行 copy；使用 `--agent '*'`，不要只安装 Codex。远程 URL 只用于发现和
 clone，不直接用于安装。
 开始前必须读取全文、重新检查 skills CLI 的 version/help、确认授权、精确核对远程 --list
 和 JSON 同名冲突；不要盲跑，不要使用 --all 或 remove --all。冲突默认按方案 A 处理：仅在旧
 来源和固定 revision 可精确恢复时定向替换；否则停止。安装后完成固定 SHA 记录、JSON diff、
 新会话代表性 smoke（正向/负向/碰撞）、报告和定向回滚记录。
-若远程 --list 不是精确 25 项，停止并说明该版本尚未发布；未运行完整 75-case corpus 时，
-不得声称全部 25 项的 runtime activation 已验证。
+若远程 --list 不是精确 26 项，停止并说明该版本尚未发布；未运行完整 78-case corpus 时，
+不得声称全部 26 项的 runtime activation 已验证。
 ```
 
-The installation prompt's 25 Skills and 75 cases refer to the complete documented installation set.
+The installation prompt's 26 Skills and 78 cases refer to the complete documented installation set.
 The six performance Skills are included in that set; the remote `--list`, fixed revision, and
 trigger corpus must remain synchronized before installation is treated as complete.
 
@@ -46,7 +46,7 @@ curl -fsSL https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/mai
 ```
 
 This only prints Markdown; never pipe it into a shell. The remote URL is for discovery and cloning,
-not direct installation or installed-revision proof. If its `--list` output is not the exact 25-name
+not direct installation or installed-revision proof. If its `--list` output is not the exact 26-name
 set in the guide, stop and report that the documented version is not published. Do not claim that
 local uncommitted work is available remotely.
 
@@ -162,12 +162,13 @@ resource signals, and proof boundary. A static smell or single average does not 
 - `performance-review` — find hidden performance risks in code paths and route them to evidence-based measurement and domain overlays
 - `performance-measurement` — design reproducible USE/RED, trace, percentile, resource, and before/after performance evidence
 - `database-performance` — inspect SQL/ORM query shape, plans, round trips, cardinality, locks, and database runtime evidence
+- `database-testing` — connect to explicitly configured SQLite, PostgreSQL, or MySQL test databases for bounded SQL validation and test-data scripts
 - `runtime-performance` — inspect CPU, allocations, GC, blocking, queues, contention, I/O, and matching profiler evidence
 - `web-performance` — review LCP, INP, CLS, long tasks, resource loading, layout shifts, and field/lab evidence
 - `benchmark-performance` — design reliable benchmarks with representative workloads, warmup, forks, variance, and setup separation
 - `unknowns-field-guide` — discover pre-change facts, blindspots, assumptions, and evidence gaps
 - `verify-change-evidence` — independently observe completed-change behavior and report proof boundaries
 
-The current source checkout contains 25 Skills and the trigger corpus contains 75 positive, negative,
+The current source checkout contains 26 Skills and the trigger corpus contains 78 positive, negative,
 and collision cases. Run `./scripts/validate-skills.sh` to validate source layout, links, README
 entries, trigger triplets, and the local Skills CLI listing.
