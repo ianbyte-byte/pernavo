@@ -1,0 +1,4 @@
+interface:
+  display_name: "Database Testing"
+  short_description: "Run bounded tests against configured databases"
+  default_prompt: "Use $database-testing to inspect a configured test database and run a bounded SQL validation."
