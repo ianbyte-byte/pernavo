@@ -11,6 +11,12 @@ description: >
 
 # SonarQube Review
 
+## Query and evidence boundaries
+
+- Perform a bounded preflight and record URL resolution, project-key match, branch, reachability, freshness, and unavailable reasons without printing or requesting token values.
+- Keep SonarQube gate, measures, and issues separate from specialist findings and deterministic checks. Baseline-only or unavailable results are not current-branch approval.
+- Query existing analysis only; do not run a scanner, change server configuration, mutate project data, or block the remaining review when this evidence channel is unavailable.
+
 Produce a bounded, read-only review of analysis that already exists in SonarQube. Do not spend a
 general repository-discovery pass rediscovering a named tool request.
 

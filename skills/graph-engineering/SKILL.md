@@ -13,6 +13,11 @@ description: >
 
 # Graph Engineering Topology
 
+## Graph admission boundary
+
+- Start with one loop and promote to a graph only when bounded independent questions, permission boundaries, independent judgment, or conditional repair materially improve the outcome; otherwise keep the sequential route.
+- Maintain one write-capable owner per working tree, minimum task-local context, independent verifier inputs, explicit budgets, fallback, and stop conditions. Graph topology does not grant domain authority or prove task success.
+
 Design the lightest reliable execution topology the task justifies. Compose reliable agent loops into an explicit graph only when the work needs one. Treat the topology as contracts, not as an excuse to spawn more agents. Use the abstract capability tiers and limits in
 [references/cost-aware-routing.md](references/cost-aware-routing.md) whenever cost, automatic
 subagent routing, reuse, or external advice is in scope.

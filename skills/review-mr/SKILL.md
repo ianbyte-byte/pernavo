@@ -19,6 +19,18 @@ turn tests into acceptance evidence; route that work to
 [verify-change-evidence](../verify-change-evidence/SKILL.md). Both may be requested in sequence,
 but neither replaces the other or grants approval.
 
+## Evidence and output boundaries
+
+- If the diff is empty, stop with `no diff` and `no findings`; do not invent a report or infer a
+  problem from repository history alone.
+- Treat each evidence channel independently. If SonarQube is unavailable, label that channel
+  `unavailable`/`degraded` and continue the other reviewers; their green checks are not approval.
+- Findings must retain `file:line`, severity, concrete impact, smallest safe fix, and reviewer
+  source. Deduplicate overlapping reports without dropping provenance.
+- Keep findings separate from completed-change QA and deployment claims; route behavior evidence to
+  `verify-change-evidence`, and route presentation to `report-writer` without transferring finding
+  or severity ownership.
+
 When findings and evidence are ready, route presentation to
 [report-writer](../report-writer/SKILL.md) and use its engineering review module. `review-mr` retains
 finding and severity ownership; `report-writer` owns purpose-based format selection and artifact
