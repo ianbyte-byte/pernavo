@@ -15,6 +15,17 @@ Own report structure, format selection, and presentation after upstream owners s
 Do not invent facts, rerun analysis, silently resolve missing evidence, or turn a report into
 approval. A report may present another Skill's work without absorbing that Skill's responsibility.
 
+## Evidence and authority boundaries
+
+- Require a supplied purpose, audience, scope, as-of time, source owners, evidence state, freshness
+  boundary, limitations, and accountable authority. Mark missing inputs unavailable; do not infer,
+  rerun analysis, or turn presentation into approval.
+- Preserve observed, inferred, partial, degraded, unavailable, and unverified states, including
+  provenance, dates, revisions, units, and excluded surfaces. A polished format is not evidence.
+- Keep findings, interpretation, recommendations, and decisions separate. The report writer owns
+  structure and format only; domain skills retain finding ownership and specialized artifact skills
+  retain container authority.
+
 ## Select the report module
 
 Read only the module that matches the requested report:
