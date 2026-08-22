@@ -9,6 +9,12 @@ description: >
 
 # Verify Change Evidence
 
+## Proof boundaries
+
+- Derive expected results from an independent contract, source record, or trusted fixture; do not use the changed implementation as its own oracle.
+- Mark each check passed, failed, blocked, skipped, or not-applicable. Stop at the highest layer observed and never turn local tests into staging or production proof, approval, or deployment.
+- Preserve target identity without secrets, command, exit status, timestamp when useful, result, and artifact path or hash; hand formal presentation to `report-writer` without surrendering case and assertion ownership.
+
 Independently determine what behavior was actually observed after a completed change. Execute only
 authorized checks and report the evidence boundary precisely. Do not repair production code, review
 the diff for findings, approve the change, deploy it, or infer production behavior from local tests.

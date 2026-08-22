@@ -9,6 +9,11 @@ description: >
 
 # Plan Code Change
 
+## Evidence and plan boundaries
+
+- Reject or return a handoff with missing seam, facts, unknowns, constraints, do-not-do scope, or evidence boundary; never invent facts or silently resolve a P0 decision.
+- Every atomic step names one owner seam, observable expected behavior, validation request, rollback/recovery, and human-review point where applicable. A plan is not implementation, QA, approval, or deployment evidence.
+
 Turn confirmed discovery into one plan another engineer can review and execute. Do not inspect for
 new facts, write production code, run QA, approve a result, or claim a deployment outcome.
 
