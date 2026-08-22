@@ -27,6 +27,17 @@ file, or tool output.
    not verified. Never print a connection URL, password, token, or result columns that contain
    secrets or unnecessary personal data.
 
+## Routing and output boundaries
+
+- For a SQL Server test-database task, state the target-resolution and `preflight` status, whether
+  the intended query is read-only, that `sqlcmd` is the required client, how credentials are kept
+  out of output, and that no production target is allowed. If target resolution or preflight is
+  blocked, stop and label metadata and query results as unverified.
+- For a read-only ORM or query-performance review involving N+1, cardinality, locks, pagination,
+  round trips, or a query plan, route to `database-performance` when no database connection or data
+  change is requested. Use the literal evidence label `static-only`, distinguish estimated from
+  actual plan evidence, and do not invoke the database runner.
+
 ## Runner
 
 Set a test-only connection in the current process:

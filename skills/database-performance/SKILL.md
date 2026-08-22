@@ -10,6 +10,21 @@ description: >
 
 # Database Performance
 
+## Evidence and routing boundaries
+
+- When reviewing source, ORM expressions, or an existing report without a database connection or
+  actual execution evidence, label the result `static-only` and `unverified`. Distinguish estimated
+  from actual plan rows and do not call a bottleneck confirmed from a pattern alone.
+- For suspected N+1 behavior, record the request query count and the amplification variable (such
+  as entity count or data volume) before recommending a fix; do not treat adding an index as the
+  default answer.
+- Keep a read-only performance review separate from database testing. Use `database-testing` only
+  when a configured test target or data change is requested; otherwise route the review here and
+  state what execution evidence remains missing.
+- For a query change that needs proof, keep this Skill's plan/runtime findings separate from
+  `performance-measurement`'s reproducible before/after comparison. Any schema change must be
+  authorized, reversible, and tested against an identified non-production or approved target.
+
 ## 静态审查
 
 - 追踪一次请求/作业的 SQL 次数、循环位置、懒加载和重复参数；优先找 N+1 与串行往返。
