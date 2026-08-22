@@ -1,0 +1,117 @@
+{
+  "format": "skillopt_sleep.tasks.v1",
+  "project": "/Users/chung/Developer/Code/loongclaude",
+  "target_skill_path": "skills/performance-review/SKILL.md",
+  "reviewed": true,
+  "tasks": [
+    {
+      "id": "performance_review_static_boundary",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Review this code path for a possible latency problem when no runtime target, profile, trace, or metrics are available. Give findings and the smallest next validation, but do not claim a confirmed bottleneck.",
+      "reference_kind": "rule",
+      "judge": {
+        "kind": "rule",
+        "checks": [
+          {"op": "contains", "arg": "static-only"},
+          {"op": "contains", "arg": "unverified"},
+          {"op": "contains", "arg": "performance-measurement"},
+          {"op": "contains", "arg": "not a confirmed bottleneck"}
+        ]
+      },
+      "tags": ["performance-review", "rule:static-boundary"],
+      "split": "train",
+      "origin": "real"
+    },
+    {
+      "id": "performance_review_overlay_route",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Review a service change with a loop that performs ORM queries and allocates a large response. Keep the performance review separate from general correctness review and route database and runtime evidence to the appropriate overlays.",
+      "reference_kind": "rule",
+      "judge": {
+        "kind": "rule",
+        "checks": [
+          {"op": "contains", "arg": "database-performance"},
+          {"op": "contains", "arg": "runtime-performance"},
+          {"op": "contains", "arg": "separate"},
+          {"op": "contains", "arg": "static"}
+        ]
+      },
+      "tags": ["performance-review", "rule:overlay-routing"],
+      "split": "train",
+      "origin": "real"
+    },
+    {
+      "id": "performance_review_mr_collision",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Review a merge request that changes retry logic and an ORM query. Include the normal diff review, a distinct hidden-performance lens, runtime measurement requirements, and report presentation without merging those responsibilities.",
+      "reference_kind": "rule",
+      "judge": {
+        "kind": "rule",
+        "checks": [
+          {"op": "contains", "arg": "review-mr"},
+          {"op": "contains", "arg": "performance-measurement"},
+          {"op": "contains", "arg": "database-performance"},
+          {"op": "contains", "arg": "separate"}
+        ]
+      },
+      "tags": ["performance-review", "rule:mr-boundary"],
+      "split": "train",
+      "origin": "real"
+    },
+    {
+      "id": "performance_review_positive_static",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Inspect a code diff with a suspected N+1 pattern but no executable environment. Report the evidence state and route the requested proof to measurement while preserving the static finding as a hypothesis.",
+      "reference_kind": "rule",
+      "judge": {
+        "kind": "rule",
+        "checks": [
+          {"op": "contains", "arg": "static-only"},
+          {"op": "contains", "arg": "hypothesis"},
+          {"op": "contains", "arg": "performance-measurement"},
+          {"op": "contains", "arg": "database-performance"}
+        ]
+      },
+      "tags": ["performance-review", "rule:static-n-plus-one"],
+      "split": "val",
+      "origin": "real"
+    },
+    {
+      "id": "performance_review_positive_web",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Review a frontend change that may affect interaction delay and layout stability. No field data is available. Keep static browser signals separate from proof and route Web Vitals evidence to the web-performance overlay.",
+      "reference_kind": "rule",
+      "judge": {
+        "kind": "rule",
+        "checks": [
+          {"op": "contains", "arg": "static-only"},
+          {"op": "contains", "arg": "web-performance"},
+          {"op": "contains", "arg": "field"},
+          {"op": "contains", "arg": "p75"}
+        ]
+      },
+      "tags": ["performance-review", "rule:web-boundary"],
+      "split": "val",
+      "origin": "real"
+    },
+    {
+      "id": "performance_review_benchmark_gate",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Review a microbenchmark that reports a faster average from one run. Explain why it is insufficient for an end-to-end regression claim and specify the required benchmark and runtime evidence.",
+      "reference_kind": "rule",
+      "judge": {
+        "kind": "rule",
+        "checks": [
+          {"op": "contains", "arg": "benchmark-performance"},
+          {"op": "contains", "arg": "performance-measurement"},
+          {"op": "contains", "arg": "average"},
+          {"op": "contains", "arg": "end-to-end"},
+          {"op": "contains", "arg": "distribution"}
+        ]
+      },
+      "tags": ["performance-review", "rule:benchmark-boundary"],
+      "split": "test",
+      "origin": "real"
+    }
+  ]
+}

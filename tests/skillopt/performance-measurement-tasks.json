@@ -1,0 +1,98 @@
+{
+  "format": "skillopt_sleep.tasks.v1",
+  "project": "/Users/chung/Developer/Code/loongclaude",
+  "target_skill_path": "skills/performance-measurement/SKILL.md",
+  "reviewed": true,
+  "tasks": [
+    {
+      "id": "performance_measurement_missing_target",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Design a performance investigation, but no executable target, metrics source, or runtime artifact is available. State the evidence limitation and what remains unverified instead of inventing measurements.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "unverified"},
+        {"op": "contains", "arg": "unavailable"},
+        {"op": "contains", "arg": "not measured"},
+        {"op": "contains", "arg": "performance-review"}
+      ]},
+      "tags": ["performance-measurement", "rule:missing-evidence"],
+      "split": "train",
+      "origin": "real"
+    },
+    {
+      "id": "performance_measurement_comparability",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Compare a before and after latency run with different workloads and no predeclared threshold. Explain why the result cannot support a regression decision and what to repeat.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "not-comparable"},
+        {"op": "contains", "arg": "same workload"},
+        {"op": "contains", "arg": "threshold"},
+        {"op": "contains", "arg": "repeat"}
+      ]},
+      "tags": ["performance-measurement", "rule:comparability"],
+      "split": "train",
+      "origin": "real"
+    },
+    {
+      "id": "performance_measurement_overlay_scope",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Plan evidence for a slow ORM endpoint with CPU saturation and browser interaction delay. Keep the measurement plan scoped and route query, runtime, and Web Vitals evidence to their overlays.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "database-performance"},
+        {"op": "contains", "arg": "runtime-performance"},
+        {"op": "contains", "arg": "web-performance"},
+        {"op": "contains", "arg": "separate"}
+      ]},
+      "tags": ["performance-measurement", "rule:overlay-scope"],
+      "split": "train",
+      "origin": "real"
+    },
+    {
+      "id": "performance_measurement_positive_gate",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Assess a suspected latency regression using a comparable workload. Require repeated p95 evidence, a predeclared threshold, and resource or error context before calling it regressed.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "p95"},
+        {"op": "contains", "arg": "threshold"},
+        {"op": "contains", "arg": "repeat"},
+        {"op": "contains", "arg": "resource"}
+      ]},
+      "tags": ["performance-measurement", "rule:regression-gate"],
+      "split": "val",
+      "origin": "real"
+    },
+    {
+      "id": "performance_measurement_positive_trace",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Investigate p99 tail latency with partial tracing. Record sampling limits, distinguish missing samples from no issue, and identify the next evidence needed.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "sampling"},
+        {"op": "contains", "arg": "not"},
+        {"op": "contains", "arg": "p99"},
+        {"op": "contains", "arg": "partial"}
+      ]},
+      "tags": ["performance-measurement", "rule:trace-limits"],
+      "split": "val",
+      "origin": "real"
+    },
+    {
+      "id": "performance_measurement_benchmark_collision",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Use a microbenchmark result to assess a production capacity risk. Explain the boundary between benchmark evidence and end-to-end proof and require representative workload evidence.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "benchmark-performance"},
+        {"op": "contains", "arg": "end-to-end"},
+        {"op": "contains", "arg": "representative"},
+        {"op": "contains", "arg": "capacity"}
+      ]},
+      "tags": ["performance-measurement", "rule:benchmark-boundary"],
+      "split": "test",
+      "origin": "real"
+    }
+  ]
+}

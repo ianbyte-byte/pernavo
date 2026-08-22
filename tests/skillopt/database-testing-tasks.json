@@ -1,0 +1,121 @@
+{
+  "format": "skillopt_sleep.tasks.v1",
+  "project": "/Users/chung/Developer/Code/loongclaude",
+  "target_skill_path": "skills/database-testing/SKILL.md",
+  "reviewed": true,
+  "tasks": [
+    {
+      "id": "database_testing_positive_preflight",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Connect to the explicitly configured PostgreSQL test database, inspect the accounts schema, and run a bounded count query. Give the exact safe workflow and commands, but do not execute them.",
+      "reference_kind": "rule",
+      "judge": {
+        "kind": "rule",
+        "checks": [
+          {"op": "contains", "arg": "preflight"},
+          {"op": "contains", "arg": "read-only"},
+          {"op": "contains", "arg": "production"},
+          {"op": "contains", "arg": "database_runner.py"},
+          {"op": "contains", "arg": "bounded"}
+        ]
+      },
+      "tags": ["database-testing", "rule:bounded-read"],
+      "split": "train",
+      "origin": "real"
+    },
+    {
+      "id": "database_testing_negative_performance",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Review this ORM query for N+1 behavior, unstable pagination, query-plan shape, lock waits, and excessive database round trips. Do not connect to a database or change test data.",
+      "reference_kind": "rule",
+      "judge": {
+        "kind": "rule",
+        "checks": [
+          {"op": "contains", "arg": "database-performance"},
+          {"op": "contains", "arg": "query plan"},
+          {"op": "contains", "arg": "read-only"},
+          {"op": "contains", "arg": "static-only"}
+        ]
+      },
+      "tags": ["database-performance", "rule:route-performance"],
+      "split": "train",
+      "origin": "real"
+    },
+    {
+      "id": "database_testing_collision_slow_query",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Use the explicitly configured test database to reproduce a slow report query, capture a safe query plan, and then analyze its indexes and ORM query shape. Keep connection and performance evidence separate and never target production.",
+      "reference_kind": "rule",
+      "judge": {
+        "kind": "rule",
+        "checks": [
+          {"op": "contains", "arg": "database-testing"},
+          {"op": "contains", "arg": "database-performance"},
+          {"op": "contains", "arg": "EXPLAIN"},
+          {"op": "contains", "arg": "production"},
+          {"op": "contains", "arg": "read-only"}
+        ]
+      },
+      "tags": ["database-testing", "database-performance", "rule:compose"],
+      "split": "train",
+      "origin": "real"
+    },
+    {
+      "id": "database_testing_positive_sqlserver",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Validate a bounded read against an explicitly configured SQL Server test database. Resolve the target first, inspect the table metadata, and report the result without exposing credentials or personal data. Do not perform a write.",
+      "reference_kind": "rule",
+      "judge": {
+        "kind": "rule",
+        "checks": [
+          {"op": "contains", "arg": "preflight"},
+          {"op": "contains", "arg": "read-only"},
+          {"op": "contains", "arg": "sqlcmd"},
+          {"op": "contains", "arg": "credential"},
+          {"op": "contains", "arg": "no write"}
+        ]
+      },
+      "tags": ["database-testing", "rule:sqlserver-read"],
+      "split": "val",
+      "origin": "real"
+    },
+    {
+      "id": "database_testing_negative_schema_review",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Explain how to inspect a query's cardinality estimates and lock behavior from an existing database performance report. This is a read-only code review; do not connect to a database or write SQL scripts.",
+      "reference_kind": "rule",
+      "judge": {
+        "kind": "rule",
+        "checks": [
+          {"op": "contains", "arg": "database-performance"},
+          {"op": "contains", "arg": "cardinality"},
+          {"op": "contains", "arg": "query plan"},
+          {"op": "contains", "arg": "static-only"}
+        ]
+      },
+      "tags": ["database-performance", "rule:review-only"],
+      "split": "val",
+      "origin": "real"
+    },
+    {
+      "id": "database_testing_collision_write_gate",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Create a disposable test fixture in the configured PostgreSQL test database, run one bounded write validation, and clean it up. State both write gates, isolate the transaction, and stop if target identification or cleanup fails; production is forbidden.",
+      "reference_kind": "rule",
+      "judge": {
+        "kind": "rule",
+        "checks": [
+          {"op": "contains", "arg": "--allow-write"},
+          {"op": "contains", "arg": "DATABASE_TESTING_ALLOW_WRITE=1"},
+          {"op": "contains", "arg": "cleanup"},
+          {"op": "contains", "arg": "production"},
+          {"op": "contains", "arg": "transaction"},
+          {"op": "contains", "arg": "stop"}
+        ]
+      },
+      "tags": ["database-testing", "rule:write-gate"],
+      "split": "test",
+      "origin": "real"
+    }
+  ]
+}

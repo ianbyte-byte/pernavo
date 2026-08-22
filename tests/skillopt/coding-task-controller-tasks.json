@@ -1,0 +1,101 @@
+{
+  "format": "skillopt_sleep.tasks.v1",
+  "project": "/Users/chung/Developer/Code/loongclaude",
+  "target_skill_path": "skills/coding-task-controller/SKILL.md",
+  "reviewed": true,
+  "tasks": [
+    {
+      "id": "coding_controller_trivial_fast",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Correct one wording error in a guide and check formatting. Select the smallest path and do not delegate lifecycle work.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "fast"},
+        {"op": "contains", "arg": "fast-local"},
+        {"op": "contains", "arg": "direct"},
+        {"op": "contains", "arg": "do not delegate"}
+      ]},
+      "tags": ["coding-task-controller", "rule:fast-path"],
+      "split": "train",
+      "origin": "real"
+    },
+    {
+      "id": "coding_controller_normal_default",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Implement a normal multi-file change with an unknown dependency. Select the default lifecycle, one writer, and independent verification; record why discovery is needed.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "default"},
+        {"op": "contains", "arg": "default-standard"},
+        {"op": "contains", "arg": "one writer"},
+        {"op": "contains", "arg": "independent"}
+      ]},
+      "tags": ["coding-task-controller", "rule:default-path"],
+      "split": "train",
+      "origin": "real"
+    },
+    {
+      "id": "coding_controller_authority",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "The user authorizes a local implementation but mentions production data and deployment. State the authority boundary and refuse to infer permission for those external actions.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "local"},
+        {"op": "contains", "arg": "authority"},
+        {"op": "contains", "arg": "production"},
+        {"op": "contains", "arg": "deployment"}
+      ]},
+      "tags": ["coding-task-controller", "rule:authority"],
+      "split": "train",
+      "origin": "real"
+    },
+    {
+      "id": "coding_controller_positive_deep",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Govern a high-risk schema change with uncertain rollback and state ownership. Select deep, bounded read-only investigations, one writer, and independent verification with a review gate.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "deep"},
+        {"op": "contains", "arg": "bounded"},
+        {"op": "contains", "arg": "one writer"},
+        {"op": "contains", "arg": "rollback"},
+        {"op": "contains", "arg": "independent"}
+      ]},
+      "tags": ["coding-task-controller", "rule:deep-path"],
+      "split": "val",
+      "origin": "real"
+    },
+    {
+      "id": "coding_controller_positive_analysis",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "The user requests read-only analysis of a repository policy. Inspect and report, but stop before implementation or external changes.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "analysis-only"},
+        {"op": "contains", "arg": "read-only"},
+        {"op": "contains", "arg": "stop"},
+        {"op": "contains", "arg": "implementation"}
+      ]},
+      "tags": ["coding-task-controller", "rule:analysis-path"],
+      "split": "val",
+      "origin": "real"
+    },
+    {
+      "id": "coding_controller_collision_handoff",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "For a retained change with an unknown dependency, automatically govern discovery, planning, implementation, independent verification, and a diff review without asking the user between ordinary internal stages.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "unknown"},
+        {"op": "contains", "arg": "plan-code-change"},
+        {"op": "contains", "arg": "develop-production-code"},
+        {"op": "contains", "arg": "verify-change-evidence"},
+        {"op": "contains", "arg": "review-mr"},
+        {"op": "contains", "arg": "without asking"}
+      ]},
+      "tags": ["coding-task-controller", "rule:handoff"],
+      "split": "test",
+      "origin": "real"
+    }
+  ]
+}
