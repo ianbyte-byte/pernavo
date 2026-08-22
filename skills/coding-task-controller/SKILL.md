@@ -28,6 +28,22 @@ Classify the request before selecting a path:
 State an ambiguity when it changes the allowed target or side effect. Otherwise, use the safest
 in-scope default and preserve the do-not-do boundary.
 
+## Decision and handoff contract
+
+- For a trivial wording or one-seam edit, select `fast` with reason code `fast-local` and use one
+  accountable owner plus a proportionate check; do not delegate or construct a full lifecycle.
+- For a normal multi-file or dependency-uncertain change, select `default` with
+  `default-standard`, one writer, and independent verification. For high-risk schema, stateful,
+  permission, external-write, or rollback-uncertain work, select `deep` with bounded investigation,
+  one writer, independent verification, and the required review gate.
+- Keep `analysis-only` read-only: inspect and report, then stop before implementation. Local
+  implementation authority does not imply permission for production data, deployment, publication,
+  or unrelated external actions.
+- Record the selected path, authority boundary, reason code, owners, missing phase, and evidence
+  layer. Route each artifact to its owner (`plan-code-change`, `develop-production-code`,
+  `verify-change-evidence`, or `review-mr`) without asking the user to advance ordinary internal
+  handoffs.
+
 ## Select a path and automatic topology
 
 Choose one path once, then execute its default topology without asking the user to advance each

@@ -10,6 +10,12 @@ description: >
 
 # Develop Production Code
 
+## Handoff and evidence boundaries
+
+- Do not implement without an approved handoff naming the seam, outcome, constraints, rollback, validation, and review points; return missing P0 facts to discovery or planning.
+- Keep author evidence separate from independent verification and deployment claims. Record only checks actually run, targets, results, artifacts, failures, skips, and unverified layers.
+- Preserve unrelated dirty work and do not infer authority for migrations, production data, external writes, deployment, or approval from local implementation permission.
+
 Implement a bounded, reviewable production change. Retain responsibility for the code and accurate
 author evidence, but do not self-approve behavior, replace independent QA, or turn local results
 into deployment proof.
