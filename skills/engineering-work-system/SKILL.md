@@ -9,6 +9,12 @@ description: >
 
 # Engineering Work System
 
+## Routing boundaries
+
+- Route each need to one specialist owner and preserve its artifact authority; do not absorb discovery, planning, implementation, verification, review, or release work into the router.
+- Compose the controller path with graph topology only when its preflight signal and measurable benefit exist. Use `degraded-sequential` when child support is unavailable and record the reason.
+- When assessing system health, score by evidence and route one or two highest-leverage gaps; a score is not proof of runtime or production health.
+
 Act as a cross-domain router and health assessor. Select specialists and their order; do not absorb
 their discovery, plan, implementation, verification, review, or release authority.
 

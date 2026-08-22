@@ -19,6 +19,17 @@ owns OCR invocation and interpretation; it does not replace independent
 behavior verification, deployment evidence, or the repository's `review-mr`
 report.
 
+## Evidence and execution boundaries
+
+- Before a real review, verify Git/Node/OCR prerequisites and `ocr llm test`. If the provider check
+  fails, stop before reviewing and report the configuration blocker; never invent or expose a key.
+- Use `--audience agent` and preserve the complete JSON result when automation or follow-up parsing
+  is needed. Keep `success`, warnings, errors, skipped work, files reviewed, and comments separate;
+  exit 0 is not proof that the code is correct.
+- Classify comments using repository evidence and report path/line, impact, and smallest fix. OCR
+  output remains model evidence requiring human judgment; it does not replace `review-mr`, behavior
+  verification, deployment evidence, or approval.
+
 ## Preconditions
 
 Before a real review, inspect the target repository and run:
