@@ -1,0 +1,23 @@
+{
+  "ok": true,
+  "reviewer": "independent-visual-qa",
+  "standard_rows": {
+    "idle": "pass",
+    "running-right": "pass",
+    "running-left": "pass",
+    "waving": "pass",
+    "jumping": "pass",
+    "failed": "pass",
+    "waiting": "pass",
+    "running": "pass",
+    "review": "pass"
+  },
+  "cardinals": {
+    "000": "pass: frontal/up",
+    "090": "pass: screen-right",
+    "180": "pass: frontal/down",
+    "270": "pass: screen-left"
+  },
+  "identity": "pass: stable human copper twin ponytails, cream-lemon sailor outfit, navy rosette, no animal anatomy",
+  "required_next_action": "Generate coherent look rows 9 and 10, assemble the 11-row atlas, despill once, and rerun full QA."
+}

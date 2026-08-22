@@ -1,0 +1,211 @@
+schema_version: 1
+project: ian_codex_pets
+research_date: "2026-07-25"
+character_policy: human_only
+
+verified_profile:
+  stage_name: IAN
+  korean_stage_name: 이안
+  group: Hearts2Hearts
+  agency: SM Entertainment
+  birth_date: "2009-10-09"
+  group_debut_date: "2025-02-24"
+  debut_release: The Chase
+
+fact_boundaries:
+  legal_name: "정이안 and 郑以安 are not confirmed as legal-name forms by the reviewed first-party artist profiles"
+  official_member_color: null
+  official_member_emoji: null
+  official_mbti: null
+  fixed_official_position: null
+  palette_note: "All palettes below come from the supplied reference photos, not official member colors."
+
+shared_character_lock: |-
+  Create one complete, age-appropriate and nonsexualized teenage human idol avatar.
+  She is fully human, with ordinary human ears, two human arms, clearly formed
+  human hands and fingers, two human legs and human footwear. Preserve warm
+  copper-auburn hair, bright dark eyes, a softly rounded face, expressive brows,
+  subtle rosy cheeks and an unusually readable range of facial expressions.
+  Her personality is emotionally perceptive, people-loving, positive, playful,
+  fan-minded and hardworking for the stage. Let a trace of pre-camera nerves
+  become focused enjoyment and confident warmth. Never add animal anatomy.
+
+shared_avoid:
+  - animal or animal-human hybrid
+  - animal ears, tail, paws, muzzle, whiskers, claws, wings or horns
+  - mascot animal, plush animal or anthropomorphic object
+  - sexualized or age-inappropriate styling
+  - photoreal portrait or exact photo reconstruction
+  - readable text, labels, logos, watermarks or copied character branding
+  - scenery, floor, cast shadow, glow, aura or detached effects
+  - malformed hands, extra fingers, extra limbs, hidden feet or cropped body
+
+reference_catalog:
+  ian_01:
+    path: references/ian-01-black-white-wave.jpg
+    sha256: 268ddf1e0a68cd6fcd051d37699223405bc015d84b05644057192684ce30a910
+    use: "human face, high bun, open-hand wave and black-and-white stage styling"
+    avoid: "photo background, watermark and exact garment copying"
+  ian_02:
+    path: references/ian-02-heartline-noir.jpg
+    sha256: 06b0da1f7ec4f5a8bf2ee3aa2b0d3db200bc81c5e149f3c05003bb3c20ea0393
+    use: "copper-red hair, silver heart cue and black-and-ivory palette"
+    avoid: "photoreal reconstruction and exact branded jewelry"
+  ian_03:
+    path: references/ian-03-white-stage-accessory.png
+    sha256: 6560e153d7dd3798dfecf4954af3d844055b904ed9088ce1f5591f6578271e56
+    use: "copper hair, white stage styling, rosy makeup and playful expression only"
+    avoid: "all animal ears, paw gloves and animal-role styling visible in the reference"
+  ian_04:
+    path: references/ian-04-azure-sailor.jpg
+    sha256: b65955fa15e03f4d722b55b4c96280986d9a785e0e0a0b68d6705beec42c6f11
+    use: "navy sailor collar, blue bow, copper hair and clean portrait cues"
+    avoid: "exact badge artwork, readable mark and photo background"
+  ian_05:
+    path: references/ian-05-denim-navigator.jpg
+    sha256: 945c8c3aee20b5023a32111da228b24acfef0116da051b24c1f67e07dee14c04
+    use: "full human silhouette, denim pinafore, navy cap and casual warmth"
+    avoid: "both plush characters, their likenesses, tags and cords"
+  ian_06:
+    path: references/ian-06-lemon-twintail-open.jpg
+    sha256: dd5cdae08f2223e69ede72393f8c5d3b22c60f7bfb25073e09c454d4b9626f84
+    use: "long human twin-tail mechanics, cream-yellow sailor styling and open pose"
+    avoid: "stairs, warning signs, exact badge art and seated photo composition"
+  ian_07:
+    path: references/ian-07-lemon-twintail-cheek.jpg
+    sha256: b3c669968c2beaaa277dd7c623e0f72454258713f9ce6c9e63e9d4afd217e02f
+    use: "twin-tail identity, compact cheek gesture and expectant waiting expression"
+    avoid: "stairs, exact badge art and interpreting twin-tails as animal appendages"
+
+common_animation_personality:
+  idle: "Calm breathing, a soft blink and a tiny persona-preserving hair movement."
+  running_right: "Readable right-facing human travel cadence with alternating steps."
+  running_left: "Readable left-facing human travel cadence with alternating steps."
+  waving: "Friendly open human-hand wave; no wave marks or detached effects."
+  jumping: "Small vertical hop expressed only through body position."
+  failed: "Brief sensitive reaction through brows and shoulders, followed by recovery."
+  waiting: "Expectant listening posture that clearly asks for user input or approval."
+  running: "Focused task-processing through eyes, posture and restrained hand movement; no literal running."
+  review: "Analytical gaze, restrained head tilt and thoughtful hand position; no UI or new prop."
+
+pets:
+  - pet_id: ian-azure-navigator
+    display_name: "Ian · Azure Navigator"
+    status: installed
+    style_preset: 3d-toy
+    references: [ian_04, ian_05]
+    description: "A warm, expressive human navigator in navy sailor styling."
+    pet_notes: |-
+      Create a compact full-body human Codex Pet called Azure Navigator.
+      Give her warm copper-auburn waist-length human hair, a softly rounded
+      face, bright dark eyes, human hands and compact navy ankle boots. Her
+      outfit uses a broad navy-and-white sailor collar, sky-blue satin bow,
+      one original silver heart ornament, structured dark-denim pinafore and
+      a small tilted navy sailor cap. Render her as a premium soft-vinyl 3D
+      collectible with an oversized expressive head, compact body, smooth
+      materials and details readable in a 192x208 cell. Keep every accessory
+      attached and show one centered head-to-toe human character on a flat
+      removable chroma-key background.
+    identity_anchors:
+      - long copper-auburn hair
+      - tilted navy sailor cap
+      - broad sailor collar and sky-blue bow
+      - dark-denim pinafore
+    look_mechanics: |-
+      Anchor boots, hips and lower torso. Eyes, eyelids and eyebrows lead;
+      the head and neck follow with restrained anatomical motion. Long hair
+      follows one step behind with gentle inertia. Preserve skull and facial
+      spacing; never rotate the whole sprite or rely on pupil-only motion.
+
+  - pet_id: ian-heartline-noir
+    display_name: "Ian · Heartline Noir"
+    status: installed
+    style_preset: sticker
+    references: [ian_01, ian_02]
+    description: "An elegant human stage character built around black, ivory and a silver heart cue."
+    pet_notes: |-
+      Create a compact full-body human Codex Pet called Heartline Noir.
+      Give her copper-red hair in a high braided bun with soft side bangs and
+      one narrow black ribbon attached behind the hair. Use large dark eyes,
+      a poised smile, clear human hands and black ankle boots. Dress her in a
+      modest graphic black-and-ivory asymmetric stage outfit with one ivory
+      shoulder panel, fitted black bodice, wide ivory belt and one original
+      embossed silver heart ornament. Render as a premium illustrated sticker
+      with crisp outlines, clean cel shading, oversized expressive head and
+      compact whole-body proportions. Place one complete centered human on a
+      flat removable chroma-key background.
+    identity_anchors:
+      - high braided bun and attached black ribbon
+      - black-and-ivory asymmetric shoulder panel
+      - original silver heart ornament
+      - controlled but unusually varied facial acting
+    look_mechanics: |-
+      Anchor boots and lower torso. Eyes, eyelids and brows initiate direction,
+      followed by a small head, neck and shoulder turn. The bun remains stable
+      while the attached ribbon lags continuously. Side directions reveal the
+      appropriate cheek and partial profile without stretching the face.
+
+  - pet_id: ian-lemon-cadet
+    display_name: "Ian · Lemon Cadet"
+    status: installed
+    style_preset: painterly
+    references: [ian_03, ian_06, ian_07]
+    description: "A lively human cadet with copper twin-tails and cream-yellow sailor styling."
+    pet_notes: |-
+      Create a compact full-body human Codex Pet called Lemon Cadet. She has
+      long copper-auburn human twin ponytails, center-parted bangs, lively dark
+      eyes, rosy cheeks, visible human hands and cream ankle boots. The twin
+      ponytails are ordinary human hair and never animal ears or tails. Dress
+      her in a modest cream-white sailor uniform with pale lemon piping,
+      structured square collar, short yellow waist bands and compact pleated
+      skirt. Attach one navy fabric rosette with an original abstract silver
+      heart center and no animal illustration. Render as a polished painterly
+      anime-game sprite with clean edges, compact body and large readable
+      costume shapes on a flat removable chroma-key background.
+    identity_anchors:
+      - long high human twin ponytails
+      - cream-white and pale-lemon sailor uniform
+      - navy rosette with original abstract heart center
+      - playful energy-source expression
+    look_mechanics: |-
+      Anchor boots, skirt and lower torso. Eyes and eyelids lead, followed by
+      restrained head and neck motion. Both ponytails remain attached at fixed
+      human hair ties and lag smoothly; they must never behave like animal
+      appendages. Preserve facial proportions and use no whole-body rotation.
+
+deliveries:
+  ian-azure-navigator:
+    run_dir: runs/ian-azure-navigator
+    pet_manifest: runs/ian-azure-navigator/final/pet.json
+    atlas: runs/ian-azure-navigator/final/spritesheet-extended.webp
+    atlas_sha256: cfaa4e8ca4159b51480a212be4cb231b102af90b360655c7db3c0a7f8cf3a5fb
+    validation: runs/ian-azure-navigator/final/validation-extended.json
+    final_qa: runs/ian-azure-navigator/qa/final-visual-qa.json
+    installed_path: /Users/chung/.codex/pets/ian-azure-navigator
+  ian-heartline-noir:
+    run_dir: runs/ian-heartline-noir
+    pet_manifest: runs/ian-heartline-noir/final/pet.json
+    atlas: runs/ian-heartline-noir/final/spritesheet-extended.webp
+    atlas_sha256: a275782c3aa3e99804516f1020832be7a969d0fc6a3a252fa2d853bf73449022
+    validation: runs/ian-heartline-noir/final/validation-extended.json
+    final_qa: runs/ian-heartline-noir/qa/final-visual-qa.json
+    installed_path: /Users/chung/.codex/pets/ian-heartline-noir
+  ian-lemon-cadet:
+    run_dir: runs/ian-lemon-cadet
+    pet_manifest: runs/ian-lemon-cadet/final/pet.json
+    atlas: runs/ian-lemon-cadet/final/spritesheet-extended.webp
+    atlas_sha256: 24abea89638e27a60de87e2a7fcc7260e22cc8bd8cfcbd5ae1470b384f7cc149
+    validation: runs/ian-lemon-cadet/final/validation-extended.json
+    final_qa: runs/ian-lemon-cadet/qa/final-visual-qa.json
+    installed_path: /Users/chung/.codex/pets/ian-lemon-cadet
+
+sources:
+  - https://cdn2.smentertainment.com/wp-content/uploads/2025/02/4Q24_ScriptENG_CEO-Message_20250210_vF-1.pdf
+  - https://www.universal-music.co.jp/hearts2hearts/biography/
+  - https://seventeen-web.jp/entertainment/k-pop/25547/
+  - https://ray-web.jp/535123
+  - https://www.wonderlandmagazine.com/2025/10/29/interview-hearts2hearts/
+  - https://www.mk.co.kr/en/musics/11446262
+  - https://www.nme.com/the-cover/hearts2hearts-22-06-2026-3952287
+  - https://www.marieclaire.com/culture/music/hearts2hearts-lemon-tang-music-taste-interview/
+  - https://seventeen-web.jp/lifestyle/l-news/25767/

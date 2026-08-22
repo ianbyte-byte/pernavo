@@ -1,0 +1,37 @@
+{
+  "identity": "Ian / 이안 / 郑以安",
+  "generated_at": "2026-07-26T18:21:03+08:00",
+  "primary": {
+    "path": "projects/codex-pets/ian/references/video-frames/ian-video-02-t01.25.jpg",
+    "sha256": "481937f9ba1d01dd8c0e49935094023ba7ad43a241b07e6afc358035bc36c4e5",
+    "role": "primary face reference"
+  },
+  "support": [
+    {
+      "path": "projects/codex-pets/ian/references/video-frames/ian-video-01-t00.80.jpg",
+      "sha256": "201c323fe48f38ea5fae4c21533783b7264818cc8190301795b5858823629b63",
+      "role": "front-view support"
+    },
+    {
+      "path": "projects/codex-pets/ian/references/video-frames/ian-video-01-t01.68.jpg",
+      "sha256": "112ba934585f624816280e88f4e6f6e432b42c21d8617d7cb6159d3b7f40a844",
+      "role": "three-quarter geometry support"
+    },
+    {
+      "path": "projects/codex-pets/ian/references/video-frames/ian-video-01-t04.50.jpg",
+      "sha256": "476324117df662d324e8b99d83426b59ce39e5466e772a6827a69aa66060962e",
+      "role": "close-up eyes, nose, and lip support"
+    }
+  ],
+  "generated_source": {
+    "path": "/Users/chung/.codex/generated_images/019f9d06-5dd3-7a40-8ea0-8cdfd76aa17c/exec-05d95a51-61b3-403b-b4f1-f49a13a2be1d.png",
+    "sha256": "4a0a37ab50de186b4c6490fe376872e03124c05f00ca721eb8445dc5baa9d81f",
+    "selected": true
+  },
+  "copied_final": {
+    "path": "projects/codex-pets/ian/runs/ian-identity-master-v2/references/identity-master.png",
+    "sha256": "4a0a37ab50de186b4c6490fe376872e03124c05f00ca721eb8445dc5baa9d81f",
+    "dimensions": "1086x1448"
+  },
+  "notes": "Single-subject photorealistic portrait generated from the four listed user-provided video frames. No pet rows or YAML files were changed."
+}

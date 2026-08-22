@@ -1,0 +1,20 @@
+{
+  "verdict": "PASS",
+  "reviewer": "independent-read-only-agent",
+  "scope": [
+    "contact-sheet.png",
+    "previews/*.gif"
+  ],
+  "frame_counts": {
+    "idle": 6,
+    "running-right": 8,
+    "running-left": 8,
+    "waving": 4,
+    "jumping": 5,
+    "failed": 8,
+    "waiting": 6,
+    "running": 6,
+    "review": 6
+  },
+  "findings": "The atlas preserves one realistic adult identity and the white sleeveless collared knit top, pale lilac-and-blue plaid pleated skirt with safety shorts, white wristband, and white ankle boots. Bodies, scale, baseline, transparency, and behaviors are consistent, with no props, UI, text, effects, shadows, empty frames, merged frames, or clipping observed."
+}

@@ -1,0 +1,24 @@
+{
+  "decision": "pass",
+  "majority": "3 PASS",
+  "confidence": ["high", "high", "high"],
+  "candidate": "references/lemon-identity-bust-r3.png",
+  "candidate_sha256": "d714b77b7ea1957109e192addb4a13815b3baf682fa3d3e7d020fcb5274e3c93",
+  "accepted_features": [
+    "broad forehead, softly elongated oval face, cheek width and lower-face length match the accepted master",
+    "almond eyes, natural spacing and brow-eye axis remain aligned without doll-eye enlargement",
+    "straight narrow nose, rounded tip and nose-to-lip distance remain aligned",
+    "cupid's bow, fuller lower lip and mouth width remain aligned",
+    "jaw taper and rounded chin remain aligned",
+    "viewer-left under-eye mole is retained",
+    "photoreal age-appropriate human; twin ponytails are ordinary human hair"
+  ],
+  "non_blocking_warnings": [
+    "eye aperture is slightly more open than in some video frames",
+    "lighting and lip finish are smoother and warmer than the compressed video"
+  ],
+  "blocking_repairs": [],
+  "full_body_generation_authorized": true,
+  "review_policy": "three isolated read-only reviewers; unanimous high-confidence PASS",
+  "limitations": "Visual identity consistency decision only; not biometric or pixel-level verification."
+}

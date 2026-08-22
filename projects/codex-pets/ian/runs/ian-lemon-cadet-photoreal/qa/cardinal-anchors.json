@@ -1,0 +1,61 @@
+{
+  "ok": true,
+  "strip": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal/decoded/look-cardinals.png",
+  "directions": [
+    "000",
+    "090",
+    "180",
+    "270"
+  ],
+  "errors": [],
+  "anchors": [
+    {
+      "direction": "000",
+      "source_box": [
+        0,
+        0,
+        510,
+        771
+      ],
+      "used_pixels": 84842,
+      "edge_pixels": 0,
+      "output": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal/decoded/look-anchors/000.png"
+    },
+    {
+      "direction": "090",
+      "source_box": [
+        510,
+        0,
+        1020,
+        771
+      ],
+      "used_pixels": 82313,
+      "edge_pixels": 0,
+      "output": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal/decoded/look-anchors/090.png"
+    },
+    {
+      "direction": "180",
+      "source_box": [
+        1020,
+        0,
+        1530,
+        771
+      ],
+      "used_pixels": 83275,
+      "edge_pixels": 0,
+      "output": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal/decoded/look-anchors/180.png"
+    },
+    {
+      "direction": "270",
+      "source_box": [
+        1530,
+        0,
+        2040,
+        771
+      ],
+      "used_pixels": 81084,
+      "edge_pixels": 0,
+      "output": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-lemon-cadet-photoreal/decoded/look-anchors/270.png"
+    }
+  ]
+}

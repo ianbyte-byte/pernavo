@@ -1,0 +1,25 @@
+{
+  "decision": "pass",
+  "majority": "2 PASS, 1 REVISE",
+  "selected_candidate": "sources/canonical-base-r2-initial-fail.png",
+  "selected_raw_copy": "sources/base-candidate-r2-selected.png",
+  "candidate_sha256": "89e35769b9d578937acd6232d17352624e322144b0bc391f078678836d119120",
+  "selection_vote": "2 alternate, 1 current",
+  "reviewer_confidence": ["medium", "medium", "medium"],
+  "accepted_features": [
+    "forehead, face length and softly tapered oval contour remain close to the master",
+    "natural almond eye size and spacing avoid the doll-eye failure",
+    "straight nose, rounded tip, nose-to-lip spacing and fuller lips preserve Ian identity",
+    "jaw taper remains gradual and the viewer-left under-eye mole remains readable",
+    "covered shoulders and neutral full-body styling are age-appropriate and nonsexualized"
+  ],
+  "non_blocking_warnings": [
+    "jaw and chin remain slightly narrower than the master",
+    "the selected dark-auburn hair is less copper-red than the rejected alternative",
+    "future rows must retain face geometry rather than inherit glam makeup from outfit photos"
+  ],
+  "rejected_r2_candidate": "sources/canonical-base-r2-current-rejected.png",
+  "animation_authorized": true,
+  "review_policy": "three isolated read-only reviewers; majority PASS and majority candidate selection required",
+  "limitations": "Visual consistency decision only; not biometric or pixel-level verification."
+}

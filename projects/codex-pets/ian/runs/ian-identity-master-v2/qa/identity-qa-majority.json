@@ -1,0 +1,65 @@
+{
+  "candidate": "references/identity-master.png",
+  "candidate_sha256": "4a0a37ab50de186b4c6490fe376872e03124c05f00ca721eb8445dc5baa9d81f",
+  "decision": "pass",
+  "same_person_confidence": "high",
+  "review_policy": "three isolated read-only visual reviewers; majority PASS required",
+  "reviewers": [
+    {
+      "id": "identity_master_qa_1",
+      "verdict": "PASS",
+      "same_person_confidence": "high",
+      "matched_features": [
+        "oval face with medium-narrow cheek width and tapered rounded jaw and chin",
+        "tall broad forehead and similar brow placement",
+        "almond-shaped slightly hooded eyes with comparable spacing and outer-corner axis",
+        "slender straight nasal bridge with compact rounded tip",
+        "defined cupid's bow, fuller lower lip and similar mouth width",
+        "stable small mole below the viewer-left eye"
+      ],
+      "non_blocking_differences": [
+        "candidate is cleaner, more frontal and slightly more symmetrical",
+        "lower face reads slightly shorter or narrower within pose and lens tolerance",
+        "skin color and smoothness differ from warm compressed video"
+      ]
+    },
+    {
+      "id": "identity_master_qa_2",
+      "verdict": "PASS",
+      "same_person_confidence": "high",
+      "matched_features": [
+        "consistent oval contour with moderate cheek width and gently tapered jaw",
+        "almond-shaped slightly hooded eyes with matching spacing and axis",
+        "softly arched medium-thickness brows",
+        "narrow straight nose bridge with small rounded tip",
+        "medium-full lips with subtle cupid's bow and fuller lower lip",
+        "stable small mole below the viewer-left eye"
+      ],
+      "non_blocking_differences": []
+    },
+    {
+      "id": "identity_master_qa_3",
+      "verdict": "PASS",
+      "same_person_confidence": "high",
+      "matched_features": [
+        "matching long-oval facial proportions and cheek-to-jaw taper",
+        "matching forehead height and width",
+        "matching brow and almond-eye axes without doll-eye enlargement",
+        "matching nose length, rounded tip and nose-to-lip spacing",
+        "matching cupid's bow, fuller lower lip and mouth width",
+        "preserved lower-face length and rounded narrow chin",
+        "stable small mole below the viewer-left eye"
+      ],
+      "non_blocking_differences": [
+        "nose wings and tip are slightly narrower or more refined",
+        "jaw edge is slightly smoother than in some dynamic video frames"
+      ]
+    }
+  ],
+  "blocking_repairs": [],
+  "limitations": [
+    "This is visual identity consistency review, not biometric verification.",
+    "The final 192x208 pet cells cannot preserve source-video pixel detail or support a literal pixel-level 1:1 claim."
+  ],
+  "next_gate": "Generate three outfit-specific canonical full-body bases from this accepted identity master, then repeat isolated identity QA before animation rows."
+}

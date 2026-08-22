@@ -1,0 +1,17 @@
+{
+  "decision": "accept",
+  "severity": "minor",
+  "reviewed_by": "parent",
+  "cardinal_gates": {
+    "000_vs_180": "pass",
+    "090_vs_270": "pass"
+  },
+  "failed_checks": [
+    "247.5 and 225 horizontal components received opposite-sign blind majorities",
+    "202.5 and 157.5 horizontal components were blind-ambiguous",
+    "067.5 upward component and 292.5 upward component were blind-ambiguous"
+  ],
+  "labeled_evidence": "Normal-size labeled review confirms each intermediate remains in its intended quadrant and the ordered loop advances monotonically through unmistakable cardinals.",
+  "continuity_evidence": "No alpha holes, scale pop, registration jump, wrong-quadrant reversal or visible closure snap; metric outliers at 202.5->225 and 337.5->000 were visually reviewed and accepted.",
+  "reason": "The validator reports ok=true and all hard cardinal pairs pass. Remaining findings are intermediate-axis uncertainty, which the v2 acceptance policy classifies as reviewable minor evidence when labeled loop review is coherent."
+}

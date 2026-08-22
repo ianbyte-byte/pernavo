@@ -1,0 +1,4 @@
+references/private/
+work/
+*.tmp
+.DS_Store

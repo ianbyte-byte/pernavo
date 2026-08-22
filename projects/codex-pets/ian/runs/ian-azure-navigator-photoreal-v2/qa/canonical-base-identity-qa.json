@@ -1,0 +1,20 @@
+{
+  "decision": "revise",
+  "majority": "2 REVISE, 1 PASS",
+  "same_person_confidence": "medium",
+  "matched_features": [
+    "overall long oval face direction",
+    "brow and eye axis broadly aligned",
+    "straight nose direction and lip relationship",
+    "viewer-left under-eye mole retained"
+  ],
+  "blocking_repairs": [
+    "reduce and horizontally lengthen the eye aperture to match the accepted master",
+    "restore nose length, rounded nose-tip volume and nose-to-lip spacing",
+    "lengthen the lower face and broaden and round the jaw and chin",
+    "preserve the accepted under-eye mole"
+  ],
+  "style_gate": "pass",
+  "animation_authorized": false,
+  "review_policy": "three isolated read-only visual reviewers; majority decision"
+}

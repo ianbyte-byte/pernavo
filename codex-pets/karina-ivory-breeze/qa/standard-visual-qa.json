@@ -1,0 +1,20 @@
+{
+  "verdict": "PASS",
+  "reviewer": "independent-read-only-agent",
+  "scope": [
+    "contact-sheet.png",
+    "previews/*.gif"
+  ],
+  "frame_counts": {
+    "idle": 6,
+    "running-right": 8,
+    "running-left": 8,
+    "waving": 4,
+    "jumping": 5,
+    "failed": 8,
+    "waiting": 6,
+    "running": 6,
+    "review": 6
+  },
+  "findings": "Consistent realistic adult-human identity, continuous attached ivory crinkled strappy ankle-length dress, ivory flat sandals, full bodies, stable scale and baseline, and distinct row behaviors. No props, UI, effects, shadows, text, empty frames, clipping, or merged frames were observed."
+}

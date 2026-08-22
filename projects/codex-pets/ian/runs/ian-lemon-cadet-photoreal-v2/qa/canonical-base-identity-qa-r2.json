@@ -1,0 +1,18 @@
+{
+  "decision": "fail",
+  "majority": "2 FAIL, 1 REVISE",
+  "candidate_sha256": "3c427fd4cb79168d9bd590269479bd8324d34447c635ae6417a67644762c9bef",
+  "reviewer_confidence": ["high", "high", "high"],
+  "blocking_repairs": [
+    "remove the remaining generic idol and doll-eye geometry",
+    "restore the accepted master's longer oval middle and lower face",
+    "restore narrower almond eyes and the accepted brow-eye axis",
+    "restore nose length, rounded tip, nose-to-lip spacing and fuller lips",
+    "broaden and round the jaw and chin",
+    "restore the viewer-left under-eye mole"
+  ],
+  "style_gate": "pass",
+  "animation_authorized": false,
+  "review_policy": "three isolated read-only reviewers; majority decision",
+  "limitations": "Visual consistency decision only; not biometric or pixel-level verification."
+}

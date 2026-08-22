@@ -1,0 +1,112 @@
+{
+  "ok": true,
+  "frames_root": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/heartline/projects/codex-pets/ian/runs/ian-heartline-noir-photoreal-v2/qa/rows/idle/frames",
+  "states": [
+    "idle"
+  ],
+  "errors": [],
+  "warnings": [],
+  "rows": [
+    {
+      "state": "idle",
+      "expected_frames": 6,
+      "actual_frames": 6,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/heartline/projects/codex-pets/ian/runs/ian-heartline-noir-photoreal-v2/qa/rows/idle/frames/idle/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6606,
+          "bbox": [
+            70,
+            5,
+            122,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 82
+        },
+        {
+          "index": 1,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/heartline/projects/codex-pets/ian/runs/ian-heartline-noir-photoreal-v2/qa/rows/idle/frames/idle/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6494,
+          "bbox": [
+            70,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 71
+        },
+        {
+          "index": 2,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/heartline/projects/codex-pets/ian/runs/ian-heartline-noir-photoreal-v2/qa/rows/idle/frames/idle/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6492,
+          "bbox": [
+            70,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 62
+        },
+        {
+          "index": 3,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/heartline/projects/codex-pets/ian/runs/ian-heartline-noir-photoreal-v2/qa/rows/idle/frames/idle/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6582,
+          "bbox": [
+            70,
+            5,
+            122,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 80
+        },
+        {
+          "index": 4,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/heartline/projects/codex-pets/ian/runs/ian-heartline-noir-photoreal-v2/qa/rows/idle/frames/idle/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6591,
+          "bbox": [
+            70,
+            5,
+            122,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 75
+        },
+        {
+          "index": 5,
+          "file": "/private/tmp/ian-pets-v2-worktrees.lVdwTD/heartline/projects/codex-pets/ian/runs/ian-heartline-noir-photoreal-v2/qa/rows/idle/frames/idle/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6598,
+          "bbox": [
+            70,
+            5,
+            122,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 74
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "pet": "ian-heartline-noir",
+  "decision": "PASS",
+  "atlas_sha256": "4011d721f21129067b6814d5a9740925e4bd49ad1e4de8c571ec6f6bb102e2f9",
+  "blind_validation": "direction-blind-validation-r2.pre-despill.json",
+  "hard_gates_pass": true,
+  "continuity_ok": true,
+  "warning_disposition": "accepted_review_only",
+  "findings": [
+    "The labeled 000→090→180→270→000 loop is visually coherent, with body and head rotation progressing through all 16 directions.",
+    "Hard cardinals are explicit: 000 up, 090 screen-right, 180 down, 270 screen-left.",
+    "Review warnings reflect visually subtle oblique components and evaluator disagreement at thumbnail scale; the labeled sequence itself does not reverse."
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "ok": false,
+  "frames_root": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/review/frames",
+  "states": [
+    "review"
+  ],
+  "errors": [
+    "review frame 01 is empty or too sparse (23 pixels)",
+    "review frame 03 is empty or too sparse (23 pixels)",
+    "review frame 04 is empty or too sparse (19 pixels)"
+  ],
+  "warnings": [
+    "review frame 01 is much smaller than the row median (23 vs 6750)",
+    "review frame 03 is much smaller than the row median (23 vs 6750)",
+    "review frame 04 is much smaller than the row median (19 vs 6750)",
+    "review frame 05 is much larger than the row median (20133 vs 6750)"
+  ],
+  "rows": [
+    {
+      "state": "review",
+      "expected_frames": 6,
+      "actual_frames": 6,
+      "extraction_method": "components",
+      "ok": false,
+      "errors": [
+        "review frame 01 is empty or too sparse (23 pixels)",
+        "review frame 03 is empty or too sparse (23 pixels)",
+        "review frame 04 is empty or too sparse (19 pixels)"
+      ],
+      "warnings": [
+        "review frame 01 is much smaller than the row median (23 vs 6750)",
+        "review frame 03 is much smaller than the row median (23 vs 6750)",
+        "review frame 04 is much smaller than the row median (19 vs 6750)",
+        "review frame 05 is much larger than the row median (20133 vs 6750)"
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/review/frames/review/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 17871,
+          "bbox": [
+            5,
+            39,
+            187,
+            169
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 79
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/review/frames/review/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 23,
+          "bbox": [
+            91,
+            97,
+            100,
+            110
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 9
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/review/frames/review/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 13477,
+          "bbox": [
+            5,
+            58,
+            187,
+            150
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 18
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/review/frames/review/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 23,
+          "bbox": [
+            89,
+            99,
+            102,
+            108
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 16
+        },
+        {
+          "index": 4,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/review/frames/review/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 19,
+          "bbox": [
+            92,
+            99,
+            99,
+            109
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 8
+        },
+        {
+          "index": 5,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/review/frames/review/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 20133,
+          "bbox": [
+            26,
+            5,
+            166,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 275
+        }
+      ]
+    }
+  ]
+}

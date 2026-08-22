@@ -1,0 +1,29 @@
+{
+  "pet_id": "ian-lemon-cadet",
+  "pass": true,
+  "reviewed_surface": "decoded/base.png",
+  "identity_evidence": [
+    "references/reference-01.jpg",
+    "references/reference-02.jpg",
+    "references/reference-03.jpg"
+  ],
+  "outfit_evidence": [
+    "references/reference-04.jpg",
+    "references/reference-05.jpg"
+  ],
+  "checks": {
+    "photoreal_real_human": true,
+    "ian_face_geometry_preserved": true,
+    "natural_human_proportions": true,
+    "complete_head_to_toe_body": true,
+    "age_appropriate_nonsexualized": true,
+    "no_cartoon_anime_chibi_toy_or_abstract_style": true,
+    "no_animal_anatomy_or_copied_character_art": true,
+    "original_abstract_silver_heart_badge": true,
+    "flat_chroma_background": true
+  },
+  "notes": [
+    "The first generation copied reference badge art; the accepted repair replaces only that badge with an original abstract silver heart.",
+    "Twin ponytails remain ordinary human hair and the accepted character is entirely human."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "reviewer": "independent-manual-qa",
+  "surface": "draft7-look-directions.png, draft7-look-continuity.json, and exact draft7 atlas cells",
+  "pass": true,
+  "directionErrors": [],
+  "continuityConcerns": [],
+  "artifactConcerns": [
+    {
+      "kind": "alpha-hole",
+      "severity": "non-material",
+      "directions": ["000", "135", "225"]
+    },
+    {
+      "kind": "337.5-to-000",
+      "severity": "non-material",
+      "diffPixels": 1786
+    },
+    {
+      "kind": "chroma-fringe",
+      "severity": "pre-despill-note"
+    }
+  ],
+  "notes": "All cardinals and clockwise intermediates are correct. Identity, planted baseline, body scale, and pose remain coherent; remaining diagnostic warnings are not visually material."
+}

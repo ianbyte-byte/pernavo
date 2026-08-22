@@ -1,0 +1,17 @@
+strip_size (2172, 724)
+frame_count 6
+strip_corners [(23, 235, 21), (22, 236, 20), (23, 234, 21), (22, 240, 20)]
+frame_sizes [(192, 208), (192, 208), (192, 208), (192, 208), (192, 208), (192, 208)]
+frame_corner_rgba [[(0, 0, 0, 0), (0, 0, 0, 0), (0, 0, 0, 0), (0, 0, 0, 0)], [(0, 0, 0, 0), (0, 0, 0, 0), (0, 0, 0, 0), (0, 0, 0, 0)], [(0, 0, 0, 0), (0, 0, 0, 0), (0, 0, 0, 0), (0, 0, 0, 0)], [(0, 0, 0, 0), (0, 0, 0, 0), (0, 0, 0, 0), (0, 0, 0, 0)], [(0, 0, 0, 0), (0, 0, 0, 0), (0, 0, 0, 0), (0, 0, 0, 0)], [(0, 0, 0, 0), (0, 0, 0, 0), (0, 0, 0, 0), (0, 0, 0, 0)]]
+slot 0 bbox_non_green (41, 41, 361, 624)
+slot 1 bbox_non_green (0, 49, 361, 618)
+slot 2 bbox_non_green (0, 47, 361, 621)
+slot 3 bbox_non_green (0, 51, 361, 608)
+slot 4 bbox_non_green (0, 46, 361, 620)
+slot 5 bbox_non_green (0, 50, 318, 615)
+00.png alpha_bbox (38, 5, 153, 203) opaque_pixels 11384
+01.png alpha_bbox (41, 5, 150, 203) opaque_pixels 12036
+02.png alpha_bbox (38, 5, 153, 203) opaque_pixels 12013
+03.png alpha_bbox (43, 5, 148, 203) opaque_pixels 12002
+04.png alpha_bbox (43, 5, 148, 203) opaque_pixels 11472
+05.png alpha_bbox (33, 5, 159, 203) opaque_pixels 12229

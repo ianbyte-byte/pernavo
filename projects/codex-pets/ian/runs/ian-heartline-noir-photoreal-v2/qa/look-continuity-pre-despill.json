@@ -1,0 +1,161 @@
+{
+  "ok": true,
+  "reviewRequired": true,
+  "medianDiffPixels": 1257.0,
+  "warnings": [
+    "067.5->090 diff is a local outlier (2562 pixels vs neighbor average 816)",
+    "067.5->090 sprite area ratio is high (1.28)",
+    "157.5->180 diff is a local outlier (2270 pixels vs neighbor average 1528)",
+    "202.5->225 diff is a local outlier (2173 pixels vs neighbor average 1012)",
+    "247.5->270 diff is a local outlier (1328 pixels vs neighbor average 832)",
+    "292.5->315 diff is a local outlier (1977 pixels vs neighbor average 1289)",
+    "292.5->315 sprite area ratio is high (1.22)"
+  ],
+  "alphaHoles": [],
+  "pairs": [
+    {
+      "from": "000",
+      "to": "022.5",
+      "firstPixels": 5884,
+      "secondPixels": 5759,
+      "diffPixels": 1186,
+      "centerDelta": 0.0,
+      "areaRatio": 1.0217051571453377
+    },
+    {
+      "from": "022.5",
+      "to": "045",
+      "firstPixels": 5759,
+      "secondPixels": 5832,
+      "diffPixels": 1416,
+      "centerDelta": 2.5,
+      "areaRatio": 1.0126758117728771
+    },
+    {
+      "from": "045",
+      "to": "067.5",
+      "firstPixels": 5832,
+      "secondPixels": 5730,
+      "diffPixels": 1011,
+      "centerDelta": 0.5,
+      "areaRatio": 1.0178010471204189
+    },
+    {
+      "from": "067.5",
+      "to": "090",
+      "firstPixels": 5730,
+      "secondPixels": 4463,
+      "diffPixels": 2562,
+      "centerDelta": 2.692582403567252,
+      "areaRatio": 1.2838897602509522
+    },
+    {
+      "from": "090",
+      "to": "112.5",
+      "firstPixels": 4463,
+      "secondPixels": 4491,
+      "diffPixels": 622,
+      "centerDelta": 0.5,
+      "areaRatio": 1.0062738068563746
+    },
+    {
+      "from": "112.5",
+      "to": "135",
+      "firstPixels": 4491,
+      "secondPixels": 4785,
+      "diffPixels": 1049,
+      "centerDelta": 1.5811388300841898,
+      "areaRatio": 1.0654642618570473
+    },
+    {
+      "from": "135",
+      "to": "157.5",
+      "firstPixels": 4785,
+      "secondPixels": 5291,
+      "diffPixels": 1886,
+      "centerDelta": 0.0,
+      "areaRatio": 1.1057471264367815
+    },
+    {
+      "from": "157.5",
+      "to": "180",
+      "firstPixels": 5291,
+      "secondPixels": 5966,
+      "diffPixels": 2270,
+      "centerDelta": 0.5,
+      "areaRatio": 1.1275751275751276
+    },
+    {
+      "from": "180",
+      "to": "202.5",
+      "firstPixels": 5966,
+      "secondPixels": 5936,
+      "diffPixels": 1169,
+      "centerDelta": 0.0,
+      "areaRatio": 1.0050539083557952
+    },
+    {
+      "from": "202.5",
+      "to": "225",
+      "firstPixels": 5936,
+      "secondPixels": 5253,
+      "diffPixels": 2173,
+      "centerDelta": 2.0615528128088303,
+      "areaRatio": 1.130020940415001
+    },
+    {
+      "from": "225",
+      "to": "247.5",
+      "firstPixels": 5253,
+      "secondPixels": 5041,
+      "diffPixels": 855,
+      "centerDelta": 1.118033988749895,
+      "areaRatio": 1.0420551477881372
+    },
+    {
+      "from": "247.5",
+      "to": "270",
+      "firstPixels": 5041,
+      "secondPixels": 4416,
+      "diffPixels": 1328,
+      "centerDelta": 0.7071067811865476,
+      "areaRatio": 1.1415307971014492
+    },
+    {
+      "from": "270",
+      "to": "292.5",
+      "firstPixels": 4416,
+      "secondPixels": 4629,
+      "diffPixels": 810,
+      "centerDelta": 0.0,
+      "areaRatio": 1.0482336956521738
+    },
+    {
+      "from": "292.5",
+      "to": "315",
+      "firstPixels": 4629,
+      "secondPixels": 5670,
+      "diffPixels": 1977,
+      "centerDelta": 0.7071067811865476,
+      "areaRatio": 1.2248865845755024
+    },
+    {
+      "from": "315",
+      "to": "337.5",
+      "firstPixels": 5670,
+      "secondPixels": 5795,
+      "diffPixels": 1768,
+      "centerDelta": 2.692582403567252,
+      "areaRatio": 1.0220458553791887
+    },
+    {
+      "from": "337.5",
+      "to": "000",
+      "firstPixels": 5795,
+      "secondPixels": 5884,
+      "diffPixels": 1070,
+      "centerDelta": 0.7071067811865476,
+      "areaRatio": 1.015358067299396
+    }
+  ]
+}

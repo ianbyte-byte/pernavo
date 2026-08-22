@@ -1,0 +1,973 @@
+{
+  "ok": true,
+  "frames_root": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames",
+  "states": [
+    "idle",
+    "running-right",
+    "running-left",
+    "waving",
+    "jumping",
+    "failed",
+    "waiting",
+    "running",
+    "review"
+  ],
+  "errors": [],
+  "warnings": [],
+  "rows": [
+    {
+      "state": "idle",
+      "expected_frames": 6,
+      "actual_frames": 6,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/idle/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6774,
+          "bbox": [
+            71,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 150
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/idle/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6712,
+          "bbox": [
+            71,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 155
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/idle/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6854,
+          "bbox": [
+            70,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 154
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/idle/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6992,
+          "bbox": [
+            65,
+            5,
+            126,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 166
+        },
+        {
+          "index": 4,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/idle/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6833,
+          "bbox": [
+            70,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 166
+        },
+        {
+          "index": 5,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/idle/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6661,
+          "bbox": [
+            71,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 150
+        }
+      ]
+    },
+    {
+      "state": "running-right",
+      "expected_frames": 8,
+      "actual_frames": 8,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/running-right/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7935,
+          "bbox": [
+            43,
+            5,
+            149,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 307
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/running-right/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7052,
+          "bbox": [
+            64,
+            5,
+            127,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 227
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/running-right/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7744,
+          "bbox": [
+            46,
+            5,
+            145,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 274
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/running-right/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7565,
+          "bbox": [
+            49,
+            5,
+            142,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 273
+        },
+        {
+          "index": 4,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/running-right/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7405,
+          "bbox": [
+            56,
+            5,
+            136,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 271
+        },
+        {
+          "index": 5,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/running-right/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7568,
+          "bbox": [
+            53,
+            5,
+            139,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 297
+        },
+        {
+          "index": 6,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/running-right/06.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7546,
+          "bbox": [
+            59,
+            5,
+            132,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 297
+        },
+        {
+          "index": 7,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/running-right/07.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7472,
+          "bbox": [
+            41,
+            5,
+            150,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 291
+        }
+      ]
+    },
+    {
+      "state": "running-left",
+      "expected_frames": 8,
+      "actual_frames": 8,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/running-left/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7800,
+          "bbox": [
+            40,
+            5,
+            152,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 374
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/running-left/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6977,
+          "bbox": [
+            59,
+            5,
+            133,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 290
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/running-left/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7547,
+          "bbox": [
+            49,
+            5,
+            143,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 327
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/running-left/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7127,
+          "bbox": [
+            53,
+            5,
+            139,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 286
+        },
+        {
+          "index": 4,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/running-left/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6891,
+          "bbox": [
+            59,
+            5,
+            133,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 285
+        },
+        {
+          "index": 5,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/running-left/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7244,
+          "bbox": [
+            50,
+            5,
+            141,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 291
+        },
+        {
+          "index": 6,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/running-left/06.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7042,
+          "bbox": [
+            66,
+            5,
+            126,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 296
+        },
+        {
+          "index": 7,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/running-left/07.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7606,
+          "bbox": [
+            46,
+            5,
+            146,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 319
+        }
+      ]
+    },
+    {
+      "state": "waving",
+      "expected_frames": 4,
+      "actual_frames": 4,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/waving/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6824,
+          "bbox": [
+            70,
+            5,
+            122,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 119
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/waving/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7070,
+          "bbox": [
+            65,
+            5,
+            126,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 143
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/waving/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7118,
+          "bbox": [
+            63,
+            5,
+            128,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 154
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/waving/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6748,
+          "bbox": [
+            70,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 113
+        }
+      ]
+    },
+    {
+      "state": "jumping",
+      "expected_frames": 5,
+      "actual_frames": 5,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/jumping/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 9934,
+          "bbox": [
+            42,
+            5,
+            149,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 322
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/jumping/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 8061,
+          "bbox": [
+            46,
+            5,
+            146,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 245
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/jumping/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 9928,
+          "bbox": [
+            35,
+            5,
+            157,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 274
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/jumping/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 8349,
+          "bbox": [
+            47,
+            5,
+            145,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 211
+        },
+        {
+          "index": 4,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/jumping/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 10495,
+          "bbox": [
+            41,
+            5,
+            151,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 313
+        }
+      ]
+    },
+    {
+      "state": "failed",
+      "expected_frames": 8,
+      "actual_frames": 8,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/failed/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6773,
+          "bbox": [
+            71,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 133
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/failed/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6577,
+          "bbox": [
+            72,
+            5,
+            119,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 132
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/failed/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6455,
+          "bbox": [
+            75,
+            5,
+            117,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 121
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/failed/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6569,
+          "bbox": [
+            74,
+            5,
+            118,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 131
+        },
+        {
+          "index": 4,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/failed/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6603,
+          "bbox": [
+            72,
+            5,
+            119,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 120
+        },
+        {
+          "index": 5,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/failed/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6617,
+          "bbox": [
+            72,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 121
+        },
+        {
+          "index": 6,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/failed/06.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6448,
+          "bbox": [
+            73,
+            5,
+            119,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 114
+        },
+        {
+          "index": 7,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/failed/07.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6741,
+          "bbox": [
+            71,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 144
+        }
+      ]
+    },
+    {
+      "state": "waiting",
+      "expected_frames": 6,
+      "actual_frames": 6,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/waiting/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7040,
+          "bbox": [
+            70,
+            5,
+            122,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 115
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/waiting/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7060,
+          "bbox": [
+            70,
+            5,
+            122,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 142
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/waiting/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7161,
+          "bbox": [
+            67,
+            5,
+            124,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 143
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/waiting/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6766,
+          "bbox": [
+            71,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 160
+        },
+        {
+          "index": 4,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/waiting/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7071,
+          "bbox": [
+            70,
+            5,
+            122,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 151
+        },
+        {
+          "index": 5,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/waiting/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7006,
+          "bbox": [
+            70,
+            5,
+            122,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 143
+        }
+      ]
+    },
+    {
+      "state": "running",
+      "expected_frames": 6,
+      "actual_frames": 6,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/running/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6546,
+          "bbox": [
+            72,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 116
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/running/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6604,
+          "bbox": [
+            72,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 128
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/running/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6704,
+          "bbox": [
+            71,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 131
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/running/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6738,
+          "bbox": [
+            72,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 103
+        },
+        {
+          "index": 4,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/running/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6565,
+          "bbox": [
+            71,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 112
+        },
+        {
+          "index": 5,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/running/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6611,
+          "bbox": [
+            72,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 126
+        }
+      ]
+    },
+    {
+      "state": "review",
+      "expected_frames": 6,
+      "actual_frames": 6,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/review/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7110,
+          "bbox": [
+            70,
+            5,
+            122,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 134
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/review/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7068,
+          "bbox": [
+            70,
+            5,
+            122,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 133
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/review/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6953,
+          "bbox": [
+            71,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 130
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/review/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6932,
+          "bbox": [
+            71,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 137
+        },
+        {
+          "index": 4,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/review/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7113,
+          "bbox": [
+            70,
+            5,
+            122,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 125
+        },
+        {
+          "index": 5,
+          "file": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-navy-academy/work/frames/review/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 7060,
+          "bbox": [
+            70,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 133
+        }
+      ]
+    }
+  ]
+}

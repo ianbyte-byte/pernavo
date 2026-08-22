@@ -1,0 +1,4 @@
+{
+  "selected_source": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/akane-copper/running-left-repaired-generated.png",
+  "qa_note": "Fresh imagegen strip passes 8-frame extraction and component QA; all 8 extracted frames have exactly one alpha-connected component; no detached fragments. Evidence: /Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/akane-copper/qa/rows/running-left-repair/review.json; visual source inspected for left-facing alternating gait, attached tail/dress/bow/heart, and no far-right debris."
+}

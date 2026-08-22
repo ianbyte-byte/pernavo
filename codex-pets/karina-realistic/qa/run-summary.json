@@ -1,0 +1,35 @@
+{
+  "ok": true,
+  "petId": "karina-realistic",
+  "spriteVersionNumber": 2,
+  "atlas": {
+    "path": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-realistic/final/spritesheet.webp",
+    "format": "WEBP",
+    "mode": "RGBA",
+    "width": 1536,
+    "height": 2288,
+    "columns": 8,
+    "rows": 11,
+    "sha256": "c4fcd0315e2b89833eac8624fba97b347dad3339b7bbc7c4b86f6bca9aed67ea"
+  },
+  "qa": {
+    "validation": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-realistic/final/validation.json",
+    "chromaDespill": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-realistic/qa/chroma-despill.json",
+    "contactSheet": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-realistic/qa/contact-sheet.png",
+    "directionSheet": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-realistic/qa/look-directions.png",
+    "directionSemantics": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-realistic/qa/direction-semantics.json",
+    "blindValidation": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-realistic/qa/direction-blind-validation.json",
+    "blindResolution": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-realistic/qa/blind-review-resolution.json",
+    "continuity": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-realistic/qa/look-continuity.json",
+    "visualReview": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-realistic/qa/review.json"
+  },
+  "package": "/Users/chung/Developer/Code/loongclaude/codex-pets/karina-realistic/package/karina-realistic",
+  "installation": {
+    "path": "/Users/chung/.codex/pets/karina-realistic",
+    "files": ["pet.json", "spritesheet.webp"],
+    "manifestSha256": "3daed76b6a7db0fc95e7ef08da0bd146700abf4cb9c047fc6147108f553a8321",
+    "spritesheetSha256": "c4fcd0315e2b89833eac8624fba97b347dad3339b7bbc7c4b86f6bca9aed67ea",
+    "hashesMatchPackage": true,
+    "globalConfigModified": false
+  }
+}

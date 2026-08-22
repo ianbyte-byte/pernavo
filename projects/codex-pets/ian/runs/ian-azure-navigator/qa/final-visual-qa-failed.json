@@ -1,0 +1,26 @@
+{
+  "ok": false,
+  "reviewer": "independent-final-qa",
+  "standard_rows": "pass",
+  "direction_ordering": "pass",
+  "blocking_continuity_repairs": [
+    {
+      "transition": "157.5->180",
+      "reason": "visible abrupt head and torso yaw jump"
+    },
+    {
+      "transition": "225->247.5",
+      "reason": "visible abrupt head and torso yaw jump"
+    },
+    {
+      "transition": "337.5->000",
+      "reason": "visible abrupt head and torso yaw jump"
+    }
+  ],
+  "non_blocking_notes": [
+    "Blind diagonal ambiguity produced no ordering reversal.",
+    "RGBA alpha, transparent RGB residue, and chroma fringe checks passed.",
+    "One opaque chroma-key pixel was reported at idle row 0 column 4."
+  ],
+  "required_action": "Regenerate both coherent look rows and rerun continuity, blind, and final visual QA."
+}

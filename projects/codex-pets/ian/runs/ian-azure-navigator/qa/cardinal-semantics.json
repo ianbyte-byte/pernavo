@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "reviewed_by": "isolated generation worker",
+  "directions": {
+    "000": {
+      "verdict": "pass",
+      "evidence": "nose remains near head-center x while both pupils sit above center"
+    },
+    "090": {
+      "verdict": "pass",
+      "evidence": "nose tip and both pupils are clearly right of head center in screen coordinates"
+    },
+    "180": {
+      "verdict": "pass",
+      "evidence": "nose remains near head-center x while both pupils sit below center"
+    },
+    "270": {
+      "verdict": "pass",
+      "evidence": "nose tip and both pupils are clearly left of head center in screen coordinates"
+    }
+  }
+}

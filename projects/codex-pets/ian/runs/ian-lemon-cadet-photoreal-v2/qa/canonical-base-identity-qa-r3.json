@@ -1,0 +1,31 @@
+{
+  "decision": "pass",
+  "majority": "2 PASS, 1 REVISE",
+  "confidence": ["high", "high", "high"],
+  "candidate": "references/canonical-base.png",
+  "candidate_sha256": "4d01ef964b8a603726efee7f1780b2f5b6faa9116a99b2b073cb817eae87ae3a",
+  "identity_bust": "references/lemon-identity-bust-r3.png",
+  "identity_bust_sha256": "d714b77b7ea1957109e192addb4a13815b3baf682fa3d3e7d020fcb5274e3c93",
+  "accepted_features": [
+    "full-body face retains the accepted bust's long oval face and broad forehead",
+    "almond eye direction, eye spacing and brow axis remain stable",
+    "nose bridge, rounded tip, nose-to-lip distance and fuller lips remain stable",
+    "jaw taper and rounded chin remain stable",
+    "viewer-left under-eye mole is retained",
+    "complete age-appropriate photoreal human with ordinary human twin ponytails"
+  ],
+  "non_blocking_warnings": [
+    "the eyes can read slightly larger at full-body scale",
+    "all animation rows must continue to use both the accepted bust and canonical base as identity inputs"
+  ],
+  "blocking_repairs": [],
+  "animation_authorized": true,
+  "cross_pet_same_person": {
+    "decision": "pass",
+    "majority": "2 PASS, 1 REVISE",
+    "confidence": ["high", "medium", "high"],
+    "notes": "Azure, selected Heartline and Lemon r3 preserve a recognizable shared facial scaffold across intended hair and outfit variations."
+  },
+  "review_policy": "three isolated read-only reviewers; majority PASS required",
+  "limitations": "Visual identity consistency decision only; not biometric or pixel-level verification."
+}

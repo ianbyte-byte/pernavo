@@ -1,0 +1,6 @@
+selected_source=/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/review-repaired-generated.png
+qa_note=Built-in imagegen generation grounded on reference-01.jpg, reference-02.jpg, reference-03.jpg, layout-guides/review.png (spacing only), and canonical-base.png. High-detail inspection shows exactly six left-to-right complete review poses of the same warm-brown twin-sailor kitten; poses are intentionally smaller and centered with wide pure-green gutters, and no adjacent copper tail/ribbon/hair touches another silhouette. Review semantics are distinct via focused gaze, narrowed eyes, blink, head tilt, cheek paw, and welcoming paws. No props, text, UI, symbols, effects, shadows, or guide marks.
+scenario=repair review row after deterministic extraction failure caused by adjacent long twin-tail overlap
+invocation=sips -g pixelWidth -g pixelHeight -g format -g space review-repaired-generated.png; file review-repaired-generated.png; shasum -a 256 review-repaired-generated.png
+binary_observable=sips reports pixelWidth=2087, pixelHeight=753, format=png, space=RGB; file reports 8-bit/color RGB PNG; sha256=444cf857700b743201512d259e675f075602ba82d4b0aa29881b3268c02631da
+artifact=/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/review-repaired-generated.png

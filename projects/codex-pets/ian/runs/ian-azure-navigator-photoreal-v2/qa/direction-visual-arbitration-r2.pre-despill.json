@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "pet": "ian-azure-navigator",
+  "decision": "PASS",
+  "atlas_sha256": "c693831036c622a8893a0571f461603e4533ec5769243d2291105868089865ea",
+  "blind_validation": "direction-blind-validation-r2.pre-despill.json",
+  "hard_gates_pass": true,
+  "continuity_ok": true,
+  "warning_disposition": "accepted_review_only",
+  "findings": [
+    "The labeled 000→090→180→270→000 loop is visually coherent and preserves clockwise head-direction progression.",
+    "Hard cardinals are explicit: 000 up, 090 screen-right, 180 down, 270 screen-left.",
+    "Blind warnings are confined to fine oblique vertical components or near-back-to-front transitions; no hard cardinal reversal remains."
+  ]
+}

@@ -1,0 +1,3 @@
+# Azure Navigator look mechanics
+
+Keep Ian fully photoreal and anatomically human. Anchor both boots, hips and lower torso. Eyes, eyelids and eyebrows lead each direction; the head and neck follow with restrained anatomical motion. Long copper-auburn hair follows one step behind with gentle inertia. Preserve the same skull, facial spacing, natural head-to-body proportions, sailor cap, collar, bow, denim pinafore and attached abstract silver heart. Never rotate the whole body, use pupil-only direction, mirror asymmetric details, or introduce illustration, anime, chibi, toy, doll, sticker, painted or cel-shaded rendering.

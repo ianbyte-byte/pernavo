@@ -1,0 +1,3 @@
+# Lemon Cadet look mechanics
+
+Keep Ian fully photoreal and anatomically human. Anchor both boots, skirt and lower torso. Eyes and eyelids lead each direction, followed by restrained head and neck motion. Both long human twin ponytails remain attached at fixed hair ties and lag smoothly; they never behave like animal appendages. Preserve the same skull, facial spacing, natural head-to-body proportions, cream-white and pale-lemon sailor uniform and attached navy rosette with abstract silver heart. Never rotate the whole body, use pupil-only direction, mirror asymmetric details, or introduce illustration, anime, chibi, toy, doll, sticker, painted or cel-shaded rendering.

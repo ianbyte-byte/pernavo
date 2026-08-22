@@ -1,0 +1,134 @@
+{
+  "ok": false,
+  "frames_root": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/review/frames-stable",
+  "states": [
+    "review"
+  ],
+  "errors": [
+    "review frame 01 is empty or too sparse (17 pixels)",
+    "review frame 03 is empty or too sparse (14 pixels)",
+    "review frame 04 is empty or too sparse (14 pixels)"
+  ],
+  "warnings": [
+    "review used extraction method stable-slots; confirm motion playback remains stable and unclipped",
+    "review frame 00 is much larger than the row median (9280 vs 2239)",
+    "review frame 01 is much smaller than the row median (17 vs 2239)",
+    "review frame 02 is much larger than the row median (13382 vs 2239)",
+    "review frame 03 is much smaller than the row median (14 vs 2239)",
+    "review frame 04 is much smaller than the row median (14 vs 2239)"
+  ],
+  "rows": [
+    {
+      "state": "review",
+      "expected_frames": 6,
+      "actual_frames": 6,
+      "extraction_method": "stable-slots",
+      "ok": false,
+      "errors": [
+        "review frame 01 is empty or too sparse (17 pixels)",
+        "review frame 03 is empty or too sparse (14 pixels)",
+        "review frame 04 is empty or too sparse (14 pixels)"
+      ],
+      "warnings": [
+        "review used extraction method stable-slots; confirm motion playback remains stable and unclipped",
+        "review frame 00 is much larger than the row median (9280 vs 2239)",
+        "review frame 01 is much smaller than the row median (17 vs 2239)",
+        "review frame 02 is much larger than the row median (13382 vs 2239)",
+        "review frame 03 is much smaller than the row median (14 vs 2239)",
+        "review frame 04 is much smaller than the row median (14 vs 2239)"
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/review/frames-stable/review/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 9280,
+          "bbox": [
+            29,
+            56,
+            163,
+            151
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 13
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/review/frames-stable/review/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 17,
+          "bbox": [
+            93,
+            91,
+            99,
+            98
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 2
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/review/frames-stable/review/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 13382,
+          "bbox": [
+            5,
+            56,
+            187,
+            151
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 15
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/review/frames-stable/review/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 14,
+          "bbox": [
+            93,
+            87,
+            99,
+            94
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 4
+        },
+        {
+          "index": 4,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/review/frames-stable/review/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 14,
+          "bbox": [
+            93,
+            97,
+            99,
+            104
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 1
+        },
+        {
+          "index": 5,
+          "file": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/hikari-twin-sailor/qa/rows/review/frames-stable/review/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 4461,
+          "bbox": [
+            62,
+            57,
+            130,
+            151
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 3
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+row_id=running
+selected_source=/Users/chung/.codex/generated_images/019f97f3-de76-7100-87b5-c0aebce48fe9/exec-5d749471-9fec-43a2-819e-28fabe3a007c.png
+generation_invocation=built-in image_gen with references/reference-01.jpg, references/reference-02.jpg, references/reference-03.jpg, references/layout-guides/running.png (layout only), references/canonical-base.png
+source_observable=file: PNG image data, 2172 x 724, 8-bit/color RGB, non-interlaced
+sha256=42ef471540a04505db078208421e314c73d75e3d081582d12e169bdb62dd4c93
+frame_count_observable=6 equal slots inferred from 2172/362 and manual normal-size inspection; every slot contains one complete pet pose
+pose_separation_observable=manual normal-size inspection: six distinct separated poses, no empty slot, no visible overlap, no labels/borders/guides
+identity_observable=manual normal-size inspection against canonical-base.png: warm-brown kitten, copper twin tails, white/lemon sailor dress, navy rosette, face and silhouette remain stable across all six frames
+state_observable=manual normal-size inspection: focused eyes/head changes and paw-tapping/held-close-paw processing; feet remain planted; no foot-running, jogging, raised-knee travel, speed lines, dust, shadows, or detached effects
+props_effects_observable=manual normal-size inspection: no new tools, UI, notebook, laptop, hologram, symbols, text, or effects; only canonical dress/rosette remain
+chroma_observable=flat green field visually present; source corners sampled as (22,223,27), (21,227,24), (20,223,21), (19,228,23), so final deterministic chroma cleanup remains parent-owned

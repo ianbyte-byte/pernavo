@@ -1,0 +1,14 @@
+{
+  "pass": true,
+  "surface": "qa/look-directions.pre-despill.png",
+  "directionErrors": [],
+  "continuityConcerns": [
+    "157.5→180 and 270→292.5 metric warnings are visible head and hair-turn changes only; body, baseline, scale, and identity remain coherent."
+  ],
+  "materialRepairsRequired": [],
+  "artifactConcerns": [
+    "Expected pre-despill chroma fringe; non-blocking.",
+    "No alpha holes detected."
+  ],
+  "notes": "Independent visual QA confirmed all 16 clockwise direction semantics; no whole-row regeneration is required."
+}

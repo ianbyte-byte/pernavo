@@ -1,0 +1,17 @@
+{
+  "ok": true,
+  "reviewer": "independent-visual-qa",
+  "directions": {
+    "000": "pass: up",
+    "022.5": "pass: up-right",
+    "045": "pass: up-right",
+    "067.5": "pass: up-right",
+    "090": "pass: screen-right",
+    "112.5": "pass: down-right",
+    "135": "pass: down-right",
+    "157.5": "pass: near-down with subtle screen-right"
+  },
+  "continuity": "pass: monotonic and 157.5 flows smoothly into approved 180",
+  "identity_body_baseline": "pass",
+  "blockers": []
+}

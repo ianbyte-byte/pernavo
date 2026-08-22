@@ -1,0 +1,20 @@
+{
+  "decision": "fail",
+  "majority": "2 FAIL, 1 PASS",
+  "same_person_confidence": "low",
+  "matched_features": [
+    "full-body human composition",
+    "broad forehead and partial nose and lip direction"
+  ],
+  "blocking_repairs": [
+    "rebuild the whole face from the accepted master and video anchors",
+    "reduce and horizontally lengthen the eyes and restore the accepted brow axis",
+    "restore the longer oval face, nose length, nose-to-lip spacing and fuller lips",
+    "broaden and round the jaw and chin",
+    "restore the under-eye mole to the accepted side and position",
+    "retain ordinary human twin ponytails without doll or anime treatment"
+  ],
+  "style_gate": "pass",
+  "animation_authorized": false,
+  "review_policy": "three isolated read-only visual reviewers; majority decision"
+}

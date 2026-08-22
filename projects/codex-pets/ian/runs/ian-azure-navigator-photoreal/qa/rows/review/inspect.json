@@ -1,0 +1,112 @@
+{
+  "ok": true,
+  "frames_root": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal/frames",
+  "states": [
+    "review"
+  ],
+  "errors": [],
+  "warnings": [],
+  "rows": [
+    {
+      "state": "review",
+      "expected_frames": 6,
+      "actual_frames": 6,
+      "extraction_method": "components",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal/frames/review/00.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6643,
+          "bbox": [
+            71,
+            5,
+            121,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 115
+        },
+        {
+          "index": 1,
+          "file": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal/frames/review/01.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6575,
+          "bbox": [
+            71,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 123
+        },
+        {
+          "index": 2,
+          "file": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal/frames/review/02.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6505,
+          "bbox": [
+            72,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 93
+        },
+        {
+          "index": 3,
+          "file": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal/frames/review/03.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6557,
+          "bbox": [
+            71,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 101
+        },
+        {
+          "index": 4,
+          "file": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal/frames/review/04.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6597,
+          "bbox": [
+            71,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 118
+        },
+        {
+          "index": 5,
+          "file": "/Users/chung/Developer/Code/loongclaude/projects/codex-pets/ian/runs/ian-azure-navigator-photoreal/frames/review/05.png",
+          "width": 192,
+          "height": 208,
+          "nontransparent_pixels": 6575,
+          "bbox": [
+            71,
+            5,
+            120,
+            203
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 99
+        }
+      ]
+    }
+  ]
+}

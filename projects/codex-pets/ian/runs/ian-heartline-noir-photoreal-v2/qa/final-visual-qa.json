@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "pet_id": "ian-heartline-noir",
+  "round": 1,
+  "verdict": "PASS",
+  "confidence": "high",
+  "atlas_sha256": "683e9053856eb58e3496c5e3183aa70d57f0121ba9b9eed885b1ec4405579f30",
+  "reviewers": [
+    {
+      "reviewer": "final_visual_qa_1",
+      "verdict": "PASS",
+      "confidence": "high"
+    },
+    {
+      "reviewer": "final_visual_qa_2",
+      "verdict": "PASS",
+      "confidence": "medium"
+    },
+    {
+      "reviewer": "final_visual_qa_3",
+      "verdict": "PASS",
+      "confidence": "high"
+    }
+  ],
+  "gates": {
+    "human_photoreal_only": "pass",
+    "age_appropriate_nonsexualized": "pass",
+    "identity_consistency": "pass_with_style_variation",
+    "state_semantics": "pass",
+    "anatomy_and_edges": "pass",
+    "strict_atlas_validation": "pass",
+    "direction_hard_gates": "pass"
+  },
+  "blockers": [],
+  "warnings": [
+    "Some oblique directions produced reviewer disagreement at thumbnail scale; all four hard cardinals and the direct labeled loop pass.",
+    "High-bun black styling changes the silhouette but does not create a different person."
+  ],
+  "evidence": {
+    "identity_master": "../../ian-identity-master-v2/references/identity-master.png",
+    "canonical_base": "../references/canonical-base.png",
+    "contact_sheet": "contact-sheet-extended.png",
+    "direction_sheet": "look-directions.png",
+    "validation": "../final/validation-extended.json",
+    "despill": "chroma-despill-extended.json",
+    "blind_validation": "direction-blind-validation.pre-despill.json",
+    "direction_arbitration": "direction-visual-arbitration-r2.pre-despill.json"
+  },
+  "note": "Visual likeness assessment only; this does not claim biometric or pixel-perfect identity."
+}

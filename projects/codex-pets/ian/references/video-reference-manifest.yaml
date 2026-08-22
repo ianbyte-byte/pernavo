@@ -1,0 +1,62 @@
+schema_version: 1
+subject: "Hearts2Hearts IAN (이안)"
+purpose: "Photoreal identity evidence for the Ian Codex Pets revision"
+created_at: "2026-07-26"
+
+source_videos:
+  - id: ian_video_01
+    repository_path: video/ian-video-01.mp4
+    supplied_filename: "(10) ian - Search _ X.mp4"
+    sha256: 674d18fa9a9693f87e025419b555abb0e16888958eb036f7d7a055fea517b582
+    duration_seconds: 6.186667
+    dimensions: 2160x3798
+    frame_rate: 30
+  - id: ian_video_02
+    repository_path: video/ian-video-02.mp4
+    supplied_filename: "(10) ian hearts2hearts - Search _ X.mp4"
+    sha256: 9981938b75788d7543db5cb9310b6a382536c59496af14fa99e9f039c7bb75ee
+    duration_seconds: 8.533333
+    dimensions: 1080x1440
+    frame_rate: 59.94
+
+selected_frames:
+  - id: ian_face_front_neutral
+    path: video-frames/ian-video-02-t01.25.jpg
+    source_video: ian_video_02
+    timestamp_seconds: 1.25
+    sha256: 481937f9ba1d01dd8c0e49935094023ba7ad43a241b07e6afc358035bc36c4e5
+    role: "primary neutral frontal facial-identity anchor"
+  - id: ian_upper_body_front
+    path: video-frames/ian-video-01-t00.80.jpg
+    source_video: ian_video_01
+    timestamp_seconds: 0.80
+    sha256: 201c323fe48f38ea5fae4c21533783b7264818cc8190301795b5858823629b63
+    role: "frontal head, neck, shoulders, arms and visible upper-torso geometry"
+  - id: ian_face_three_quarter
+    path: video-frames/ian-video-01-t01.68.jpg
+    source_video: ian_video_01
+    timestamp_seconds: 1.68
+    sha256: 112ba934585f624816280e88f4e6f6e432b42c21d8617d7cb6159d3b7f40a844
+    role: "three-quarter facial geometry and jaw continuity"
+  - id: ian_face_detail
+    path: video-frames/ian-video-01-t04.50.jpg
+    source_video: ian_video_01
+    timestamp_seconds: 4.50
+    sha256: 476324117df662d324e8b99d83426b59ce39e5466e772a6827a69aa66060962e
+    role: "close facial-landmark detail"
+
+evidence_limits:
+  true_profile_present: false
+  standing_full_body_present: false
+  notes:
+    - "Both videos are seated or close upper-body footage; lower-body proportions are not observable."
+    - "Warm indoor white balance and beauty smoothing make skin color and texture scene-specific."
+    - "Use multi-view geometry for likeness; use the seven supplied stage photos for outfits and available full-silhouette cues."
+
+bindings:
+  contract: ../ian-pets.yaml
+  identity_catalog_key: identity_reference_catalog
+  pet_binding_fields:
+    - identity_references
+    - outfit_references
+    - generation_references

@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "frames_root": "/Users/chung/Developer/Code/loongclaude/.omo/evidence/codex-pets/akane-copper/qa/rows/running-left-repair/frames",
+  "states": [
+    "running-left"
+  ],
+  "errors": [],
+  "warnings": []
+}
