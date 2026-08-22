@@ -12,6 +12,12 @@ description: >
 
 # Audit Agent Harness
 
+## Ablation evidence boundary
+
+- Pin model, runtime, permission mode, revision, fixtures, and evaluation window before comparing a unit; changing a pinned variable starts a new comparison.
+- Protected controls stay active unless explicit authority and independent evidence justify change. Use positive, negative, and collision probes for routing units; token savings or a happy path is not evidence that a unit is safe to remove.
+- Inventory only authorized scopes, record minimum metadata, and stage human-reviewable proposals; do not mutate the harness during inventory or expose credential values.
+
 Determine whether each customization still improves observable behavior on the current model and
 runtime. Treat cadence such as “every six months” as a reminder to remeasure, not as evidence that
 deletion is safe.
