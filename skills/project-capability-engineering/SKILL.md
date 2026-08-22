@@ -13,6 +13,12 @@ description: >
 
 # Project Capability Engineering
 
+## Assessment evidence boundary
+
+- This V1 is read-only: record revision, dirty state, inspected and uninspected scopes, and unknown runtime/external evidence; do not implement the recommended increment or install tools.
+- Score each capability from observed evidence, not documentation or configuration alone. Choose one highest-leverage reversible increment with an observable acceptance check, rollback, and owners.
+- A score or baseline is not proof of production health, release readiness, or deployment.
+
 Assess how well a repository enables humans and coding agents to understand, change, verify, ship,
 and continuously improve the project. Produce an evidence-based baseline and one focused capability
 increment. This V1 is read-only: do not implement the increment, edit the assessed repository,

@@ -13,6 +13,12 @@ description: >
 
 # Repository Knowledge Gardening
 
+## Knowledge evidence boundary
+
+- Inspect only authorized repository-local sources; mark external, runtime, chat, ticket, and human knowledge as unobserved unless explicitly supplied. Do not edit the assessed repository in V1.
+- Classify confirmed drift separately from suspected drift, contradiction, duplicate, and unknown; name a canonical source and evidence pointer before proposing a gardening increment.
+- Select one smallest reversible increment with observable acceptance and route implementation, verification, review, and human decisions to their owners; an inventory is not proof of freshness.
+
 Make repository-local knowledge discoverable, versioned, progressively disclosed, and verifiable
 for humans and coding agents. Produce a documentation inventory, drift assessment, and one focused
 gardening increment. This V1 is read-only: do not edit the assessed repository, create or delete

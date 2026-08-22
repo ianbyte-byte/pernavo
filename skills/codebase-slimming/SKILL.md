@@ -40,6 +40,17 @@ description: >
 
 其余章节只引用本表，不再重复展开。
 
+## Decision and evidence boundaries
+
+- Do not modify core code before a behavior baseline and a bounded pilot exist. If behavior cannot
+  be measured, choose `STOP` or `PILOT_ONLY`; never use line-count reduction as permission to
+  delete code.
+- A pilot must be independently reversible and compare behavior, readability, complexity, and
+  duplication evidence before and after. A failed test or acceptance check stops expansion of the
+  scope; it does not authorize a broader rewrite.
+- Deletion requires evidence of no behavior loss, and architecture-level replacement requires
+  human approval. Preserve tests, valuable comments, known defects, and unrelated dirty work.
+
 ## 禁止代码高尔夫
 
 禁止：删注释/删测试、合并不相关文件、单行压缩、晦涩运算符、过度链式、反射藏逻辑、字符串驱动代替类型、布尔参数万能方法、配置/元编程黑盒、巨型类、用复杂抽象替换少量稳定可读重复。
