@@ -1,0 +1,103 @@
+{
+  "format": "skillopt_sleep.tasks.v1",
+  "project": "/Users/chung/Developer/Code/loongclaude",
+  "target_skill_path": "skills/unknowns-field-guide/SKILL.md",
+  "reviewed": true,
+  "tasks": [
+    {
+      "id": "unknowns_field_discovery_boundary",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Investigate a named endpoint before a change. Produce discovery evidence only; do not write a plan, modify code, or claim completed behavior.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "discovery"},
+        {"op": "contains", "arg": "do not"},
+        {"op": "contains", "arg": "plan"},
+        {"op": "contains", "arg": "implementation"},
+        {"op": "contains", "arg": "behavior"}
+      ]},
+      "tags": ["unknowns-field-guide", "rule:discovery-only"],
+      "split": "train",
+      "origin": "real"
+    },
+    {
+      "id": "unknowns_field_four_categories",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Report findings for a stateful data seam and classify evidence using Known Known, Known Unknown, Unknown Known, and Unknown Unknown.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "Known Known"},
+        {"op": "contains", "arg": "Known Unknown"},
+        {"op": "contains", "arg": "Unknown Known"},
+        {"op": "contains", "arg": "Unknown Unknown"}
+      ]},
+      "tags": ["unknowns-field-guide", "rule:classification"],
+      "split": "train",
+      "origin": "real"
+    },
+    {
+      "id": "unknowns_field_context_boundary",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "The checked-out code is known but the tenant, environment, and live dependency owner are unavailable. Report those context items as unconfirmed and do not substitute a nearby environment.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "unconfirmed"},
+        {"op": "contains", "arg": "tenant"},
+        {"op": "contains", "arg": "environment"},
+        {"op": "contains", "arg": "dependency"},
+        {"op": "contains", "arg": "do not substitute"}
+      ]},
+      "tags": ["unknowns-field-guide", "rule:active-context"],
+      "split": "train",
+      "origin": "real"
+    },
+    {
+      "id": "unknowns_field_positive_risk",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Investigate a migration seam with an uncertain rollback and a possible retry path. Rank the unanswered item P0 only when it can materially change data safety or behavior.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "P0"},
+        {"op": "contains", "arg": "rollback"},
+        {"op": "contains", "arg": "retry"},
+        {"op": "contains", "arg": "data safety"}
+      ]},
+      "tags": ["unknowns-field-guide", "rule:risk-ranking"],
+      "split": "val",
+      "origin": "real"
+    },
+    {
+      "id": "unknowns_field_positive_reverse_interview",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "A remaining decision-changing gap cannot be resolved locally. Ask only the necessary reverse-interview question, explain why it matters, give a safe default, and state its risk.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "Why it matters"},
+        {"op": "contains", "arg": "Safe default"},
+        {"op": "contains", "arg": "Risk if wrong"},
+        {"op": "contains", "arg": "minimum safe handoff"}
+      ]},
+      "tags": ["unknowns-field-guide", "rule:reverse-interview"],
+      "split": "val",
+      "origin": "real"
+    },
+    {
+      "id": "unknowns_field_collision_handoff",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Complete pre-change discovery for a high-risk stateful change. End with active context, lifecycle facts, assumptions/defaults, unresolved blockers, do-not-do constraints, and evidence locations, then hand off to plan-code-change.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "active context"},
+        {"op": "contains", "arg": "lifecycle"},
+        {"op": "contains", "arg": "assumptions"},
+        {"op": "contains", "arg": "unresolved blockers"},
+        {"op": "contains", "arg": "do-not-do"},
+        {"op": "contains", "arg": "evidence locations"},
+        {"op": "contains", "arg": "plan-code-change"}
+      ]},
+      "tags": ["unknowns-field-guide", "rule:handoff"],
+      "split": "test",
+      "origin": "real"
+    }
+  ]
+}

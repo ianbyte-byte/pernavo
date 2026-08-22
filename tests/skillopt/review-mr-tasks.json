@@ -1,0 +1,100 @@
+{
+  "format": "skillopt_sleep.tasks.v1",
+  "project": "/Users/chung/Developer/Code/loongclaude",
+  "target_skill_path": "skills/review-mr/SKILL.md",
+  "reviewed": true,
+  "tasks": [
+    {
+      "id": "review_mr_empty_diff_boundary",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "The repository has no diff to review. Stop without inventing findings or creating a report.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "no diff"},
+        {"op": "contains", "arg": "stop"},
+        {"op": "contains", "arg": "no findings"}
+      ]},
+      "tags": ["review-mr", "rule:empty-diff"],
+      "split": "train",
+      "origin": "real"
+    },
+    {
+      "id": "review_mr_sonar_degraded",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Review a non-empty diff when SonarQube is unavailable. Continue other reviewers, label the SonarQube channel degraded or unavailable, and do not treat the remaining checks as approval.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "sonarqube"},
+        {"op": "contains", "arg": "unavailable"},
+        {"op": "contains", "arg": "degraded"},
+        {"op": "contains", "arg": "not approval"}
+      ]},
+      "tags": ["review-mr", "rule:degraded-evidence"],
+      "split": "train",
+      "origin": "real"
+    },
+    {
+      "id": "review_mr_qa_boundary",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Review changed production code and identify findings, but do not turn a passing test into behavior acceptance or deployment proof. Route completed-change verification separately.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "verify-change-evidence"},
+        {"op": "contains", "arg": "separate"},
+        {"op": "contains", "arg": "not"},
+        {"op": "contains", "arg": "deployment"}
+      ]},
+      "tags": ["review-mr", "rule:qa-boundary"],
+      "split": "train",
+      "origin": "real"
+    },
+    {
+      "id": "review_mr_positive_findings",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Produce a review report for a diff with concrete findings. Every finding must include file and line, impact, smallest safe fix, severity, and reviewer source.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "file"},
+        {"op": "contains", "arg": "line"},
+        {"op": "contains", "arg": "impact"},
+        {"op": "contains", "arg": "P1"},
+        {"op": "contains", "arg": "source"}
+      ]},
+      "tags": ["review-mr", "rule:finding-contract"],
+      "split": "val",
+      "origin": "real"
+    },
+    {
+      "id": "review_mr_positive_scope",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Review a staged diff and preserve separate sections for SonarQube, specialist findings, and deterministic checks. Do not claim one green tool approves the change.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "separate"},
+        {"op": "contains", "arg": "sonarqube"},
+        {"op": "contains", "arg": "specialist"},
+        {"op": "contains", "arg": "deterministic"},
+        {"op": "contains", "arg": "not"}
+      ]},
+      "tags": ["review-mr", "rule:evidence-sections"],
+      "split": "val",
+      "origin": "real"
+    },
+    {
+      "id": "review_mr_collision_report",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Review a multi-domain diff and write the repository audit report. Aggregate and deduplicate findings, preserve reviewer provenance, and route presentation to report-writer without giving it severity ownership.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "deduplicate"},
+        {"op": "contains", "arg": "provenance"},
+        {"op": "contains", "arg": "report-writer"},
+        {"op": "contains", "arg": "severity"},
+        {"op": "contains", "arg": "audit"}
+      ]},
+      "tags": ["review-mr", "rule:report-boundary"],
+      "split": "test",
+      "origin": "real"
+    }
+  ]
+}

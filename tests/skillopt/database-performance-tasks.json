@@ -1,0 +1,98 @@
+{
+  "format": "skillopt_sleep.tasks.v1",
+  "project": "/Users/chung/Developer/Code/loongclaude",
+  "target_skill_path": "skills/database-performance/SKILL.md",
+  "reviewed": true,
+  "tasks": [
+    {
+      "id": "database_performance_static_plan_boundary",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Review an ORM query from source only. No database connection, actual plan, or runtime metrics are available. Report the query risks without claiming a confirmed bottleneck.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "static-only"},
+        {"op": "contains", "arg": "unverified"},
+        {"op": "contains", "arg": "actual plan"},
+        {"op": "contains", "arg": "database-performance"}
+      ]},
+      "tags": ["database-performance", "rule:static-boundary"],
+      "split": "train",
+      "origin": "real"
+    },
+    {
+      "id": "database_performance_nplusone_evidence",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Investigate a suspected N+1 query in a service. State the smallest runtime evidence needed and the amplification variable; do not prescribe an index as the default fix.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "N+1"},
+        {"op": "contains", "arg": "query count"},
+        {"op": "contains", "arg": "data volume"},
+        {"op": "contains", "arg": "not"}
+      ]},
+      "tags": ["database-performance", "rule:nplusone"],
+      "split": "train",
+      "origin": "real"
+    },
+    {
+      "id": "database_performance_write_boundary",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Analyze a proposed index change using a production database. Keep the review read-only and require an authorized, reversible comparison before changing schema.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "read-only"},
+        {"op": "contains", "arg": "production"},
+        {"op": "contains", "arg": "reversible"},
+        {"op": "contains", "arg": "authorization"}
+      ]},
+      "tags": ["database-performance", "rule:write-boundary"],
+      "split": "train",
+      "origin": "real"
+    },
+    {
+      "id": "database_performance_positive_plan",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Review a query with an estimated plan and actual execution evidence. Compare estimated versus actual rows and report spills or scans without treating the estimate as actual proof.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "estimated"},
+        {"op": "contains", "arg": "actual"},
+        {"op": "contains", "arg": "rows"},
+        {"op": "contains", "arg": "spills"}
+      ]},
+      "tags": ["database-performance", "rule:plan-evidence"],
+      "split": "val",
+      "origin": "real"
+    },
+    {
+      "id": "database_performance_positive_route",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Review a read-only ORM performance concern with no connection or data change requested. Route it to database-performance and keep database-testing out of the workflow.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "database-performance"},
+        {"op": "contains", "arg": "read-only"},
+        {"op": "contains", "arg": "static-only"},
+        {"op": "contains", "arg": "do not"}
+      ]},
+      "tags": ["database-performance", "rule:route"],
+      "split": "val",
+      "origin": "real"
+    },
+    {
+      "id": "database_performance_collision_measurement",
+      "project": "/Users/chung/Developer/Code/loongclaude",
+      "intent": "Review a query change and design a reproducible before/after plan comparison. Keep static findings, database runtime evidence, and performance measurement conclusions separate.",
+      "reference_kind": "rule",
+      "judge": {"kind": "rule", "checks": [
+        {"op": "contains", "arg": "database-performance"},
+        {"op": "contains", "arg": "performance-measurement"},
+        {"op": "contains", "arg": "before/after"},
+        {"op": "contains", "arg": "separate"}
+      ]},
+      "tags": ["database-performance", "rule:measurement-boundary"],
+      "split": "test",
+      "origin": "real"
+    }
+  ]
+}
