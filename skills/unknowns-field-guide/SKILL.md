@@ -28,6 +28,19 @@ behavior.
 - Keep the report proportional: inline for a small seam, durable only when risk or the user needs
   a handoff.
 
+## Evidence and handoff boundaries
+
+- Treat checked-out code as only one context item. If tenant, environment, live dependency owner,
+  or runtime state is unavailable, label it `unconfirmed` and never substitute a nearby environment.
+- Use all four classifications (`Known Known`, `Known Unknown`, `Unknown Known`, and `Unknown
+  Unknown`) with an evidence pointer or an explicit reason the item remains unresolved. Rank P0 only
+  when the unanswered item can materially change behavior or data safety.
+- A reverse interview is limited to decision-changing gaps that local evidence cannot resolve. For
+  every question, state why it matters, the safe default, and the risk if wrong; include the minimum
+  safe handoff instead of turning discovery into a plan.
+- End every durable handoff with active context, lifecycle facts, assumptions/defaults, unresolved
+  blockers, do-not-do constraints, and evidence locations, then route planning to `plan-code-change`.
+
 ## Perform the discovery pass
 
 1. Restate the requested outcome and named seam without proposing a change.
