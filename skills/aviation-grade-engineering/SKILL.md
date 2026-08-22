@@ -32,6 +32,12 @@ description: >
 
 ## Core Principles
 
+## Reliability evidence boundary
+
+- Match rigor to impact and record the failure consequence, affected users, reversibility, and compliance context before choosing controls; do not call a system reliable from a checklist alone.
+- Separate design intent, configured controls, observed test evidence, and production evidence. SLO/error-budget, resilience, and postmortem claims require corresponding measurements or incident records and explicit unknowns.
+- Prefer one measurable, reversible reliability increment with an owner and rollback; do not turn a reliability discussion into an unapproved implementation or deployment.
+
 1. **Risk-Driven Rigor（风险驱动）** — 不是所有代码都需要相同 rigor。高影响模块（医疗数据、支付、安全、数据一致性）用最高验证标准，低风险内部工具快速迭代。
 2. **Defense in Depth（纵深防御）** — 多层独立保护。没有单一故障点能导致灾难。
 3. **Resilience Over Perfection（韧性优于完美）** — 系统一定会出错。设计优雅降级，而非追求零 bug。"飞机一台引擎故障不会坠机——靠剩余引擎继续飞。"
