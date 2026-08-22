@@ -24,6 +24,19 @@ description: >
 4. 路由窄域 Skill；请求“证明/排查/回归”时调用 `performance-measurement`，不要直接下结论。
 5. 输出每个 finding 的 `静态信号 → 影响假设 → 需要的证据 → 建议动作`。
 
+## Routing and evidence boundaries
+
+- When no executable target, runtime artifact, or comparable measurements are available, label the
+  review `static-only` and the conclusion `unverified`; describe a finding as a hypothesis, not a
+  confirmed bottleneck, and route proof or regression work to `performance-measurement`.
+- Keep the performance lens separate from general correctness review. For an MR, `review-mr` owns
+  the normal diff review, this Skill owns hidden-performance findings, narrow overlays own their
+  evidence (`database-performance`, `runtime-performance`, `web-performance`, or
+  `benchmark-performance`), and `report-writer` only formats an already-supported report.
+- If a request combines static review with runtime proof, report the static hypothesis and the
+  measurement plan as separate sections; do not promote one into the other or treat an average,
+  single profile, or green build as proof.
+
 ## 优先检查的隐藏成本
 
 | 信号 | 常见放大方式 | 最小验证/路由 |

@@ -20,6 +20,18 @@ description: >
 4. 以 trace 定位端到端尾延迟中的下游、重试、排队和串行阶段；记录采样率，不能把“没采样到”当作“没有”。
 5. 只改一个变量；用相同负载复测，记录效应大小、误差、回归和未覆盖面。性能改善必须与资源/错误代价一起判断。
 
+## Routing and evidence boundaries
+
+- This Skill owns runtime measurement design and interpretation, not static-only findings. If the
+  target, metrics source, or runtime artifact is unavailable, label the result `unverified` and
+  `unavailable`/`not measured`, state the gap, and route code-pattern review to `performance-review`.
+- A before/after result is `not-comparable` unless workload, environment, time window, and relevant
+  configuration are aligned. Require a predeclared threshold and repeated observations before
+  calling a change `regressed`; do not promote a single average or one sample into a decision.
+- Keep overlay evidence separate: query plans and database waits belong to `database-performance`,
+  CPU/allocation/locks to `runtime-performance`, browser field/lab signals to `web-performance`,
+  and microbenchmark methodology to `benchmark-performance`.
+
 ## 最小证据包
 
 - `manifest.json`：目标、revision、环境、命令、时间窗、负载和工具版本；不要写 token。
