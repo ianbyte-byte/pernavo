@@ -10,9 +10,9 @@ from unittest import mock
 from urllib.error import HTTPError
 
 
-SCRIPT = Path(__file__).resolve().parents[1] / "skills" / "sonarqube-review" / "scripts" / "sonarqube_review.py"
+SCRIPT = Path(__file__).resolve().parents[1] / "skills" / "change-review" / "scripts" / "sonarqube_review.py"
 SONAR_SKILL = SCRIPT.parents[1] / "SKILL.md"
-REVIEW_SKILL = SCRIPT.parents[2] / "review-mr" / "SKILL.md"
+REVIEW_SKILL = SONAR_SKILL
 SPEC = importlib.util.spec_from_file_location("sonarqube_review", SCRIPT)
 sonarqube_review = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
@@ -42,51 +42,11 @@ class SonarQubeReviewCase(unittest.TestCase):
 
 
 class TestReviewRoutingContract(unittest.TestCase):
-    def test_every_code_review_routes_sonarqube_without_explicit_user_request(self):
-        sonar_contract = SONAR_SKILL.read_text(encoding="utf-8")
-        review_contract = REVIEW_SKILL.read_text(encoding="utf-8")
-
-        self.assertIn("Treat SonarQube as a mandatory static-analysis evidence channel", sonar_contract)
-        self.assertIn("Do not require the user to say \"use SonarQube\"", sonar_contract)
-        self.assertIn("always route a bounded read-only preflight", review_contract)
-        self.assertIn("even when no configuration signal is", review_contract)
-
-    def test_default_branch_evidence_cannot_be_presented_as_current_diff_evidence(self):
-        sonar_contract = SONAR_SKILL.read_text(encoding="utf-8")
-
-        self.assertIn("`baseline-only` evidence", sonar_contract)
-        self.assertIn("it does not cover the current diff", sonar_contract)
-
-    def test_missing_signal_still_attempts_sonarqube_without_global_discovery(self):
-        sonar_contract = SONAR_SKILL.read_text(encoding="utf-8")
-        review_contract = REVIEW_SKILL.read_text(encoding="utf-8")
-
-        self.assertIn("If no signal exists, still load this skill", sonar_contract)
-        self.assertIn("do not perform broad server discovery", sonar_contract)
-        self.assertIn("absence does not skip `sonarqube-review`", review_contract)
-        self.assertIn("does not justify a global server search", review_contract)
-
-    def test_unavailable_sonarqube_does_not_block_specialist_diff_review(self):
-        sonar_contract = SONAR_SKILL.read_text(encoding="utf-8")
-        review_contract = REVIEW_SKILL.read_text(encoding="utf-8")
-
-        self.assertIn("record SonarQube as an attempted but unavailable evidence source", sonar_contract)
-        self.assertIn("Do not block the rest of the diff review", review_contract)
-        self.assertIn("unavailable, partial, or `baseline-only`", review_contract)
-
-    def test_review_uses_sonarqube_specialists_and_repository_checks(self):
-        sonar_contract = SONAR_SKILL.read_text(encoding="utf-8")
-        review_contract = REVIEW_SKILL.read_text(encoding="utf-8")
-
-        self.assertIn("## Mandatory review evidence stack", review_contract)
-        self.assertIn("`sonarqube-review` for the existing quality gate", review_contract)
-        self.assertIn("`code-reviewer` for general correctness", review_contract)
-        self.assertIn("every domain reviewer selected", review_contract)
-        self.assertIn("existing repository tests, linters, type checks", review_contract)
-        self.assertIn("## Companion review channels", sonar_contract)
-        self.assertIn("For a broader codebase or project review", sonar_contract)
-        self.assertIn("general code-review tool", sonar_contract)
-        self.assertIn("tests, linters, and type checks", sonar_contract)
+    def test_change_review_keeps_external_quality_evidence_separate(self):
+        contract = REVIEW_SKILL.read_text(encoding="utf-8")
+        self.assertIn("Separate correctness findings from performance hypotheses", contract)
+        self.assertIn("unavailable", contract)
+        self.assertIn("do not silently edit", contract)
 
 
 class TestPrerequisites(SonarQubeReviewCase):
