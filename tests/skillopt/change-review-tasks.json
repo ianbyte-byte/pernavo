@@ -1,0 +1,11 @@
+{
+  "format": "skillopt_sleep.tasks.v1",
+  "project": "/Users/chung/Developer/Code/loongclaude",
+  "target_skill_path": "skills/change-review/SKILL.md",
+  "reviewed": true,
+  "tasks": [
+    {"id":"cr1","project":"/Users/chung/Developer/Code/loongclaude","intent":"Review a staged diff and report prioritized findings with file and line references.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"P1"},{"op":"contains","arg":"file"},{"op":"contains","arg":"line"}]},"tags":["findings"],"split":"train","origin":"real"},
+    {"id":"cr2","project":"/Users/chung/Developer/Code/loongclaude","intent":"Keep static performance findings separate from runtime proof.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"performance"},{"op":"contains","arg":"separate"},{"op":"contains","arg":"unavailable"}]},"tags":["evidence"],"split":"val","origin":"real"},
+    {"id":"cr3","project":"/Users/chung/Developer/Code/loongclaude","intent":"Do not approve or deploy based on a green build.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"approval"},{"op":"contains","arg":"deploy"},{"op":"contains","arg":"green build"}]},"tags":["boundary"],"split":"test","origin":"real"}
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "format": "skillopt_sleep.tasks.v1",
+  "project": "/Users/chung/Developer/Code/loongclaude",
+  "target_skill_path": "skills/data-work/SKILL.md",
+  "reviewed": true,
+  "tasks": [
+    {"id":"dw1","project":"/Users/chung/Developer/Code/loongclaude","intent":"Run a narrow read-only query against an explicitly configured test database.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"preflight"},{"op":"contains","arg":"read-only"},{"op":"contains","arg":"test"}]},"tags":["execution"],"split":"train","origin":"real"},
+    {"id":"dw2","project":"/Users/chung/Developer/Code/loongclaude","intent":"Review ORM query shape for N+1 without connecting to a database.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"static-only"},{"op":"contains","arg":"N+1"},{"op":"contains","arg":"without connecting"}]},"tags":["static"],"split":"val","origin":"real"},
+    {"id":"dw3","project":"/Users/chung/Developer/Code/loongclaude","intent":"Perform a write test only with explicit gates and cleanup.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"write"},{"op":"contains","arg":"cleanup"},{"op":"contains","arg":"explicit"}]},"tags":["safety"],"split":"test","origin":"real"}
+  ]
+}
