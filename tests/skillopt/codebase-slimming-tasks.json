@@ -1,8 +1,11 @@
-{"format":"skillopt_sleep.tasks.v1","project":"/Users/chung/Developer/Code/loongclaude","target_skill_path":"skills/codebase-slimming/SKILL.md","reviewed":true,"tasks":[
-{"id":"codebase_slimming_no_baseline","project":"/Users/chung/Developer/Code/loongclaude","intent":"Remove suspected dead code without a behavior baseline or tests.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"STOP"},{"op":"contains","arg":"baseline"},{"op":"contains","arg":"do not"}]},"tags":["codebase-slimming","rule:baseline"],"split":"train","origin":"real"},
-{"id":"codebase_slimming_pilot_gate","project":"/Users/chung/Developer/Code/loongclaude","intent":"Run a bounded cleanup pilot and decide whether to expand it.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"PILOT_ONLY"},{"op":"contains","arg":"reversible"},{"op":"contains","arg":"before and after"}]},"tags":["codebase-slimming","rule:pilot"],"split":"train","origin":"real"},
-{"id":"codebase_slimming_delete_evidence","project":"/Users/chung/Developer/Code/loongclaude","intent":"Delete a compatibility branch that appears unused but has historical callers.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"no behavior loss"},{"op":"contains","arg":"preserve"},{"op":"contains","arg":"human"}]},"tags":["codebase-slimming","rule:deletion"],"split":"train","origin":"real"},
-{"id":"codebase_slimming_positive_regression","project":"/Users/chung/Developer/Code/loongclaude","intent":"A pilot test fails after a refactor. State the expansion and rollback boundary.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"stop"},{"op":"contains","arg":"rollback"},{"op":"contains","arg":"scope"}]},"tags":["codebase-slimming","rule:regression"],"split":"val","origin":"real"},
-{"id":"codebase_slimming_positive_guard","project":"/Users/chung/Developer/Code/loongclaude","intent":"Prevent future duplication after a successful pilot.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"guardrails"},{"op":"contains","arg":"search"},{"op":"contains","arg":"tests"}]},"tags":["codebase-slimming","rule:guard"],"split":"val","origin":"real"},
-{"id":"codebase_slimming_collision_architecture","project":"/Users/chung/Developer/Code/loongclaude","intent":"Replace a homegrown framework across modules for line-count reduction.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"human approval"},{"op":"contains","arg":"behavior"},{"op":"contains","arg":"readable"},{"op":"contains","arg":"rollback"}]},"tags":["codebase-slimming","rule:architecture"],"split":"test","origin":"real"}
-]}
+{
+  "format": "skillopt_sleep.tasks.v1",
+  "project": "/Users/chung/Developer/Code/loongclaude",
+  "target_skill_path": "skills/codebase-slimming/SKILL.md",
+  "reviewed": true,
+  "tasks": [
+    {"id":"cs1","project":"/Users/chung/Developer/Code/loongclaude","intent":"Remove duplicate code only after a behavior baseline and bounded pilot.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"baseline"},{"op":"contains","arg":"pilot"},{"op":"contains","arg":"behavior"}]},"tags":["gate"],"split":"train","origin":"real"},
+    {"id":"cs2","project":"/Users/chung/Developer/Code/loongclaude","intent":"Stop expansion after a failed test or acceptance check.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"failed"},{"op":"contains","arg":"stop"},{"op":"contains","arg":"scope"}]},"tags":["stop"],"split":"val","origin":"real"},
+    {"id":"cs3","project":"/Users/chung/Developer/Code/loongclaude","intent":"Require human approval before an architecture-level replacement.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"architecture"},{"op":"contains","arg":"human"},{"op":"contains","arg":"approval"}]},"tags":["authority"],"split":"test","origin":"real"}
+  ]
+}

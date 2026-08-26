@@ -1,0 +1,11 @@
+{
+  "format": "skillopt_sleep.tasks.v1",
+  "project": "/Users/chung/Developer/Code/loongclaude",
+  "target_skill_path": "skills/performance-work/SKILL.md",
+  "reviewed": true,
+  "tasks": [
+    {"id":"pw1","project":"/Users/chung/Developer/Code/loongclaude","intent":"Review a suspected N+1 issue without runtime access and route proof to measurement.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"static-only"},{"op":"contains","arg":"hypothesis"},{"op":"contains","arg":"runtime"}]},"tags":["boundary"],"split":"train","origin":"real"},
+    {"id":"pw2","project":"/Users/chung/Developer/Code/loongclaude","intent":"Validate a benchmark that reports a faster average from one run.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"warmup"},{"op":"contains","arg":"variance"},{"op":"contains","arg":"p95"}]},"tags":["benchmark"],"split":"val","origin":"real"},
+    {"id":"pw3","project":"/Users/chung/Developer/Code/loongclaude","intent":"Review a frontend change with no field data and require Web Vitals evidence.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"LCP"},{"op":"contains","arg":"INP"},{"op":"contains","arg":"field"}]},"tags":["web"],"split":"test","origin":"real"}
+  ]
+}
