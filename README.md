@@ -24,20 +24,21 @@ Paste this prompt into Codex, Claude Code, Cursor, or another coding agent:
 请为我安装 Pernavo 的完整 Skills 系统。完整执行手册：
 https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/main/AI_INSTALL.md
 
-默认参数：官方 GitHub 来源、当前用户、所有支持 global 安装的 agents、全部 26 个 Skills、
+默认参数：官方 GitHub 来源、当前用户、所有支持 global 安装的 agents、全部 7 个 Skills、
 从固定 SHA checkout 执行 copy；使用 `--agent '*'`，不要只安装 Codex。远程 URL 只用于发现和
 clone，不直接用于安装。
 开始前必须读取全文、重新检查 skills CLI 的 version/help、确认授权、精确核对远程 --list
 和 JSON 同名冲突；不要盲跑，不要使用 --all 或 remove --all。冲突默认按方案 A 处理：仅在旧
 来源和固定 revision 可精确恢复时定向替换；否则停止。安装后完成固定 SHA 记录、JSON diff、
 新会话代表性 smoke（正向/负向/碰撞）、报告和定向回滚记录。
-若远程 --list 不是精确 26 项，停止并说明该版本尚未发布；未运行完整 78-case corpus 时，
-不得声称全部 26 项的 runtime activation 已验证。
+若远程 --list 不是精确 7 项，停止并说明该版本尚未发布；未运行完整 21-case corpus 时，
+不得声称全部 7 项的 runtime activation 已验证。
 ```
 
-The installation prompt's 26 Skills and 78 cases refer to the complete documented installation set.
-The six performance Skills are included in that set; the remote `--list`, fixed revision, and
-trigger corpus must remain synchronized before installation is treated as complete.
+The installation prompt's 7 Skills and 21 cases refer to the consolidated documented installation
+set. Retired fine-grained Skills remain recoverable under `skills-archive/` but are outside the
+default discovery root. The remote `--list`, fixed revision, and trigger corpus must remain
+synchronized before installation is treated as complete.
 
 The complete procedure is [AI_INSTALL.md](AI_INSTALL.md). An AI may fetch the published guide with:
 
@@ -46,7 +47,7 @@ curl -fsSL https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/mai
 ```
 
 This only prints Markdown; never pipe it into a shell. The remote URL is for discovery and cloning,
-not direct installation or installed-revision proof. If its `--list` output is not the exact 26-name
+not direct installation or installed-revision proof. If its `--list` output is not the exact 7-name
 set in the guide, stop and report that the documented version is not published. Do not claim that
 local uncommitted work is available remotely.
 
@@ -104,7 +105,7 @@ For a local SonarQube Server, Skills can use SonarScanner through `quality_evide
 secret-free, read-only MCP configuration proposal through `sonarqube_local.py`:
 
 ```bash
-python3 skills/codebase-slimming/scripts/sonarqube_local.py \
+python3 skills/change-review/scripts/sonarqube_local.py \
   mcp-config \
   --client codex \
   --url http://localhost:9000 \
@@ -120,21 +121,16 @@ evidence remain separate states.
 
 ## Hidden performance review
 
-The performance suite separates static review from runtime proof:
-
-- `performance-review` finds amplification signals and routes narrow-domain checks.
-- `performance-measurement` defines reproducible workload, percentile, USE/RED, trace, and before/after evidence.
-- `database-performance` checks SQL/ORM query shape, plans, round trips, cardinality, and locks.
-- `runtime-performance` checks CPU, allocation, GC, blocking, queues, contention, I/O, and profiler evidence.
-- `web-performance` checks LCP, INP, CLS, long tasks, resource loading, and field/lab data.
-- `benchmark-performance` checks workload fidelity, setup separation, warmup, forks, variance, and result consumption.
+`performance-work` now owns static review, reproducible measurement, database/runtime/browser
+overlays, and benchmark discipline. `data-work` supplies the database-specific static and test-target
+checks; the split between hypothesis and runtime proof remains mandatory.
 
 The standard-library-only evidence helper is inventory/validation only; it does not run a workload,
 profiler, database query, or network call:
 
 ```bash
-python3 skills/performance-measurement/scripts/performance_evidence.py inventory --target . --json
-python3 skills/performance-measurement/scripts/performance_evidence.py validate <manifest.json>
+python3 skills/performance-work/scripts/performance_evidence.py inventory --target . --json
+python3 skills/performance-work/scripts/performance_evidence.py validate <manifest.json>
 ```
 
 Performance findings must retain the workload, target, revision, time window, sample distribution,
@@ -142,33 +138,17 @@ resource signals, and proof boundary. A static smell or single average does not 
 
 ## Included skills
 
-- `audit-agent-harness` — run reversible ablation audits on CLAUDE.md, AGENTS.md, Skills, Hooks, prompts, and other agent customizations without disabling safety controls
-- `aviation-grade-engineering` — apply aviation-grade engineering rigor: risk-driven lifecycle, multi-layer test defense, SRE observability, resilience patterns, CI/CD quality gates, and blameless postmortems
+- `engineering-workflow` — route intent and authority through discovery, planning, one-writer implementation, independent verification, and delivery boundaries
 - `codebase-slimming` — slim and decouple an existing codebase with a baseline, bounded pilot, and behavior-preserving batches
-- `coding-task-controller` — govern risk-path selection and phase handoffs without owning delivery work
-- `develop-production-code` — implement the smallest retained production change and hand off author evidence
-- `engineering-work-system` — cross-domain workflow router and engineering-health assessor; focused tasks go directly to their specialist Skill
-- `exa-search` — token-efficient Exa Search API workflows for neural web search, highlights, known-URL extraction, and structured enrichment
-- `gpt55-fusion` — opt-in GPT-5.5 Fusion with two independent analyses and a judge when the user explicitly requests it
-- `graph-engineering` — design auditable agent execution topologies with explicit routing, ownership, and verification
-- `open-code-review` — run Alibaba's Open Code Review agent through the `ocr` CLI for line-level Git review and full-file scans
-- `plan-code-change` — turn confirmed discovery into an executable, reviewable change plan
-- `pplx-cli` — install, authenticate, or use Perplexity's `pplx` CLI for terminal web search and page fetch when the user asks for Perplexity
-- `project-capability-engineering` — assess greenfield, existing, and legacy repository capabilities and select one evidence-based, reversible foundation increment
-- `repository-knowledge-gardening` — inventory repository knowledge, detect documentation drift, and select one verifiable gardening increment without inferring unobserved behavior
+- `data-work` — inspect SQL/ORM shape and run bounded, explicitly configured test-database checks
+- `performance-work` — review and measure application, database, runtime, browser, and benchmark performance
+- `change-review` — review Git diffs and MRs with separate correctness, performance, and environment evidence
 - `report-writer` — turn supplied facts and evidence into a formal report and select Markdown, spreadsheet, PDF, HTML, Word, or slides from its intended use
-- `review-mr` — produce findings on an existing diff with mandatory SonarQube evidence routing; separate from behavior verification
-- `sonarqube-review` — mandatory read-only SonarQube quality-gate/measures/issues channel during code review through exposed MCP tools or a bundled API client; unavailable results stay labeled evidence
-- `performance-review` — find hidden performance risks in code paths and route them to evidence-based measurement and domain overlays
-- `performance-measurement` — design reproducible USE/RED, trace, percentile, resource, and before/after performance evidence
-- `database-performance` — inspect SQL/ORM query shape, plans, round trips, cardinality, locks, and database runtime evidence
-- `database-testing` — connect to explicitly configured SQLite, PostgreSQL, or MySQL test databases for bounded SQL validation and test-data scripts
-- `runtime-performance` — inspect CPU, allocations, GC, blocking, queues, contention, I/O, and matching profiler evidence
-- `web-performance` — review LCP, INP, CLS, long tasks, resource loading, layout shifts, and field/lab evidence
-- `benchmark-performance` — design reliable benchmarks with representative workloads, warmup, forks, variance, and setup separation
-- `unknowns-field-guide` — discover pre-change facts, blindspots, assumptions, and evidence gaps
-- `verify-change-evidence` — independently observe completed-change behavior and report proof boundaries
+- `repository-governance` — improve repository knowledge, memory, agent configuration, and skill-system hygiene from observed evidence
 
-The current source checkout contains 26 Skills and the trigger corpus contains 78 positive, negative,
-and collision cases. Run `./scripts/validate-skills.sh` to validate source layout, links, README
-entries, trigger triplets, and the local Skills CLI listing.
+The current source checkout contains 7 default Skills and the trigger corpus contains 21 positive,
+negative, and collision cases. Retired source is preserved in
+`skills-archive/20260826-pre-consolidation/`. Run `python3 scripts/skill-usage-report.py --db
+<codex-history.sqlite> --output <report.json>` to refresh aggregate usage evidence, then run
+`./scripts/validate-skills.sh` to validate source layout, links, README entries, trigger triplets,
+and the local Skills CLI listing.
