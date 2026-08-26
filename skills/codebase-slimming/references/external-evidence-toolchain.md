@@ -114,7 +114,7 @@ reports the missing prerequisite without requiring or exposing a credential.
 Use the companion helper to produce a configuration proposal for the Skill host:
 
 ```bash
-python3 scripts/sonarqube_local.py mcp-config \
+python3 skills/change-review/scripts/sonarqube_local.py mcp-config \
   --client codex \
   --url http://localhost:9000 \
   --project-key my-project \
@@ -136,7 +136,7 @@ It emits a stdio configuration with:
 An optional readiness probe checks only local service identity and connectivity:
 
 ```bash
-python3 scripts/sonarqube_local.py probe \
+python3 skills/change-review/scripts/sonarqube_local.py probe \
   --url http://localhost:9000 \
   --allow-network \
   --json
