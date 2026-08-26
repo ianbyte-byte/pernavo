@@ -40,18 +40,16 @@ For hidden performance-risk work, keep review and measurement owners separate:
 
 | Request | Owner | Minimum evidence |
 |---|---|---|
-| Find static amplification signals in a change or path | `performance-review` | file/line, amplification variable, impact hypothesis, routed overlay |
-| Establish whether a suspected bottleneck is real | `performance-measurement` | workload, target, revision, time window, p50/p95/p99, resource signals, and cause artifact |
-| Inspect SQL/ORM query shape or execution plans | `database-performance` | generated SQL, request query count, actual plan/runtime stats where authorized |
-| Inspect CPU, allocation, GC, waits, queues, or locks | `runtime-performance` | matching counter/trace/profile event, sample window, runtime and workload |
-| Inspect browser loading, interaction, or layout stability | `web-performance` | field/lab distinction, LCP/INP/CLS p75, long-task/resource evidence |
-| Validate a microbenchmark | `benchmark-performance` | representative input, setup boundary, warmup, measurement, fork/iteration, variance and environment |
+| Find static amplification signals or establish runtime proof | `performance-work` | file/line, workload, target, revision, p50/p95/p99, resource signals, and cause artifact |
+| Inspect SQL/ORM query shape or execute a test query | `data-work` | generated SQL, request query count, plan/runtime stats where authorized |
+| Inspect browser loading, interaction, or layout stability | `performance-work` | field/lab distinction, LCP/INP/CLS p75, long-task/resource evidence |
+| Validate a microbenchmark | `performance-work` | representative input, setup boundary, warmup, measurement, fork/iteration, variance and environment |
 
 The performance evidence helper can create a secret-safe local inventory manifest:
 
 ```text
-python3 skills/performance-measurement/scripts/performance_evidence.py inventory --target . --json
-python3 skills/performance-measurement/scripts/performance_evidence.py validate <manifest.json>
+python3 skills/performance-work/scripts/performance_evidence.py inventory --target . --json
+python3 skills/performance-work/scripts/performance_evidence.py validate <manifest.json>
 ```
 
 This helper does not execute a workload or profiler. A trial that only reads source or a benchmark
