@@ -1,0 +1,45 @@
+{
+  "format": "pernavo.skill_usage.v1",
+  "source": "/Users/chung/.codex/thread_history_1.sqlite",
+  "message_count": 270,
+  "unique_message_count": 252,
+  "first_created_at_ms": 1787403582179,
+  "last_created_at_ms": 1787710545799,
+  "explicit_skill_mentions": {
+    "codebase-slimming": 21,
+    "review-mr": 21,
+    "open-code-review": 20,
+    "database-performance": 15,
+    "performance-measurement": 14,
+    "benchmark-performance": 13,
+    "performance-review": 13,
+    "report-writer": 13,
+    "runtime-performance": 13,
+    "web-performance": 13,
+    "database-testing": 10,
+    "gpt55-fusion": 1,
+    "unknowns-field-guide": 1
+  },
+  "canonical_route_counts": {
+    "delivery": 40,
+    "performance": 34,
+    "data": 87,
+    "review": 52,
+    "governance": 40,
+    "implementation": 56
+  },
+  "legacy_names_not_in_default_root": [
+    "benchmark-performance",
+    "database-performance",
+    "database-testing",
+    "gpt55-fusion",
+    "open-code-review",
+    "performance-measurement",
+    "performance-review",
+    "review-mr",
+    "runtime-performance",
+    "unknowns-field-guide",
+    "web-performance"
+  ],
+  "method": "Counts userMessage text only; assistant/system prompt echoes are excluded."
+}
