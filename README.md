@@ -24,18 +24,18 @@ Paste this prompt into Codex, Claude Code, Cursor, or another coding agent:
 请为我安装 Pernavo 的完整 Skills 系统。完整执行手册：
 https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/main/AI_INSTALL.md
 
-默认参数：官方 GitHub 来源、当前用户、所有支持 global 安装的 agents、全部 7 个 Skills、
+默认参数：官方 GitHub 来源、当前用户、所有支持 global 安装的 agents、全部 8 个 Skills、
 从固定 SHA checkout 执行 copy；使用 `--agent '*'`，不要只安装 Codex。远程 URL 只用于发现和
 clone，不直接用于安装。
 开始前必须读取全文、重新检查 skills CLI 的 version/help、确认授权、精确核对远程 --list
 和 JSON 同名冲突；不要盲跑，不要使用 --all 或 remove --all。冲突默认按方案 A 处理：仅在旧
 来源和固定 revision 可精确恢复时定向替换；否则停止。安装后完成固定 SHA 记录、JSON diff、
 新会话代表性 smoke（正向/负向/碰撞）、报告和定向回滚记录。
-若远程 --list 不是精确 7 项，停止并说明该版本尚未发布；未运行完整 21-case corpus 时，
-不得声称全部 7 项的 runtime activation 已验证。
+若远程 --list 不是精确 8 项，停止并说明该版本尚未发布；未运行完整 24-case corpus 时，
+不得声称全部 8 项的 runtime activation 已验证。
 ```
 
-The installation prompt's 7 Skills and 21 cases refer to the consolidated documented installation
+The installation prompt's 8 Skills and 24 cases refer to the consolidated documented installation
 set. Retired fine-grained Skills remain recoverable under `skills-archive/` but are outside the
 default discovery root. The remote `--list`, fixed revision, and trigger corpus must remain
 synchronized before installation is treated as complete.
@@ -47,7 +47,7 @@ curl -fsSL https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/mai
 ```
 
 This only prints Markdown; never pipe it into a shell. The remote URL is for discovery and cloning,
-not direct installation or installed-revision proof. If its `--list` output is not the exact 7-name
+not direct installation or installed-revision proof. If its `--list` output is not the exact 8-name
 set in the guide, stop and report that the documented version is not published. Do not claim that
 local uncommitted work is available remotely.
 
@@ -145,8 +145,9 @@ resource signals, and proof boundary. A static smell or single average does not 
 - `change-review` — review Git diffs and MRs with separate correctness, performance, and environment evidence
 - `report-writer` — turn supplied facts and evidence into a formal report and select Markdown, spreadsheet, PDF, HTML, Word, or slides from its intended use
 - `repository-governance` — improve repository knowledge, memory, agent configuration, and skill-system hygiene from observed evidence
+- `test-engineering` — route unit, integration, API, functional, regression, acceptance, and release-smoke tests across white-box, gray-box, and black-box evidence
 
-The current source checkout contains 7 default Skills and the trigger corpus contains 21 positive,
+The current source checkout contains 8 default Skills and the trigger corpus contains 24 positive,
 negative, and collision cases. Retired source is preserved in
 `skills-archive/20260826-pre-consolidation/`. Run `python3 scripts/skill-usage-report.py --db
 <codex-history.sqlite> --output <report.json>` to refresh aggregate usage evidence, then run
