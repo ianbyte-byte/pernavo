@@ -10,7 +10,7 @@ black-box 三种观察方法，接入当前 Skills 系统的一个可复用入�
 
 - 新增 `skills/test-engineering/SKILL.md` 作为统一测试路由和证据契约。
 - 新增 `skills/test-engineering/references/test-matrix.md`，按需提供层级/方法映射、案例类别和
-  .NET 工具选择原则。
+  跨语言技术栈适配原则。
 - `engineering-workflow` 的独立验证阶段接入 `test-engineering`，并保留 `data-work`、
   `performance-work`、`qa`、`codex-security:*` 和 `report-writer` 的专长边界。
 - 增加 `tests/skill-trigger-corpus.tsv` 的正向、负向、碰撞三元组，以及
@@ -45,7 +45,7 @@ runtime 触发；因此保留人工编写版本。
 ## 覆盖边界
 
 上述证据最高到 source/installed/static validation。尚未在独立宿主新会话中执行完整 24-case
-runtime corpus，因此正文 loaded、executed、target-observed 和真实 .NET/ERP 目标环境行为仍
+runtime corpus，因此正文 loaded、executed、target-observed 和真实业务目标环境行为仍
 为 `unverified`。测试工具、数据库目标、凭据、CI 和 UAT 仍须按当前仓库和用户授权解析，不能
 由 Skill 名称推断。
 
