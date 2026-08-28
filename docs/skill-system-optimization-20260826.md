@@ -3,7 +3,7 @@
 ## 目标
 
 让 Codex 日常开发优先命中少量可复用入口，而不是在 26 个细分 Skill 中选择低频或外部工具
-包装。默认发现目录从 26 项收敛为 7 项；旧实现保存在
+包装。默认发现目录在 2026-08-26 从 26 项收敛为 7 项；旧实现保存在
 `skills-archive/20260826-pre-consolidation/`，可按名称恢复。
 
 ## 证据
@@ -60,3 +60,16 @@ python3 scripts/skill-usage-report.py \
 从 `skills-archive/20260826-pre-consolidation/<name>/` 恢复指定目录，更新
 `tests/skill-trigger-corpus.tsv` 和 README/安装清单，并重新运行
 `./scripts/validate-skills.sh`。不要使用通配删除或 `remove --all`。
+
+## 2026-08-28 测试能力集成
+
+基于本地对话历史和测试体系审计，新增单一 `test-engineering` 聚合入口，避免继续创建
+`unit-testing`、`integration-testing`、`black-box-testing` 等低复用碎片。该入口负责测试层级
+（unit、integration、API、functional/system、regression、acceptance、release-smoke）与观察
+方法（white-box、gray-box、black-box）的选择，再按需叠加 `tdd`、`data-work`、`qa`、
+`performance-work`、`codex-security:*` 和 `report-writer`。
+
+当前默认安装集合为 8 个入口，触发语料为 24 个正向、负向和碰撞用例。新增 Skill 的 SkillOpt
+夹具位于 `tests/skillopt/test-engineering-tasks.json`；运行 `./scripts/validate-skills.sh` 可
+验证入口、链接、安装清单和触发三元组。宿主新会话的实际加载与执行仍需独立 runtime evidence，
+静态校验不能替代该证据。
