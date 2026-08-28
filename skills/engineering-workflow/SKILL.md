@@ -33,7 +33,9 @@ Record path, authority boundary, reason, owner, and evidence layer (`static`, `a
    rollback/recovery, and human gates.
 3. Implement the smallest authorized change. Keep one writer in a shared working tree.
 4. Verify independently against the intended behavior, including success and failure/recovery
-   paths when relevant. The changed code is not the verification oracle.
+   paths when relevant. Use `test-engineering` to select test levels, observation methods, and case
+   evidence; overlay `data-work`, `performance-work`, `qa`, or `codex-security:*` only when their
+   boundaries apply. The changed code is not the verification oracle.
 5. Report evidence and unverified layers. Local tests never prove deployment or production behavior.
 
 Use a bounded independent subagent for discovery or verification only when the selected path needs
