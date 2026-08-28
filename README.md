@@ -10,6 +10,21 @@ For end-to-end workflow and trigger experiments, including the boundary between 
 installed, loaded, executed, and target-observed evidence, read
 [End-to-End Skill Workflow and Trigger Experiments](docs/skill-workflow-and-trigger-experiments.md).
 
+Codex and Claude Code hooks append privacy-preserving Skill usage evidence to the shared local
+JSONL file `~/.codex/skill-usage/events.jsonl`. The logger records source, event kind, Skill name,
+status, and session metadata, but never raw prompts, commands, tool responses, credentials, or data
+rows. Analyze it with:
+
+```bash
+python3 scripts/skill-usage-report.py \
+  --events ~/.codex/skill-usage/events.jsonl \
+  --date 2026-08-28 --timezone Asia/Shanghai \
+  --output docs/audit/skill-events.json
+```
+
+See [Cross-Agent Skill Usage Logging](docs/skill-usage-hook-integration.md) for the schema and Hook
+configuration details.
+
 For a source-backed, vendor-neutral policy for bounded cost-aware multi-agent routing, read
 [Cost-Aware Multi-Agent Orchestration](docs/reference/cost-aware-multi-agent-orchestration.md).
 
