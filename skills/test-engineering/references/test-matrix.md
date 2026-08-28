@@ -28,21 +28,29 @@ Select the categories required by the contract and risk model:
 - pagination, ordering, empty result, payload/batch limits, and safe concurrency;
 - business invariants and reconciliation, such as totals, tax, inventory, and ledger consistency.
 
-## .NET selection guidance
+## Stack adapter guidance
 
-Inspect the solution and existing CI before selecting tools. Common choices are examples, not
-mandatory dependencies:
+Testing is language- and framework-agnostic. Inspect the repository's language(s), build system,
+test runner, fixtures, dependency services, and existing CI before selecting commands or tools. Use
+the native ecosystem and preserve its lifecycle, isolation, reporting, and conventions; do not add a
+framework only to satisfy a metric.
 
-- xUnit, NUnit, or MSTest for unit and repository-native test projects;
-- ASP.NET Core `WebApplicationFactory` for in-process integration boundaries;
-- a disposable container or explicitly configured test service for database and dependency tests;
-- Coverlet for coverage evidence and Stryker.NET for mutation evidence when the repository already
-  supports them;
-- Playwright or the repository's browser runner for black-box UI workflows;
-- a repository-approved client or contract fixture for HTTP/API tests.
+Examples are adapters, not requirements:
 
-Do not add a framework only to satisfy a metric. Preserve the repository's runner, fixture lifecycle,
-target isolation, and CI conventions.
+- a repository-native unit framework and assertion library for the implementation language;
+- an in-process harness or service test host for application boundaries;
+- disposable containers, emulators, or explicitly configured test services for real dependencies;
+- coverage, mutation, property-based, or fuzz tooling when the repository already supports it;
+- the repository's approved browser runner for black-box UI workflows;
+- an approved HTTP/RPC client or contract fixture for API tests.
+
+For example, a .NET repository might use xUnit, NUnit, or MSTest; ASP.NET Core
+`WebApplicationFactory`; and Coverlet or Stryker.NET. A Python repository might use pytest and
+pytest fixtures, while a JavaScript/TypeScript repository might use Vitest or Jest with Playwright.
+These names illustrate adapter selection only; inspect the repository before choosing among them.
+
+When a concrete example is useful, name the language-specific tool and why it fits the repository;
+never infer a language, framework, or dependency from this reference alone.
 
 ## Evidence minimum
 
