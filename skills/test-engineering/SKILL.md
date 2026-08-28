@@ -84,6 +84,6 @@ Blocked, skipped, and unverified surfaces:
 Next gate or handoff:
 ```
 
-For detailed case categories and .NET adapter selection, read
+For detailed case categories and stack adapter selection, read
 [the test matrix](references/test-matrix.md). For HTTP request/response evidence, read
 [`report-writer`'s API test module](../report-writer/references/http-api-test.md).
