@@ -101,6 +101,39 @@ class SkillUsageReportCase(unittest.TestCase):
         self.assertEqual("call bearer [REDACTED]", skill_usage_report.redact_text("call bearer abc.def"))
         self.assertEqual("token=[REDACTED]", skill_usage_report.redact_text("token=abc123"))
 
+    def test_reads_unified_hook_events_by_date(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "events.jsonl"
+            rows = [
+                {
+                    "schema_version": "pernavo.skill_usage_event.v1",
+                    "timestamp": "2026-08-28T01:00:00+00:00",
+                    "source": "codex",
+                    "kind": "skill_invoked",
+                    "skill_name": "data-work",
+                    "status": "started",
+                    "session_id": "s1",
+                },
+                {
+                    "schema_version": "pernavo.skill_usage_event.v1",
+                    "timestamp": "2026-08-27T01:00:00+00:00",
+                    "source": "claude",
+                    "kind": "skill_invoked",
+                    "skill_name": "test-engineering",
+                    "status": "started",
+                    "session_id": "s2",
+                },
+                {"not": "an event"},
+            ]
+            path.write_text("\n".join(json.dumps(row) for row in rows), encoding="utf-8")
+            report = skill_usage_report.build_event_usage_report(path, "2026-08-28", "Asia/Shanghai")
+
+        self.assertEqual(1, report["event_count"])
+        self.assertEqual({"codex": 1}, report["summary"]["sources"])
+        self.assertEqual({"data-work": 1}, report["summary"]["skills"])
+        self.assertEqual(1, report["summary"]["sessions"])
+        self.assertEqual(1, report["invalid_or_unknown_lines"])
+
 
 if __name__ == "__main__":
     unittest.main()

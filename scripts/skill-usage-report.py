@@ -72,9 +72,10 @@ REDACTION_PATTERNS = (
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--db", type=Path, required=True, help="Codex thread_history SQLite database")
+    parser.add_argument("--db", type=Path, help="Codex thread_history SQLite database (legacy aggregate mode)")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--sessions-root", type=Path, help="Codex JSONL session directory")
+    parser.add_argument("--events", type=Path, help="Unified Skill usage JSONL emitted by Codex/Claude hooks")
     parser.add_argument("--date", help="Local calendar date to include, YYYY-MM-DD")
     parser.add_argument("--timezone", default="Asia/Shanghai")
     return parser.parse_args()
@@ -231,6 +232,44 @@ def build_session_usage_report(sessions_root: Path, target_date: str | None, tim
     }
 
 
+def build_event_usage_report(events_path: Path, target_date: str | None, timezone: str) -> dict:
+    local_zone = ZoneInfo(timezone)
+    events = []
+    invalid_lines = 0
+    for line in events_path.read_text(encoding="utf-8").splitlines():
+        try:
+            event = json.loads(line)
+        except json.JSONDecodeError:
+            invalid_lines += 1
+            continue
+        if not isinstance(event, dict) or event.get("schema_version") != "pernavo.skill_usage_event.v1":
+            invalid_lines += 1
+            continue
+        timestamp = event_timestamp(event)
+        if target_date and (not timestamp or timestamp.astimezone(local_zone).date().isoformat() != target_date):
+            continue
+        events.append(event)
+    def counts(key: str) -> dict[str, int]:
+        counter = Counter(str(event[key]) for event in events if event.get(key))
+        return dict(sorted(counter.items()))
+    return {
+        "format": "pernavo.skill_usage_events.v1",
+        "source": str(events_path.resolve()),
+        "date": target_date,
+        "timezone": timezone,
+        "event_count": len(events),
+        "invalid_or_unknown_lines": invalid_lines,
+        "summary": {
+            "sources": counts("source"),
+            "kinds": counts("kind"),
+            "skills": counts("skill_name"),
+            "statuses": counts("status"),
+            "sessions": len({event.get("session_id") for event in events if event.get("session_id")}),
+        },
+        "method": "Consumes only pernavo.skill_usage_event.v1 records emitted by the Codex and Claude Code hooks; payloads are not reconstructed.",
+    }
+
+
 def read_user_messages(db: Path) -> tuple[list[str], int, int]:
     uri = f"file:{db.resolve()}?mode=ro"
     with sqlite3.connect(uri, uri=True) as connection:
@@ -256,6 +295,14 @@ def read_user_messages(db: Path) -> tuple[list[str], int, int]:
 
 def main() -> int:
     args = parse_args()
+    if args.events:
+        report = build_event_usage_report(args.events, args.date, args.timezone)
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        print(json.dumps({"event_count": report["event_count"], "summary": report["summary"]}, ensure_ascii=False))
+        return 0
+    if not args.sessions_root and not args.db:
+        raise SystemExit("one of --events, --sessions-root, or --db is required")
     if args.sessions_root:
         report = build_session_usage_report(args.sessions_root, args.date, args.timezone)
         args.output.parent.mkdir(parents=True, exist_ok=True)
