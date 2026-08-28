@@ -20,3 +20,6 @@ rw_collision	report-writer	report-writer,change-review	-	Convert the completed c
 rg_positive	repository-governance	repository-governance	engineering-workflow	Audit repository instructions and memory for drift, then stage one reversible documentation or configuration improvement with a restore path.
 rg_negative	repository-governance	engineering-workflow	repository-governance	Fix the production endpoint bug described here with a code change and focused tests; do not audit repository governance.
 rg_collision	repository-governance	repository-governance,engineering-workflow	-	Consolidate unused Skills based on aggregate Codex history, preserve an archive, update routing, and verify the new discovery surface.
+te_positive	test-engineering	test-engineering	-	Design and run a risk-based plan covering unit, integration, API, regression, and black-box business workflow tests; record blocked cases and evidence.
+te_negative	test-engineering	engineering-workflow	test-engineering	Implement the approved invoice change with one writer and independent verification; testing details are not requested.
+te_collision	test-engineering	test-engineering,engineering-workflow	change-review	Implement a customer-visible change through the engineering workflow, run white-box unit and gray-box integration tests, then report the test evidence without reviewing the Git diff.
