@@ -1,0 +1,396 @@
+{
+  "format": "pernavo.skill_usage.v2",
+  "source": "/Users/chung/.codex/sessions/2026/08/28",
+  "date": "2026-08-28",
+  "timezone": "Asia/Shanghai",
+  "task_count": 16,
+  "tasks": [
+    {
+      "session_id": "01a03bd7-3374-7d60-864b-171346eab658",
+      "request": "有没有测试方面的技能 当前的 skills 系统是否覆盖了开发测试：单元测试、集成测试、黑白盒测试的技能： 以下是参考材料，你可以从互联网获取更多信息，作为 skills 系统中测试技能的参考资料来源： 在软件项目工程中，“测试”不是单指找 Bug，而是一套**验证软件质量、业务正确性、稳定性和可交付性的工程体系**。通常包括以下几个层级： ## 1. 单元测试（Unit Test） **目标：验证最小代码单元是否正确** 测试对象： - 方法 - 类 - 服务 - 工具函数 - 业务规则 例如： - 计算税额是否正确 - 金额四舍五入是否符合规则 - 状态转换逻辑是否正确 常用工具： - .NET： - xUnit - NUnit - MSTest 示例： ``` 输入： 金额 = 100 税率 = 13% 期望： 税额 = 13 含税金额 = 113 ``` --- # 2. 集成测试（Integration Test） **目标：验证多个模块协作是否正确** 测试范围： - API + 数据库 - 服务 + 第三方接口 - 消息队列 - 缓存 - 文件系统 例如： 发票系统： `",
+      "applicable_routes": [
+        "data",
+        "delivery",
+        "governance",
+        "implementation",
+        "performance",
+        "testing"
+      ],
+      "applicable_skills": [
+        "data-work",
+        "engineering-workflow",
+        "performance-work",
+        "repository-governance",
+        "test-engineering"
+      ],
+      "loaded_skills": [
+        "repository-governance",
+        "test-engineering"
+      ],
+      "explicit_mentions": [],
+      "missed_opportunity": [
+        "data-work",
+        "engineering-workflow",
+        "performance-work"
+      ],
+      "observation": "completed",
+      "completed": true
+    },
+    {
+      "session_id": "01a04400-a9f2-7ab1-a588-88ba4da5afdc",
+      "request": "/Users/chung/Developer/Code/zksoft-2025/ZKSoft.Sandbox/App\\_Data/yonbip-sandbox-requests.jsonl 为什这个文件一直撤销不掉，一直出现在变更里，是否有同步，或者其他进程控制了 终止进程 撤销 jsonl 的变更",
+      "applicable_routes": [],
+      "applicable_skills": [],
+      "loaded_skills": [],
+      "explicit_mentions": [],
+      "missed_opportunity": [],
+      "observation": "completed",
+      "completed": true
+    },
+    {
+      "session_id": "01a04412-6b8a-7830-a160-03e08ff39b54",
+      "request": "审查并重构当前仓库中 zksoft.aa 的代码。先问我要重点关注代码库的哪一部分。 1. 性能、可维护性、并发、安全或测试 请将本次变更按模块/功能拆分成多个原子提交，描述用中文、动词开头、清晰简洁，严格遵守conventional commit，变更已完成测试，无需审查",
+      "applicable_routes": [
+        "delivery",
+        "performance",
+        "review",
+        "testing"
+      ],
+      "applicable_skills": [
+        "change-review",
+        "engineering-workflow",
+        "performance-work",
+        "test-engineering"
+      ],
+      "loaded_skills": [
+        "codebase-slimming",
+        "engineering-workflow"
+      ],
+      "explicit_mentions": [],
+      "missed_opportunity": [
+        "change-review",
+        "performance-work",
+        "test-engineering"
+      ],
+      "observation": "completed",
+      "completed": true
+    },
+    {
+      "session_id": "01a0441b-58d4-7630-bafa-c3e64e4b21b7",
+      "request": "我们一起来设置一个已安排任务吧。首先，说明已安排任务在 ChatGPT 中的工作方式。然后询问我需要安排什么，以及应该在什么时候运行。 审查并重构当前仓库中 zksoft.aa 的代码：重点关注代码代码库的性能、可维护性、并发、安全或测试",
+      "applicable_routes": [
+        "performance",
+        "review",
+        "testing"
+      ],
+      "applicable_skills": [
+        "change-review",
+        "performance-work",
+        "test-engineering"
+      ],
+      "loaded_skills": [],
+      "explicit_mentions": [],
+      "missed_opportunity": [
+        "change-review",
+        "performance-work",
+        "test-engineering"
+      ],
+      "observation": "aborted",
+      "completed": false
+    },
+    {
+      "session_id": "01a0461a-c343-7ff0-b1d3-59699b580da6",
+      "request": "发布 czlhc 到文件夹，打开文件夹 重新发布 czlhc 到文件夹，打开文件夹",
+      "applicable_routes": [
+        "delivery"
+      ],
+      "applicable_skills": [
+        "engineering-workflow"
+      ],
+      "loaded_skills": [],
+      "explicit_mentions": [],
+      "missed_opportunity": [
+        "engineering-workflow"
+      ],
+      "observation": "completed",
+      "completed": true
+    },
+    {
+      "session_id": "01a04625-d15b-7c12-a438-015260c85d7e",
+      "request": "\\============================================================= 【异常时间】：2026-08-28 10:13:07.246 【异常位置】：CzlHcSaleOrder -> CustomerServiceCheckPrice 【异常消息】：列名 'cVariety' 无效。 【异常堆栈】： at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\\`1 wrapCloseInAction) &#x20; at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action\\`1 wrapCloseInAction) &#x20; at Microsoft.Data.SqlClient.TdsParser.ThrowE",
+      "applicable_routes": [
+        "data",
+        "delivery",
+        "performance",
+        "review",
+        "testing"
+      ],
+      "applicable_skills": [
+        "change-review",
+        "data-work",
+        "engineering-workflow",
+        "performance-work",
+        "test-engineering"
+      ],
+      "loaded_skills": [
+        "data-work",
+        "test-engineering"
+      ],
+      "explicit_mentions": [],
+      "missed_opportunity": [
+        "change-review",
+        "engineering-workflow",
+        "performance-work"
+      ],
+      "observation": "completed",
+      "completed": true
+    },
+    {
+      "session_id": "01a04679-c536-7233-875d-0d966123c329",
+      "request": "项目 yjzyys： 尝试复现问题：============================================================= 【异常时间】：2026-08-28 10:16:28.954 【异常位置】：PmiBgReceiptHx -> Hx 【异常消息】：在应使用条件的上下文(在 ',' 附近)中指定了非布尔类型的表达式。 【异常堆栈】： at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, SqlCommand command, Boolean callerHasConnectionLock, Boolean asyncClose) &#x20; at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResu",
+      "applicable_routes": [
+        "data",
+        "delivery",
+        "performance",
+        "review",
+        "testing"
+      ],
+      "applicable_skills": [
+        "change-review",
+        "data-work",
+        "engineering-workflow",
+        "performance-work",
+        "test-engineering"
+      ],
+      "loaded_skills": [
+        "data-work",
+        "test-engineering"
+      ],
+      "explicit_mentions": [],
+      "missed_opportunity": [
+        "change-review",
+        "engineering-workflow",
+        "performance-work"
+      ],
+      "observation": "completed",
+      "completed": true
+    },
+    {
+      "session_id": "01a04682-e7fc-7a10-ab56-a3ed9b8f2db2",
+      "request": "yjzypmi： 000100741，发票附件没有上传到红冲单据上。TC000098280827172350 分析问题，尝试复现 回写开票申请没有问题，可以继续回写到`PmiRedInvoice` 的附件 运行项目，开始测试业务，及时发现业务缺口，是否已经完成修复 authoration bearer [REDACTED] 启动 zksoft.sandbox 沙盒完成业务流测试 yjzy0808 作为 yjzyys 的测试数据库，也可以作为沙盒的测试数据库，沙盒的数据保存在对应的系统的数据库内，没有就连接创建对应的表结构 你知道你要测试的是本次附件回写的内容吗 像 SpaceX 无法直接在火星测试一样，软件团队也无法完全复制生产环境。测试工作的价值不在于构造一个完美的真实环境，而在于通过模拟、建模、故障注入、压力测试和场景覆盖，把潜在风险尽可能提前暴露出来，用可控成本换取上线后的稳定性。真正的目标不是证明系统永不出错，而是把已知和未知风险持续压缩到业务能够接受的范围内 开始启动项目测试完整业务 如果沙盒不满足测试业务需求，可以对沙盒进行优化开发，完善沙盒机制 红票附件依旧保留同步回写到",
+      "applicable_routes": [
+        "data",
+        "delivery",
+        "implementation",
+        "testing"
+      ],
+      "applicable_skills": [
+        "data-work",
+        "engineering-workflow",
+        "test-engineering"
+      ],
+      "loaded_skills": [
+        "data-work",
+        "engineering-workflow",
+        "test-engineering"
+      ],
+      "explicit_mentions": [],
+      "missed_opportunity": [],
+      "observation": "completed",
+      "completed": true
+    },
+    {
+      "session_id": "01a046f8-657e-7420-85b2-21ff2081b546",
+      "request": "技术性消化不要碰涉政话题，企业改为民营企业",
+      "applicable_routes": [
+        "implementation"
+      ],
+      "applicable_skills": [
+        "engineering-workflow"
+      ],
+      "loaded_skills": [],
+      "explicit_mentions": [],
+      "missed_opportunity": [
+        "engineering-workflow"
+      ],
+      "observation": "completed",
+      "completed": true
+    },
+    {
+      "session_id": "01a046fa-3a30-7871-ade9-954852b017e2",
+      "request": "钟甘棠 是便利店主，没有医药基础，但对中药有偏执的信任 县城\"甘棠堂便利店\"（匾书\"甘棠堂\"）店主：这个改掉，只是普通便利店主，但长期阅览中药书籍，平常也经常自行配方中药自服 钟允文则是小厂软件工程师，赚的不多，也是挣扎的，渴望进取的年轻人 周婉兮 姓丘，化学/数学教师，钟甘棠 曾是物理/化学/数学教师 加入两个小角色：两个同门小师妹，爱玩游戏，有小群体，但在实验室不受欢迎，有自己的小九九",
+      "applicable_routes": [],
+      "applicable_skills": [],
+      "loaded_skills": [],
+      "explicit_mentions": [],
+      "missed_opportunity": [],
+      "observation": "completed",
+      "completed": true
+    },
+    {
+      "session_id": "01a0473b-2fa6-7ad3-b59d-31be809b0c34",
+      "request": "hjg 数字门户： 所有报表需要控制权限。 1.财务郑泽彦可以查看所有数据 2.其他用户只能看到自己导入的数据 ----------------- ## 目前配置的过滤条件IDPerson = @IDPerson or @IDPerson=97 无效，因导入数据没有记录IDPerson值(IdMaker/可临时使用 cmaker 替代) 保证有 IDMaker 或 cMaker 即可 涉及报表：HjgPitSalary\\_View、HjgPitEmployeeBenefits\\_View、HjgPitServiceFee\\_View、HjgPitOccasionalIncome\\_View、HjgPitOneTimeIncome\\_View、HjgPitOneTimeIncome\\_View\\_Year、HjgPitMergeDeclare\\_View、HjgPitMergeDeclare\\_View\\_All 以下两个报表不用修改： HjgPitMergeDeclare\\_View\\_All 来源于 HjgPitMergeDeclare\\_View HjgPitOneTimeInco",
+      "applicable_routes": [
+        "data",
+        "delivery",
+        "implementation",
+        "review",
+        "testing"
+      ],
+      "applicable_skills": [
+        "change-review",
+        "data-work",
+        "engineering-workflow",
+        "test-engineering"
+      ],
+      "loaded_skills": [],
+      "explicit_mentions": [],
+      "missed_opportunity": [
+        "change-review",
+        "data-work",
+        "engineering-workflow",
+        "test-engineering"
+      ],
+      "observation": "aborted",
+      "completed": false
+    },
+    {
+      "session_id": "01a0474a-07f3-7383-984d-cb0b217bee42",
+      "request": "视图:CzlHcCustomerPriceAdjustment\\_ViewAll,增加字段:cVariety \\-- auto-generated definition\\ CREATE VIEW dbo.CzlHcCustomerPriceAdjustment\\_ViewAll\\ AS\\ SELECT m.IDMainVouch, m.cMemo, m.iUnitPriceTaxPercent, d.ID AS IDCzlHcCustomerPriceAdjustmentDetail, d.IDCustomer, d.iCustomerDiscountRate, d.dDateStart, d.dDateEnd, d.IDInventory, d.iUnitPriceStand, d.iUnitPriceDiscount, d.iUnitPriceTax, d.iUnitPriceTaxLast, d.iUnitPriceNoTax, d.cCusCode, d.cCusName, d.cInvCode, d.cInvName, d.cInvName1,\\ &#x20; d.cJudg",
+      "applicable_routes": [
+        "data",
+        "delivery",
+        "implementation",
+        "review",
+        "testing"
+      ],
+      "applicable_skills": [
+        "change-review",
+        "data-work",
+        "engineering-workflow",
+        "test-engineering"
+      ],
+      "loaded_skills": [],
+      "explicit_mentions": [],
+      "missed_opportunity": [
+        "change-review",
+        "data-work",
+        "engineering-workflow",
+        "test-engineering"
+      ],
+      "observation": "completed",
+      "completed": true
+    },
+    {
+      "session_id": "01a04776-2012-7910-a7ab-77e164674b5e",
+      "request": "排查问题，为什么api/bkip/st/BkipDataGateWay/ 的接口显示的运行实现为 0 ，问题泵为：047 ，可以启动项目，连接测试库研判 ```json \"cMode\": \"RATE^����ģʽ\", \"cTubeSet\": \"BK001\", \"cBattery\": \"75\", \"cRate\": \"150\", \"cOcclusion\": \"0\", \"cVibi\": \"0\", \"cVolume\": \"260.51\", \"cTime\": \"0:0:0\" ``` 查阅 hl7 日志，是否取错时间",
+      "applicable_routes": [
+        "data",
+        "delivery",
+        "implementation",
+        "testing"
+      ],
+      "applicable_skills": [
+        "data-work",
+        "engineering-workflow",
+        "test-engineering"
+      ],
+      "loaded_skills": [],
+      "explicit_mentions": [],
+      "missed_opportunity": [
+        "data-work",
+        "engineering-workflow",
+        "test-engineering"
+      ],
+      "observation": "completed",
+      "completed": true
+    },
+    {
+      "session_id": "01a04797-fcea-75a0-961f-89e82c53e0e7",
+      "request": "api/bkip/st/BkipDataGateWay/ 开发一个新的数据大屏更新模型，引入 sse+数据接口，实现数据实时更新，不再需要前端轮询获取数据，先评估技术方案 api/bkip/st/BkipDataGateWay/ 开发一个新的数据大屏更新模式，引入 sse+数据接口，实现数据实时更新，不再需要前端轮询获取数据，先评估技术方案 设备数据传输频次是比较高的 可以连接测试库查看数据推送频次 开始落地方案 在 wwwroot 设计一个大屏页面，展示数据 使用 react +shadcn 开发，开发完成后，编译出来我拷贝到当前的 iis 部署的系统下",
+      "applicable_routes": [
+        "data",
+        "delivery",
+        "implementation",
+        "testing"
+      ],
+      "applicable_skills": [
+        "data-work",
+        "engineering-workflow",
+        "test-engineering"
+      ],
+      "loaded_skills": [
+        "data-work",
+        "engineering-workflow",
+        "test-engineering"
+      ],
+      "explicit_mentions": [],
+      "missed_opportunity": [],
+      "observation": "aborted",
+      "completed": false
+    },
+    {
+      "session_id": "01a047ca-5b38-7ec2-abdc-44aaac973d21",
+      "request": "hxycwms： 结合当前的库存视图，开发一个报表脚本： 库存查询：增加按编码查询库存，查询的库存需要返回在库数量、已订货未送数量、到货待上架数量、已申请未出库数量、库存可用数量=在库数量+到货待上架数量-已申请未出库数量、展望数量=库存可用数量+已订货未送货数量，按存货编码展示",
+      "applicable_routes": [
+        "data",
+        "implementation"
+      ],
+      "applicable_skills": [
+        "data-work",
+        "engineering-workflow"
+      ],
+      "loaded_skills": [],
+      "explicit_mentions": [],
+      "missed_opportunity": [
+        "data-work",
+        "engineering-workflow"
+      ],
+      "observation": "completed",
+      "completed": true
+    },
+    {
+      "session_id": "01a048a6-2df8-7e42-b2f2-6601ab78e003",
+      "request": "hjgpmi: 需求核对验收： 月度开票汇总单：应收、已开票合计、收款合计数据不对,接口带出来的合计跟截图上的对不上 统计口径调整： 需求更新： 2026-07-31 按核销后的数据对照统计 先明确明细的数据来源： 应收：按缴费单（申请日期）/职工租金（申请日期）统计 已开票、已收款、未收款由明细的的数据统计 明细的金额数据来源: **应收金额 当月申请的缴费通知单、已开票、当月申请已开票的缴费通知单关联税控单的数据、收款金额：与当月缴费通知单核销的收款单的核销的数据，未收款：应收-收款**",
+      "applicable_routes": [
+        "testing"
+      ],
+      "applicable_skills": [
+        "test-engineering"
+      ],
+      "loaded_skills": [],
+      "explicit_mentions": [],
+      "missed_opportunity": [
+        "test-engineering"
+      ],
+      "observation": "completed",
+      "completed": true
+    }
+  ],
+  "summary": {
+    "applicable": {
+      "change-review": 6,
+      "data-work": 9,
+      "engineering-workflow": 12,
+      "performance-work": 5,
+      "repository-governance": 1,
+      "test-engineering": 11
+    },
+    "loaded": {
+      "codebase-slimming": 1,
+      "data-work": 4,
+      "engineering-workflow": 3,
+      "repository-governance": 1,
+      "test-engineering": 5
+    },
+    "missed_opportunity": {
+      "change-review": 6,
+      "data-work": 5,
+      "engineering-workflow": 9,
+      "performance-work": 5,
+      "test-engineering": 6
+    },
+    "explicit_only": {}
+  },
+  "method": "Top-level user sessions grouped by session_id; generated evaluator prompts excluded; loaded requires a reader command naming SKILL.md and is not inferred from mentions or available-skill listings."
+}
