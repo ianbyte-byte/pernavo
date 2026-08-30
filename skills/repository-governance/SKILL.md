@@ -24,4 +24,5 @@ evidence. Archive retired material with reason, date, and restore path.
 
 Record observed facts, assumptions, unknowns, proposed change, expected signal, rollback, and the
 highest evidence layer reached. Route code changes to `engineering-workflow`, review to
-`change-review`, and formal output to `report-writer`.
+`change-review`, and formal output to `report-writer`. Do not implement from a `change-review`
+finding list, and do not turn one reversible increment into a review-fix loop.

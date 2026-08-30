@@ -6,7 +6,8 @@ Classify the user's requested outcome before choosing a general coding approach.
   审查改动/提交前自查, invoke `change-review` (alias `/review-mr`) and follow that Skill's evidence
   and specialist routing.
 - If the user explicitly asks for Open Code Review, OCR, the `ocr` CLI, or an OCR preview/review,
-  invoke `/open-code-review`. Do not substitute a generic code review.
+  invoke `/open-code-review`. Do not substitute a generic code review. If that Skill is unregistered,
+  report the missing registration; do not implement suggested fixes.
 - If the user asks to remove dead or duplicated code, decouple modules, or perform behavior-preserving
   codebase slimming, invoke `/codebase-slimming`.
 - If none of these conditions match, do not invoke a review or cleanup workflow merely because the
@@ -16,16 +17,12 @@ Keep review, implementation, and behavior verification as separate responsibilit
 different agent, model, or session:
 
 - Implement: `engineering-workflow`. One writer. Do not review your own diff.
-- Review: `change-review`. Report findings only. Do not implement, silently edit, approve, merge, or
-  deploy from the review session.
-- Verify: `test-engineering` (and overlays named by `engineering-workflow`). Behavior evidence is not
-  a substitute for diff review, and a review report is not behavior proof.
+- Review: `change-review`. Findings only. Do not implement, silently edit, approve, merge, or deploy.
+- Verify: `test-engineering`. Behavior evidence is not diff review, and a review report is not proof.
 
-Stop the implement → review → verify loop when a human or explicit policy says remaining findings
-are below the severity bar: no remaining P1; selected P2 only if that policy requires them; P3/nits
-optional. Do not loop until the findings list is empty. Same-session "review again" is not an
-independent review; any re-review after fixes needs a fresh context. Each finding still needs a
-human or explicit policy decision before it is worth fixing.
+Default policy, including agent-only sessions with no human in the loop: remaining P1 only; do not
+self-select P2 or P3. A human or explicit policy may still require selected P2. Re-review after
+fixes needs a fresh context.
 
 When a listed Skill is unavailable, report the missing registration instead of silently claiming that
 the workflow was used. Preserve unrelated dirty work.

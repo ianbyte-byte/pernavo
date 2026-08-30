@@ -21,7 +21,11 @@ deployed target.
 ## Plan a workflow experiment
 
 1. Define the requested outcome, allowed actions, and prohibited external effects. Keep read-only
-   diagnosis separate from authorization to repair.
+   diagnosis separate from authorization to repair. Implementation, review, and verification are
+   separate owners (`engineering-workflow`, `change-review`, `test-engineering`). A review trial that
+   stops under the default policy (remaining P1 only when no human is in the loop; do not
+   self-select P2 or P3) is complete; leftover nits are not a failed trial. Re-review trials need a
+   fresh context.
 2. Select a fast, default, or deep lifecycle based on consequence, reversibility, active context,
    data/state ownership, recovery behavior, and target-environment uncertainty.
 3. Write an abstract corpus with exactly one positive, negative, and collision case for each owner.

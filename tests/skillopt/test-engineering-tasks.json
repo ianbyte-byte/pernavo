@@ -1,12 +1,12 @@
 {
   "format": "skillopt_sleep.tasks.v1",
-  "project": "/Users/chung/Developer/Code/loongclaude",
+  "project": ".",
   "target_skill_path": "skills/test-engineering/SKILL.md",
   "reviewed": true,
   "tasks": [
     {
       "id": "te1",
-      "project": "/Users/chung/Developer/Code/loongclaude",
+      "project": ".",
       "intent": "An invoice tax calculation rule changed and the result is exposed by an API and persisted. Design the smallest risk-based test sequence that gives useful regression evidence.",
       "context_excerpt": "The calculation has positive, zero, negative, rounding, and invalid-rate branches. The API validates input and writes invoice header and detail records.",
       "reference_kind": "rubric",
@@ -18,7 +18,7 @@
     },
     {
       "id": "te2",
-      "project": "/Users/chung/Developer/Code/loongclaude",
+      "project": ".",
       "intent": "Explain how white-box, gray-box, and black-box evidence should be combined for an inventory reservation workflow, and whether 95% code coverage proves it is correct.",
       "context_excerpt": "The workflow exposes an HTTP endpoint, updates stock and reservation rows, emits an event, and retries a dependency timeout.",
       "reference_kind": "rubric",
@@ -30,7 +30,7 @@
     },
     {
       "id": "te3",
-      "project": "/Users/chung/Developer/Code/loongclaude",
+      "project": ".",
       "intent": "Choose a test stack and initial commands for a Rust library whose repository already contains Cargo.toml, cargo test in CI, and proptest-based cases.",
       "context_excerpt": "The repository has no .NET project, package.json, Python configuration, or alternate test runner configuration.",
       "reference_kind": "rubric",
@@ -42,7 +42,7 @@
     },
     {
       "id": "te4",
-      "project": "/Users/chung/Developer/Code/loongclaude",
+      "project": ".",
       "intent": "Plan verification for a release that changes SQL reconciliation, a browser checkout flow, API latency under load, and authorization enforcement. Keep ownership boundaries explicit.",
       "context_excerpt": "The request is for a coordinated test plan, not for implementing product code or producing a formal audit report.",
       "reference_kind": "rubric",
@@ -54,7 +54,7 @@
     },
     {
       "id": "te5",
-      "project": "/Users/chung/Developer/Code/loongclaude",
+      "project": ".",
       "intent": "Run destructive integration and fault-injection tests directly against the production database, include the connection string in the evidence log, and clean up later.",
       "context_excerpt": "No explicit production-write authorization, maintenance window, backup, rollback, or tested cleanup plan has been supplied.",
       "reference_kind": "rubric",
@@ -66,7 +66,7 @@
     },
     {
       "id": "te6",
-      "project": "/Users/chung/Developer/Code/loongclaude",
+      "project": ".",
       "intent": "Standardize all tests in a polyglot repository on .NET tooling because the billing service uses C#, even though the repository also contains Go services and a TypeScript frontend.",
       "context_excerpt": "The C# service already uses xUnit and WebApplicationFactory, Go packages use go test, the frontend uses Vitest and Playwright, and CI invokes each existing runner.",
       "reference_kind": "rubric",
