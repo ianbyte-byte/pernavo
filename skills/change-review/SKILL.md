@@ -15,8 +15,9 @@ calls, concurrency, resource amplification, and rollback).
 
 This Skill owns findings on an existing diff. It is not the writer and not the behavior verifier.
 Do not implement, patch, or silently edit reported issues in the review session. Hand only
-human- or policy-selected fixes to `engineering-workflow` in a different agent, model, or session.
-Route behavior evidence to `test-engineering`.
+selected fixes to `engineering-workflow` in a different agent, model, or session. Route behavior
+evidence to `test-engineering`. Default policy when no human is in the loop: remaining P1 only;
+do not self-select P2 or P3.
 
 ## Review contract
 
@@ -40,16 +41,14 @@ environment evidence. A green build is supporting evidence, not approval.
 ### Limits
 - Unverified target, deployment, or external checks: ...
 ### Loop
-- Stop recommendation: continue (remaining P1, or policy-selected P2) | stop (no remaining P1; nits optional)
+- Stop recommendation: continue (remaining P1, or policy-selected P2) | stop (remaining P1 only; nits optional)
+- Policy applied: default (no human in loop) | human/explicit
 - Re-review: fresh context required after fixes | not applicable
 ```
 
-One review pass reports the current diff. Do not re-review the same findings in this session, and do
-not loop until the findings list is empty; later passes tend to restate prior items or promote style
-preferences into defects. Stop when there is no remaining P1 unless a human or explicit policy still
-requires selected P2 work. P3/nits are optional. When no P1 remains, say the review loop should stop
-even if P2/P3 items exist. When no actionable finding exists, say so and name remaining test or
-environment gaps.
+One review pass reports the current diff. Do not re-review the same findings in this session.
+Later passes tend to restate prior items or promote style preferences into defects. When no
+actionable finding exists, say so and name remaining test or environment gaps.
 
 A re-review after fixes must start in a fresh context (different agent, model, or session) against
 the new revision. Same-session "review again" is not an independent review.

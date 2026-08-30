@@ -1,11 +1,11 @@
 {
   "format": "skillopt_sleep.tasks.v1",
-  "project": "/Users/chung/Developer/Code/loongclaude",
+  "project": ".",
   "target_skill_path": "skills/report-writer/SKILL.md",
   "reviewed": true,
   "tasks": [
-    {"id":"rw1","project":"/Users/chung/Developer/Code/loongclaude","intent":"Write a concise report from supplied evidence without adding claims.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"evidence"},{"op":"contains","arg":"unverified"},{"op":"contains","arg":"claims"}]},"tags":["integrity"],"split":"train","origin":"real"},
-    {"id":"rw2","project":"/Users/chung/Developer/Code/loongclaude","intent":"Separate observed results from unavailable or degraded channels.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"observed"},{"op":"contains","arg":"unavailable"},{"op":"contains","arg":"degraded"}]},"tags":["evidence"],"split":"val","origin":"real"},
-    {"id":"rw3","project":"/Users/chung/Developer/Code/loongclaude","intent":"Choose a report format based on intended use and audience.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"format"},{"op":"contains","arg":"audience"},{"op":"contains","arg":"intended use"}]},"tags":["format"],"split":"test","origin":"real"}
+    {"id":"rw1","project":".","intent":"Write a concise report from supplied evidence without adding claims.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"evidence"},{"op":"contains","arg":"unverified"},{"op":"contains","arg":"claims"}]},"tags":["integrity"],"split":"train","origin":"real"},
+    {"id":"rw2","project":".","intent":"Separate observed results from unavailable or degraded channels.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"observed"},{"op":"contains","arg":"unavailable"},{"op":"contains","arg":"degraded"}]},"tags":["evidence"],"split":"val","origin":"real"},
+    {"id":"rw3","project":".","intent":"Choose a report format based on intended use and audience.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"format"},{"op":"contains","arg":"audience"},{"op":"contains","arg":"intended use"}]},"tags":["format"],"split":"test","origin":"real"}
   ]
 }

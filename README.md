@@ -4,7 +4,8 @@ Local-first skills, memory, and tool orchestration for AI agents.
 
 Repository web page: [https://github.com/ianbyte-byte/pernavo](https://github.com/ianbyte-byte/pernavo)
 
-Skill sources live under `skills/<name>/SKILL.md`.
+Skill sources live under `skills/<name>/SKILL.md`. Project routing for implement, review, and
+verify lives in [CLAUDE.md](CLAUDE.md); review ownership is `change-review` (alias `/review-mr`).
 
 For end-to-end workflow and trigger experiments, including the boundary between static,
 installed, loaded, executed, and target-observed evidence, read
