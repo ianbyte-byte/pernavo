@@ -1,11 +1,11 @@
 {
   "format": "skillopt_sleep.tasks.v1",
-  "project": "/Users/chung/Developer/Code/loongclaude",
+  "project": ".",
   "target_skill_path": "skills/repository-governance/SKILL.md",
   "reviewed": true,
   "tasks": [
-    {"id":"rg1","project":"/Users/chung/Developer/Code/loongclaude","intent":"Audit repository instructions and memory for drift.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"Inventory"},{"op":"contains","arg":"source of truth"},{"op":"contains","arg":"unknown"}]},"tags":["discovery"],"split":"train","origin":"real"},
-    {"id":"rg2","project":"/Users/chung/Developer/Code/loongclaude","intent":"Stage one reversible documentation improvement with a restore path.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"reversible"},{"op":"contains","arg":"restore"},{"op":"contains","arg":"increment"}]},"tags":["change"],"split":"val","origin":"real"},
-    {"id":"rg3","project":"/Users/chung/Developer/Code/loongclaude","intent":"Do not claim runtime loading from documentation alone.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"not"},{"op":"contains","arg":"runtime"},{"op":"contains","arg":"trace"}]},"tags":["evidence"],"split":"test","origin":"real"}
+    {"id":"rg1","project":".","intent":"Audit repository instructions and memory for drift.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"Inventory"},{"op":"contains","arg":"source of truth"},{"op":"contains","arg":"unknown"}]},"tags":["discovery"],"split":"train","origin":"real"},
+    {"id":"rg2","project":".","intent":"Stage one reversible documentation improvement with a restore path.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"reversible"},{"op":"contains","arg":"restore"},{"op":"contains","arg":"increment"}]},"tags":["change"],"split":"val","origin":"real"},
+    {"id":"rg3","project":".","intent":"Do not claim runtime loading from documentation alone.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"not"},{"op":"contains","arg":"runtime"},{"op":"contains","arg":"trace"}]},"tags":["evidence"],"split":"test","origin":"real"}
   ]
 }

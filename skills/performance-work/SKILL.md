@@ -25,8 +25,9 @@ Start with a static hypothesis, then select the narrowest proof overlay inside t
 ## Rules
 
 Do not call a loop, average, green test, single profile, or one-run benchmark a bottleneck. Do not
-implement an optimization from a static pattern without authorization. Distinguish `static-only`,
-`partial`, `runtime-observed`, and `unavailable`; route code changes to `engineering-workflow`.
+implement an optimization from a static pattern without authorization, and do not silently edit.
+Distinguish `static-only`, `partial`, `runtime-observed`, and `unavailable`; route code changes to
+`engineering-workflow`. This Skill reports findings; it is not the writer.
 
 ## Finding format
 

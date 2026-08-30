@@ -70,7 +70,8 @@ Choose the observation method explicitly:
 - A passing local test does not prove deployment or production behavior. A coverage number, snapshot,
   mock expectation, or single benchmark does not by itself prove quality or a regression decision.
 - Keep test execution separate from implementation and diff review. Route code changes to
-  `engineering-workflow` and review-only requests to `change-review`.
+  `engineering-workflow` and review-only requests to `change-review`. Verification does not re-open the review loop,
+  does not authorize the verifier to edit the writer's tree, and does not self-select P2 or P3.
 
 ## Output
 

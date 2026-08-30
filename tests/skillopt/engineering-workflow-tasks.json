@@ -1,11 +1,12 @@
 {
   "format": "skillopt_sleep.tasks.v1",
-  "project": "/Users/chung/Developer/Code/loongclaude",
+  "project": ".",
   "target_skill_path": "skills/engineering-workflow/SKILL.md",
   "reviewed": true,
   "tasks": [
-    {"id":"ew1","project":"/Users/chung/Developer/Code/loongclaude","intent":"Choose a lifecycle for a normal multi-file change with one writer and independent verification.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"default"},{"op":"contains","arg":"one writer"},{"op":"contains","arg":"independent"}]},"tags":["route"],"split":"train","origin":"real"},
-    {"id":"ew2","project":"/Users/chung/Developer/Code/loongclaude","intent":"Keep a local implementation separate from production deployment authority.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"authority"},{"op":"contains","arg":"production"},{"op":"contains","arg":"deployment"}]},"tags":["boundary"],"split":"val","origin":"real"},
-    {"id":"ew3","project":"/Users/chung/Developer/Code/loongclaude","intent":"Handle a high-risk schema change with rollback and independent verification.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"deep"},{"op":"contains","arg":"rollback"},{"op":"contains","arg":"independent"}]},"tags":["risk"],"split":"test","origin":"real"}
+    {"id":"ew1","project":".","intent":"Choose a lifecycle for a normal multi-file change with one writer and independent verification.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"default"},{"op":"contains","arg":"one writer"},{"op":"contains","arg":"independent"}]},"tags":["route"],"split":"train","origin":"real"},
+    {"id":"ew2","project":".","intent":"Keep a local implementation separate from production deployment authority.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"authority"},{"op":"contains","arg":"production"},{"op":"contains","arg":"deployment"}]},"tags":["boundary"],"split":"val","origin":"real"},
+    {"id":"ew3","project":".","intent":"Handle a high-risk schema change with rollback and independent verification.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"deep"},{"op":"contains","arg":"rollback"},{"op":"contains","arg":"independent"}]},"tags":["risk"],"split":"test","origin":"real"},
+    {"id":"ew4","project":".","intent":"After a requested review, follow the default policy and do not have the writer review their own diff.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"change-review"},{"op":"contains","arg":"fresh context"},{"op":"contains","arg":"do not self-select"}]},"tags":["loop"],"split":"val","origin":"synth"}
   ]
 }

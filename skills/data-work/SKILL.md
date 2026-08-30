@@ -31,4 +31,5 @@ cleanup state is unknown. Estimated plans and source patterns are not actual run
 
 Report target class, revision, SQL or request shape, query count/round trips, plan source, lock or
 cardinality evidence, result summary, cleanup state, and unverified surfaces. Route a confirmed
-performance question to `performance-work`; route implementation to `engineering-workflow`.
+performance question to `performance-work`; route implementation to `engineering-workflow`. Do not
+implement code or schema changes from a static review, and do not silently edit.
