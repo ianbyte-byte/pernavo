@@ -50,11 +50,12 @@ Use the shared metadata and source tables from the main Skill, then use:
 ```
 
 Never present default-branch or stale SonarQube analysis as current-diff evidence. A green quality
-gate, test suite, or reviewer result is one source, not approval.
+gate, test suite, or reviewer result is one source, not approval. Do not implement findings while
+formatting the report; Disposition records the supplying review's stop or continue recommendation.
 
 ## Path compatibility
 
-When called by `review-mr`, preserve
+When called by `change-review` (alias `review-mr`), preserve
 `docs/audit/<branch>-<YYYYMMDD>-mr-review.<md|html>`. Use HTML only when the main Skill's complexity
 criteria apply. Keep existing report numbering behavior by appending `-2`, `-3`, and so on.
 

@@ -50,6 +50,8 @@ description: >
   scope; it does not authorize a broader rewrite.
 - Deletion requires evidence of no behavior loss, and architecture-level replacement requires
   human approval. Preserve tests, valuable comments, known defects, and unrelated dirty work.
+- Route Git-diff findings to `change-review` in a different agent, model, or session. The slimming
+  writer does not implement from its own review notes.
 
 ## 禁止代码高尔夫
 

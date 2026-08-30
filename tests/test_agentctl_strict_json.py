@@ -58,9 +58,11 @@ class TestAgentctlStrictJson(AgentctlCase):
         # Given: a config JSON document deeper than Python's decoder recursion limit
         # When: the executable CLI reads it in a child process
         # Then: it exits one with a stable JSON envelope and no traceback
+        # CPython 3.12's C decoder accepts ~2000 nested arrays, so 10000 is used so
+        # this hits json_recursion rather than a later invalid_shape on a decoded array.
         with tempfile.TemporaryDirectory() as directory:
             config = Path(directory) / "deep.json"
-            config.write_text("[" * 2000 + "]" * 2000, encoding="utf-8")
+            config.write_text("[" * 10000 + "]" * 10000, encoding="utf-8")
             process = subprocess.run(
                 [sys.executable, str(SCRIPTS / "agentctl.py"), "doctor", "--config", str(config), "--json"],
                 capture_output=True,

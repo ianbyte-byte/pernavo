@@ -2,9 +2,9 @@
 name: change-review
 description: >
   Review an existing Git diff, merge request, or pull request for correctness, security, data,
-  performance, and maintainability findings. Use when asked to review changes or check code before
-  commit. Report findings only; do not silently edit, approve, merge, deploy, or treat tests as proof
-  of production behavior.
+  performance, and maintainability findings. Use when asked to review changes, check code before
+  commit, review an MR/PR, /review-mr, or 审查改动/提交前自查. Report findings only; do not silently edit,
+  implement fixes, approve, merge, deploy, or treat tests as proof of production behavior.
 ---
 
 # Change Review
@@ -13,11 +13,21 @@ Fix the review target first: working tree, staged diff, or explicit base/revisio
 diff and affected callers, then inspect high-risk boundaries (auth, data, transactions, external
 calls, concurrency, resource amplification, and rollback).
 
+This Skill owns findings on an existing diff. It is not the writer and not the behavior verifier.
+Do not implement, patch, or silently edit reported issues in the review session. Hand only
+selected fixes to `engineering-workflow` in a different agent, model, or session. Route behavior
+evidence to `test-engineering`. Default policy when no human is in the loop: remaining P1 only;
+do not self-select P2 or P3.
+
 ## Review contract
 
 Order findings by severity and include file/line, trigger, impact, and a concrete fix direction.
 Separate correctness findings from performance hypotheses and from unavailable SonarQube or target
 environment evidence. A green build is supporting evidence, not approval.
+
+- P1: correctness, security, data loss, broken contract, or missing rollback on a destructive change.
+- P2: real maintainability or test-gap cost that a human or explicit policy may still defer.
+- P3: style, nits, optional refactors. Never promote a nit to P1.
 
 ```markdown
 ## Change Review
@@ -30,7 +40,17 @@ environment evidence. A green build is supporting evidence, not approval.
    - Suggested correction: ...
 ### Limits
 - Unverified target, deployment, or external checks: ...
+### Loop
+- Stop recommendation: continue (remaining P1, or policy-selected P2) | stop (remaining P1 only; nits optional)
+- Policy applied: default (no human in loop) | human/explicit
+- Re-review: fresh context required after fixes | not applicable
 ```
 
-When no actionable finding exists, say so and name remaining test or environment gaps. If an
-external reviewer or quality gate is unavailable, record it as unavailable instead of simulating it.
+One review pass reports the current diff. Do not re-review the same findings in this session.
+Later passes tend to restate prior items or promote style preferences into defects. When no
+actionable finding exists, say so and name remaining test or environment gaps.
+
+A re-review after fixes must start in a fresh context (different agent, model, or session) against
+the new revision. Same-session "review again" is not an independent review.
+
+If an external reviewer or quality gate is unavailable, record it as unavailable instead of simulating it.
