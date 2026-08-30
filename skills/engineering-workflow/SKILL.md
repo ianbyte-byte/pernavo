@@ -31,12 +31,22 @@ Record path, authority boundary, reason, owner, and evidence layer (`static`, `a
    rollback constraints. Mark unavailable context as unconfirmed.
 2. Write a reviewable plan with goal, do-not-do scope, affected seams, expected behavior, checks,
    rollback/recovery, and human gates.
-3. Implement the smallest authorized change. Keep one writer in a shared working tree.
+3. Implement the smallest authorized change. Keep one writer in a shared working tree. The writer
+   does not review their own diff. Invoke `change-review` only when a diff review was requested or a
+   human/policy gate requires it, and only in a different agent, model, or session. Implement only
+   findings a human or explicit policy selected; do not absorb a reviewer's full nit list.
 4. Verify independently against the intended behavior, including success and failure/recovery
    paths when relevant. Use `test-engineering` to select test levels, observation methods, and case
    evidence; overlay `data-work`, `performance-work`, `qa`, or `codex-security:*` only when their
-   boundaries apply. The changed code is not the verification oracle.
+   boundaries apply. The changed code is not the verification oracle. Verification does not replace
+   requested diff review and does not re-open the review loop.
 5. Report evidence and unverified layers. Local tests never prove deployment or production behavior.
+
+After a requested `change-review` pass, stop the implement → review → verify loop when there is
+no remaining P1 unless a human or explicit policy still requires selected P2 work. P3/nits are
+optional.
+Do not loop until the findings list is empty, and do not re-review in the writer session. Re-review
+after fixes needs a fresh context.
 
 Use a bounded independent subagent for discovery or verification only when the selected path needs
 it; do not delegate trivial work or create a second writer. Preserve evidence and stop expansion on
