@@ -72,6 +72,22 @@ class WorkflowLoopContractTests(unittest.TestCase):
         self.assertIn("remaining P1 only", contract)
         self.assertIn("do not self-select P2 or P3", contract)
 
+    def test_production_surface_and_complexity_are_dual_constraints(self):
+        engineering = folded(ENGINEERING)
+        review = folded(CHANGE_REVIEW)
+        slimming = folded(SLIMMING)
+        self.assertIn("least production code", engineering)
+        self.assertIn("cyclomatic complexity", engineering)
+        self.assertIn("not proof of fewer bugs", engineering)
+        self.assertIn("Unrequested production surface", review)
+        self.assertIn("failed reduction, not a win", review)
+        self.assertIn("Never promote a nit to P1", review)
+        self.assertIn("圈复杂度与生产规模必须同时约束", slimming)
+        self.assertIn("体积下降而复杂度上升，不算瘦身成功", slimming)
+        self.assertIn("体积下降未抬高圈复杂度", slimming)
+        self.assertNotIn("every pull request must reduce", engineering.lower())
+        self.assertNotIn("fewer bugs", slimming.lower())
+
     def test_test_engineering_does_not_reopen_review_or_edit(self):
         contract = folded(TEST_ENGINEERING)
         self.assertIn("does not re-open the review loop", contract)
