@@ -17,6 +17,8 @@ https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/main/AI_INSTAL
 仅按名称定向移除冲突项，再从固定 SHA checkout 重装；旧来源、revision 或影响范围无法可靠
 恢复时必须停止。若远程 --list 不是精确 8 项，停止并说明该版本尚未发布。
 安装后按手册完成 JSON diff、新会话触发验证、报告和可定向回滚记录。
+安装 Skills 成功后，将固定 checkout 中的 `AGENTS-PERNAVO.md` 分发到用户全局 `$CODEX_HOME/AGENTS.md`；
+该文件只包含学习笔记提炼出的通用规范，不包含 Skills 信息。
 ```
 
 本手册供 AI 安装代理逐步执行，不是 Shell 脚本。上述默认值只补全用户未指定的参数；安装代理
@@ -60,9 +62,10 @@ Eve 和 PromptScript 的 global 安装不受支持，属于已知能力边界，
 | 5 | 保存全局 JSON 快照 | 快照包含每个登记的 agents、scope、path 和 source，可恢复、可比较 |
 | 6 | 分类同名项 | 每项是 `absent`、`same-source` 或 `conflict` |
 | 7 | 处理并安装 | `same-source` 不触碰；安装 `absent`；`conflict` 默认按方案 A 定向替换 |
-| 8 | 安装后 JSON diff | absent 正确新增、conflict 正确换源，无意外 Agent 或范围 |
-| 9 | 新会话验证 | 3 个代表性 smoke，或完整 24-case corpus |
-| 10 | 报告与回滚 | 区分新增与替换，分别给出定向删除和旧来源恢复步骤 |
+| 8 | 同步分发规则 | 将固定 checkout 的 `AGENTS-PERNAVO.md` 复制到全局 `$CODEX_HOME/AGENTS.md` |
+| 9 | 安装后 JSON diff | absent 正确新增、conflict 正确换源，无意外 Agent 或范围 |
+| 10 | 新会话验证 | 3 个代表性 smoke，或完整 24-case corpus |
+| 11 | 报告与回滚 | 区分新增与替换，分别给出定向删除和旧来源恢复步骤 |
 
 ## 安全契约与系统边界
 
@@ -82,6 +85,8 @@ Eve 和 PromptScript 的 global 安装不受支持，属于已知能力边界，
    Harness 或记忆写入器。
 6. 真正的子 Agent 派生，以及 Skill 是否 `loaded`/`executed`，只能在安装后的宿主新会话中
    观察；命令成功、目录存在或模型自述均不是运行时证明。
+7. 分发规则同步只使用固定 checkout 中的 `AGENTS-PERNAVO.md`，不使用项目 `AGENTS.md`。该文件只
+   保存跨项目可复用规范，不包含 Skills 清单、安装命令或项目专属规则。
 
 ### Agent 目标与实际落盘
 
@@ -261,6 +266,25 @@ npx --yes skills add "$PERNAVO_CHECKOUT" \
   --yes \
   --copy
 ```
+
+### 同步分发规则
+
+固定 checkout 中的 `AGENTS-PERNAVO.md` 是可分发规则源。Skills 安装成功后，在用户明确授权覆盖全局
+规则的前提下执行：
+
+```bash
+PERNAVO_GLOBAL_AGENTS="${CODEX_HOME:-$HOME/.codex}/AGENTS.md"
+PERNAVO_GLOBAL_AGENTS_BACKUP="$PERNAVO_INSTALL_TMP/agents-before.md"
+if test -e "$PERNAVO_GLOBAL_AGENTS"; then
+  cp "$PERNAVO_GLOBAL_AGENTS" "$PERNAVO_GLOBAL_AGENTS_BACKUP"
+fi
+cp "$PERNAVO_CHECKOUT/AGENTS-PERNAVO.md" "$PERNAVO_GLOBAL_AGENTS"
+cmp -s "$PERNAVO_CHECKOUT/AGENTS-PERNAVO.md" "$PERNAVO_GLOBAL_AGENTS"
+```
+
+将全局文件原内容、备份路径、来源 checkout、full SHA 和覆盖授权写入安装报告。若用户未授权
+覆盖已有全局规则，停止并报告，不执行 `cp`。项目根目录的 `AGENTS.md` 只治理本仓库，
+`AGENTS-PERNAVO.md` 才参与分发。
 
 存在任何 `same-source` 时，必须把所有原始 `absent` 名称和方案 A 已移除的 `replaceable conflict`
 名称逐个写出；下面仅示范命令形状：
