@@ -170,6 +170,8 @@ def parse_args(argv: list[str] | None) -> argparse.Namespace:
     parser.add_argument("--script", type=Path, default=default_script())
     parser.add_argument("--claude-settings", type=Path, default=Path.home() / ".claude" / "settings.json")
     parser.add_argument("--codex-hooks", type=Path, default=Path.home() / ".codex" / "hooks.json")
+    parser.add_argument("--cursor-hooks", type=Path, default=None)
+    parser.add_argument("--grok-hooks", type=Path, default=None)
     parser.add_argument("--check", action="store_true", help="read-only verify (default)")
     parser.add_argument("--dry-run", action="store_true", help="classify a merge without writing")
     parser.add_argument("--apply", action="store_true", help="write; not the live default install path")
@@ -214,6 +216,20 @@ def main(argv: list[str] | None = None) -> int:
     if not args.skip_codex:
         report["hosts"]["codex"] = apply_host(
             args.codex_hooks.expanduser(),
+            CODEX_EVENTS,
+            script,
+            mode=mode,
+        )
+    if args.cursor_hooks is not None:
+        report["hosts"]["cursor"] = apply_host(
+            args.cursor_hooks.expanduser(),
+            ("stop", "subagentStop"),
+            script,
+            mode=mode,
+        )
+    if args.grok_hooks is not None:
+        report["hosts"]["grok"] = apply_host(
+            args.grok_hooks.expanduser(),
             CODEX_EVENTS,
             script,
             mode=mode,

@@ -127,6 +127,37 @@ class InstallApiTestGateTests(unittest.TestCase):
             mode = stat.S_IMODE(os.stat(codex).st_mode)
             self.assertEqual(0o600, mode)
 
+    def test_check_optional_cursor_and_grok_hosts(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            claude = root / "claude" / "settings.json"
+            claude.parent.mkdir()
+            claude.write_text(json.dumps({"hooks": {"Stop": [], "TaskCompleted": []}}), encoding="utf-8")
+            cursor = root / "cursor" / "hooks.json"
+            grok = root / "grok" / "pernavo.json"
+            cursor.parent.mkdir()
+            grok.parent.mkdir()
+            result = run_installer(
+                [
+                    "--script",
+                    str(HOOK),
+                    "--claude-settings",
+                    str(claude),
+                    "--codex-hooks",
+                    str(root / "missing-parent" / "hooks.json"),
+                    "--cursor-hooks",
+                    str(cursor),
+                    "--grok-hooks",
+                    str(grok),
+                ]
+            )
+            report = json.loads(result.stdout)
+            self.assertEqual("blocked-parent", report["hosts"]["codex"]["status"])
+            self.assertEqual("missing", report["hosts"]["cursor"]["status"])
+            self.assertEqual("missing", report["hosts"]["grok"]["status"])
+            self.assertFalse(cursor.exists())
+            self.assertFalse(grok.exists())
+
 
 if __name__ == "__main__":
     unittest.main()
