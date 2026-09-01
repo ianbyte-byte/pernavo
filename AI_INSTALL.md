@@ -17,9 +17,21 @@ https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/main/AI_INSTAL
 仅按名称定向移除冲突项，再从固定 SHA checkout 重装；旧来源、revision 或影响范围无法可靠
 恢复时必须停止。若远程 --list 不是精确 8 项，停止并说明该版本尚未发布。
 安装后按手册完成 JSON diff、新会话触发验证、报告和可定向回滚记录。
-安装 Skills 成功后，仅当全局 `$CODEX_HOME/AGENTS.md` 不存在时，将固定 checkout 中的
-`AGENTS-PERNAVO.md` 创建为该文件；内容已相同则跳过；已存在但不同、为符号链接或非普通
-文件时停止且不得覆盖。该文件只包含学习笔记提炼出的通用规范，不包含 Skills 信息。
+默认安装集合是：全部 8 个 Skills、跨项目 `AGENTS.md` 规则、API 测试 Stop 门禁、以及
+`~/.pernavo` 运行日志 Hook。
+由本手册中的安装代理阅读现有文件后再写入，不要用脚本整文件覆盖宿主配置。
+安装 Skills 成功后：
+1. 仅当全局 `$CODEX_HOME/AGENTS.md` 不存在时，将固定 checkout 中的
+   `AGENTS-PERNAVO.md` 创建为该文件；内容已相同则跳过；已存在但不同、为符号链接或非普通
+   文件时停止且不得覆盖。该文件只包含学习笔记提炼出的通用规范，不包含 Skills 信息。
+2. 先读取 Claude `settings.json` 与 Codex `hooks.json`，按现有 Hook 数组形状把 API 测试
+   完成门禁合并进去；保持已有 Hook 与其它键不变，不得整文件替换，不得 mkdir 缺失父目录。
+   命令路径必须指向已落盘 test-engineering 副本中的 `api_test_stop_hook.py`。
+   合并后用只读 `--check` 核对；禁止对默认宿主路径直接 `--apply`。
+3. 将固定 checkout 中的 `scripts/pernavo-runtime-hook.py` 复制到
+   `$HOME/.pernavo/hooks/runtime-hook.py`，并按现有形状合并运行日志 Hook；日志写入
+   `$HOME/.pernavo/logs/runtime.jsonl`。不得记录原文 prompt、命令、工具输出或凭据。
+   不得整文件替换宿主 Hook 文件。
 ```
 
 本手册供 AI 安装代理逐步执行，不是 Shell 脚本。上述默认值只补全用户未指定的参数；安装代理
@@ -47,6 +59,8 @@ https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/main/AI_INSTAL
 | 复制方式 | `--copy` |
 | 冲突策略 | 方案 A；来源无法恢复时 `blocked` |
 | 全局 AGENTS.md | 仅当 `$CODEX_HOME/AGENTS.md` 不存在时从 `AGENTS-PERNAVO.md` 创建；已相同则跳过；否则停止且不写入 |
+| API 测试 Stop 门禁 | 安装代理先读取再合并进 Claude `Stop`/`TaskCompleted` 与 Codex `Stop`/`SubagentStop`；不得替换已有 Hook |
+| `~/.pernavo` 运行日志 | 复制 `pernavo-runtime-hook.py` 到 `$HOME/.pernavo/hooks/`，合并 SessionStart/Prompt/Tool/Stop 等事件；best-effort 不阻断 |
 
 `--agent '*'` 表示当前 CLI 支持的全部 agent 目标，不等于“只安装当前会话使用的 agent”。
 不同版本可能枚举不同数量；必须记录当次 CLI 输出中的实际 agent 列表和不支持 global 的目标，
@@ -57,7 +71,7 @@ Eve 和 PromptScript 的 global 安装不受支持，属于已知能力边界，
 
 | 顺序 | 操作 | 通过条件 |
 |---|---|---|
-| 1 | 确认写入授权 | 当前用户、所有支持 global 的 agents、官方来源、8 项、copy 均获授权；不得把本提示理解成覆盖已有全局 `AGENTS.md` |
+| 1 | 确认写入授权 | 当前用户、所有支持 global 的 agents、官方来源、8 项、copy、AGENTS 同步与 Stop 门禁合并均获授权；不得把本提示理解成覆盖已有全局 `AGENTS.md` 或整份 Hook 文件 |
 | 2 | 检查 CLI | version 和 help 可用，参数与本手册兼容 |
 | 3 | 远程 `--list` | 名称集合精确等于下方 8 项；远程 URL 仅用于发现 |
 | 4 | 固定来源 | 安全临时目录中 clone，记录 full HEAD SHA，detach、校验 8 项 |
@@ -65,9 +79,11 @@ Eve 和 PromptScript 的 global 安装不受支持，属于已知能力边界，
 | 6 | 分类同名项 | 每项是 `absent`、`same-source` 或 `conflict` |
 | 7 | 处理并安装 | `same-source` 不触碰；安装 `absent`；`conflict` 默认按方案 A 定向替换 |
 | 8 | 同步分发规则 | 目标不存在则创建且 `cmp` 通过；已相同则跳过；符号链接、非普通文件、父目录不可用或已存在但不同则停止且不写入 |
-| 9 | 安装后 JSON diff | absent 正确新增、conflict 正确换源，无意外 Agent 或范围 |
-| 10 | 新会话验证 | 3 个代表性 smoke，或完整 24-case corpus |
-| 11 | 报告与回滚 | 区分新增与替换；若本次创建了 `AGENTS.md`，给出仅在内容仍与来源相同时可执行的删除命令 |
+| 9 | 合并 API 测试 Stop 门禁 | 先读取宿主 JSON，按现有数组形状追加；before 中的 Hook 命令 after 仍在；只读 `--check` 通过；无整文件替换、无 `--apply` |
+| 10 | 合并 `~/.pernavo` 运行日志 | 先复制 hook 脚本再按现有形状追加；日志目录 `0700`；before 中的 Hook 命令 after 仍在；无密钥落盘 |
+| 11 | 安装后 JSON diff | absent 正确新增、conflict 正确换源，无意外 Agent 或范围 |
+| 12 | 新会话验证 | 3 个代表性 smoke，或完整 24-case corpus |
+| 13 | 报告与回滚 | 区分新增与替换；`AGENTS.md` 与各 Hook 条目分别给出定向回滚 |
 
 ## 安全契约与系统边界
 
@@ -83,8 +99,10 @@ Eve 和 PromptScript 的 global 安装不受支持，属于已知能力边界，
 4. `absent` 直接安装，`same-source` 保持不变；`conflict` 默认采用方案 A，在旧来源、固定
    revision、影响 Agent 和恢复命令均已记录后定向替换。任一恢复条件不完整时停止，不得覆盖。
 5. 安装 8 个入口 Skills 会提供成本感知的自动工作流政策，包括生命周期、数据、性能、测试和
-审查路由规则。它不会安装或证明宿主的子 Agent 目录、模型路由、Hook、MCP、权限、
-   Harness 或记忆写入器。
+审查路由规则。默认安装还会由安装代理把 API 测试完成门禁和 `~/.pernavo` 运行日志 Hook
+合并进宿主配置：必须先读取现有 JSON，按已有数组形状追加，不得整文件替换，也不得安装或
+证明子 Agent 目录、模型路由、MCP、权限、Harness、Mem0 或 skill-usage logger。
+运行日志 Hook 是 best-effort，不得阻断宿主。合并写入只证明配置被编辑，不证明宿主已触发该 Hook。
 6. 真正的子 Agent 派生，以及 Skill 是否 `loaded`/`executed`，只能在安装后的宿主新会话中
    观察；命令成功、目录存在或模型自述均不是运行时证明。
 7. 分发规则同步只使用固定 checkout 中的 `AGENTS-PERNAVO.md`，不使用项目 `AGENTS.md`。只在
@@ -311,6 +329,114 @@ cmp -s "$PERNAVO_AGENTS_SOURCE" "$PERNAVO_GLOBAL_AGENTS"
 Skill 登记；Skills 成功而规则未写入时记 `partial`。项目根目录的 `AGENTS.md` 只治理本仓库，
 `AGENTS-PERNAVO.md` 才参与分发。
 
+### 合并 API 测试 Stop 门禁
+
+默认安装包含该门禁。由安装代理阅读现有宿主 JSON 后按形状合并，以保证 Mem0、skill-usage
+和其它已有 Hook 不被改写。这不是 Shell 脚本，也不是对默认宿主路径运行
+`install_api_test_gate.py --apply`。
+
+先从安装后的 `skills ls --global --json` 取出 `test-engineering` 的 `path`，确认下列文件存在
+且 SHA-256 与本次 `$PERNAVO_CHECKOUT/skills/test-engineering/scripts/` 中对应文件一致：
+
+```text
+scripts/api_test_stop_hook.py
+scripts/grade_api_jsonl.py
+```
+
+若已落盘的 same-source `test-engineering` 缺少上述脚本或 SHA 不一致，只对该名称从本次
+checkout 再执行一次 `--copy`，不触碰其他 same-source 项。命令路径必须使用已落盘副本，
+不得指向即将删除的 `$PERNAVO_CHECKOUT`。
+
+宿主与事件：
+
+| 宿主 | 文件 | 事件 |
+|---|---|---|
+| Claude Code | `$HOME/.claude/settings.json` | `Stop`, `TaskCompleted` |
+| Codex | `${CODEX_HOME:-$HOME/.codex}/hooks.json` | `Stop`, `SubagentStop` |
+
+每个文件先读取再分类，只执行匹配分支。写入前把该文件里已有 Hook 的 `command` 全部抄下，
+写入后必须逐条仍在。
+
+| 状态 | 判定 | 动作 |
+|---|---|---|
+| `blocked-symlink` | 目标存在且是符号链接 | 停止，不写入 |
+| `blocked-not-file` | 目标存在且不是普通文件 | 停止，不写入 |
+| `blocked-invalid` | 不是 JSON 对象，或 `hooks` 存在但不是对象 | 停止，不写入 |
+| `blocked-format` | 某所需事件存在但不是数组 | 停止，不猜测、不改写该事件 |
+| `blocked-parent` | 目标不存在，且父路径不存在、不是目录或是符号链接 | 跳过该宿主，不得 `mkdir` |
+| `skipped-identical` | 所需事件的数组已包含 `api_test_stop_hook.py` | 不写入 |
+| `created` | 目标不存在，父路径是真实目录 | 创建仅含本门禁的 JSON；新文件 `chmod 600` |
+| `merged` | 目标是普通 JSON 对象 | 按该文件现有数组形状追加一条，保留其它键和已有 Hook |
+
+追加条目必须与该事件数组里已有元素同形。若已有元素是
+`{"hooks":[{ "type":"command", "command":"...", "timeout":30 }]}` 这种分组，则追加同形分组；
+若已有元素是扁平的 `{"type":"command",...}`，则追加扁平条目。不要改写已有元素的 `matcher`
+或其它字段。分组内命令为：
+
+```text
+python3 "MATERIALIZED_TEST_ENGINEERING/scripts/api_test_stop_hook.py"
+```
+
+`MATERIALIZED_TEST_ENGINEERING` 换成上一步得到的已落盘 path。不得把 checkout 临时目录写进
+宿主配置。
+
+合并后对已落盘脚本运行只读核对，禁止对默认宿主路径加 `--apply`：
+
+```bash
+python3 "$PERNAVO_TE_ROOT/scripts/install_api_test_gate.py" \
+  --check \
+  --script "$PERNAVO_TE_ROOT/scripts/api_test_stop_hook.py"
+```
+
+`--check` 通过只证明 JSON 含有该脚本路径，不证明宿主已触发 Hook。Claude 与 Codex 父目录都
+`blocked-parent` 时，Skills 与 `AGENTS.md` 仍可记成功，Hook 记 `blocked-parent`，总状态
+`partial`。任一宿主为 `blocked-symlink`、`blocked-not-file`、`blocked-invalid` 或
+`blocked-format` 时停止。
+
+Hook 回滚只删除 `command` 含 `api_test_stop_hook.py` 的那一条；不得删除 `settings.json` 或
+`hooks.json`，不得移除其它 Stop 条目。若本次 `created` 了该文件且文件现在只含本门禁，也只
+删除本门禁条目，不删除整个文件。
+
+### 合并 ~/.pernavo 运行日志 Hook
+
+默认安装包含该 best-effort 日志，供后续改进 Skills 与完成门禁。它不替代 API 测试 Stop 门禁，
+也不安装 `~/.codex/skill-usage` logger。由安装代理复制脚本并阅读现有宿主 JSON 后按形状合并。
+
+来源脚本是固定 checkout 中的 `scripts/pernavo-runtime-hook.py`。先落到用户主目录，这样临时
+checkout 删除后命令路径仍然有效：
+
+```text
+PERNAVO_HOME="${PERNAVO_HOME:-$HOME/.pernavo}"
+```
+
+| 状态 | 判定 | 动作 |
+|---|---|---|
+| `blocked-home` | `$HOME` 不存在或不是真实目录 | 停止该步，不写入 |
+| `blocked-not-dir` | `$PERNAVO_HOME` 已存在且不是目录，或是符号链接 | 停止，不写入、不删除 |
+| `copied` / `skipped-identical` | `hooks/runtime-hook.py` 与来源 `cmp -s` | 不同则 `cp` 后 `chmod 600`；相同则跳过 |
+| `logs-ready` | `$PERNAVO_HOME/logs` 为真实目录 | 没有则 `mkdir -m 700`；不得把项目树写进该目录 |
+
+允许创建 `$HOME/.pernavo`、`hooks/` 和 `logs/`（`0700`）。这不授权 `mkdir` `$HOME/.claude`
+或 `$CODEX_HOME`。不要删除已有 `logs/runtime.jsonl`。
+
+命令路径必须是：
+
+```text
+PERNAVO_RUNTIME_SOURCE=claude python3 "$HOME/.pernavo/hooks/runtime-hook.py"
+PERNAVO_RUNTIME_SOURCE=codex python3 "$HOME/.pernavo/hooks/runtime-hook.py"
+```
+
+分别写入 Claude 与 Codex。Claude 事件：`SessionStart`、`UserPromptSubmit`、`PreToolUse`、
+`PostToolUse`、`Stop`、`TaskCompleted`。Codex 事件：`SessionStart`、`UserPromptSubmit`、
+`PreToolUse`、`PostToolUse`、`Stop`、`SubagentStop`。每条仍按该文件现有数组形状追加；
+`skipped-identical` 当该事件已含 `runtime-hook.py`。超时建议 10 秒。
+
+写入前抄下已有 `command`，写入后必须仍在。禁止对默认宿主路径运行任何 `--apply` 安装器。
+Hook 必须 `continue: true` 且 exit 0；不得记录原文 prompt、命令、工具输出、凭据或业务 JSONL。
+
+回滚只删除 `command` 含 `runtime-hook.py` 的条目，并仅在 `hooks/runtime-hook.py` 仍与来源
+`cmp -s` 相同时删除该脚本。不得删除 `logs/runtime.jsonl` 或整个 `$PERNAVO_HOME`。
+
 存在任何 `same-source` 时，必须把所有原始 `absent` 名称和方案 A 已移除的 `replaceable conflict`
 名称逐个写出；下面仅示范命令形状：
 
@@ -418,8 +544,9 @@ cmp -s "$PERNAVO_AGENTS_SOURCE" "$PERNAVO_GLOBAL_AGENTS" && rm -- "$PERNAVO_GLOB
 
 ## 7. Harness 检查（可选、独立授权）
 
-Skills 安装不会安装 `scripts/agentctl.py`、`harness/`、Hook、MCP、权限或宿主路由。用户要求
-检查只读 Harness 时，保留 checkout 并从仓库根目录运行：
+Skills CLI 不会安装 `scripts/agentctl.py`、`harness/`、MCP、权限或宿主路由。默认安装中的
+API 测试 Stop 门禁和 `~/.pernavo` 运行日志由安装代理按上一节阅读并合并，仍不会安装 Mem0
+或 skill-usage logger。用户要求检查只读 Harness 时，保留 checkout 并从仓库根目录运行：
 
 ```bash
 python3 scripts/agentctl.py doctor --config harness/examples/agentctl.json --json
@@ -446,6 +573,8 @@ python3 scripts/agentctl.py memory search --config harness/examples/agentctl.jso
 - 继续操作需要覆盖、广泛删除、修改权限或系统依赖；
 - 全局 `$CODEX_HOME/AGENTS.md` 为符号链接、非普通文件、父目录不可用，或已存在且与
   `AGENTS-PERNAVO.md` 不同；
+- Claude `settings.json` 或 Codex `hooks.json` 为符号链接、非普通文件、无效 JSON，或所需
+  事件存在但不是可追加的数组；
 - 用户要求保证运行时触发，但宿主没有可观察证据。
 
 部分安装失败时，对 before/after 差集中的新增名称定向移除；对已经替换的名称按替换台账恢复旧
@@ -475,6 +604,16 @@ Directed removal command and post-removal JSON result:
 Install/update command and exit status:
 AGENTS.md path and distribution: created | skipped-identical | blocked-existing | blocked-symlink | blocked-not-file | blocked-parent | blocked-source-missing
 Exact rollback for created AGENTS.md:
+API test Stop hook script path (materialized, not checkout):
+Claude settings.json: created | merged | skipped-identical | blocked-parent | blocked-symlink | blocked-not-file | blocked-invalid | blocked-format
+Codex hooks.json: created | merged | skipped-identical | blocked-parent | blocked-symlink | blocked-not-file | blocked-invalid | blocked-format
+Before/after Hook command lists proving pre-existing entries remain:
+Exact rollback for this Stop hook entry only:
+`--check` result:
+`~/.pernavo/hooks/runtime-hook.py`: copied | skipped-identical | blocked-home | blocked-not-dir
+Runtime log path:
+Runtime hook events merged (claude/codex): created | merged | skipped-identical | blocked-*
+Exact rollback for runtime-hook.py entries only (keep logs):
 After global and all-agent JSON snapshot paths:
 Structured before/after diff and newly created registrations:
 Installed names, paths, scopes, sources, target agents, materialized SHA-256:
@@ -494,5 +633,6 @@ Final status: complete | partial | blocked
 ```
 
 只有获授权的 absent 项完成安装、方案 A 的 replaceable conflict 已正确换源、after diff 已核对、
-`AGENTS.md` 为 `created` 或 `skipped-identical`、回滚步骤可执行、失败项已处理且未验证边界明确
+`AGENTS.md` 为 `created` 或 `skipped-identical`、各可用宿主的 Stop 门禁与运行日志 Hook 为
+`created`、`merged` 或 `skipped-identical`、回滚步骤可执行、失败项已处理且未验证边界明确
 列出时，安装代理才可结束任务。

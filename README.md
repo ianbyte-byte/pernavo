@@ -26,7 +26,12 @@ python3 scripts/skill-usage-report.py \
 ```
 
 See [Cross-Agent Skill Usage Logging](docs/skill-usage-hook-integration.md) for the schema and Hook
-configuration details.
+configuration details. That Codex-centric logger is optional and is not part of default install.
+
+Default install also merges a best-effort runtime log into `~/.pernavo/logs/runtime.jsonl` so Skill
+routing and completion-claim patterns can be reviewed later. See
+[Host runtime log](docs/pernavo-runtime-log.md). It does not record prompts, commands, tool
+payloads, or credentials.
 
 For a source-backed, vendor-neutral policy for bounded cost-aware multi-agent routing, read
 [Cost-Aware Multi-Agent Orchestration](docs/reference/cost-aware-multi-agent-orchestration.md).
@@ -49,9 +54,14 @@ clone，不直接用于安装。
 和 JSON 同名冲突；不要盲跑，不要使用 --all 或 remove --all。冲突默认按方案 A 处理：仅在旧
 来源和固定 revision 可精确恢复时定向替换；否则停止。安装后完成固定 SHA 记录、JSON diff、
 新会话代表性 smoke（正向/负向/碰撞）、报告和定向回滚记录。
+默认安装集合是 8 个 Skills、跨项目 AGENTS.md 规则、API 测试 Stop 门禁、以及 ~/.pernavo
+运行日志；由安装代理阅读现有文件后再写入，不要用脚本整文件覆盖宿主配置。
 安装完成后，仅当全局 `$CODEX_HOME/AGENTS.md` 不存在时，将固定 checkout 中的
 `AGENTS-PERNAVO.md` 创建为该文件；已存在则跳过或停止，不得覆盖。它只保存
 学习笔记提炼出的通用规范，不保存 Skills 清单或安装流程。
+再读取 Claude settings.json 与 Codex hooks.json，按现有形状合并 API 测试 Stop 门禁和
+`~/.pernavo` 运行日志 Hook；保持已有 Hook 不变，不得整文件替换；Stop 门禁合并后只读
+`--check`，禁止对默认宿主路径 `--apply`。运行日志不得记录原文 prompt、命令或凭据。
 若远程 --list 不是精确 8 项，停止并说明该版本尚未发布；未运行完整 24-case corpus 时，
 不得声称全部 8 项的 runtime activation 已验证。
 ```
@@ -88,8 +98,10 @@ This proves deterministic local routing simulation and data integrity only. It d
 
 Do not copy a bare install command from this README. The guide requires authorization, current CLI
 help, an exact remote list, a fixed-SHA checkout, before/after JSON snapshots, conflict
-classification, and a new-session runtime check. It also explains the boundary between installing
-workflow policy and proving host subagents, model routing, Hooks, MCP, permissions, or Harness.
+classification, and a new-session runtime check. Default install also has the installing agent merge
+the API-test Stop gate and the `~/.pernavo` runtime log into existing host hook files without
+replacing them. The guide still separates installing workflow policy from proving host subagents,
+model routing, MCP, permissions, or Harness.
 
 Repository maintainers can validate the source without installing it:
 
