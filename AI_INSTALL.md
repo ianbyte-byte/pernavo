@@ -17,8 +17,9 @@ https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/main/AI_INSTAL
 仅按名称定向移除冲突项，再从固定 SHA checkout 重装；旧来源、revision 或影响范围无法可靠
 恢复时必须停止。若远程 --list 不是精确 8 项，停止并说明该版本尚未发布。
 安装后按手册完成 JSON diff、新会话触发验证、报告和可定向回滚记录。
-安装 Skills 成功后，将固定 checkout 中的 `AGENTS-PERNAVO.md` 分发到用户全局 `$CODEX_HOME/AGENTS.md`；
-该文件只包含学习笔记提炼出的通用规范，不包含 Skills 信息。
+安装 Skills 成功后，仅当全局 `$CODEX_HOME/AGENTS.md` 不存在时，将固定 checkout 中的
+`AGENTS-PERNAVO.md` 创建为该文件；内容已相同则跳过；已存在但不同、为符号链接或非普通
+文件时停止且不得覆盖。该文件只包含学习笔记提炼出的通用规范，不包含 Skills 信息。
 ```
 
 本手册供 AI 安装代理逐步执行，不是 Shell 脚本。上述默认值只补全用户未指定的参数；安装代理
@@ -45,6 +46,7 @@ https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/main/AI_INSTAL
 | 内容 | 下方完整的 8 个 Skills |
 | 复制方式 | `--copy` |
 | 冲突策略 | 方案 A；来源无法恢复时 `blocked` |
+| 全局 AGENTS.md | 仅当 `$CODEX_HOME/AGENTS.md` 不存在时从 `AGENTS-PERNAVO.md` 创建；已相同则跳过；否则停止且不写入 |
 
 `--agent '*'` 表示当前 CLI 支持的全部 agent 目标，不等于“只安装当前会话使用的 agent”。
 不同版本可能枚举不同数量；必须记录当次 CLI 输出中的实际 agent 列表和不支持 global 的目标，
@@ -55,17 +57,17 @@ Eve 和 PromptScript 的 global 安装不受支持，属于已知能力边界，
 
 | 顺序 | 操作 | 通过条件 |
 |---|---|---|
-| 1 | 确认写入授权 | 当前用户、所有支持 global 的 agents、官方来源、8 项、copy 均获授权 |
+| 1 | 确认写入授权 | 当前用户、所有支持 global 的 agents、官方来源、8 项、copy 均获授权；不得把本提示理解成覆盖已有全局 `AGENTS.md` |
 | 2 | 检查 CLI | version 和 help 可用，参数与本手册兼容 |
 | 3 | 远程 `--list` | 名称集合精确等于下方 8 项；远程 URL 仅用于发现 |
 | 4 | 固定来源 | 安全临时目录中 clone，记录 full HEAD SHA，detach、校验 8 项 |
 | 5 | 保存全局 JSON 快照 | 快照包含每个登记的 agents、scope、path 和 source，可恢复、可比较 |
 | 6 | 分类同名项 | 每项是 `absent`、`same-source` 或 `conflict` |
 | 7 | 处理并安装 | `same-source` 不触碰；安装 `absent`；`conflict` 默认按方案 A 定向替换 |
-| 8 | 同步分发规则 | 将固定 checkout 的 `AGENTS-PERNAVO.md` 复制到全局 `$CODEX_HOME/AGENTS.md` |
+| 8 | 同步分发规则 | 目标不存在则创建且 `cmp` 通过；已相同则跳过；符号链接、非普通文件、父目录不可用或已存在但不同则停止且不写入 |
 | 9 | 安装后 JSON diff | absent 正确新增、conflict 正确换源，无意外 Agent 或范围 |
 | 10 | 新会话验证 | 3 个代表性 smoke，或完整 24-case corpus |
-| 11 | 报告与回滚 | 区分新增与替换，分别给出定向删除和旧来源恢复步骤 |
+| 11 | 报告与回滚 | 区分新增与替换；若本次创建了 `AGENTS.md`，给出仅在内容仍与来源相同时可执行的删除命令 |
 
 ## 安全契约与系统边界
 
@@ -85,8 +87,10 @@ Eve 和 PromptScript 的 global 安装不受支持，属于已知能力边界，
    Harness 或记忆写入器。
 6. 真正的子 Agent 派生，以及 Skill 是否 `loaded`/`executed`，只能在安装后的宿主新会话中
    观察；命令成功、目录存在或模型自述均不是运行时证明。
-7. 分发规则同步只使用固定 checkout 中的 `AGENTS-PERNAVO.md`，不使用项目 `AGENTS.md`。该文件只
-   保存跨项目可复用规范，不包含 Skills 清单、安装命令或项目专属规则。
+7. 分发规则同步只使用固定 checkout 中的 `AGENTS-PERNAVO.md`，不使用项目 `AGENTS.md`。只在
+   `$CODEX_HOME/AGENTS.md` 不存在时创建；内容已相同则跳过；目标为符号链接、非普通文件、
+   父目录不存在/不是目录/是符号链接，或已存在但内容不同时停止且不得 `cp`。不得把粘贴提示
+   理解成覆盖授权。该文件只保存跨项目可复用规范，不包含 Skills 清单、安装命令或项目专属规则。
 
 ### Agent 目标与实际落盘
 
@@ -269,21 +273,42 @@ npx --yes skills add "$PERNAVO_CHECKOUT" \
 
 ### 同步分发规则
 
-固定 checkout 中的 `AGENTS-PERNAVO.md` 是可分发规则源。Skills 安装成功后，在用户明确授权覆盖全局
-规则的前提下执行：
+固定 checkout 中的 `AGENTS-PERNAVO.md` 是可分发规则源。Skills 安装成功后同步 Codex 用户级
+`$CODEX_HOME/AGENTS.md`。默认不得覆盖已有文件；粘贴提示不构成覆盖授权。
 
 ```bash
+PERNAVO_AGENTS_SOURCE="$PERNAVO_CHECKOUT/AGENTS-PERNAVO.md"
 PERNAVO_GLOBAL_AGENTS="${CODEX_HOME:-$HOME/.codex}/AGENTS.md"
-PERNAVO_GLOBAL_AGENTS_BACKUP="$PERNAVO_INSTALL_TMP/agents-before.md"
-if test -e "$PERNAVO_GLOBAL_AGENTS"; then
-  cp "$PERNAVO_GLOBAL_AGENTS" "$PERNAVO_GLOBAL_AGENTS_BACKUP"
-fi
-cp "$PERNAVO_CHECKOUT/AGENTS-PERNAVO.md" "$PERNAVO_GLOBAL_AGENTS"
-cmp -s "$PERNAVO_CHECKOUT/AGENTS-PERNAVO.md" "$PERNAVO_GLOBAL_AGENTS"
+PERNAVO_GLOBAL_AGENTS_PARENT="$(dirname -- "$PERNAVO_GLOBAL_AGENTS")"
+test -f "$PERNAVO_AGENTS_SOURCE"
+test ! -L "$PERNAVO_AGENTS_SOURCE"
 ```
 
-将全局文件原内容、备份路径、来源 checkout、full SHA 和覆盖授权写入安装报告。若用户未授权
-覆盖已有全局规则，停止并报告，不执行 `cp`。项目根目录的 `AGENTS.md` 只治理本仓库，
+按目标分类，只执行匹配分支，不得先备份再无条件 `cp`。先判断
+`test -L "$PERNAVO_GLOBAL_AGENTS"`；损坏的符号链接也属于 `blocked-symlink`，不得写入。
+
+| 状态 | 判定 | 动作 |
+|---|---|---|
+| `blocked-source-missing` | 来源不是普通文件或是符号链接 | 停止，不写入 |
+| `blocked-symlink` | 目标存在且是符号链接 | 停止，不写入 |
+| `blocked-not-file` | 目标存在且不是普通文件 | 停止，不写入 |
+| `skipped-identical` | 目标是普通文件且与来源 `cmp -s` 相同 | 跳过，不写入 |
+| `blocked-existing` | 目标是普通文件且与来源不同 | 停止，不写入，报告目标路径和手工合并步骤 |
+| `blocked-parent` | 目标不存在，且父路径不存在、不是目录或是符号链接 | 停止，不写入，不得 `mkdir` |
+| `created` | 目标不存在，父路径是真实目录 | `cp` 后来源与目标必须 `cmp -s` |
+
+`created` 的写入命令仅为：
+
+```bash
+test -d "$PERNAVO_GLOBAL_AGENTS_PARENT"
+test ! -L "$PERNAVO_GLOBAL_AGENTS_PARENT"
+test ! -e "$PERNAVO_GLOBAL_AGENTS"
+cp "$PERNAVO_AGENTS_SOURCE" "$PERNAVO_GLOBAL_AGENTS"
+cmp -s "$PERNAVO_AGENTS_SOURCE" "$PERNAVO_GLOBAL_AGENTS"
+```
+
+将分发状态、目标路径、来源 checkout 和 full SHA 写入安装报告。`blocked-*` 不回滚已完成的
+Skill 登记；Skills 成功而规则未写入时记 `partial`。项目根目录的 `AGENTS.md` 只治理本仓库，
 `AGENTS-PERNAVO.md` 才参与分发。
 
 存在任何 `same-source` 时，必须把所有原始 `absent` 名称和方案 A 已移除的 `replaceable conflict`
@@ -382,6 +407,15 @@ Agent 与 scope，并用 JSON 与 before 快照比较。缺少恢复来源、rev
 时，在替换前就必须报告 `rollback blocked` 并停止，不得假称可回滚或用旧来源最新分支代替旧
 revision。
 
+本次若将 `AGENTS.md` 标为 `created`，回滚只能在目标仍与来源 `cmp -s` 相同时删除该文件：
+
+```bash
+cmp -s "$PERNAVO_AGENTS_SOURCE" "$PERNAVO_GLOBAL_AGENTS" && rm -- "$PERNAVO_GLOBAL_AGENTS"
+```
+
+`cmp` 失败说明用户已改过该文件：报告 `rollback blocked`，不得删除。`skipped-identical` 与
+所有 `blocked-*` 状态没有文件回滚动作。
+
 ## 7. Harness 检查（可选、独立授权）
 
 Skills 安装不会安装 `scripts/agentctl.py`、`harness/`、Hook、MCP、权限或宿主路由。用户要求
@@ -410,6 +444,8 @@ python3 scripts/agentctl.py memory search --config harness/examples/agentctl.jso
 - 默认官方 checkout 校验失败；已有本地开发 checkout 仅在可信验证器缺失时可降级为 `partial`；
 - 安装失败、部分成功、after diff 异常或无法计算精确新增集合；
 - 继续操作需要覆盖、广泛删除、修改权限或系统依赖；
+- 全局 `$CODEX_HOME/AGENTS.md` 为符号链接、非普通文件、父目录不可用，或已存在且与
+  `AGENTS-PERNAVO.md` 不同；
 - 用户要求保证运行时触发，但宿主没有可观察证据。
 
 部分安装失败时，对 before/after 差集中的新增名称定向移除；对已经替换的名称按替换台账恢复旧
@@ -437,6 +473,8 @@ Conflict disposition: replaceable | blocked
 Replacement ledger: name, agent, scope, old repository, old full SHA, restore command
 Directed removal command and post-removal JSON result:
 Install/update command and exit status:
+AGENTS.md path and distribution: created | skipped-identical | blocked-existing | blocked-symlink | blocked-not-file | blocked-parent | blocked-source-missing
+Exact rollback for created AGENTS.md:
 After global and all-agent JSON snapshot paths:
 Structured before/after diff and newly created registrations:
 Installed names, paths, scopes, sources, target agents, materialized SHA-256:
@@ -456,4 +494,5 @@ Final status: complete | partial | blocked
 ```
 
 只有获授权的 absent 项完成安装、方案 A 的 replaceable conflict 已正确换源、after diff 已核对、
-回滚步骤可执行、失败项已处理且未验证边界明确列出时，安装代理才可结束任务。
+`AGENTS.md` 为 `created` 或 `skipped-identical`、回滚步骤可执行、失败项已处理且未验证边界明确
+列出时，安装代理才可结束任务。
