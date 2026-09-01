@@ -64,6 +64,7 @@ GENERATED_USER_MARKERS = (
     "You are SkillOpt's optimizer",
     "Reply with exactly",
 )
+EVENT_SCHEMAS = ("pernavo.skill_usage_event.v1", "pernavo.runtime_event.v1")
 REDACTION_PATTERNS = (
     (re.compile(r"(?i)(\bbearer\s+)[A-Za-z0-9._~+/=-]+"), r"\1[REDACTED]"),
     (re.compile(r"(?i)(\b(?:password|passwd|pwd|token|secret)\s*[:=]\s*)[^\s,;]+"), r"\1[REDACTED]"),
@@ -242,7 +243,7 @@ def build_event_usage_report(events_path: Path, target_date: str | None, timezon
         except json.JSONDecodeError:
             invalid_lines += 1
             continue
-        if not isinstance(event, dict) or event.get("schema_version") != "pernavo.skill_usage_event.v1":
+        if not isinstance(event, dict) or event.get("schema_version") not in EVENT_SCHEMAS:
             invalid_lines += 1
             continue
         timestamp = event_timestamp(event)
@@ -266,7 +267,7 @@ def build_event_usage_report(events_path: Path, target_date: str | None, timezon
             "statuses": counts("status"),
             "sessions": len({event.get("session_id") for event in events if event.get("session_id")}),
         },
-        "method": "Consumes only pernavo.skill_usage_event.v1 records emitted by the Codex and Claude Code hooks; payloads are not reconstructed.",
+        "method": "Consumes pernavo.skill_usage_event.v1 and pernavo.runtime_event.v1 records; payloads are not reconstructed.",
     }
 
 

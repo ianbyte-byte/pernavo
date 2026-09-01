@@ -41,7 +41,8 @@ Inventory, in this order:
 2. Project instructions (`AGENTS.md`, `CLAUDE.md`, README, contributing and security policy).
 3. Build, lint, test, release, and rollback entry points; record commands actually present.
 4. Ownership boundaries (CODEOWNERS, maintainers, data/state owners, approval gates).
-5. Skill/config/memory roots, installed copies, archives, and any usage or trigger evidence.
+5. Skill/config/memory roots, installed copies, archives, and any usage or trigger evidence,
+   including `~/.pernavo/logs/runtime.jsonl` when that hook is installed.
 6. Credentials, production endpoints, destructive commands, and unavailable target environments.
 
 Do not edit until the target, owner, authorization, and rollback/recovery path are explicit. If an
