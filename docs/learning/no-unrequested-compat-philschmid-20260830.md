@@ -7,7 +7,7 @@
 ## 来源
 
 - 分析对象：[Philipp Schmid (@_philschmid)](https://x.com/_philschmid/status/2094152154382528996) 引用 [Robin Ebers (@robinebers)](https://x.com/robinebers/status/2093734599956590738)
-- 抓取：`https://api.fxtwitter.com/_philschmid/status/2094152154382528996`（HTTP 200）。未把未抓到的回复树当作证据。
+- 抓取：`https://api.fxtwitter.com/_philschmid/status/2094152154382528996`（HTTP 200）。未登录补读同一帖可见回复 3 条；其余约 18 条被登录墙挡住。未把未看见的回复当作证据。
 - 作者公开身份（帖子档案）：Agents & Gemini API, MTS @GoogleDeepMind；此前 Hugging Face Tech Lead。个人观点。
 - 抓取时互动（只反映该次快照，不是趋势证明）：Philipp 帖 527 likes / 16 retweets / 21 replies / 430 bookmarks / 36,004 views；被引用的 Robin 帖 5,682 likes / 201 retweets / 125 replies / 47 quotes / 220,414 views。
 
@@ -34,6 +34,30 @@ Robin 指出一类可复现的 agent 行为：在**还没有真实调用方、�
 Philipp 的回应不是再讲段子，而是把禁令写进 **`AGENTS.md`**：把“不要发明兼容层”从一次性 prompt 变成仓库常驻偏好。这是 preference skill / 项目指令，不是新模型能力。
 
 适用场景被 Robin 限定得很窄：**isn't even deployed yet**。Philipp 的句子写得更绝对（Do not preserve backward compatibility / Remove obsolete paths），没有在推文里复述“仅限未上线”。分析时必须把这两层分开，不能把引用对象的限定条件悄悄删掉。
+
+## 未登录可见回复（同一帖补记）
+
+未登录阅读同一条 Philipp 帖：这是一条独立引用推文（standalone quote tweet），作者没有自回复。可见回复如下，其余被登录墙挡住。不编造额外回复，也不把未看见的回复树当作证据。
+
+1. Wags（@wagsify，8 月 31 日）：
+
+> Thats not nearly enough!
+
+另附一张深色主题 agent-guide 截图。图无 alt text。未对整图做逐字 OCR；可见范围内大致写的是 Direct prohibition：agents 甚至不得提议 backward compatibility、legacy migration、dual-read/write、version bridges、adapters、deprecation periods 或 fallback paths，并指向 CLAUDE.md。该次快照：14 likes / 752 views。
+
+2. tryingEveryThing（@tryingET，8 月 30 日）：
+
+> better: "This is an alpha version. Do introduce braking changes where it simplifies things."
+
+原文拼写是 braking（应为 breaking）。该次快照：5 likes / 598 views。
+
+3. GoldMagikarp（@GoldMagikarp42）：
+
+> Someday this is going to bite someone and cause an outage. Their project will ship and someone will forget to remove the "this is not a shipping product, do not add fallbacks, do not preserve legacy". Proving that software engineering will continue to be hard for a while.
+
+该次快照：2 likes / 157 views。可见界面未给出日期，此处不补。
+
+**本文综合建议（不是推文主张）：** 比 Philipp 更强的禁令（连 adapters / deprecation window 都不许提议）会把绿场 slop 控制压成对生产不安全的绝对句。“alpha，引入 breaking changes”是有时限的 preference。GoldMagikarp 指出的是生命周期漏洞：这条 AGENTS.md 必须过期或按绿场 / 已上线划界，否则会变成下一颗被遗忘的地雷。这支持既有结论：应吸收“禁止未请求的兼容”，而不是吸收“永远不要保留向后兼容”。
 
 ## 为什么 agent 会这样写
 
@@ -100,8 +124,8 @@ requires evidence and a human decision; this rule does not authorize that.
 
 ## 证据边界
 
-- 已核实：两条推文正文、作者、时间、引用关系、该次抓取的互动数字。
-- 未核实：21 条回复的论点分布、Philipp 个人仓库里实际 AGENTS.md 全文、他是否在所有项目使用同一句。
+- 已核实：两条推文正文、作者、时间、引用关系、该次抓取的互动数字；未登录可见的 3 条回复正文与其快照互动数字；Philipp 无自回复、本帖为独立 quote tweet。
+- 未核实：登录墙后约 18 条回复的论点分布、Philipp 个人仓库里实际 AGENTS.md 全文、他是否在所有项目使用同一句。Wags 截图无 alt text，未对整图逐字 OCR。
 - 本文件不证明任何 Skill 已加载或任何目标仓库已改行为。
 - 不把本分析当作对已部署系统删除兼容层的批准。
 
