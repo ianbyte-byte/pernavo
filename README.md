@@ -49,7 +49,8 @@ clone，不直接用于安装。
 和 JSON 同名冲突；不要盲跑，不要使用 --all 或 remove --all。冲突默认按方案 A 处理：仅在旧
 来源和固定 revision 可精确恢复时定向替换；否则停止。安装后完成固定 SHA 记录、JSON diff、
 新会话代表性 smoke（正向/负向/碰撞）、报告和定向回滚记录。
-安装完成后，将固定 checkout 中的 `AGENTS-PERNAVO.md` 分发到用户全局 `$CODEX_HOME/AGENTS.md`；它只保存
+安装完成后，仅当全局 `$CODEX_HOME/AGENTS.md` 不存在时，将固定 checkout 中的
+`AGENTS-PERNAVO.md` 创建为该文件；已存在则跳过或停止，不得覆盖。它只保存
 学习笔记提炼出的通用规范，不保存 Skills 清单或安装流程。
 若远程 --list 不是精确 8 项，停止并说明该版本尚未发布；未运行完整 24-case corpus 时，
 不得声称全部 8 项的 runtime activation 已验证。
