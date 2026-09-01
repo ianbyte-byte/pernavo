@@ -1,0 +1,7 @@
+{"event": "http.response", "http_status": 200, "result": -1, "resultdetail": "empty id"}
+{"case_id": "empty-id", "event": "http.response", "http_status": 200, "result": -1, "verdict": "passed"}
+{"case_id": "empty-id", "event": "http.response", "http_status": 200, "result": -1, "verdict": "passed"}
+{"case_id": "unknown-id", "event": "http.response", "http_status": 200, "result": -1, "verdict": "passed"}
+{"case_id": "unknown-id", "event": "http.response", "http_status": 200, "result": -1, "verdict": "passed"}
+{"case_id": "unknown-id", "event": "http.response", "http_status": 200, "result": -1, "verdict": "passed"}
+{"id": "probe", "event": "test-run", "http_status": 200, "result": -1}

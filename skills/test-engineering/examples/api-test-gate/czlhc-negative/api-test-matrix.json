@@ -1,0 +1,21 @@
+{
+  "schema_version": "pernavo.api_test_matrix.v1",
+  "jsonl": "evidence.jsonl",
+  "required_cases": [
+    {
+      "id": "create-valid",
+      "kind": "business-success",
+      "expect": {"http": 200, "result": 1}
+    },
+    {
+      "id": "empty-id",
+      "kind": "validation",
+      "expect": {"http": 200, "result": -1}
+    },
+    {
+      "id": "unknown-id",
+      "kind": "validation",
+      "expect": {"http": 200, "result": -1}
+    }
+  ]
+}

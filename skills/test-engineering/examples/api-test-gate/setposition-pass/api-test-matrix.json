@@ -1,0 +1,15 @@
+{
+  "schema_version": "pernavo.api_test_matrix.v1",
+  "jsonl": "evidence.jsonl",
+  "required_cases": [
+    {
+      "id": "set-position-ok",
+      "kind": "business-success",
+      "expect": {"http": 200, "result": 1}
+    },
+    {
+      "id": "blocked-occupied",
+      "kind": "resource-state"
+    }
+  ]
+}

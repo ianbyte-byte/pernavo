@@ -1,0 +1,4 @@
+{"case_id": "set-position-ok", "event": "http.request", "method": "POST", "path": "/api/set-position"}
+{"case_id": "set-position-ok", "event": "http.response", "http_status": 200, "result": 1, "verdict": "passed"}
+{"case_id": "set-position-ok", "event": "database.reconciliation", "before": {"position": null}, "after": {"position": "A-01"}}
+{"case_id": "blocked-occupied", "event": "http.response", "http_status": 200, "result": -1, "verdict": "blocked", "reason": "location occupied"}

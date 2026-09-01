@@ -73,6 +73,13 @@ Choose the observation method explicitly:
   `engineering-workflow` and review-only requests to `change-review`. Verification does not re-open the review loop,
   does not authorize the verifier to edit the writer's tree, and does not self-select P2 or P3.
 
+## API completion gate
+
+Before HTTP or business API tests, write `.pernavo/api-test-matrix.json` with `required_cases`. Do
+not claim those tests complete unless `scripts/grade_api_jsonl.py` exits 0. Default install merges a
+host Stop hook that runs `scripts/api_test_stop_hook.py`; see
+[the API test gate](references/api-test-gate.md).
+
 ## Output
 
 ```text
@@ -87,4 +94,5 @@ Next gate or handoff:
 
 For detailed case categories and stack adapter selection, read
 [the test matrix](references/test-matrix.md). For HTTP request/response evidence, read
-[`report-writer`'s API test module](../report-writer/references/http-api-test.md).
+[`report-writer`'s API test module](../report-writer/references/http-api-test.md). For the JSONL
+completion gate, read [the API test gate](references/api-test-gate.md).
