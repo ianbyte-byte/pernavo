@@ -47,17 +47,19 @@ Paste this prompt into Codex, Claude Code, Cursor, or another coding agent:
 请为我安装 Pernavo 的完整 Skills 系统。完整执行手册：
 https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/main/AI_INSTALL.md
 
-默认参数：官方 GitHub 来源、当前用户、所有支持 global 安装的 agents、全部 8 个 Skills、
-从固定 SHA checkout 执行 copy；使用 `--agent '*'`，不要只安装 Codex。远程 URL 只用于发现和
-clone，不直接用于安装。
+默认参数：官方 GitHub 来源、当前用户、本机所有支持 global 安装的 agent harness、全部 8 个
+Skills、从固定 SHA checkout 执行 copy；使用 `--agent '*'`，不要只安装 Codex 或当前会话宿主。
+远程 URL 只用于发现和 clone，不直接用于安装。
 开始前必须读取全文、重新检查 skills CLI 的 version/help、确认授权、精确核对远程 --list
 和 JSON 同名冲突；不要盲跑，不要使用 --all 或 remove --all。冲突默认按方案 A 处理：仅在旧
-来源和固定 revision 可精确恢复时定向替换；否则停止。安装后完成固定 SHA 记录、JSON diff、
-新会话代表性 smoke（正向/负向/碰撞）、报告和定向回滚记录。
-默认安装集合是 8 个 Skills、跨项目 AGENTS.md 规则、API 测试 Stop 门禁、以及 ~/.pernavo
-运行日志；由安装代理阅读现有文件后再写入，不要用脚本整文件覆盖宿主配置。
-安装完成后，仅当全局 `$CODEX_HOME/AGENTS.md` 不存在时，将固定 checkout 中的
-`AGENTS-PERNAVO.md` 创建为该文件；已存在则跳过或停止，不得覆盖。它只保存
+来源和固定 revision 可精确恢复时定向替换；内容 SHA 与本次 checkout 一致且来源字段为空时按
+同源处理。安装后完成固定 SHA 记录、JSON diff、checkout 内只读 agentctl、新会话代表性
+smoke（正向/负向/碰撞）、报告和定向回滚记录。
+默认安装集合是 8 个 Skills（写入本机全部支持 global 的 agent harness）、跨项目 AGENTS.md
+规则、API 测试 Stop 门禁、以及 ~/.pernavo 运行日志；由安装代理阅读现有文件后再写入，不要
+用脚本整文件覆盖宿主配置。
+安装完成后，仅当全局 `$CODEX_HOME/AGENTS.md` 不存在或普通文件长度为 0 时，将固定 checkout
+中的 `AGENTS-PERNAVO.md` 写入该文件；已存在且非空则跳过或停止，不得覆盖非空文件。它只保存
 学习笔记提炼出的通用规范，不保存 Skills 清单或安装流程。
 再读取 Claude settings.json 与 Codex hooks.json，按现有形状合并 API 测试 Stop 门禁和
 `~/.pernavo` 运行日志 Hook；保持已有 Hook 不变，不得整文件替换；Stop 门禁合并后只读
@@ -100,8 +102,10 @@ Do not copy a bare install command from this README. The guide requires authoriz
 help, an exact remote list, a fixed-SHA checkout, before/after JSON snapshots, conflict
 classification, and a new-session runtime check. Default install also has the installing agent merge
 the API-test Stop gate and the `~/.pernavo` runtime log into existing host hook files without
-replacing them. The guide still separates installing workflow policy from proving host subagents,
-model routing, MCP, permissions, or Harness.
+replacing them. Default install writes the 8 Skills to every locally present agent harness the
+CLI can target with `--agent '*'`, and runs the read-only `agentctl` check from the checkout.
+The guide still separates that coverage from proving host subagents, model routing, MCP, or
+permissions.
 
 Repository maintainers can validate the source without installing it:
 
