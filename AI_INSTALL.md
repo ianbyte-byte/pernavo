@@ -6,10 +6,10 @@
 请为我安装 Pernavo 的完整 Skills 系统。完整执行手册：
 https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/main/AI_INSTALL.md
 
-默认参数：来源使用官方 GitHub 仓库 https://github.com/ianbyte-byte/pernavo；安装给当前用户的
-**所有支持 global 安装的 agents**；范围为 global；目标为手册列出的全部 8 个 Skills；安装
-方式为固定 SHA checkout 中的 copy。CLI 使用 `--agent '*'`，不是只安装 Codex。远程 URL 只用于
-发现和 clone，不直接作为安装源。
+默认参数：来源使用官方 GitHub 仓库 https://github.com/ianbyte-byte/pernavo；安装给当前用户
+**本机所有支持 global 安装的 agent harness**；范围为 global；目标为手册列出的全部 8 个
+Skills；安装方式为固定 SHA checkout 中的 copy。CLI 使用 `--agent '*'`，不是只安装 Codex 或
+当前会话那一个宿主。远程 URL 只用于发现和 clone，不直接作为安装源。
 
 开始前必须读取完整手册，重新检查 skills CLI 的 version/help，确认写入授权，精确核对远程
 --list 的 8 项，并用 JSON 快照检查同名冲突。不要直接盲跑安装命令，不要使用 --all，
@@ -17,13 +17,15 @@ https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/main/AI_INSTAL
 仅按名称定向移除冲突项，再从固定 SHA checkout 重装；旧来源、revision 或影响范围无法可靠
 恢复时必须停止。若远程 --list 不是精确 8 项，停止并说明该版本尚未发布。
 安装后按手册完成 JSON diff、新会话触发验证、报告和可定向回滚记录。
-默认安装集合是：全部 8 个 Skills、跨项目 `AGENTS.md` 规则、API 测试 Stop 门禁、以及
-`~/.pernavo` 运行日志 Hook。
+默认安装集合是：全部 8 个 Skills（写入本机全部支持 global 的 agent harness）、跨项目
+`AGENTS.md` 规则、API 测试 Stop 门禁、`~/.pernavo` 运行日志 Hook，以及 checkout 内只读
+`agentctl` harness 检查。
 由本手册中的安装代理阅读现有文件后再写入，不要用脚本整文件覆盖宿主配置。
 安装 Skills 成功后：
-1. 仅当全局 `$CODEX_HOME/AGENTS.md` 不存在时，将固定 checkout 中的
-   `AGENTS-PERNAVO.md` 创建为该文件；内容已相同则跳过；已存在但不同、为符号链接或非普通
-   文件时停止且不得覆盖。该文件只包含学习笔记提炼出的通用规范，不包含 Skills 信息。
+1. 仅当全局 `$CODEX_HOME/AGENTS.md` 不存在，或存在但是长度为 0 的普通文件时，将固定
+   checkout 中的 `AGENTS-PERNAVO.md` 写入该路径；内容已相同则跳过；已存在、非空且不同、为
+   符号链接或非普通文件时停止且不得覆盖。该文件只包含学习笔记提炼出的通用规范，不包含
+   Skills 信息。
 2. 先读取 Claude `settings.json` 与 Codex `hooks.json`，按现有 Hook 数组形状把 API 测试
    完成门禁合并进去；保持已有 Hook 与其它键不变，不得整文件替换，不得 mkdir 缺失父目录。
    命令路径必须指向已落盘 test-engineering 副本中的 `api_test_stop_hook.py`。
@@ -52,15 +54,16 @@ https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/main/AI_INSTAL
 | 参数 | 默认值 |
 |---|---|
 | 来源 | `https://github.com/ianbyte-byte/pernavo`，固定 full commit SHA |
-| 目标 | 当前用户所有支持 global 安装的 agents |
-| CLI 目标选择 | `--agent '*'`；不要把显示名称（如 `Claude Code`）当作 CLI ID |
+| 目标 | 当前用户本机所有支持 global 安装的 agent harness |
+| CLI 目标选择 | `--agent '*'`；不要把显示名称（如 `Claude Code`）当作 CLI ID；不要只装当前会话宿主 |
 | 范围 | global |
 | 内容 | 下方完整的 8 个 Skills |
 | 复制方式 | `--copy` |
 | 冲突策略 | 方案 A；来源无法恢复时 `blocked` |
-| 全局 AGENTS.md | 仅当 `$CODEX_HOME/AGENTS.md` 不存在时从 `AGENTS-PERNAVO.md` 创建；已相同则跳过；否则停止且不写入 |
+| 全局 AGENTS.md | 目标不存在或普通文件长度为 0 时从 `AGENTS-PERNAVO.md` 写入；已相同则跳过；非空且不同则停止且不写入 |
 | API 测试 Stop 门禁 | 安装代理先读取再合并进 Claude `Stop`/`TaskCompleted` 与 Codex `Stop`/`SubagentStop`；不得替换已有 Hook |
 | `~/.pernavo` 运行日志 | 复制 `pernavo-runtime-hook.py` 到 `$HOME/.pernavo/hooks/`，合并 SessionStart/Prompt/Tool/Stop 等事件；best-effort 不阻断 |
+| 本机 agent harness | `--agent '*'` 写入 CLI 支持的全部 global 目标；checkout 内只读运行 `agentctl`；不把 `agentctl` 安装进宿主 |
 
 `--agent '*'` 表示当前 CLI 支持的全部 agent 目标，不等于“只安装当前会话使用的 agent”。
 不同版本可能枚举不同数量；必须记录当次 CLI 输出中的实际 agent 列表和不支持 global 的目标，
@@ -71,27 +74,28 @@ Eve 和 PromptScript 的 global 安装不受支持，属于已知能力边界，
 
 | 顺序 | 操作 | 通过条件 |
 |---|---|---|
-| 1 | 确认写入授权 | 当前用户、所有支持 global 的 agents、官方来源、8 项、copy、AGENTS 同步与 Stop 门禁合并均获授权；不得把本提示理解成覆盖已有全局 `AGENTS.md` 或整份 Hook 文件 |
+| 1 | 确认写入授权 | 当前用户、本机全部支持 global 的 agent harness、官方来源、8 项、copy、AGENTS 同步与 Stop 门禁合并均获授权；不得把本提示理解成覆盖非空全局 `AGENTS.md` 或整份 Hook 文件 |
 | 2 | 检查 CLI | version 和 help 可用，参数与本手册兼容 |
 | 3 | 远程 `--list` | 名称集合精确等于下方 8 项；远程 URL 仅用于发现 |
-| 4 | 固定来源 | 安全临时目录中 clone，记录 full HEAD SHA，detach、校验 8 项 |
-| 5 | 保存全局 JSON 快照 | 快照包含每个登记的 agents、scope、path 和 source，可恢复、可比较 |
+| 4 | 固定来源 | 安全临时目录中 `--single-branch` clone 默认分支，记录 full HEAD SHA，detach、校验 8 项；不 fetch 其他分支 |
+| 5 | 保存全局 JSON 快照 | `skills ls --global --json`；agent 列表从登记的 `agents` 字段汇总 |
 | 6 | 分类同名项 | 每项是 `absent`、`same-source` 或 `conflict` |
 | 7 | 处理并安装 | `same-source` 不触碰；安装 `absent`；`conflict` 默认按方案 A 定向替换 |
-| 8 | 同步分发规则 | 目标不存在则创建且 `cmp` 通过；已相同则跳过；符号链接、非普通文件、父目录不可用或已存在但不同则停止且不写入 |
+| 8 | 同步分发规则 | 目标不存在或空文件则写入且 `cmp` 通过；已相同则跳过；符号链接、非普通文件、父目录不可用或非空且不同则停止且不写入 |
 | 9 | 合并 API 测试 Stop 门禁 | 先读取宿主 JSON，按现有数组形状追加；before 中的 Hook 命令 after 仍在；只读 `--check` 通过；无整文件替换、无 `--apply` |
 | 10 | 合并 `~/.pernavo` 运行日志 | 先复制 hook 脚本再按现有形状追加；日志目录 `0700`；before 中的 Hook 命令 after 仍在；无密钥落盘 |
-| 11 | 安装后 JSON diff | absent 正确新增、conflict 正确换源，无意外 Agent 或范围 |
-| 12 | 新会话验证 | 3 个代表性 smoke，或完整 24-case corpus |
-| 13 | 报告与回滚 | 区分新增与替换；`AGENTS.md` 与各 Hook 条目分别给出定向回滚 |
+| 11 | 本机 harness | `--agent '*'` 覆盖 CLI 支持的全部 global 目标；checkout 内只读 `agentctl` 通过 |
+| 12 | 安装后 JSON diff | absent 正确新增、conflict 正确换源，无意外 Agent 或范围 |
+| 13 | 新会话验证 | 3 个代表性 smoke，或完整 24-case corpus |
+| 14 | 报告与回滚 | 区分新增与替换；`AGENTS.md` 与各 Hook 条目分别给出定向回滚 |
 
 ## 安全契约与系统边界
 
 安装代理必须遵守：
 
 1. 写入前确认用户授权的来源、当前系统用户、目标 Agent、范围、名称集合和 copy/symlink
-   方式。默认写入当前用户所有支持 global 安装的 agents；用 `--agent '*'` 交给当前 CLI
-   枚举目标，不要只写 Codex。
+   方式。默认写入当前用户本机所有支持 global 安装的 agent harness；用 `--agent '*'` 交给
+   当前 CLI 枚举目标，不要只写 Codex 或当前会话宿主。
 2. 保留既有 Skills、配置、记忆、目录和未提交工作。不得通配删除、递归清理、修改 Shell
    启动文件、静默安装系统依赖或运行 `skills remove --all`。
 3. 不在 Pernavo 自己的 checkout 中做项目级自安装；那会创建 `.agents/skills` 副本并与
@@ -100,15 +104,18 @@ Eve 和 PromptScript 的 global 安装不受支持，属于已知能力边界，
    revision、影响 Agent 和恢复命令均已记录后定向替换。任一恢复条件不完整时停止，不得覆盖。
 5. 安装 8 个入口 Skills 会提供成本感知的自动工作流政策，包括生命周期、数据、性能、测试和
 审查路由规则。默认安装还会由安装代理把 API 测试完成门禁和 `~/.pernavo` 运行日志 Hook
-合并进宿主配置：必须先读取现有 JSON，按已有数组形状追加，不得整文件替换，也不得安装或
-证明子 Agent 目录、模型路由、MCP、权限、Harness、Mem0 或 skill-usage logger。
-运行日志 Hook 是 best-effort，不得阻断宿主。合并写入只证明配置被编辑，不证明宿主已触发该 Hook。
+合并进宿主配置：必须先读取现有 JSON，按已有数组形状追加，不得整文件替换。不得安装 MCP、
+权限、Mem0 或 skill-usage logger，也不得把 `scripts/agentctl.py` 复制进宿主。默认必须把
+Skills 写入 CLI 支持的全部 global agent harness，并在固定 checkout 内做只读 `agentctl`
+检查。运行日志 Hook 是 best-effort，不得阻断宿主。合并写入只证明配置被编辑，不证明宿主
+已触发该 Hook。
 6. 真正的子 Agent 派生，以及 Skill 是否 `loaded`/`executed`，只能在安装后的宿主新会话中
    观察；命令成功、目录存在或模型自述均不是运行时证明。
-7. 分发规则同步只使用固定 checkout 中的 `AGENTS-PERNAVO.md`，不使用项目 `AGENTS.md`。只在
-   `$CODEX_HOME/AGENTS.md` 不存在时创建；内容已相同则跳过；目标为符号链接、非普通文件、
-   父目录不存在/不是目录/是符号链接，或已存在但内容不同时停止且不得 `cp`。不得把粘贴提示
-   理解成覆盖授权。该文件只保存跨项目可复用规范，不包含 Skills 清单、安装命令或项目专属规则。
+7. 分发规则同步只使用固定 checkout 中的 `AGENTS-PERNAVO.md`，不使用项目 `AGENTS.md`。目标
+   不存在、或普通文件长度为 0 时写入；内容已相同则跳过；目标为符号链接、非普通文件、父目录
+   不存在/不是目录/是符号链接，或已存在、非空且内容不同时停止且不得 `cp`。不得把粘贴提示
+   理解成覆盖非空文件的授权。该文件只保存跨项目可复用规范，不包含 Skills 清单、安装命令或
+   项目专属规则。
 
 ### Agent 目标与实际落盘
 
@@ -188,8 +195,9 @@ npx --yes skills add "$PERNAVO_REMOTE" --list
 
 ### 固定默认安装来源
 
-创建仅当前用户可访问的新临时目录，验证路径确为本次新目录，然后 clone 官方仓库。不得使用
-已有路径，不得覆盖内容：
+创建仅当前用户可访问的新临时目录，验证路径确为本次新目录，然后 clone 官方仓库的默认分支。
+不得使用已有路径，不得覆盖内容，默认不得 `fetch --all`：远程上其它分支可能仍含与 Skills
+无关的大文件，会把安装 clone 拉回数百 MB。
 
 ```bash
 umask 077
@@ -200,8 +208,7 @@ test ! -L "$PERNAVO_INSTALL_TMP"
 chmod 700 "$PERNAVO_INSTALL_TMP"
 PERNAVO_CHECKOUT="$PERNAVO_INSTALL_TMP/checkout"
 test ! -e "$PERNAVO_CHECKOUT"
-git clone "$PERNAVO_REMOTE" "$PERNAVO_CHECKOUT"
-git -C "$PERNAVO_CHECKOUT" fetch --all --tags
+git clone --single-branch --branch main --depth 1 "$PERNAVO_REMOTE" "$PERNAVO_CHECKOUT"
 PERNAVO_COMMIT_SHA="$(git -C "$PERNAVO_CHECKOUT" rev-parse --verify 'HEAD^{commit}')"
 git -C "$PERNAVO_CHECKOUT" checkout --detach "$PERNAVO_COMMIT_SHA"
 git -C "$PERNAVO_CHECKOUT" rev-parse --verify 'HEAD^{commit}'
@@ -209,9 +216,13 @@ npx --yes skills add "$PERNAVO_CHECKOUT" --list
 "$PERNAVO_CHECKOUT/scripts/validate-skills.sh"
 ```
 
+`--list` 的发现 clone 不能代替上述固定 checkout：它不是已记录 SHA、已 detach、已跑
+`validate-skills.sh` 的安装源。发现 clone 与固定 checkout 各做一次是预期的；不要为了省一次
+clone 而把远程 URL 交给 `skills add` 当安装源。
+
 再次确认 checkout 的列表精确为 8 项、校验通过，并在报告中记录完整 SHA。若用户要求指定
-revision，先确认该 full commit SHA 存在，再 detach 到该 SHA 后执行相同校验。不得把 branch、
-tag 或远程 `main` 名称当成安装 revision。
+非 HEAD 的 revision，先确认该 full commit SHA 存在，再改用无 `--depth 1` 的 clone 并 detach
+到该 SHA 后执行相同校验。不得把 branch、tag 或远程 `main` 名称当成安装 revision。
 
 临时 checkout 和所有 JSON 快照必须保留到安装报告、diff 和回滚信息全部完成；不要自动删除。
 报告其路径，由用户决定何时清理。
@@ -237,20 +248,26 @@ test -n "$PERNAVO_INSTALL_TMP"
 test -d "$PERNAVO_INSTALL_TMP"
 test ! -L "$PERNAVO_INSTALL_TMP"
 test ! -e "$PERNAVO_INSTALL_TMP/pernavo-before-global.json"
-test ! -e "$PERNAVO_INSTALL_TMP/pernavo-before-agents.json"
 npx --yes skills ls --global --json > "$PERNAVO_INSTALL_TMP/pernavo-before-global.json"
-npx --yes skills ls --global --agent '*' --json > "$PERNAVO_INSTALL_TMP/pernavo-before-agents.json"
 ```
+
+不要对 `ls` 使用 `--agent '*'`：CLI 1.5.22 会拒绝该过滤器。`add` 与 `remove` 仍使用
+`--agent '*'`。每个登记的目标 Agent 从 JSON 的 `agents` 数组汇总；需要按单个 CLI ID 抽样时，
+用 help 里的合法 ID，不要用星号。
 
 对 8 个请求名称逐项读取 `name`、`path`、`scope`、`source`、`sourceUrl` 和所有 Agent 登记，并分类：
 
 - `absent`：全局 JSON 中无同名登记，且没有不明同名来源；可安装。
-- `same-source`：已来自同一个官方仓库；本次不触碰、不重装、不隐式更新。
-- `conflict`：来自其他来源，或来源无法可靠判断；进入下方方案 A 的替换安全门，不能直接覆盖。
+- `same-source`：已来自同一个官方仓库；或 `source`/`sourceUrl` 为空，但落盘
+  `path/SKILL.md`（`test-engineering` 还要 `scripts/api_test_stop_hook.py` 与
+  `scripts/grade_api_jsonl.py`）的 SHA-256 与本次 checkout 对应文件一致。本次不触碰、不重装、
+  不隐式更新。
+- `conflict`：来自其他来源，或来源无法可靠判断且内容 SHA 与本次 checkout 不一致；进入下方
+  方案 A 的替换安全门，不能直接覆盖。
 
-如果旧来源显示 `tuloong/pernavo`、`tuloong/loongclaude` 或其他 fork/mirror，只有能证明它与
-官方仓库是同一 repository 时才可视为 `same-source`，否则是 `conflict`。不得因为仓库名称相似、
-内容相同或来源是 fork/mirror，就跳过冲突处理。
+如果旧来源显示 `tuloong/pernavo`、`tuloong/loongclaude` 或其他 fork/mirror，只有 GitHub 解析后的
+canonical repository（`full_name` 或 `html_url`）等于 `ianbyte-byte/pernavo`，或内容 SHA 与本次
+checkout 一致时，才可视为 `same-source`。不得只因为仓库名称相似或内容看起来相同就跳过冲突处理。
 
 安装前必须同时保存：8 项分类、原始 JSON、已授权目标、“安装后全局名称集合减安装前全局名称
 集合”的新增项回滚计算规则，以及每个替换项的旧来源、固定 revision、Agent、scope 和恢复
@@ -292,7 +309,7 @@ npx --yes skills add "$PERNAVO_CHECKOUT" \
 ### 同步分发规则
 
 固定 checkout 中的 `AGENTS-PERNAVO.md` 是可分发规则源。Skills 安装成功后同步 Codex 用户级
-`$CODEX_HOME/AGENTS.md`。默认不得覆盖已有文件；粘贴提示不构成覆盖授权。
+`$CODEX_HOME/AGENTS.md`。默认不得覆盖已有文件（空文件除外）；粘贴提示不构成覆盖授权。
 
 ```bash
 PERNAVO_AGENTS_SOURCE="$PERNAVO_CHECKOUT/AGENTS-PERNAVO.md"
@@ -311,9 +328,10 @@ test ! -L "$PERNAVO_AGENTS_SOURCE"
 | `blocked-symlink` | 目标存在且是符号链接 | 停止，不写入 |
 | `blocked-not-file` | 目标存在且不是普通文件 | 停止，不写入 |
 | `skipped-identical` | 目标是普通文件且与来源 `cmp -s` 相同 | 跳过，不写入 |
-| `blocked-existing` | 目标是普通文件且与来源不同 | 停止，不写入，报告目标路径和手工合并步骤 |
+| `blocked-existing` | 目标是普通文件、长度非 0，且与来源不同 | 停止，不写入，报告目标路径和手工合并步骤 |
 | `blocked-parent` | 目标不存在，且父路径不存在、不是目录或是符号链接 | 停止，不写入，不得 `mkdir` |
 | `created` | 目标不存在，父路径是真实目录 | `cp` 后来源与目标必须 `cmp -s` |
+| `replaced-empty` | 目标是普通文件且长度为 0 | `cp` 后来源与目标必须 `cmp -s`；这不是覆盖非空文件 |
 
 `created` 的写入命令仅为：
 
@@ -321,6 +339,18 @@ test ! -L "$PERNAVO_AGENTS_SOURCE"
 test -d "$PERNAVO_GLOBAL_AGENTS_PARENT"
 test ! -L "$PERNAVO_GLOBAL_AGENTS_PARENT"
 test ! -e "$PERNAVO_GLOBAL_AGENTS"
+cp "$PERNAVO_AGENTS_SOURCE" "$PERNAVO_GLOBAL_AGENTS"
+cmp -s "$PERNAVO_AGENTS_SOURCE" "$PERNAVO_GLOBAL_AGENTS"
+```
+
+`replaced-empty` 的写入命令仅为：
+
+```bash
+test -d "$PERNAVO_GLOBAL_AGENTS_PARENT"
+test ! -L "$PERNAVO_GLOBAL_AGENTS_PARENT"
+test -f "$PERNAVO_GLOBAL_AGENTS"
+test ! -L "$PERNAVO_GLOBAL_AGENTS"
+test ! -s "$PERNAVO_GLOBAL_AGENTS"
 cp "$PERNAVO_AGENTS_SOURCE" "$PERNAVO_GLOBAL_AGENTS"
 cmp -s "$PERNAVO_AGENTS_SOURCE" "$PERNAVO_GLOBAL_AGENTS"
 ```
@@ -462,9 +492,7 @@ test -n "$PERNAVO_INSTALL_TMP"
 test -d "$PERNAVO_INSTALL_TMP"
 test ! -L "$PERNAVO_INSTALL_TMP"
 test ! -e "$PERNAVO_INSTALL_TMP/pernavo-after-global.json"
-test ! -e "$PERNAVO_INSTALL_TMP/pernavo-after-agents.json"
 npx --yes skills ls --global --json > "$PERNAVO_INSTALL_TMP/pernavo-after-global.json"
-npx --yes skills ls --global --agent '*' --json > "$PERNAVO_INSTALL_TMP/pernavo-after-agents.json"
 ```
 
 对 before/after JSON 做结构化比较并确认：请求的 absent 项各新增一次；方案 A 替换项名称和
@@ -539,14 +567,25 @@ revision。
 cmp -s "$PERNAVO_AGENTS_SOURCE" "$PERNAVO_GLOBAL_AGENTS" && rm -- "$PERNAVO_GLOBAL_AGENTS"
 ```
 
+本次若将 `AGENTS.md` 标为 `replaced-empty`，回滚只能在目标仍与来源 `cmp -s` 时恢复为空文件，
+不得删除该路径：
+
+```bash
+cmp -s "$PERNAVO_AGENTS_SOURCE" "$PERNAVO_GLOBAL_AGENTS" && : > "$PERNAVO_GLOBAL_AGENTS"
+```
+
 `cmp` 失败说明用户已改过该文件：报告 `rollback blocked`，不得删除。`skipped-identical` 与
 所有 `blocked-*` 状态没有文件回滚动作。
 
-## 7. Harness 检查（可选、独立授权）
+## 7. 本机 agent harness（默认）
 
-Skills CLI 不会安装 `scripts/agentctl.py`、`harness/`、MCP、权限或宿主路由。默认安装中的
-API 测试 Stop 门禁和 `~/.pernavo` 运行日志由安装代理按上一节阅读并合并，仍不会安装 Mem0
-或 skill-usage logger。用户要求检查只读 Harness 时，保留 checkout 并从仓库根目录运行：
+默认安装必须覆盖当前 CLI 支持 global 写入的全部 agent harness，使用 `--agent '*'`，不要只装
+Codex、Cursor 或当前会话宿主。Eve 和 PromptScript 若被 CLI 拒绝 global，记
+`unsupported-global`，不要重试或手工绕过。安装后按共享 `path` 检查 `SKILL.md` 已落盘，并记录
+共享登记，不要把同一 path 计成多份独立副本。
+
+Skills CLI 不会把 `scripts/agentctl.py` 或 `harness/` 安装进宿主，也不会安装 MCP、权限或
+skill-usage logger。默认安装仍须在固定 checkout 根目录做只读 harness 检查：
 
 ```bash
 python3 scripts/agentctl.py doctor --config harness/examples/agentctl.json --json
@@ -556,8 +595,8 @@ python3 scripts/agentctl.py memory search --config harness/examples/agentctl.jso
   --query canonical --json
 ```
 
-这些命令只证明本地静态配置、精确字段路由和 JSONL 读取；不能证明宿主 Hook、MCP、模型、
-认证、子 Agent 或工具已启用。
+这些命令只证明 checkout 内静态配置、精确字段路由和 JSONL 读取；不能证明宿主 Hook、MCP、模型、
+认证、子 Agent 或工具已启用。失败则记 `partial`，不回滚已完成的 Skill 登记。
 
 ## 8. 停止条件
 
@@ -571,7 +610,7 @@ python3 scripts/agentctl.py memory search --config harness/examples/agentctl.jso
 - 默认官方 checkout 校验失败；已有本地开发 checkout 仅在可信验证器缺失时可降级为 `partial`；
 - 安装失败、部分成功、after diff 异常或无法计算精确新增集合；
 - 继续操作需要覆盖、广泛删除、修改权限或系统依赖；
-- 全局 `$CODEX_HOME/AGENTS.md` 为符号链接、非普通文件、父目录不可用，或已存在且与
+- 全局 `$CODEX_HOME/AGENTS.md` 为符号链接、非普通文件、父目录不可用，或已存在、非空且与
   `AGENTS-PERNAVO.md` 不同；
 - Claude `settings.json` 或 Codex `hooks.json` 为符号链接、非普通文件、无效 JSON，或所需
   事件存在但不是可追加的数组；
@@ -596,14 +635,15 @@ Secure temporary directory and permission check:
 skills CLI version and help checked:
 Requested 8 names or authorized subset:
 Remote/local --list exact-set result:
-Before global and all-agent JSON snapshot paths:
+Before global JSON snapshot path (no `ls --agent '*'`):
 Per-name classification: absent | same-source | conflict
 Conflict disposition: replaceable | blocked
 Replacement ledger: name, agent, scope, old repository, old full SHA, restore command
 Directed removal command and post-removal JSON result:
 Install/update command and exit status:
-AGENTS.md path and distribution: created | skipped-identical | blocked-existing | blocked-symlink | blocked-not-file | blocked-parent | blocked-source-missing
+AGENTS.md path and distribution: created | replaced-empty | skipped-identical | blocked-existing | blocked-symlink | blocked-not-file | blocked-parent | blocked-source-missing
 Exact rollback for created AGENTS.md:
+Exact rollback for replaced-empty AGENTS.md:
 API test Stop hook script path (materialized, not checkout):
 Claude settings.json: created | merged | skipped-identical | blocked-parent | blocked-symlink | blocked-not-file | blocked-invalid | blocked-format
 Codex hooks.json: created | merged | skipped-identical | blocked-parent | blocked-symlink | blocked-not-file | blocked-invalid | blocked-format
@@ -614,17 +654,19 @@ Exact rollback for this Stop hook entry only:
 Runtime log path:
 Runtime hook events merged (claude/codex): created | merged | skipped-identical | blocked-*
 Exact rollback for runtime-hook.py entries only (keep logs):
-After global and all-agent JSON snapshot paths:
+After global JSON snapshot path:
 Structured before/after diff and newly created registrations:
 Installed names, paths, scopes, sources, target agents, materialized SHA-256:
 Agent status: registered | materialized | shared-registration | unsupported-global | blocked-source
+Default `--agent '*'` harness coverage and unsupported-global list:
+Readonly agentctl doctor/explain/memory result:
 New-session/restart status:
 Representative 3-case smoke: cases, expected/forbidden/actual owners, result
 Full 24-case corpus: result | not run; remaining activation unverified
 Observed child-agent/tool execution:
 Per-case target-observed evidence:
 External environment-observed evidence, or not observed:
-Harness checks, if separately requested:
+Harness checks (default readonly agentctl):
 Exact rollback command for only newly created name+agent registrations:
 Exact rollback sequence for replaced registrations:
 Unverified layers and remaining decisions:
@@ -633,6 +675,6 @@ Final status: complete | partial | blocked
 ```
 
 只有获授权的 absent 项完成安装、方案 A 的 replaceable conflict 已正确换源、after diff 已核对、
-`AGENTS.md` 为 `created` 或 `skipped-identical`、各可用宿主的 Stop 门禁与运行日志 Hook 为
-`created`、`merged` 或 `skipped-identical`、回滚步骤可执行、失败项已处理且未验证边界明确
+`AGENTS.md` 为 `created`、`replaced-empty` 或 `skipped-identical`、各可用宿主的 Stop 门禁与运行日志 Hook 为
+`created`、`merged` 或 `skipped-identical`、只读 `agentctl` 已跑、回滚步骤可执行、失败项已处理且未验证边界明确
 列出时，安装代理才可结束任务。
