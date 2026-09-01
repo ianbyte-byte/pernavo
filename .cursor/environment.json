@@ -1,0 +1,5 @@
+{
+  "name": "Pernavo",
+  "user": "ubuntu",
+  "install": "python3 --version && python3 -m compileall -q scripts skills tests"
+}
