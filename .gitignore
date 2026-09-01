@@ -3,3 +3,11 @@
 .pytest_cache/
 .ruff_cache/
 .skillopt-sleep/
+
+# Local generation artifacts; not part of the skills distribution.
+/.omo/
+/projects/
+/codex-pets/
+/direction-blind-pairs.png
+/pets-settings-BTsRzspN.js
+
