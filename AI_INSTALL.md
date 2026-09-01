@@ -22,18 +22,22 @@ Skills；安装方式为固定 SHA checkout 中的 copy。CLI 使用 `--agent '*
 `agentctl` harness 检查。
 由本手册中的安装代理阅读现有文件后再写入，不要用脚本整文件覆盖宿主配置。
 安装 Skills 成功后：
-1. 仅当全局 `$CODEX_HOME/AGENTS.md` 不存在，或存在但是长度为 0 的普通文件时，将固定
-   checkout 中的 `AGENTS-PERNAVO.md` 写入该路径；内容已相同则跳过；已存在、非空且不同、为
-   符号链接或非普通文件时停止且不得覆盖。该文件只包含学习笔记提炼出的通用规范，不包含
-   Skills 信息。
-2. 先读取 Claude `settings.json` 与 Codex `hooks.json`，按现有 Hook 数组形状把 API 测试
-   完成门禁合并进去；保持已有 Hook 与其它键不变，不得整文件替换，不得 mkdir 缺失父目录。
+1. 将固定 checkout 中的 `AGENTS-PERNAVO.md` 同步到 Codex、Claude Code、Cursor、Grok 各自
+   会加载的用户级规则路径（见手册目标表）。目标不存在或普通文件长度为 0 时写入；已相同则
+   跳过；非空且不同则停止且不得覆盖。不要覆盖 Claude Code 的 `~/.claude/AGENTS.md`（常为
+   其它插件正文）；Claude 使用 `~/.claude/rules/pernavo.md`。Cursor 使用
+   `$HOME/.cursor/rules/pernavo.mdc`（须含 `alwaysApply: true`）；默认安装不得写入
+   `$HOME/.cursor/AGENTS.md`，也不得改写项目 `AGENTS.md`。
+2. 先读取 Claude `settings.json`、Codex `hooks.json`、Cursor `hooks.json` 与 Grok
+   `~/.grok/hooks/*.json`，按现有 Hook 数组形状把 API 测试完成门禁合并进去；保持已有 Hook
+   与其它键不变，不得整文件替换，不得 mkdir 缺失的 vendor 根目录。
    命令路径必须指向已落盘 test-engineering 副本中的 `api_test_stop_hook.py`。
    合并后用只读 `--check` 核对；禁止对默认宿主路径直接 `--apply`。
 3. 将固定 checkout 中的 `scripts/pernavo-runtime-hook.py` 复制到
    `$HOME/.pernavo/hooks/runtime-hook.py`，并按现有形状合并运行日志 Hook；日志写入
    `$HOME/.pernavo/logs/runtime.jsonl`。不得记录原文 prompt、命令、工具输出或凭据。
-   不得整文件替换宿主 Hook 文件。
+   不得整文件替换宿主 Hook 文件。Cursor / Grok 的 `PERNAVO_RUNTIME_SOURCE` 分别为
+   `cursor` 与 `grok`。
 ```
 
 本手册供 AI 安装代理逐步执行，不是 Shell 脚本。上述默认值只补全用户未指定的参数；安装代理
@@ -60,8 +64,8 @@ Skills；安装方式为固定 SHA checkout 中的 copy。CLI 使用 `--agent '*
 | 内容 | 下方完整的 8 个 Skills |
 | 复制方式 | `--copy` |
 | 冲突策略 | 方案 A；来源无法恢复时 `blocked` |
-| 全局 AGENTS.md | 目标不存在或普通文件长度为 0 时从 `AGENTS-PERNAVO.md` 写入；已相同则跳过；非空且不同则停止且不写入 |
-| API 测试 Stop 门禁 | 安装代理先读取再合并进 Claude `Stop`/`TaskCompleted` 与 Codex `Stop`/`SubagentStop`；不得替换已有 Hook |
+| 全局 AGENTS.md | 按宿主写入下表专用路径；不存在或空文件则创建；已相同则跳过；非空且不同则停止 |
+| API 测试 Stop 门禁 | 安装代理先读取再合并进 Claude、Codex、Cursor、Grok 各自的 Hook 文件；不得替换已有 Hook |
 | `~/.pernavo` 运行日志 | 复制 `pernavo-runtime-hook.py` 到 `$HOME/.pernavo/hooks/`，合并 SessionStart/Prompt/Tool/Stop 等事件；best-effort 不阻断 |
 | 本机 agent harness | `--agent '*'` 写入 CLI 支持的全部 global 目标；checkout 内只读运行 `agentctl`；不把 `agentctl` 安装进宿主 |
 
@@ -308,8 +312,30 @@ npx --yes skills add "$PERNAVO_CHECKOUT" \
 
 ### 同步分发规则
 
-固定 checkout 中的 `AGENTS-PERNAVO.md` 是可分发规则源。Skills 安装成功后同步 Codex 用户级
-`$CODEX_HOME/AGENTS.md`。默认不得覆盖已有文件（空文件除外）；粘贴提示不构成覆盖授权。
+固定 checkout 中的 `AGENTS-PERNAVO.md` 是可分发规则源。Skills 安装成功后，对下表每个目标各自
+分类并写入；默认不得覆盖已有文件（空文件除外）；粘贴提示不构成覆盖授权。不要覆盖
+`~/.claude/AGENTS.md`。
+
+| 宿主 | 用户级规则路径 | 允许创建的子目录 |
+|---|---|---|
+| Codex | `${CODEX_HOME:-$HOME/.codex}/AGENTS.md` | 不得 mkdir `$CODEX_HOME` |
+| Claude Code | `$HOME/.claude/rules/pernavo.md` | 父目录 `~/.claude` 已是真实目录时可 `mkdir` `rules/` |
+| Cursor | `$HOME/.cursor/rules/pernavo.mdc` | 父目录 `~/.cursor` 已是真实目录时可 `mkdir` `rules/`；须 `.mdc` 且 `alwaysApply: true` |
+| Grok | `$HOME/.grok/rules/pernavo.md` | 父目录 `~/.grok` 已是真实目录时可 `mkdir` `rules/` |
+
+Cursor Agent 仍会读取项目 `AGENTS.md`（仓库根与子目录）。默认安装不得改写项目
+`AGENTS.md`，也不得写入 `$HOME/.cursor/AGENTS.md`。Cursor 规则必须是 `.mdc`：纯 `.md` 会被
+忽略。正文与 `AGENTS-PERNAVO.md` 相同，文件头固定为：
+
+```text
+---
+description: Pernavo cross-project guidance
+alwaysApply: true
+---
+```
+
+判定 `skipped-identical` 时，去掉 YAML frontmatter 后的正文须与来源 `cmp -s` 相同。Cursor
+的 Stop 与运行日志仍合并进 `$HOME/.cursor/hooks.json`。
 
 ```bash
 PERNAVO_AGENTS_SOURCE="$PERNAVO_CHECKOUT/AGENTS-PERNAVO.md"
@@ -319,8 +345,10 @@ test -f "$PERNAVO_AGENTS_SOURCE"
 test ! -L "$PERNAVO_AGENTS_SOURCE"
 ```
 
+对每个目标路径使用同一套状态表。把 Codex 路径记为 `$PERNAVO_GLOBAL_AGENTS` 以便回滚模板复用。
+
 按目标分类，只执行匹配分支，不得先备份再无条件 `cp`。先判断
-`test -L "$PERNAVO_GLOBAL_AGENTS"`；损坏的符号链接也属于 `blocked-symlink`，不得写入。
+`test -L` 目标；损坏的符号链接也属于 `blocked-symlink`，不得写入。
 
 | 状态 | 判定 | 动作 |
 |---|---|---|
@@ -383,6 +411,13 @@ checkout 再执行一次 `--copy`，不触碰其他 same-source 项。命令路�
 |---|---|---|
 | Claude Code | `$HOME/.claude/settings.json` | `Stop`, `TaskCompleted` |
 | Codex | `${CODEX_HOME:-$HOME/.codex}/hooks.json` | `Stop`, `SubagentStop` |
+| Cursor | `$HOME/.cursor/hooks.json` | `stop`, `subagentStop`（Cursor camelCase；元素多为扁平 `command`） |
+| Grok | `$HOME/.grok/hooks/pernavo.json` | `Stop`, `SubagentStop`（Claude 形分组 JSON；`~/.grok` 已存在时可 `mkdir` `hooks/`） |
+
+Grok 默认还会扫描 `~/.claude/settings.json` 与 `~/.cursor/hooks.json`。Claude 或 Cursor
+已含同一 Stop 门禁时，Grok 原生文件会再跑一遍；门禁必须幂等。不要为避免重复而跳过
+Grok 原生 `~/.grok/hooks/pernavo.json`。用户若关闭 `[compat.claude] hooks` 或
+`[compat.cursor] hooks`，仍依赖该原生文件。
 
 每个文件先读取再分类，只执行匹配分支。写入前把该文件里已有 Hook 的 `command` 全部抄下，
 写入后必须逐条仍在。
@@ -415,12 +450,14 @@ python3 "MATERIALIZED_TEST_ENGINEERING/scripts/api_test_stop_hook.py"
 ```bash
 python3 "$PERNAVO_TE_ROOT/scripts/install_api_test_gate.py" \
   --check \
-  --script "$PERNAVO_TE_ROOT/scripts/api_test_stop_hook.py"
+  --script "$PERNAVO_TE_ROOT/scripts/api_test_stop_hook.py" \
+  --cursor-hooks "$HOME/.cursor/hooks.json" \
+  --grok-hooks "$HOME/.grok/hooks/pernavo.json"
 ```
 
-`--check` 通过只证明 JSON 含有该脚本路径，不证明宿主已触发 Hook。Claude 与 Codex 父目录都
-`blocked-parent` 时，Skills 与 `AGENTS.md` 仍可记成功，Hook 记 `blocked-parent`，总状态
-`partial`。任一宿主为 `blocked-symlink`、`blocked-not-file`、`blocked-invalid` 或
+`--check` 通过只证明 JSON 含有该脚本路径，不证明宿主已触发 Hook。四个宿主的父目录都
+`blocked-parent` 时，Skills 与规则文件仍可记成功，Hook 记 `blocked-parent`，总状态
+`partial`。任一已检查宿主为 `blocked-symlink`、`blocked-not-file`、`blocked-invalid` 或
 `blocked-format` 时停止。
 
 Hook 回滚只删除 `command` 含 `api_test_stop_hook.py` 的那一条；不得删除 `settings.json` 或
@@ -446,20 +483,24 @@ PERNAVO_HOME="${PERNAVO_HOME:-$HOME/.pernavo}"
 | `copied` / `skipped-identical` | `hooks/runtime-hook.py` 与来源 `cmp -s` | 不同则 `cp` 后 `chmod 600`；相同则跳过 |
 | `logs-ready` | `$PERNAVO_HOME/logs` 为真实目录 | 没有则 `mkdir -m 700`；不得把项目树写进该目录 |
 
-允许创建 `$HOME/.pernavo`、`hooks/` 和 `logs/`（`0700`）。这不授权 `mkdir` `$HOME/.claude`
-或 `$CODEX_HOME`。不要删除已有 `logs/runtime.jsonl`。
+允许创建 `$HOME/.pernavo`、`hooks/` 和 `logs/`（`0700`）。这不授权 `mkdir` `$HOME/.claude`、
+`$HOME/.cursor`、`$HOME/.grok` 或 `$CODEX_HOME`。`~/.claude` / `~/.cursor` / `~/.grok` 已存在时可以创建
+其下的 `rules/` 与 `hooks/`。不要删除已有 `logs/runtime.jsonl`。
 
 命令路径必须是：
 
 ```text
 PERNAVO_RUNTIME_SOURCE=claude python3 "$HOME/.pernavo/hooks/runtime-hook.py"
 PERNAVO_RUNTIME_SOURCE=codex python3 "$HOME/.pernavo/hooks/runtime-hook.py"
+PERNAVO_RUNTIME_SOURCE=cursor python3 "$HOME/.pernavo/hooks/runtime-hook.py"
+PERNAVO_RUNTIME_SOURCE=grok python3 "$HOME/.pernavo/hooks/runtime-hook.py"
 ```
 
-分别写入 Claude 与 Codex。Claude 事件：`SessionStart`、`UserPromptSubmit`、`PreToolUse`、
-`PostToolUse`、`Stop`、`TaskCompleted`。Codex 事件：`SessionStart`、`UserPromptSubmit`、
-`PreToolUse`、`PostToolUse`、`Stop`、`SubagentStop`。每条仍按该文件现有数组形状追加；
-`skipped-identical` 当该事件已含 `runtime-hook.py`。超时建议 10 秒。
+分别写入各宿主。Claude 事件：`SessionStart`、`UserPromptSubmit`、`PreToolUse`、
+`PostToolUse`、`Stop`、`TaskCompleted`。Codex 与 Grok：`SessionStart`、`UserPromptSubmit`、
+`PreToolUse`、`PostToolUse`、`Stop`、`SubagentStop`。Cursor 使用 camelCase：`sessionStart`、
+`beforeSubmitPrompt`、`preToolUse`、`postToolUse`、`stop`、`subagentStop`。每条仍按该文件
+现有数组形状追加；`skipped-identical` 当该事件已含 `runtime-hook.py`。超时建议 10 秒。
 
 写入前抄下已有 `command`，写入后必须仍在。禁止对默认宿主路径运行任何 `--apply` 安装器。
 Hook 必须 `continue: true` 且 exit 0；不得记录原文 prompt、命令、工具输出、凭据或业务 JSONL。
@@ -612,8 +653,8 @@ python3 scripts/agentctl.py memory search --config harness/examples/agentctl.jso
 - 继续操作需要覆盖、广泛删除、修改权限或系统依赖；
 - 全局 `$CODEX_HOME/AGENTS.md` 为符号链接、非普通文件、父目录不可用，或已存在、非空且与
   `AGENTS-PERNAVO.md` 不同；
-- Claude `settings.json` 或 Codex `hooks.json` 为符号链接、非普通文件、无效 JSON，或所需
-  事件存在但不是可追加的数组；
+- Claude `settings.json`、Codex `hooks.json`、Cursor `hooks.json` 或 Grok
+  `hooks/pernavo.json` 为符号链接、非普通文件、无效 JSON，或所需事件存在但不是可追加的数组；
 - 用户要求保证运行时触发，但宿主没有可观察证据。
 
 部分安装失败时，对 before/after 差集中的新增名称定向移除；对已经替换的名称按替换台账恢复旧
@@ -642,17 +683,22 @@ Replacement ledger: name, agent, scope, old repository, old full SHA, restore co
 Directed removal command and post-removal JSON result:
 Install/update command and exit status:
 AGENTS.md path and distribution: created | replaced-empty | skipped-identical | blocked-existing | blocked-symlink | blocked-not-file | blocked-parent | blocked-source-missing
+Claude rules/pernavo.md: created | replaced-empty | skipped-identical | blocked-*
+Cursor rules/pernavo.mdc: created | replaced-empty | skipped-identical | blocked-*
+Grok rules/pernavo.md: created | replaced-empty | skipped-identical | blocked-*
 Exact rollback for created AGENTS.md:
 Exact rollback for replaced-empty AGENTS.md:
 API test Stop hook script path (materialized, not checkout):
 Claude settings.json: created | merged | skipped-identical | blocked-parent | blocked-symlink | blocked-not-file | blocked-invalid | blocked-format
 Codex hooks.json: created | merged | skipped-identical | blocked-parent | blocked-symlink | blocked-not-file | blocked-invalid | blocked-format
+Cursor hooks.json: created | merged | skipped-identical | blocked-parent | blocked-symlink | blocked-not-file | blocked-invalid | blocked-format
+Grok hooks/pernavo.json: created | merged | skipped-identical | blocked-parent | blocked-symlink | blocked-not-file | blocked-invalid | blocked-format
 Before/after Hook command lists proving pre-existing entries remain:
 Exact rollback for this Stop hook entry only:
 `--check` result:
 `~/.pernavo/hooks/runtime-hook.py`: copied | skipped-identical | blocked-home | blocked-not-dir
 Runtime log path:
-Runtime hook events merged (claude/codex): created | merged | skipped-identical | blocked-*
+Runtime hook events merged (claude/codex/cursor/grok): created | merged | skipped-identical | blocked-*
 Exact rollback for runtime-hook.py entries only (keep logs):
 After global JSON snapshot path:
 Structured before/after diff and newly created registrations:

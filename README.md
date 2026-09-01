@@ -58,12 +58,15 @@ smoke（正向/负向/碰撞）、报告和定向回滚记录。
 默认安装集合是 8 个 Skills（写入本机全部支持 global 的 agent harness）、跨项目 AGENTS.md
 规则、API 测试 Stop 门禁、以及 ~/.pernavo 运行日志；由安装代理阅读现有文件后再写入，不要
 用脚本整文件覆盖宿主配置。
-安装完成后，仅当全局 `$CODEX_HOME/AGENTS.md` 不存在或普通文件长度为 0 时，将固定 checkout
-中的 `AGENTS-PERNAVO.md` 写入该文件；已存在且非空则跳过或停止，不得覆盖非空文件。它只保存
-学习笔记提炼出的通用规范，不保存 Skills 清单或安装流程。
-再读取 Claude settings.json 与 Codex hooks.json，按现有形状合并 API 测试 Stop 门禁和
-`~/.pernavo` 运行日志 Hook；保持已有 Hook 不变，不得整文件替换；Stop 门禁合并后只读
-`--check`，禁止对默认宿主路径 `--apply`。运行日志不得记录原文 prompt、命令或凭据。
+安装完成后，将固定 checkout 中的 `AGENTS-PERNAVO.md` 写入 Codex `AGENTS.md`、Claude
+`~/.claude/rules/pernavo.md`、Cursor `~/.cursor/rules/pernavo.mdc`、Grok
+`~/.grok/rules/pernavo.md`；不存在或空文件才写，不得覆盖非空文件，也不得覆盖 Claude 的
+`~/.claude/AGENTS.md`。Cursor 规则须为 `.mdc` 且 `alwaysApply: true`；默认安装不得写入
+`~/.cursor/AGENTS.md`，也不得改写项目 `AGENTS.md`。
+再读取 Claude settings.json、Codex hooks.json、Cursor hooks.json 与 Grok
+`~/.grok/hooks/pernavo.json`，按现有形状合并 API 测试 Stop 门禁和 ~/.pernavo 运行日志 Hook；
+保持已有 Hook 不变，不得整文件替换；Stop 门禁合并后只读 `--check`，禁止对默认宿主路径
+`--apply`。运行日志不得记录原文 prompt、命令或凭据。
 若远程 --list 不是精确 8 项，停止并说明该版本尚未发布；未运行完整 24-case corpus 时，
 不得声称全部 8 项的 runtime activation 已验证。
 ```

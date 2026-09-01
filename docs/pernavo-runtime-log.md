@@ -21,7 +21,7 @@ not written.
 ```
 
 Directory mode `0700`, log and hook file mode `0600`. Override the home with `PERNAVO_HOME` and the
-log path with `PERNAVO_RUNTIME_LOG`. Set `PERNAVO_RUNTIME_SOURCE=claude` or `codex` in the hook
+log path with `PERNAVO_RUNTIME_LOG`. Set `PERNAVO_RUNTIME_SOURCE` to `claude`, `codex`, `cursor`, or `grok` in the hook
 command.
 
 ## Schema
@@ -40,6 +40,8 @@ Kinds include `prompt_submitted`, `skill_invoked`, `skill_file_read`, `session_s
 |---|---|
 | Claude Code | `SessionStart`, `UserPromptSubmit`, `PreToolUse`, `PostToolUse`, `Stop`, `TaskCompleted` |
 | Codex | `SessionStart`, `UserPromptSubmit`, `PreToolUse`, `PostToolUse`, `Stop`, `SubagentStop` |
+| Cursor | `sessionStart`, `beforeSubmitPrompt`, `preToolUse`, `postToolUse`, `stop`, `subagentStop` |
+| Grok | `SessionStart`, `UserPromptSubmit`, `PreToolUse`, `PostToolUse`, `Stop`, `SubagentStop` |
 
 Merge into existing hook arrays. Do not replace Mem0, skill-usage, or the API-test Stop gate.
 

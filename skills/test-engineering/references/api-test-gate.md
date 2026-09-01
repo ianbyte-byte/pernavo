@@ -44,9 +44,11 @@ Use `--hook` when a command hook should exit 2 on failure. Do not log secrets fr
 ## Host Stop hook
 
 Default install follows [AI_INSTALL.md](../../../AI_INSTALL.md): an installing agent reads the host
-JSON and merges `scripts/api_test_stop_hook.py` into Claude `Stop` / `TaskCompleted` and Codex
-`Stop` / `SubagentStop`. It does not replace existing hooks. After editing, verify with
-`scripts/install_api_test_gate.py --check`. Do not `--apply` against default host paths.
+JSON and merges `scripts/api_test_stop_hook.py` into Claude `Stop` / `TaskCompleted`, Codex
+`Stop` / `SubagentStop`, Cursor `stop` / `subagentStop`, and Grok `Stop` / `SubagentStop`. It does
+not replace existing hooks. After editing, verify with `scripts/install_api_test_gate.py --check`
+and the optional `--cursor-hooks` / `--grok-hooks` paths. Do not `--apply` against default host
+paths.
 
 The adapter allows ordinary turns. It grades when Stop claims completion and a matrix or API/JSONL
 context is present, or when `TaskCompleted` sees a matrix. Failure prints
