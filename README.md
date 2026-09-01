@@ -4,8 +4,10 @@ Local-first skills, memory, and tool orchestration for AI agents.
 
 Repository web page: [https://github.com/ianbyte-byte/pernavo](https://github.com/ianbyte-byte/pernavo)
 
-Skill sources live under `skills/<name>/SKILL.md`. Project routing for implement, review, and
-verify lives in [CLAUDE.md](CLAUDE.md); review ownership is `change-review` (alias `/review-mr`).
+Skill sources live under `skills/<name>/SKILL.md`. Repository instructions live in [AGENTS.md](AGENTS.md).
+The separate [AGENTS-PERNAVO.md](AGENTS-PERNAVO.md) file is the distributable source for cross-project guidance and
+contains no Skill inventory. Project routing for implement, review, and verify lives in [CLAUDE.md](CLAUDE.md);
+review ownership is `change-review` (alias `/review-mr`).
 
 For end-to-end workflow and trigger experiments, including the boundary between static,
 installed, loaded, executed, and target-observed evidence, read
@@ -47,6 +49,8 @@ clone，不直接用于安装。
 和 JSON 同名冲突；不要盲跑，不要使用 --all 或 remove --all。冲突默认按方案 A 处理：仅在旧
 来源和固定 revision 可精确恢复时定向替换；否则停止。安装后完成固定 SHA 记录、JSON diff、
 新会话代表性 smoke（正向/负向/碰撞）、报告和定向回滚记录。
+安装完成后，将固定 checkout 中的 `AGENTS-PERNAVO.md` 分发到用户全局 `$CODEX_HOME/AGENTS.md`；它只保存
+学习笔记提炼出的通用规范，不保存 Skills 清单或安装流程。
 若远程 --list 不是精确 8 项，停止并说明该版本尚未发布；未运行完整 24-case corpus 时，
 不得声称全部 8 项的 runtime activation 已验证。
 ```
@@ -160,7 +164,7 @@ resource signals, and proof boundary. A static smell or single average does not 
 - `performance-work` — review and measure application, database, runtime, browser, and benchmark performance
 - `change-review` — review Git diffs and MRs with separate correctness, performance, and environment evidence
 - `report-writer` — turn supplied facts and evidence into a formal report and select Markdown, spreadsheet, PDF, HTML, Word, or slides from its intended use
-- `repository-governance` — improve repository knowledge, memory, agent configuration, and skill-system hygiene from observed evidence
+- `repository-governance` — govern project/repository baselines, instructions, ownership, memory, agent configuration, and Skill-system hygiene from observed evidence
 - `test-engineering` — route unit, integration, API, functional, regression, acceptance, and release-smoke tests across white-box, gray-box, and black-box evidence
 
 The current source checkout contains 8 default Skills and the trigger corpus contains 24 positive,
