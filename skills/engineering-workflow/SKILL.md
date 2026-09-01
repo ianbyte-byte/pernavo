@@ -25,14 +25,26 @@ artifact owned by one role.
 Record path, authority boundary, reason, owner, and evidence layer (`static`, `author`,
 `independent`, `target-environment`). Ask only for a decision-changing permission or P0 choice.
 
+## Production surface
+
+Implement the authorized behavior with the least production code. Reuse existing types, functions,
+and modules before adding new ones. Do not invent files, helpers, abstractions, compatibility
+layers, or fallbacks that the authorized change does not require. When replacing a path, delete the
+old one in the same batch if evidence allows.
+
+Do not reduce volume by raising cyclomatic complexity: nested branches, flag-driven god functions,
+and compressed control flow are not smaller. Tests, explicit types, error handling, and rollback are
+not optional savings. Less production code is a slop control, not proof of fewer bugs.
+
 ## Lifecycle
 
 1. Discover active revision, configuration, dependencies, data/state ownership, unknowns, and
    rollback constraints. Mark unavailable context as unconfirmed.
 2. Write a reviewable plan with goal, do-not-do scope, affected seams, expected behavior, checks,
    rollback/recovery, and human gates.
-3. Implement the smallest authorized change. Keep one writer in a shared working tree. The writer
-   does not review their own diff. Invoke `change-review` only when a diff review was requested or a
+3. Implement the smallest authorized change with the least production code that does not raise
+   cyclomatic complexity. Keep one writer in a shared working tree. The writer does not review
+   their own diff. Invoke `change-review` only when a diff review was requested or a
    human/policy gate requires it, and only in a different agent, model, or session. Implement only
    findings selected by the default policy or by a human; do not self-select P2 or P3.
 4. Verify independently against the intended behavior, including success and failure/recovery
@@ -55,6 +67,7 @@ failure.
 ```text
 Selected path and rationale:
 Intent and authority boundary:
+Production-code delta and cyclomatic complexity:
 Owners and completed artifacts:
 Missing or blocked phase:
 Evidence by layer:

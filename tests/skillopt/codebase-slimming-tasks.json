@@ -6,6 +6,7 @@
   "tasks": [
     {"id":"cs1","project":".","intent":"Remove duplicate code only after a behavior baseline and bounded pilot.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"baseline"},{"op":"contains","arg":"pilot"},{"op":"contains","arg":"behavior"}]},"tags":["gate"],"split":"train","origin":"real"},
     {"id":"cs2","project":".","intent":"Stop expansion after a failed test or acceptance check.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"failed"},{"op":"contains","arg":"stop"},{"op":"contains","arg":"scope"}]},"tags":["stop"],"split":"val","origin":"real"},
-    {"id":"cs3","project":".","intent":"Require human approval before an architecture-level replacement.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"architecture"},{"op":"contains","arg":"human"},{"op":"contains","arg":"approval"}]},"tags":["authority"],"split":"test","origin":"real"}
+    {"id":"cs3","project":".","intent":"Require human approval before an architecture-level replacement.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"architecture"},{"op":"contains","arg":"human"},{"op":"contains","arg":"approval"}]},"tags":["authority"],"split":"test","origin":"real"},
+    {"id":"cs4","project":".","intent":"Treat volume and cyclomatic complexity as joint constraints, not a line-count win.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"圈复杂度与生产规模必须同时约束"},{"op":"contains","arg":"体积下降而复杂度上升"},{"op":"contains","arg":"不算瘦身成功"}]},"tags":["surface"],"split":"train","origin":"synth"}
   ]
 }

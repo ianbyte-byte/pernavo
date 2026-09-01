@@ -29,10 +29,18 @@ environment evidence. A green build is supporting evidence, not approval.
 - P2: real maintainability or test-gap cost that a human or explicit policy may still defer.
 - P3: style, nits, optional refactors. Never promote a nit to P1.
 
+Inspect net production-code delta and cyclomatic complexity together. Unrequested production
+surface (new files, unused helpers, speculative abstractions, or compatibility layers the change
+does not need) is a scope finding, not a style nit. Reducing line count by concentrating branches,
+nested ternaries, or flag-driven god functions is a failed reduction, not a win. Do not promote
+"could be a few lines shorter" to P1. Do not treat tests, explicit types, error handling, or
+valuable comments as deletable budget. A smaller diff does not prove fewer bugs.
+
 ```markdown
 ## Change Review
 - Scope / revision: ...
 - Evidence: diff | tests | static-only | target-observed
+- Production-code delta / cyclomatic complexity: ...
 ### Findings
 1. [P1/P2/P3] `path:line` - concise title
    - Trigger and impact: ...
