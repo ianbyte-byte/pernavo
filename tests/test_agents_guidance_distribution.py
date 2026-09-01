@@ -21,7 +21,7 @@ class AgentsGuidanceDistributionTests(unittest.TestCase):
         self.assertIn("blocked-symlink", install)
         self.assertIn("skipped-identical", install)
         self.assertIn("blocked-existing", install)
-        self.assertIn("不得 mkdir", install)
+        self.assertIn("不得 `mkdir`", install)
         self.assertIn('test ! -e "$PERNAVO_GLOBAL_AGENTS"', install)
         self.assertIn("Exact rollback for created AGENTS.md", install)
         self.assertIn("不得覆盖", readme)
