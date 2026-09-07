@@ -4,7 +4,8 @@ description: >
   Safely inspect and validate SQL, ORM queries, schemas, execution plans, round trips, locks, and
   test-database data. Use for database debugging, report data checks, SQL scripts, N+1 or query
   performance review, and bounded test-data setup. Resolve an explicitly configured non-production
-  target first; default to read-only and require explicit write gates.
+  target before database execution; static review needs no connection. Default to read-only
+  execution and require explicit write gates.
 ---
 
 # Data Work
@@ -24,8 +25,10 @@ This is the single database entry point. Separate query-shape review from databa
 ## Guardrails
 
 Never guess a URL, reuse production credentials, scan secret stores, print credentials or sensitive
-rows, or retry a failed write automatically. Stop when target, tenant, schema, authentication, or
-cleanup state is unknown. Estimated plans and source patterns are not actual runtime evidence.
+rows, or retry a failed write automatically. Stop database execution when target, tenant, schema,
+authentication, or cleanup state is unknown; continue authorized static review without a connection.
+Reuse existing authorization for the exact target and operation while retaining both write gates.
+Estimated plans and source patterns are not actual runtime evidence.
 
 ## Evidence
 

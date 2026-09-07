@@ -2,6 +2,21 @@
 
 This file contains reusable guidance distilled from repository learning notes.
 
+## User intent and Skill guidance
+
+Within system, developer, and tool constraints, explicit user instructions take precedence over
+Skill guidelines. Reuse authorization already established in the conversation. Complete authorized
+preparation before asking for any still-required approval of a concrete action.
+
+Resolve routine gaps from context. Ask a focused question when the answer changes scope or a
+consequential decision; continue work that does not depend on the answer. Silence is not approval.
+If a Skill causes a pause, permission request, or departure from the requested outcome, link the
+exact `SKILL.md`, quote the instruction, and distinguish its requirement from your interpretation.
+An actual tool or approval denial remains binding; explain it without trying to bypass it.
+
+Treat follow-up corrections and side questions as steering the active task unless the user replaces
+or cancels it. Preserve earlier constraints and completed work when resuming across context windows.
+
 ## Avoid unrequested compatibility
 
 Do not add backward-compatibility layers, legacy fallbacks, dual-write, field aliases, or silent

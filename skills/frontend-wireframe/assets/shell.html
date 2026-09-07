@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="core" data-mode="dark" data-view="wireframe">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product · UI wireframe</title>
+<style>
+  :root {
+    --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Helvetica Neue", sans-serif;
+    --font-mono: "SF Mono", Menlo, Monaco, Consolas, monospace;
+    --radius-sm: 6px; --radius-md: 10px; --radius-lg: 14px; --radius-full: 9999px;
+  }
+  [data-theme="core"][data-mode="dark"] {
+    --bg-canvas: #060709; --bg-window: #0D0E12;
+    --bg-card: rgba(255,255,255,.035); --bg-card-hover: rgba(255,255,255,.06);
+    --bg-inset: rgba(0,0,0,.35);
+    --ink-primary: #F4F4F6; --ink-secondary: #92939B; --ink-tertiary: #5A5B64;
+    --wire-line: rgba(255,255,255,.12); --wire-line-strong: rgba(255,255,255,.28);
+    --wire-annotation: #7E97B8; --wire-tag-bg: rgba(126,151,184,.15);
+    --accent: #FFFFFF; --accent-contrast: #08090C; --accent-soft: rgba(255,255,255,.08);
+    --badge-key: #181A20; --badge-key-border: rgba(255,255,255,.2);
+    --dock-bg: rgba(20,21,26,.90); --popover-bg: #111217;
+  }
+  [data-theme="core"][data-mode="light"] {
+    --bg-canvas: #F0F0F3; --bg-window: #FFFFFF;
+    --bg-card: rgba(0,0,0,.025); --bg-card-hover: rgba(0,0,0,.05);
+    --bg-inset: rgba(0,0,0,.03);
+    --ink-primary: #1C1D21; --ink-secondary: #6E7079; --ink-tertiary: #9B9DA7;
+    --wire-line: rgba(0,0,0,.10); --wire-line-strong: rgba(0,0,0,.25);
+    --wire-annotation: #356299; --wire-tag-bg: rgba(53,98,153,.10);
+    --accent: #2148B8; --accent-contrast: #FFFFFF; --accent-soft: rgba(33,72,184,.08);
+    --badge-key: #F3F4F6; --badge-key-border: rgba(0,0,0,.15);
+    --dock-bg: rgba(255,255,255,.92); --popover-bg: #FFFFFF;
+  }
+  [data-theme="alt"][data-mode="dark"] {
+    --accent: #C65F38; --accent-contrast: #140804; --accent-soft: rgba(198,95,56,.14);
+    --wire-annotation: #C65F38;
+  }
+  [data-theme="alt"][data-mode="light"] {
+    --accent: #C65F38; --accent-contrast: #FFFFFF; --accent-soft: rgba(198,95,56,.10);
+    --wire-annotation: #C65F38;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg-canvas); color: var(--ink-primary);
+    font-family: var(--font-sans); font-size: 13px; line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .control-dock {
+    position: sticky; top: 0; z-index: 1000;
+    background: var(--dock-bg);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--wire-line);
+    padding: 10px 24px;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .brand-chip { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+  .ver-badge {
+    font-family: var(--font-mono); font-size: 10px; padding: 2px 6px; border-radius: 4px;
+    background: var(--wire-tag-bg); color: var(--wire-annotation);
+  }
+  .btn-group {
+    display: inline-flex; background: var(--bg-card); border: 1px solid var(--wire-line);
+    border-radius: var(--radius-sm); padding: 2px; gap: 2px;
+  }
+  .btn-seg {
+    border: none; background: transparent; color: var(--ink-secondary);
+    padding: 4px 10px; font-size: 11.5px; font-weight: 500; border-radius: 4px; cursor: pointer;
+  }
+  .btn-seg.active { background: var(--accent); color: var(--accent-contrast); font-weight: 600; }
+  .nav-pills { display: flex; gap: 6px; overflow-x: auto; padding: 2px 0; }
+  .nav-pill {
+    text-decoration: none; color: var(--ink-secondary); font-size: 11px;
+    padding: 3px 8px; border-radius: var(--radius-sm); border: 1px solid transparent; white-space: nowrap;
+  }
+  .nav-pill:hover { color: var(--ink-primary); border-color: var(--wire-line); }
+  [data-view="wireframe"] .redline {
+    position: relative; outline: 1px dashed var(--wire-annotation) !important; outline-offset: -1px;
+  }
+  [data-view="wireframe"] .redline::after {
+    content: attr(data-dim); position: absolute; top: -8px; right: 4px;
+    font-family: var(--font-mono); font-size: 9px; padding: 1px 4px;
+    background: var(--wire-annotation); color: #fff; border-radius: 2px;
+    pointer-events: none; line-height: 1.1; z-index: 50;
+  }
+  [data-view="clean"] .redline { outline: none; }
+  [data-view="clean"] .redline::after,
+  [data-view="clean"] .annot-badge { display: none; }
+  .key-badge {
+    display: inline-block; font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+    padding: 1px 5px; border-radius: 4px; background: var(--badge-key);
+    color: var(--ink-primary); border: 1px solid var(--badge-key-border);
+  }
+  .annot-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-family: var(--font-mono); font-size: 10px; padding: 1px 6px; border-radius: 3px;
+    background: var(--wire-tag-bg); color: var(--wire-annotation); border: 1px solid var(--wire-annotation);
+  }
+  .canvas { max-width: 1440px; margin: 0 auto; padding: 36px 24px 100px; }
+  .module-section { margin-bottom: 56px; scroll-margin-top: 80px; }
+  .section-header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    border-bottom: 1px solid var(--wire-line-strong); padding-bottom: 10px; margin-bottom: 20px;
+  }
+  .section-title { font-size: 17px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+  .section-subtitle { font-size: 12px; color: var(--ink-secondary); }
+  .module-row { display: grid; grid-template-columns: minmax(440px, auto) 1fr; gap: 32px; align-items: start; }
+  @media (max-width: 980px) { .module-row { grid-template-columns: 1fr; } }
+  .refine-card { background: var(--bg-card); border: 1px solid var(--wire-line); border-radius: var(--radius-lg); padding: 20px; }
+  .refine-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 10px; color: var(--wire-annotation); }
+  .refine-card ul { list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 12px; }
+  .refine-card li { padding-left: 14px; position: relative; color: var(--ink-secondary); }
+  .refine-card li::before { content: "▫"; position: absolute; left: 0; color: var(--wire-annotation); }
+  .refine-card b { color: var(--ink-primary); }
+  .mac-window {
+    width: 440px; height: 560px; background: var(--bg-window);
+    border: 1px solid var(--wire-line-strong); border-radius: 16px;
+    box-shadow: 0 16px 40px rgba(0,0,0,.25);
+    display: flex; flex-direction: column; overflow: hidden; position: relative;
+  }
+  .window-titlebar {
+    height: 38px; padding: 0 14px; display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--wire-line); background: var(--bg-card);
+  }
+  .traffic-lights { display: flex; gap: 6px; }
+  .traffic-dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid var(--wire-line-strong); background: var(--bg-card); }
+  .window-title { font-size: 11.5px; font-weight: 600; color: var(--ink-secondary); }
+  .segmented-nav {
+    height: 36px; padding: 0 16px; display: flex; align-items: center; justify-content: center;
+    border-bottom: 1px solid var(--wire-line); background: var(--bg-card);
+  }
+  .segmented-control {
+    display: flex; background: var(--bg-inset); border: 1px solid var(--wire-line);
+    border-radius: 7px; padding: 2px; width: 100%; max-width: 380px;
+  }
+  .segmented-tab {
+    flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
+    height: 24px; font-size: 11.5px; color: var(--ink-secondary); border-radius: 5px; cursor: pointer;
+  }
+  .segmented-tab.active { background: var(--bg-window); color: var(--ink-primary); font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+  .window-body { flex: 1; overflow-y: auto; padding: 18px 20px; display: flex; flex-direction: column; gap: 16px; }
+  .wire-card { background: var(--bg-card); border: 1px solid var(--wire-line); border-radius: var(--radius-md); padding: 14px; }
+  .btn-primary {
+    height: 44px; border-radius: 22px; background: var(--accent); color: var(--accent-contrast);
+    border: none; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; width: 100%;
+  }
+  .muted { color: var(--ink-secondary); font-size: 12px; }
+</style>
+</head>
+<body>
+<nav class="control-dock">
+  <div class="brand-chip">
+    <span>Product · 线稿</span>
+    <span class="ver-badge">v1 Spec</span>
+  </div>
+  <div style="display:flex;gap:10px;align-items:center;">
+    <div class="btn-group">
+      <button class="btn-seg active" data-view-btn="wireframe">蓝图标注</button>
+      <button class="btn-seg" data-view-btn="clean">极简纯净</button>
+    </div>
+    <div class="btn-group">
+      <button class="btn-seg active" data-theme-btn="core">Core</button>
+      <button class="btn-seg" data-theme-btn="alt">Alt</button>
+    </div>
+    <div class="btn-group">
+      <button class="btn-seg active" data-mode-btn="dark">深色</button>
+      <button class="btn-seg" data-mode-btn="light">浅色</button>
+    </div>
+  </div>
+  <div class="nav-pills">
+    <a href="#m01" class="nav-pill">01 首页</a>
+    <a href="#m02" class="nav-pill">02 设置</a>
+  </div>
+</nav>
+<main class="canvas">
+  <section id="m01" class="module-section">
+    <div class="section-header">
+      <div class="section-title"><span class="annot-badge">MODULE 01</span><span>首页 · 单一焦点</span></div>
+      <div class="section-subtitle">每屏一件事 · 一个主按钮 · 统计归其他模块</div>
+    </div>
+    <div class="module-row">
+      <div class="mac-window redline" data-dim="440 × 560 pt">
+        <div class="window-titlebar">
+          <div class="traffic-lights"><div class="traffic-dot"></div><div class="traffic-dot"></div><div class="traffic-dot"></div></div>
+          <div class="window-title">Product</div>
+          <div style="width:40px;"></div>
+        </div>
+        <div class="segmented-nav">
+          <div class="segmented-control">
+            <div class="segmented-tab active">首页</div>
+            <div class="segmented-tab">设置</div>
+          </div>
+        </div>
+        <div class="window-body" style="justify-content:space-between;">
+          <div>
+            <div class="muted">现在</div>
+            <div style="font-size:28px;font-weight:700;letter-spacing:-.03em;margin:8px 0 12px;">一件正在发生的事</div>
+            <p class="muted">用产品自己的语言写这一行，不要放假数据看板。</p>
+          </div>
+          <button class="btn-primary">主行动</button>
+        </div>
+      </div>
+      <div class="refine-card">
+        <h4>为什么这样排</h4>
+        <ul>
+          <li><b>一屏一焦点</b>：首页只服务最高频行动，次要入口走分段导航。</li>
+          <li><b>删掉的</b>：底部统计条、状态胶囊、第二颗主按钮。</li>
+          <li><b>待定</b>：主行动文案是否带快捷键 <span class="key-badge">⌘↩</span>。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section id="m02" class="module-section">
+    <div class="section-header">
+      <div class="section-title"><span class="annot-badge">MODULE 02</span><span>设置 · 分组列表</span></div>
+      <div class="section-subtitle">偏好不进首页 · 每组一个职责</div>
+    </div>
+    <div class="module-row">
+      <div class="mac-window redline" data-dim="440 × 560 pt">
+        <div class="window-titlebar">
+          <div class="traffic-lights"><div class="traffic-dot"></div><div class="traffic-dot"></div><div class="traffic-dot"></div></div>
+          <div class="window-title">Product</div>
+          <div style="width:40px;"></div>
+        </div>
+        <div class="segmented-nav">
+          <div class="segmented-control">
+            <div class="segmented-tab">首页</div>
+            <div class="segmented-tab active">设置</div>
+          </div>
+        </div>
+        <div class="window-body">
+          <div class="wire-card redline" data-dim="Preference group">
+            <div style="font-weight:600;margin-bottom:6px;">提醒</div>
+            <div class="muted">把开关、间隔、渠道放在同一组，不要散落在首页。</div>
+          </div>
+          <div class="wire-card">
+            <div style="font-weight:600;margin-bottom:6px;">外观</div>
+            <div class="muted">深色 / 浅色跟随系统或手动。主题色只在这里改。</div>
+          </div>
+        </div>
+      </div>
+      <div class="refine-card">
+        <h4>设置页边界</h4>
+        <ul>
+          <li><b>不实现</b>：真实偏好读写、账号、付款。</li>
+          <li><b>要呈现</b>：分组、默认值、不可逆操作的位置。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+  function bind(attr, key) {
+    document.querySelectorAll("[" + attr + "]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        document.querySelectorAll("[" + attr + "]").forEach(function (b) { b.classList.remove("active"); });
+        btn.classList.add("active");
+        document.documentElement.setAttribute(key, btn.getAttribute(attr));
+      });
+    });
+  }
+  bind("data-view-btn", "data-view");
+  bind("data-theme-btn", "data-theme");
+  bind("data-mode-btn", "data-mode");
+</script>
+</body>
+</html>

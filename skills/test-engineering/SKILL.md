@@ -46,15 +46,18 @@ Choose the observation method explicitly:
 
 1. Record the revision, target environment, changed seam, risk, authority, and available test runner.
    Inspect repository scripts and fixtures before choosing a framework or inventing a command.
-2. Build a case matrix covering applicable success, validation, boundary, authentication,
+2. Select cases covering applicable success, validation, boundary, authentication,
    authorization, not-found/conflict, state transition, idempotency, dependency failure, limits,
    side effects, cleanup, and recovery cases. Mark every non-executed case `blocked`, `skipped`, or
-   `not-applicable` with a reason.
+   `not-applicable` with a reason. A small non-API change needs only a focused case list; retain the
+   required API matrix and grader for HTTP or business-flow tests.
 3. Pick the smallest public seam and independent oracle. For white-box tests, cover meaningful
    branches and failure paths; for gray-box tests, verify the selected internal evidence plus the
    public result; for black-box tests, derive assertions from requirements or a trusted contract.
-4. Run in an evidence ladder: unit, integration/API, functional/system, regression, then authorized
-   acceptance or release smoke. Stop expansion after a failed gate until the failure is understood.
+4. Run the selected levels, not an automatic ladder through every level. Reuse existing tests and
+   their files. Do not add tests that only mirror a reversible copy or formatting edit. After the
+   required checks pass, stop; widen or repeat only for a new change, failure, unresolved risk, or
+   explicit required gate. A failed gate stops expansion until the failure is understood.
 5. Preserve command, exit status, revision, environment class, fixture identity, timing, result per
    case, artifact paths, cleanup state, and evidence limits. Keep credentials and regulated data out
    of logs.
@@ -65,8 +68,10 @@ Choose the observation method explicitly:
 
 ## Boundaries
 
-- Use non-production or disposable targets by default. Require explicit authorization and a cleanup
-  plan for writes, destructive cases, fault injection, concurrency, or rate-limit tests.
+- Use non-production or disposable targets by default. Ordinary fixture writes within the requested
+  local test scope use existing authorization. Require explicit authorization and a cleanup plan
+  for external writes, destructive cases, fault injection, concurrency, or rate-limit tests; do not
+  ask again when that exact operation and target are already authorized.
 - A passing local test does not prove deployment or production behavior. A coverage number, snapshot,
   mock expectation, or single benchmark does not by itself prove quality or a regression decision.
 - Keep test execution separate from implementation and diff review. Route code changes to
@@ -82,15 +87,11 @@ host Stop hook that runs `scripts/api_test_stop_hook.py`; see
 
 ## Output
 
-```text
-Testing scope and authority:
-Test levels and observation methods:
-Case matrix and expected behavior:
-Commands, revision, target class, and results:
-Evidence artifacts and cleanup:
-Blocked, skipped, and unverified surfaces:
-Next gate or handoff:
-```
+Report selected scope, command and result, target/revision, evidence paths, and any unverified
+surface or cleanup issue. Keep a small check concise; use a matrix when the case count or risk
+requires it. For UI workflows, inspect the rendered result and exercise the affected controls using
+available browser/computer tools. A screenshot establishes appearance, not interaction success;
+record the resulting state. If tools are unavailable, label visual/interaction QA unverified.
 
 For detailed case categories and stack adapter selection, read
 [the test matrix](references/test-matrix.md). For HTTP request/response evidence, read

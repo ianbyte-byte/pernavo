@@ -10,11 +10,9 @@ description: >
 
 # Project and Repository Governance
 
-Governance is a small control loop, not a large policy document: establish the source of truth,
-make one bounded change, observe a meaningful signal, and preserve a restore path. The pasted
-Tencent article is useful design input (long, duplicated instructions can dilute attention), but
-its percentages and causal claims are hypotheses unless independently measured. Prefer local
-evidence and the authoritative references linked below.
+Establish the source of truth, make one bounded change, observe a meaningful signal, and preserve
+a restore path. Use local evidence and authoritative sources; published model capabilities are
+design inputs, not proof that this repository's Skills perform better.
 
 ## Choose the governance mode
 
@@ -45,8 +43,10 @@ Inventory, in this order:
    including `~/.pernavo/logs/runtime.jsonl` when that hook is installed.
 6. Credentials, production endpoints, destructive commands, and unavailable target environments.
 
-Do not edit until the target, owner, authorization, and rollback/recovery path are explicit. If an
-assertion cannot be checked, label it `unknown` rather than filling the gap with a plausible claim.
+Before editing, identify the target, owner, existing authorization, and restore path at the level
+the change needs. A request for a scoped local correction supplies its authority; do not require a
+separate approval ceremony. If an assertion cannot be checked, label it `unknown` and continue work
+that does not depend on it.
 
 ## Documentation governance
 
@@ -87,6 +87,10 @@ Treat an instruction set as an executable interface with a limited context budge
 - Give each rule one canonical home. Replace or merge a matching rule; do not append another
   warning merely because a bad case occurred.
 - Resolve tension with explicit scope (`always`, `when`, `only`, `except`) and a precedence order.
+- Audit rules that demand confirmation, impose a fixed sequence, or force output templates. Within
+  host constraints, explicit user instructions take precedence over Skill guidelines. If a rule
+  causes a pause or departure from the user's intent, link its exact file, quote it, and explain
+  whether it is a requirement or an interpretation; do not silently invent another approval gate.
 - Use tables, numbered steps, and checklists for routing decisions; keep examples compliant with
   the rules they illustrate.
 - Keep reference knowledge, schemas, and long examples in linked `references/` files. Load only
@@ -142,8 +146,9 @@ evidence, not proof of deployment or production behavior.
 - Formal report formatting -> `report-writer`.
 - Security, data, performance, or browser-specific evidence -> the relevant specialist Skill.
 
-Stop and report when the source/revision is ambiguous, authorization is missing, the rollback path
-is unknown for a risky change, or the requested result would require deployment/production writes.
+Stop only the dependent action when its source/revision or authority is unresolved, recovery is
+unknown for a risky change, or deployment/production access has not been authorized. Complete
+independent local preparation and identify the concrete missing decision or evidence.
 Do not implement from a `change-review` finding list, and do not turn one reversible increment into
 a review-fix loop.
 

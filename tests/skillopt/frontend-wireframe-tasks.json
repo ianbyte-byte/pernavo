@@ -1,0 +1,11 @@
+{
+  "format": "skillopt_sleep.tasks.v1",
+  "project": ".",
+  "target_skill_path": "skills/frontend-wireframe/SKILL.md",
+  "reviewed": true,
+  "tasks": [
+    {"id":"fw1","project":".","intent":"Produce a self-contained HTML wireframe deck for stakeholder review before implementation.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"HTML"},{"op":"contains","arg":"wireframe"},{"op":"contains","arg":"file://"}]},"tags":["artifact"],"split":"train","origin":"real"},
+    {"id":"fw2","project":".","intent":"Keep production implementation out of a wireframe request.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"Do not implement"},{"op":"contains","arg":"engineering-workflow"},{"op":"contains","arg":"production"}]},"tags":["boundary"],"split":"val","origin":"real"},
+    {"id":"fw3","project":".","intent":"Copy the shell and keep view, theme, and mode toggles.","reference_kind":"rule","judge":{"kind":"rule","checks":[{"op":"contains","arg":"shell.html"},{"op":"contains","arg":"data-view"},{"op":"contains","arg":"no CDN"}]},"tags":["chrome"],"split":"test","origin":"real"}
+  ]
+}

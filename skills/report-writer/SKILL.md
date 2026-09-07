@@ -25,6 +25,9 @@ approval. A report may present another Skill's work without absorbing that Skill
 - Keep findings, interpretation, recommendations, and decisions separate. The report writer owns
   structure and format only; domain skills retain finding ownership and specialized artifact skills
   retain container authority.
+- Use a supplied template, example, language, and writing style before the defaults below. Fit the
+  evidence into that structure, keep only context relevant to the reader's decision, and mark
+  unavailable facts without blocking a draft. Ask only when a missing input materially changes it.
 
 ## Select the report module
 
@@ -90,7 +93,7 @@ handoff. Do not choose a format merely for decoration.
 
 ## General Markdown contract
 
-Use this baseline and adapt section names to the report domain:
+When no user template is supplied, use this baseline and adapt it to the report domain and size:
 
 ```markdown
 # <Report title>
@@ -134,8 +137,11 @@ Use this baseline and adapt section names to the report domain:
 |---|---|---|---|---|
 ```
 
-Omit a section only when it is genuinely not applicable. Use `None observed`, `Not supplied`, or
-`Not applicable` rather than ambiguous empty cells. Keep long logs in linked artifacts.
+Include only applicable sections; a short report can use concise paragraphs in place of tables.
+Use `None observed`, `Not supplied`, or `Not applicable` rather than ambiguous empty cells. Keep
+long logs in linked artifacts. For rendered documents, slides, or HTML, use an available rendering
+tool to inspect layout, overflow, and legibility; report visual verification as unavailable if the
+container cannot be rendered. File creation alone is not visual QA.
 
 ## Self-contained HTML contract
 

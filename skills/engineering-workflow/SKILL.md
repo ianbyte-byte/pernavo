@@ -23,7 +23,12 @@ artifact owned by one role.
 - `analysis-only`: inspect and report. Do not edit, retry writes, deploy, or alter historical data.
 
 Record path, authority boundary, reason, owner, and evidence layer (`static`, `author`,
-`independent`, `target-environment`). Ask only for a decision-changing permission or P0 choice.
+`independent`, `target-environment`). A request to implement or fix authorizes that scoped local
+work. Reuse prior authorization; prepare the concrete result before any still-required release
+approval. Resolve routine choices from context and ask only when an answer materially changes the
+outcome. Ask asynchronously when supported and continue independent work; silence does not approve
+a consequential decision. If a Skill guideline blocks requested work, cite its exact file and rule,
+explain the conflict, and apply explicit user instructions within host and tool constraints.
 
 ## Production surface
 
@@ -40,8 +45,9 @@ not optional savings. Less production code is a slop control, not proof of fewer
 
 1. Discover active revision, configuration, dependencies, data/state ownership, unknowns, and
    rollback constraints. Mark unavailable context as unconfirmed.
-2. Write a reviewable plan with goal, do-not-do scope, affected seams, expected behavior, checks,
-   rollback/recovery, and human gates.
+2. For `default` or `deep`, record the goal, affected behavior, checks, recovery, and any unresolved
+   decision. A short in-session plan is enough unless risk or repository policy needs an artifact;
+   `fast` needs only the intended edit and focused check.
 3. Implement the smallest authorized change with the least production code that does not raise
    cyclomatic complexity. Keep one writer in a shared working tree. The writer does not review
    their own diff. Invoke `change-review` only when a diff review was requested or a
@@ -58,18 +64,26 @@ After a requested `change-review` pass, follow the default policy when no human 
 remaining P1 only; do not self-select P2 or P3. Do not re-review in the writer session. Re-review
 after fixes needs a fresh context.
 
-Use a bounded independent subagent for discovery or verification only when the selected path needs
-it; do not delegate trivial work or create a second writer. Preserve evidence and stop expansion on
-failure.
+For `default` and `deep`, delegate independent verification when the host supports it. Parallelize
+bounded read-only discovery with writer work when they are independent and it saves time or improves
+coverage. Give each agent its scope, inputs, expected artifact, and stopping condition. Keep one
+writer; do not delegate trivial work. If an independent role is unavailable, finish authorized
+preparation and report the verification gap without claiming independence.
+
+## Continue long tasks
+
+Treat corrections, added constraints, and status questions as steering; keep the original objective
+unless the user replaces or cancels it. After answering a side question, resume remaining work.
+At a context transition, retain the active goal, accepted constraints, completed checks, failed
+approaches and their causes, open decisions, and artifact references in supported session notes.
+Retrieve earlier messages or tool results when a missing detail matters, then confirm the current
+revision before reusing old test results. Do not repeat completed work merely because context was
+compacted. Native notes and history search require actual host support; do not invent tools or
+enable experimental configuration as part of an ordinary coding task.
 
 ## Output
 
-```text
-Selected path and rationale:
-Intent and authority boundary:
-Production-code delta and cyclomatic complexity:
-Owners and completed artifacts:
-Missing or blocked phase:
-Evidence by layer:
-Unverified surfaces and required human/release gate:
-```
+Lead with the delivered behavior, relevant check results, and any remaining blocker. Use concise
+paragraphs for a small change. For substantial work, include path, owners, production-code delta and
+cyclomatic complexity, evidence layer, and remaining release gates. Keep detailed evidence in linked
+artifacts; do not turn this checklist into mandatory headings for every reply.

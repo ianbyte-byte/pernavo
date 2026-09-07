@@ -36,6 +36,10 @@ payloads, or credentials.
 For a source-backed, vendor-neutral policy for bounded cost-aware multi-agent routing, read
 [Cost-Aware Multi-Agent Orchestration](docs/reference/cost-aware-multi-agent-orchestration.md).
 
+For the source-backed GPT-6 Astra adjustments to clarification, instruction precedence, task
+continuity, delegation, testing scope, and report templates, read
+[GPT-6 Astra Skill Adaptation](docs/reference/gpt-6-astra-skill-adaptation.md).
+
 For the public-source methodology behind hidden performance-risk review, read
 [Hidden Performance Public Research](docs/reference/hidden-performance-public-research.md).
 
@@ -47,7 +51,7 @@ Paste this prompt into Codex, Claude Code, Cursor, or another coding agent:
 请为我安装 Pernavo 的完整 Skills 系统。完整执行手册：
 https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/main/AI_INSTALL.md
 
-默认参数：官方 GitHub 来源、当前用户、本机所有支持 global 安装的 agent harness、全部 8 个
+默认参数：官方 GitHub 来源、当前用户、本机所有支持 global 安装的 agent harness、全部 9 个
 Skills、从固定 SHA checkout 执行 copy；使用 `--agent '*'`，不要只安装 Codex 或当前会话宿主。
 远程 URL 只用于发现和 clone，不直接用于安装。
 开始前必须读取全文、重新检查 skills CLI 的 version/help、确认授权、精确核对远程 --list
@@ -55,7 +59,7 @@ Skills、从固定 SHA checkout 执行 copy；使用 `--agent '*'`，不要只�
 来源和固定 revision 可精确恢复时定向替换；内容 SHA 与本次 checkout 一致且来源字段为空时按
 同源处理。安装后完成固定 SHA 记录、JSON diff、checkout 内只读 agentctl、新会话代表性
 smoke（正向/负向/碰撞）、报告和定向回滚记录。
-默认安装集合是 8 个 Skills（写入本机全部支持 global 的 agent harness）、跨项目 AGENTS.md
+默认安装集合是 9 个 Skills（写入本机全部支持 global 的 agent harness）、跨项目 AGENTS.md
 规则、API 测试 Stop 门禁、以及 ~/.pernavo 运行日志；由安装代理阅读现有文件后再写入，不要
 用脚本整文件覆盖宿主配置。
 安装完成后，将固定 checkout 中的 `AGENTS-PERNAVO.md` 写入 Codex `AGENTS.md`、Claude
@@ -67,11 +71,11 @@ smoke（正向/负向/碰撞）、报告和定向回滚记录。
 `~/.grok/hooks/pernavo.json`，按现有形状合并 API 测试 Stop 门禁和 ~/.pernavo 运行日志 Hook；
 保持已有 Hook 不变，不得整文件替换；Stop 门禁合并后只读 `--check`，禁止对默认宿主路径
 `--apply`。运行日志不得记录原文 prompt、命令或凭据。
-若远程 --list 不是精确 8 项，停止并说明该版本尚未发布；未运行完整 24-case corpus 时，
-不得声称全部 8 项的 runtime activation 已验证。
+若远程 --list 不是精确 9 项，停止并说明该版本尚未发布；未运行完整 27-case corpus 时，
+不得声称全部 9 项的 runtime activation 已验证。
 ```
 
-The installation prompt's 8 Skills and 24 cases refer to the consolidated documented installation
+The installation prompt's 9 Skills and 27 cases refer to the consolidated documented installation
 set. Retired fine-grained Skills remain recoverable under `skills-archive/` but are outside the
 default discovery root. The remote `--list`, fixed revision, and trigger corpus must remain
 synchronized before installation is treated as complete.
@@ -83,7 +87,7 @@ curl -fsSL https://raw.githubusercontent.com/ianbyte-byte/pernavo/refs/heads/mai
 ```
 
 This only prints Markdown; never pipe it into a shell. The remote URL is for discovery and cloning,
-not direct installation or installed-revision proof. If its `--list` output is not the exact 8-name
+not direct installation or installed-revision proof. If its `--list` output is not the exact 9-name
 set in the guide, stop and report that the documented version is not published. Do not claim that
 local uncommitted work is available remotely.
 
@@ -105,7 +109,7 @@ Do not copy a bare install command from this README. The guide requires authoriz
 help, an exact remote list, a fixed-SHA checkout, before/after JSON snapshots, conflict
 classification, and a new-session runtime check. Default install also has the installing agent merge
 the API-test Stop gate and the `~/.pernavo` runtime log into existing host hook files without
-replacing them. Default install writes the 8 Skills to every locally present agent harness the
+replacing them. Default install writes the 9 Skills to every locally present agent harness the
 CLI can target with `--agent '*'`, and runs the read-only `agentctl` check from the checkout.
 The guide still separates that coverage from proving host subagents, model routing, MCP, or
 permissions.
@@ -186,8 +190,9 @@ resource signals, and proof boundary. A static smell or single average does not 
 - `report-writer` — turn supplied facts and evidence into a formal report and select Markdown, spreadsheet, PDF, HTML, Word, or slides from its intended use
 - `repository-governance` — govern project/repository baselines, instructions, ownership, memory, agent configuration, and Skill-system hygiene from observed evidence
 - `test-engineering` — route unit, integration, API, functional, regression, acceptance, and release-smoke tests across white-box, gray-box, and black-box evidence
+- `frontend-wireframe` — produce a self-contained HTML wireframe deck for early product thinking, demos, and stakeholder review before implementation
 
-The current source checkout contains 8 default Skills and the trigger corpus contains 24 positive,
+The current source checkout contains 9 default Skills and the trigger corpus contains 27 positive,
 negative, and collision cases. Retired source is preserved in
 `skills-archive/20260826-pre-consolidation/`. Run `python3 scripts/skill-usage-report.py --db
 <codex-history.sqlite> --output <report.json>` to refresh aggregate usage evidence, then run
