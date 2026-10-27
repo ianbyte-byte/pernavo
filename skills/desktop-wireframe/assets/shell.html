@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>桌面端线框原型图</title>
+<style>
+  :root {
+    --ink: #1f2329;
+    --muted: #8f959e;
+    --line: #1f2329;
+    --hair: #dee0e3;
+    --paper: #fff;
+    --canvas: #f5f6f7;
+    --pick: #e8f3ff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--canvas);
+    color: var(--ink);
+    font: 12px/1.45 "PingFang SC", "Hiragino Sans GB", "Source Han Sans SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  }
+  .page {
+    width: min(1120px, calc(100% - 48px));
+    margin: 40px auto 72px;
+  }
+  h1 {
+    margin: 0 0 22px;
+    font-size: 28px;
+    font-weight: 640;
+    letter-spacing: 0;
+  }
+  .board {
+    display: grid;
+    grid-template-columns: 1.2fr 0.78fr 1.42fr;
+    background: var(--paper);
+    border: 1px solid var(--hair);
+    border-radius: 16px;
+  }
+  .col { padding: 18px 16px 22px; min-width: 0; }
+  .col + .col { border-left: 1px solid var(--hair); }
+  .col h2 { margin: 0 0 14px; font-size: 14px; font-weight: 600; }
+  .window, .pane, .menu, .card, .field, .btn, .tag, .media, .search {
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .titlebar, .pane-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 32px;
+    padding: 0 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .lights, .win-actions, .choices, .pair, .toggles, .icons, .transport, .tabs, .toolbar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .lights i, .win-actions i, .transport i, .icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 10px;
+    height: 10px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+  }
+  .win-actions i { border-radius: 1px; width: 11px; height: 9px; }
+  .title { flex: 1; text-align: center; }
+  .split { display: grid; grid-template-columns: 92px 1fr; min-height: 132px; }
+  .side { border-right: 1px solid var(--line); }
+  .pane { margin-top: 14px; }
+  .pane-bar .track { flex: 1; height: 1px; background: var(--line); }
+  .pane-bar b { font-weight: 400; }
+  .pane-body { height: 96px; }
+  .stack { display: flex; flex-direction: column; gap: 8px; }
+  .pair { justify-content: space-between; }
+  .btn, .tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 64px;
+    height: 26px;
+    padding: 0 8px;
+    font: inherit;
+  }
+  .btn.primary, .tag.fill { background: var(--ink); color: var(--paper); }
+  .choices { justify-content: space-between; margin: 4px 0; }
+  .choice { display: inline-flex; align-items: center; gap: 6px; }
+  .box, .radio {
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--line);
+    display: inline-block;
+  }
+  .radio { border-radius: 50%; }
+  .field {
+    height: 28px;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    color: var(--muted);
+  }
+  .field.on { color: var(--ink); }
+  .toggles { gap: 10px; }
+  .toggle {
+    width: 34px;
+    height: 18px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    position: relative;
+    display: inline-block;
+  }
+  .toggle i {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--ink);
+  }
+  .toggle.on { background: var(--ink); }
+  .toggle.on i { left: 17px; background: var(--paper); }
+  .icon-btn { width: 26px; height: 26px; font-size: 14px; }
+  .pills { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+  .pills .btn { min-width: 96px; }
+  .menus { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .menu { padding: 4px 0; }
+  .opt { padding: 4px 8px; }
+  .opt.picked, .nav-item.picked, .tree .picked { background: var(--pick); }
+  .card { margin-top: 10px; padding: 8px; }
+  .card-top { display: flex; gap: 8px; }
+  .avatar {
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    flex: none;
+  }
+  .card p { margin: 2px 0 0; color: var(--muted); }
+  .card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+  }
+  .link { color: var(--ink); text-decoration: underline; }
+  .search { display: flex; gap: 8px; align-items: center; margin-top: 10px; padding: 6px; }
+  .search .field { flex: 1; }
+  .media {
+    margin-top: 10px;
+    height: 92px;
+    background: #111;
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .transport { justify-content: center; gap: 14px; margin-top: 8px; }
+  .transport i { width: 22px; height: 22px; }
+  .transport .play { width: 26px; height: 26px; background: var(--ink); color: var(--paper); }
+  .progress { height: 1px; margin: 8px 12px 0; background: var(--line); }
+  .tabs { gap: 12px; margin-top: 10px; padding: 0 4px; }
+  .tabs span { padding-bottom: 3px; color: var(--muted); }
+  .tabs .on { color: var(--ink); border-bottom: 2px solid var(--line); }
+  .tree { list-style: none; margin: 8px 0 0; padding: 0; }
+  .tree li { padding: 3px 8px; }
+  .tree .sub { padding-left: 20px; }
+  .toolbar { gap: 8px; margin-top: 12px; padding-top: 8px; border-top: 1px solid var(--hair); }
+  .toolbar svg { width: 14px; height: 14px; stroke: var(--ink); fill: none; stroke-width: 1.4; }
+  .screens { margin-top: 36px; }
+  .screens > h2 { margin: 0 0 14px; font-size: 16px; font-weight: 600; }
+  .screen .split { grid-template-columns: 168px 1fr; min-height: 220px; }
+  .nav-item { padding: 9px 12px; border-bottom: 1px solid var(--hair); }
+  .screen-main { padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+  .screen-main .search { margin-top: 0; }
+  .screen .opt { display: flex; justify-content: space-between; border-bottom: 1px solid var(--hair); }
+</style>
+</head>
+<body>
+  <main class="page">
+    <h1>桌面端线框原型图</h1>
+    <section class="board" data-board="kit">
+      <div class="col" data-column="layout">
+        <h2>窗口布局</h2>
+        <div class="window" data-part="window">
+          <div class="titlebar">
+            <span class="lights"><i></i><i></i><i></i></span>
+            <span class="title">页面标题</span>
+            <span class="win-actions"><i></i><i></i></span>
+          </div>
+          <div class="split">
+            <div class="side"></div>
+            <div class="main"></div>
+          </div>
+        </div>
+        <div class="pane" data-part="status-bar">
+          <div class="pane-bar">
+            <span class="lights"><i></i><i></i><i></i></span>
+            <span class="track"></span>
+            <b>✕</b>
+          </div>
+          <div class="pane-body"></div>
+        </div>
+      </div>
+      <div class="col" data-column="buttons">
+        <h2>按钮</h2>
+        <div class="stack">
+          <div class="pair">
+            <span class="btn" data-part="button-secondary">按钮</span>
+            <span class="btn primary" data-part="button-primary">主要按钮</span>
+          </div>
+          <div class="pair">
+            <span class="btn">按钮</span>
+            <span class="btn primary">主要按钮</span>
+          </div>
+          <div class="choices">
+            <span class="choice" data-part="checkbox"><i class="box"></i>选项</span>
+            <span class="choice" data-part="radio"><i class="radio"></i>选项</span>
+          </div>
+          <div class="pair">
+            <span class="tag fill" data-part="tag">标签</span>
+            <span class="tag">标签</span>
+          </div>
+          <div class="field" data-part="field">请输入</div>
+          <div class="field on">输入文字</div>
+          <div class="toggles">
+            <span class="toggle on" data-part="toggle"><i></i></span>
+            <span class="toggle"><i></i></span>
+          </div>
+          <div class="icons">
+            <span class="icon-btn" data-part="icon-button">−</span>
+            <span class="icon-btn">+</span>
+          </div>
+          <div class="pills">
+            <span class="btn primary">按钮文字</span>
+            <span class="btn primary">按钮文字</span>
+            <span class="btn primary">按钮文字</span>
+          </div>
+        </div>
+      </div>
+      <div class="col" data-column="components">
+        <h2>常用组件</h2>
+        <div class="menus">
+          <div class="menu" data-part="menu">
+            <div class="opt">选项</div>
+            <div class="opt picked">选项</div>
+            <div class="opt">选项</div>
+            <div class="opt">选项</div>
+          </div>
+          <div class="menu">
+            <div class="opt">选项</div>
+            <div class="opt">选项</div>
+            <div class="opt picked">选项</div>
+            <div class="opt">选项</div>
+          </div>
+        </div>
+        <div class="card" data-part="card">
+          <div class="card-top">
+            <i class="avatar"></i>
+            <div>
+              <div>标题</div>
+              <p>说明文字。说明文字。说明文字。</p>
+            </div>
+          </div>
+          <div class="card-actions">
+            <span class="link">查看详情</span>
+            <span class="btn primary">主要操作</span>
+          </div>
+        </div>
+        <div class="search" data-part="search">
+          <span class="field">搜索</span>
+          <span class="btn primary">搜索</span>
+        </div>
+        <div class="media" data-part="media">▶</div>
+        <div class="transport" data-part="transport">
+          <i>⏮</i>
+          <i class="play">▶</i>
+          <i>■</i>
+        </div>
+        <div class="progress"></div>
+        <div class="tabs" data-part="tabs">
+          <span class="on">推荐</span>
+          <span>热门</span>
+          <span>最新</span>
+          <span>关注</span>
+        </div>
+        <ul class="tree" data-part="tree">
+          <li>一级标题</li>
+          <li class="sub picked">选项</li>
+          <li>一级标题</li>
+          <li class="sub">选项</li>
+          <li>一级标题</li>
+          <li class="sub">选项</li>
+        </ul>
+        <div class="toolbar" data-part="toolbar">
+          <svg viewBox="0 0 16 16"><path d="M3 13 8 3l5 10M5 10h6"/></svg>
+          <svg viewBox="0 0 16 16"><rect x="3" y="3" width="10" height="10"/></svg>
+          <svg viewBox="0 0 16 16"><path d="M5 13h6M8 3v10"/></svg>
+          <svg viewBox="0 0 16 16"><path d="M8 3v10M3 8h10"/></svg>
+          <svg viewBox="0 0 16 16"><rect x="3" y="4" width="10" height="8"/><path d="M3 11l3-3 2 2 2-3 3 4"/></svg>
+          <svg viewBox="0 0 16 16"><path d="M6 8a3 3 0 0 1 3-3h1M10 8a3 3 0 0 1-3 3H6"/></svg>
+        </div>
+      </div>
+    </section>
+    <section class="screens" data-board="screens">
+      <h2>页面</h2>
+      <article class="screen" data-screen="orders">
+        <div class="window" data-part="window">
+          <div class="titlebar">
+            <span class="lights"><i></i><i></i><i></i></span>
+            <span class="title">订单</span>
+            <span class="win-actions"><i></i><i></i></span>
+          </div>
+          <div class="split">
+            <div class="side">
+              <div class="nav-item picked">订单</div>
+              <div class="nav-item">客户</div>
+              <div class="nav-item">库存</div>
+            </div>
+            <div class="screen-main">
+              <div class="search" data-part="search">
+                <span class="field">搜索订单</span>
+                <span class="btn primary" data-part="button-primary">新建订单</span>
+              </div>
+              <div class="menu" data-part="menu">
+                <div class="opt"><span>SO-1042 华北仓</span><span>待发货</span></div>
+                <div class="opt picked"><span>SO-1043 华东仓</span><span>拣货中</span></div>
+                <div class="opt"><span>SO-1044 华南仓</span><span>已完成</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
