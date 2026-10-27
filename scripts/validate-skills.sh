@@ -59,13 +59,16 @@ require "csv"
 require "pathname"
 require "yaml"
 
+Encoding.default_external = Encoding::UTF_8
+Encoding.default_internal = Encoding::UTF_8
+
 repo_root = Pathname(ARGV.fetch(0))
 corpus_path = Pathname(ARGV.fetch(1))
 skill_files = Dir[repo_root.join("skills/*/SKILL.md").to_s].sort
 skill_names = skill_files.map { |file| File.basename(File.dirname(file)) }
 
 skill_files.each do |file|
-  text = File.read(file)
+  text = File.read(file, encoding: "UTF-8")
   match = text.match(/\A---\s*\n(.*?)\n---\s*\n/m)
   abort("missing frontmatter: #{file}") unless match
   metadata = YAML.safe_load(match[1], permitted_classes: [], aliases: false)
@@ -76,7 +79,7 @@ skill_files.each do |file|
 end
 
 Dir[repo_root.join("skills/**/*.md").to_s].sort.each do |file|
-  text = File.read(file)
+  text = File.read(file, encoding: "UTF-8")
   text.scan(/\[[^\]]*\]\(([^)]+)\)/).flatten.each do |raw_target|
     target = raw_target.strip.sub(/\A</, "").sub(/>\z/, "").split("#", 2).first
     next if target.nil? || target.empty? || target.match?(/\A[a-z][a-z0-9+.-]*:/i)
@@ -85,7 +88,7 @@ Dir[repo_root.join("skills/**/*.md").to_s].sort.each do |file|
   end
 end
 
-readme = File.read(repo_root.join("README.md"))
+readme = File.read(repo_root.join("README.md"), encoding: "UTF-8")
 skill_names.each do |name|
   abort("README missing skill: #{name}") unless readme.include?("`#{name}`")
   installed_copy = repo_root.join(".agents/skills", name, "SKILL.md")
@@ -94,7 +97,7 @@ end
 
 lock_path = repo_root.join("skills-lock.json")
 if lock_path.exist?
-  lock_text = File.read(lock_path)
+  lock_text = File.read(lock_path, encoding: "UTF-8")
   legacy_lock_sources = ["tuloong/pernavo", "tuloong/loongclaude"]
   self_reference_sources = ["ianbyte-byte/pernavo"] + legacy_lock_sources
   lock_source = self_reference_sources.find do |source|
@@ -103,7 +106,7 @@ if lock_path.exist?
   abort("skills-lock.json self-references #{lock_source}") if lock_source
 end
 
-rows = CSV.read(corpus_path, headers: true, col_sep: "\t")
+rows = CSV.read(corpus_path, headers: true, col_sep: "\t", encoding: "UTF-8")
 required_headers = %w[id subject expected forbidden prompt]
 abort("unexpected corpus headers") unless rows.headers == required_headers
 abort("expected three cases per skill") unless rows.length == skill_names.length * 3
