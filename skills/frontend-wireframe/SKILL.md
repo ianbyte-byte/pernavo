@@ -5,7 +5,8 @@ description: >
   stakeholder review. Use when the user asks for 线稿, wireframe, UI blueprint, clickable
   mock, product demo pages, 设计稿, 全页面线稿, or a presentable multi-screen HTML prototype
   before implementation. Do not use for production frontend, visual-identity exploration,
-  Figma/flow specs, or engineering reports.
+  Figma/flow specs, or engineering reports. A Feishu desktop wireframe prototype
+  sheet belongs to `desktop-wireframe`.
 ---
 
 # Frontend Wireframe
@@ -36,6 +37,7 @@ annotation marks, it does not add decoration.
 
 | Request | Owner |
 |---|---|
+| Feishu desktop wireframe prototype sheet | `desktop-wireframe` |
 | Production page, component, or styling in the real app | `engineering-workflow` or a frontend Skill |
 | Distinctive visual identity / anti-template art direction | `frontend-design` |
 | Multi-screen flow spec, sitemap, or design brief without an HTML deck | product-design flow Skills |

@@ -10,6 +10,9 @@ Classify the user's requested outcome before choosing a general coding approach.
   report the missing registration; do not implement suggested fixes.
 - If the user asks to remove dead or duplicated code, decouple modules, or perform behavior-preserving
   codebase slimming, invoke `/codebase-slimming`.
+- If the user asks for 桌面端线框原型, 飞书线框模板, 窗口布局, 常用组件, or a
+  desktop wireframe prototype sheet, invoke `desktop-wireframe`. Do not implement
+  the production UI in the same pass.
 - If the user asks for 线稿, wireframe, UI blueprint, clickable mock, 设计稿, or a presentable
   multi-screen HTML prototype before implementation, invoke `frontend-wireframe`. Do not implement
   the production UI in the same pass.
