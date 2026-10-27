@@ -15,9 +15,11 @@ Classify the user's requested outcome before choosing a general coding approach.
   the production UI in the same pass.
 - If the user asks for 给同事看, 对接文档, 不要太啰嗦, 精简文档, or a one-page human handoff,
   invoke `human-docs-for-colleagues`. Do not use `report-writer` or an agent-instruction template.
-- If the user asks to understand an existing system's design, 搞清楚一个系统的设计, 系统设计,
-  表设计, ER, 实体联系, 数据流转, or 状态变更, invoke `understanding-system`. Do not implement
-  the system, open a database, or write a colleague handoff in that pass.
+- If the user runs `/understanding-system`, or asks to understand an existing system's design,
+  搞清楚一个系统的设计, 系统设计, 表设计, ER, 实体联系, 数据流转, or 状态变更, invoke
+  `understanding-system`. With no narrower question, write `excalidraw/system-design.md` and
+  its figures. Do not implement the system, open a database, or write a colleague handoff in
+  that pass.
 - If none of these conditions match, do not invoke a review or cleanup workflow merely because the
   task involves code.
 

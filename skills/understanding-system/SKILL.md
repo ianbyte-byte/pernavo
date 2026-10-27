@@ -1,62 +1,63 @@
 ---
 name: understanding-system
 description: >
-  Explain an existing system's design from source that was read. Use when the user asks to
-  搞清楚一个系统的设计, 系统设计, 表设计, ER, 实体联系, 数据流转, 状态变更, or how the
-  running parts, tables, and status of a codebase fit together. Draw each figure as an
-  Excalidraw file. Do not use for implementation, diff review, colleague API handoffs, formal
-  sign-off reports, or opening a database.
+  Write the design document for the current repository. Use when the user runs
+  /understanding-system, or asks to 搞清楚一个系统的设计, 系统设计, 表设计, ER,
+  实体联系, 数据流转, 状态变更, or 方案. With no narrower question, write the
+  complete document and its Excalidraw figures. Do not use for implementation,
+  diff review, colleague API handoffs, formal sign-off reports, or opening a database.
 ---
 
 # Understanding a System
 
-Explain a system that already exists. Read the source the page will cite, then open the one
-reference that matches the question. A second question gets a second figure and its own
-reference. Each figure has one caption and one paragraph.
+The user runs `/understanding-system`. With no narrower question, write the complete
+design document for the repository they have open. Read the source the document will
+cite, then read every reference listed below.
 
-When the user names no question, read only [structure](references/structure.md). Stop after
-the runnable parts and one operation.
+## Document
 
-## Which page
+Write `excalidraw/system-design.md` in that repository. Put each figure in the same
+`excalidraw/` directory. The document is the deliverable. The reply gives its path.
 
-| The user wants | Read |
-|---|---|
-| What the running parts are, or how one operation proceeds | [structure](references/structure.md) |
-| A repeated block and the one exception | [repetition](references/repetition.md) |
-| Why this design or this parameter was chosen | [choice](references/choice.md) |
-| Where two sides disagree, and what aligns them | [alignment](references/alignment.md) |
-| The columns of one table | [table](references/table.md) |
-| How entities are associated (ER) | [er](references/er.md) |
-| Which data moves from which program to which program | [flow](references/flow.md) |
-| How one record's status changes | [state](references/state.md) |
+Write the document in modern written Chinese. Names go in the Excalidraw file.
+Sentences go under that figure, in the document. Follow the paragraph shape in the
+reference. Every part, column, association, message, status, and reason names a file
+that was read. Leave an unread item out of the figure, and name the unread directory
+in the last sentence of that section.
 
-## The figure
+Use these sections, in this order:
 
-Draw every figure with [excalidraw_scene.py](scripts/excalidraw_scene.py). Write a scene
-JSON whose nodes are the names from the source, then run the script
-from this skill directory:
+| Section | Read | Figure |
+|---|---|---|
+| 结构 | [structure](references/structure.md) | `excalidraw/structure.excalidraw` |
+| 表设计 | [table](references/table.md) | none; the columns are a table in the document |
+| 关联 | [er](references/er.md) | `excalidraw/er.excalidraw` |
+| 数据流转 | [flow](references/flow.md) | `excalidraw/flow.excalidraw` |
+| 状态变更 | [state](references/state.md) | `excalidraw/status.excalidraw` |
+| 方案 | [choice](references/choice.md) | none; the comparison is a table in the document |
+| 重复结构 | [repetition](references/repetition.md) | `excalidraw/repetition.excalidraw` when the source has a repeated block |
+| 对齐 | [alignment](references/alignment.md) | none |
+
+Write 重复结构 and 对齐 as one sentence when the source does not show that case. Write
+the other six sections from the source. A missing table, relationship, flow, or status
+still gets its section, with the unread directory named there.
+
+## Figures
+
+Draw every figure with [excalidraw_scene.py](scripts/excalidraw_scene.py). Run it from
+this skill directory:
 
 ```bash
 python3 scripts/excalidraw_scene.py scene.json -o excalidraw/<figure>.excalidraw
 ```
 
-`rectangle` is an entity, program, or status. `diamond` is a relationship. Edge text is `1`,
-`N`, the data that moves, or the event. Save the file in the repository being explained, under
-`excalidraw/`. The reply keeps the paragraph and the file path. Open the file in Excalidraw.
+`rectangle` is an entity, program, or status. `diamond` is a relationship. Edge text is
+`1`, `N`, the data that moves, or the event.
 
-## The page
+## A narrower question
 
-Write modern written Chinese when the user writes Chinese. Write ordinary technical English
-when the user writes English. Follow the paragraph shape in the reference. Names go in the
-Excalidraw file. Sentences go under the figure, in the reply.
-
-Every part, column, association, message, and status names a file that was read. Leave an
-unread item out of the figure and say which directory is still unread, in the last sentence
-of that paragraph.
-
-Leave the paragraphs in the reply. The Excalidraw file is the figure, so write that file even
-when the prose stays in the reply. Do not also write a Markdown design document unless the
-user asks to keep one.
+When the user names one section, write that section and its figure. `/understanding-system`
+alone means the complete document.
 
 ## Other owners
 
@@ -68,4 +69,6 @@ user asks to keep one.
 
 ## Done
 
-Each figure answers one question. A reader can check every sentence against the cited file.
+`excalidraw/system-design.md` contains 结构, 表设计, 关联, 数据流转, 状态变更, and 方案.
+The four required figures exist beside it. A reader can check every sentence against the
+cited file.

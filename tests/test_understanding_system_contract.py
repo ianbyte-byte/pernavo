@@ -24,6 +24,11 @@ class UnderstandingSystemContractTests(unittest.TestCase):
     def test_one_page_per_question_and_paper_routes(self):
         contract = SKILL.read_text(encoding="utf-8")
 
+        self.assertIn("/understanding-system", contract)
+        self.assertIn("excalidraw/system-design.md", contract)
+        self.assertIn("表设计", contract)
+        self.assertIn("方案", contract)
+        self.assertNotIn("read only", contract)
         self.assertIn("搞清楚一个系统的设计", contract)
         self.assertIn("references/structure.md", contract)
         self.assertIn("references/er.md", contract)
