@@ -5,9 +5,10 @@ Follow Chen, “The Entity-Relationship Model—Toward a Unified View of Data”
 of Data for Large Shared Data Banks”, CACM 1970, requires each relation to declare its primary
 key. <https://www.csc.lsu.edu/~chen/pdf/erd-5-pages.pdf>
 
-Show one table, the one the question names. Column order follows the source definition. Mark
-the primary key. A column that points at another table is named here; the association itself
-belongs in [er](er.md), and only when the question asks for it.
+Give each relation its own column table. When the question names one relation, show that
+relation. When the question is the whole system, show every relation defined in the inventoried
+files. Column order follows the source definition. Mark the primary key. A column that points
+at another table is named here. The association itself belongs in [er](er.md).
 
 ```markdown
 ## 表
@@ -22,4 +23,4 @@ belongs in [er](er.md), and only when the question asks for it.
 <这张表保存什么。>定义见 `<路径>`。
 ```
 
-Do not list tables the question did not name.
+Omit a relation only when the question excluded it.

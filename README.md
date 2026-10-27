@@ -192,7 +192,7 @@ resource signals, and proof boundary. A static smell or single average does not 
 - `test-engineering` — route unit, integration, API, functional, regression, acceptance, and release-smoke tests across white-box, gray-box, and black-box evidence
 - `frontend-wireframe` — produce a self-contained HTML wireframe deck for early product thinking, demos, and stakeholder review before implementation
 - `human-docs-for-colleagues` — write a one-page colleague-facing handoff a teammate can scan and act on
-- `understanding-system` — explain an existing system's design from source that was read
+- `understanding-system` — explain an existing system's design by citing every inventoried source file
 
 The current source checkout contains 11 default Skills and the trigger corpus contains 33 positive,
 negative, and collision cases. Retired source is preserved in

@@ -9,8 +9,9 @@ resulting actions.” A node is the value stored after the write. The edge is th
 causes that write.
 
 Name the column. One sentence per state says what that value means, in the manner of RFC 9293’s
-“represents waiting for…”. Walk one normal path and cite the write. Leave a failure that does
-not change the column out of the figure, and say so in the last sentence.
+“represents waiting for…”. Draw one diagram per stored status column, and walk every transition
+that writes that column. Leave a failure that does not change the column out of the figure, cite
+the file that handles it, and say so in the last sentence.
 
 ```mermaid
 stateDiagram-v2
