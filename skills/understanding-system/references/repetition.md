@@ -11,19 +11,10 @@ block, which uses global attention with a dense Feed-Forward Network (FFN).”
 Boxes stay short names. Put the repeat count and the exception in the caption and the
 paragraph. Cite the file that fixes the count.
 
-```json
-{
-  "title": "<系统名>的重复结构",
-  "nodes": [
-    {"id": "block", "text": "<块名>", "shape": "rectangle"},
-    {"id": "inner", "text": "<子块>", "shape": "rectangle"},
-    {"id": "other", "text": "<另一子块>", "shape": "rectangle"}
-  ],
-  "edges": [
-    {"from": "block", "to": "inner", "text": ""},
-    {"from": "inner", "to": "other", "text": ""}
-  ]
-}
+```mermaid
+flowchart LR
+  block["<块名>"] --> inner["<子块>"]
+  inner --> other["<另一子块>"]
 ```
 
 ## 重复结构

@@ -13,21 +13,12 @@ container is a runnable application or a data store. It is not a Docker containe
 a component inside a part the question did not name. Do not write a code note for every
 directory.
 
-Scene for the figure, one rectangle per runnable part:
+Put this fence in the section:
 
-```json
-{
-  "title": "<系统名>的组成",
-  "nodes": [
-    {"id": "a", "text": "<部分甲>", "shape": "rectangle"},
-    {"id": "b", "text": "<部分乙>", "shape": "rectangle"},
-    {"id": "c", "text": "<部分丙>", "shape": "rectangle"}
-  ],
-  "edges": [
-    {"from": "a", "to": "b", "text": ""},
-    {"from": "b", "to": "c", "text": ""}
-  ]
-}
+```mermaid
+flowchart LR
+  a["<部分甲>"] --> b["<部分乙>"]
+  b --> c["<部分丙>"]
 ```
 
 ## 结构

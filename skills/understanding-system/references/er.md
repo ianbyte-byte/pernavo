@@ -12,24 +12,14 @@ PROJECT-WORKER.
 The 1 sits on the side whose upper limit is one. The N sits on the side whose upper limit is
 many.
 
-```json
-{
-  "title": "<这张图里的联系>",
-  "nodes": [
-    {"id": "a", "text": "<实体甲>", "shape": "rectangle"},
-    {"id": "rel", "text": "<联系名>", "shape": "diamond"},
-    {"id": "b", "text": "<实体乙>", "shape": "rectangle"}
-  ],
-  "edges": [
-    {"from": "a", "to": "rel", "text": "1"},
-    {"from": "rel", "to": "b", "text": "N"}
-  ]
-}
+```mermaid
+flowchart LR
+  a["<实体甲>"] -- "1" --- rel{"<联系名>"}
+  rel -- "N" --- b["<实体乙>"]
 ```
 
 ## 联系
 
 <实体甲>参与「<联系名>」的上限是 1，<实体乙>参与「<联系名>」的上限是 N。<一句说清谁可以对应多条谁。>`<表乙>.<列>` 引用 `<表甲>.<列>`。见 `<路径>`。
 
-Add another diamond only for another relationship the question names. A shape sample, not a
-survey of a repository, is [entity-relationship.excalidraw](../examples/entity-relationship.excalidraw).
+Add another diamond only for another relationship the question names.

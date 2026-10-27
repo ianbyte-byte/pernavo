@@ -7,19 +7,10 @@ the data that moves, such as “chunk data”, not a sentence and not a column l
 
 This figure does not show status values. Status belongs in [state](state.md).
 
-```json
-{
-  "title": "一次<操作名>中移动的数据",
-  "nodes": [
-    {"id": "a", "text": "<程序甲>", "shape": "rectangle"},
-    {"id": "b", "text": "<程序乙>", "shape": "rectangle"},
-    {"id": "c", "text": "<程序丙>", "shape": "rectangle"}
-  ],
-  "edges": [
-    {"from": "a", "to": "b", "text": "<数据名>"},
-    {"from": "b", "to": "c", "text": "<数据名>"}
-  ]
-}
+```mermaid
+flowchart LR
+  a["<程序甲>"] -->|"<数据名>"| b["<程序乙>"]
+  b -->|"<数据名>"| c["<程序丙>"]
 ```
 
 ## 数据流转
@@ -27,5 +18,4 @@ This figure does not show status values. Status belongs in [state](state.md).
 结合图 1 看一次<操作名>。<谁把哪份数据交给谁。谁写入哪张表。谁在返回之后才读取下一份数据。返回时哪一项可能尚未发生。>投递和消费见 `<路径>`。
 
 An unread producer or consumer stays off the figure. The paragraph’s last sentence names the
-directory that was not read. A shape sample, not a survey of a repository, is
-[data-flow.excalidraw](../examples/data-flow.excalidraw).
+directory that was not read.
