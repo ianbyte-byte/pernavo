@@ -20,10 +20,12 @@ DEFAULT_SKILLS = {
     "data-work",
     "engineering-workflow",
     "frontend-wireframe",
+    "human-docs-for-colleagues",
     "performance-work",
     "report-writer",
     "repository-governance",
     "test-engineering",
+    "understanding-system",
 }
 MACHINE_PATH = "/Users/chung/Developer/Code/loongclaude"
 
@@ -33,7 +35,7 @@ def folded(path):
 
 
 class WorkflowLoopContractTests(unittest.TestCase):
-    def test_default_install_set_stays_nine_named_skills(self):
+    def test_default_install_set_matches_named_skills(self):
         names = {path.parent.name for path in (ROOT / "skills").glob("*/SKILL.md")}
         self.assertEqual(DEFAULT_SKILLS, names)
 

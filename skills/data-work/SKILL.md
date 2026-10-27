@@ -5,12 +5,15 @@ description: >
   test-database data. Use for database debugging, report data checks, SQL scripts, N+1 or query
   performance review, and bounded test-data setup. Resolve an explicitly configured non-production
   target before database execution; static review needs no connection. Default to read-only
-  execution and require explicit write gates.
+  execution and require explicit write gates. Explaining tables, ER, data flow, or status from
+  source, without opening a database, belongs to `understanding-system`.
 ---
 
 # Data Work
 
 This is the single database entry point. Separate query-shape review from database execution.
+A design page about tables, ER, data flow, or status, read from source and not from a live
+database, belongs to `understanding-system`.
 
 ## Route
 

@@ -144,6 +144,8 @@ evidence, not proof of deployment or production behavior.
 - Diff/MR/PR findings -> `change-review` (findings only, fresh context for re-review).
 - Test design or execution -> `test-engineering`.
 - Formal report formatting -> `report-writer`.
+- Colleague-facing 对接文档 / 给同事看 / one-page human handoff -> `human-docs-for-colleagues`.
+- Explain an existing system's design, ER, data flow, or status changes -> `understanding-system`.
 - Security, data, performance, or browser-specific evidence -> the relevant specialist Skill.
 
 Stop only the dependent action when its source/revision or authority is unresolved, recovery is

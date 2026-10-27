@@ -7,6 +7,8 @@ description: >
   Markdown, spreadsheet, PDF, HTML, Word, or slides from the report's purpose, audience, lifecycle,
   and interaction needs; default to Markdown only when no specialized use applies. Do not collect
   missing evidence, invent conclusions, or replace specialized artifact or domain-analysis tools.
+  Colleague-facing 对接文档, 给同事看, or one-page handoffs belong to `human-docs-for-colleagues`.
+  A page that explains an existing system's design from source belongs to `understanding-system`.
 ---
 
 # Report Writer
@@ -39,6 +41,8 @@ Read only the module that matches the requested report:
   use [HTTP API test](references/http-api-test.md) and [log evidence](references/log-evidence.md).
 - A report that cites command output, runtime events, audit trails, or agent/tool execution: use
   [log evidence](references/log-evidence.md).
+- Colleague-facing 对接文档, 给同事看, or a one-page API/integration handoff: stop and use
+  `human-docs-for-colleagues`. A report template is the wrong shape.
 - No matching module: use the general report contract below and label domain-specific sections
   supplied by the caller without inventing a domain template.
 

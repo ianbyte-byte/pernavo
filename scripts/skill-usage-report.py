@@ -22,6 +22,9 @@ CANONICAL = (
     "report-writer",
     "repository-governance",
     "test-engineering",
+    "frontend-wireframe",
+    "human-docs-for-colleagues",
+    "understanding-system",
 )
 LEGACY = (
     "audit-agent-harness", "aviation-grade-engineering", "benchmark-performance",
