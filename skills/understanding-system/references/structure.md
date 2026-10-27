@@ -1,4 +1,4 @@
-# Runnable parts and one operation
+# Runnable parts and each stored operation
 
 Follow Ghemawat, Gobioff, and Leung, “The Google File System”, SOSP 2003, sections 2.3 and 2.4.
 The Princeton copy is <http://www.cs.princeton.edu/courses/archive/fall09/cos518/papers/gfs.pdf>.
@@ -10,8 +10,7 @@ read in time and refers back to that figure.
 
 Use the names of the programs, stores, and queues that the source actually contains. A C4
 container is a runnable application or a data store. It is not a Docker container. Do not draw
-a component inside a part the question did not name. Do not write a code note for every
-directory.
+a box per file. Under the figure, cite every inventoried file that belongs to those parts.
 
 Put this fence in the section:
 
@@ -32,4 +31,5 @@ flowchart LR
 结合图 1 看一次<操作名>。<调用方把什么交给谁。谁写入什么。谁在返回之后才继续。返回时哪一项可能尚未发生。>
 
 Replace every angle-bracket slot with the system under study. Drop a part the source does not
-show.
+show. Repeat the timed walk for every operation that writes or returns stored data. One sample
+is not the section.

@@ -22,4 +22,5 @@ flowchart LR
 
 <实体甲>参与「<联系名>」的上限是 1，<实体乙>参与「<联系名>」的上限是 N。<一句说清谁可以对应多条谁。>`<表乙>.<列>` 引用 `<表甲>.<列>`。见 `<路径>`。
 
-Add another diamond only for another relationship the question names.
+Draw every relationship the inventoried files define. When the question names one relationship,
+draw that one.

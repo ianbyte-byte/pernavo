@@ -17,5 +17,5 @@ flowchart LR
 
 结合图 1 看一次<操作名>。<谁把哪份数据交给谁。谁写入哪张表。谁在返回之后才读取下一份数据。返回时哪一项可能尚未发生。>投递和消费见 `<路径>`。
 
-An unread producer or consumer stays off the figure. The paragraph’s last sentence names the
-directory that was not read.
+Repeat this fence for every operation that writes or returns stored data. Cite every inventoried
+producer and consumer. One sample is not the section.
